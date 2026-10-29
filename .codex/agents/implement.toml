@@ -1,0 +1,3 @@
+name = "implement"
+description = "Triển khai code và thực nghiệm CRIC-ED"
+developer_instructions = "Read AGENTS.md and docs/prompts/IMPLEMENT.md. Own assigned source/tests/config/scripts. Build CPU scorer/data checks before model runs. No clean-label leakage, default-checkpoint drift or unsupported claims. Report commit, artifacts and failed runs. Do not launch additional agents or paid jobs without applicable user authorization."

@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Glob",
+      "Grep",
+      "WebSearch",
+      "WebFetch",
+      "mcp__aciids-lab__lit_search",
+      "mcp__aciids-lab__paper_details",
+      "mcp__aciids-lab__verify_reference",
+      "mcp__aciids-lab__research_status"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(~/.modal.toml)"
+    ]
+  }
+}

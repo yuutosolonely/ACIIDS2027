@@ -1,0 +1,48 @@
+# Idea 3 — Thiết kế nghiên cứu cho ACIIDS 2027
+
+Cập nhật: 2026-10-29.
+Working title: **CRIC-ED: Contamination-Resilient In-Context Likelihood for Cell-Level Error Detection in Tabular Foundation Models**
+(Tên trong source card ban đầu: TabFM-ED; xem `docs/BRAINSTORM.md` để biết toàn bộ 3 hướng phân tích).
+Stage: **Proposal / Hypothesis / Protocol Design (Đang xem xét dưới dạng đề xuất nghiên cứu; chưa chốt quyết định cuối cùng; chưa có kết quả thực nghiệm benchmark).**
+
+---
+
+## 1. Bài toán và mục tiêu nghiên cứu
+Cho một bảng dữ liệu bẩn $\tilde{X} \in \mathbb{R}^{N \times D}$ gồm các cột số (numerical) và cột phân loại (categorical), hoàn toàn không có nhãn lỗi trong pha suy luận. Mục tiêu là tính điểm nghi ngờ lỗi (anomaly/error score) $S_{i,j}$ cho từng ô riêng biệt $(i,j)$ bằng Tabular Foundation Model (TFM) pre-trained mà không cần cập nhật trọng số (training-free).
+
+Trọng tâm nghiên cứu là điều tra hiện tượng **Tự nhiễm bẩn ngữ cảnh (Self-Contamination)**: khi các ô lỗi trong bảng được nạp vào làm in-context prompt, chúng gây méo phân phối dự báo và làm "bình thường hóa" lỗi (Context Normalization), đặc biệt khi lỗi xuất hiện có cấu trúc. Đề tài phát triển và đánh giá cơ chế Context Intervention & Influence Trimming để khắc phục hiện tượng này.
+
+---
+
+## 2. Câu hỏi nghiên cứu (RQs) & Yêu cầu chứng minh
+1. **RQ1 (Cell-ED vs Baselines)**: Conditional TFM Likelihood có đạt cell-level AUPRC vượt trội hơn classical baselines (DDC, Isolation Forest) và modern baselines (CDC, unsupervised TabPFN) trên cùng protocol và budget không?
+2. **RQ2 (Cấu trúc lỗi trong Context)**: Lỗi phân tán ngẫu nhiên (random) và lỗi tập trung theo nhóm/nguồn (clustered) trong context làm suy giảm điểm số và thứ hạng của ô đích như thế nào?
+3. **RQ3 (Trimming vs Rare-Valid Preservation)**: Cơ chế can thiệp context (random vs kNN vs influence-aware trimming) có tạo ra sự đánh đổi giữa việc loại bỏ lỗi context và việc vô tình xóa bỏ các nhóm mẫu hiếm nhưng hợp lệ (rare-valid subgroups) không?
+4. **RQ4 (Hiệu năng tính toán)**: Đánh đổi giữa chi phí inference ($D$ bài toán ICL cho mỗi dòng) và độ chính xác so với các giải pháp imputation/statistical detection.
+
+*Lưu ý Novelty*: Việc "dùng TFM tính conditional likelihood" hoặc "cross-fitting" đã xuất hiện trong prior work (uTabPFN, ZEN, TACTIC). Điểm mới cần chứng minh là: **định vị lỗi ở cấp ô (cell localization) trên dữ liệu bảng dị thể dưới sự can thiệp của self-contamination**, tách bạch khỏi bài toán row anomaly detection.
+
+---
+
+## 3. Hợp đồng phương pháp (Methodological Invariants)
+- **Column Masking**: Mỗi cột mục tiêu $j$ được coi là biến phụ thuộc trong bài toán học có giám sát $X_{-j} \to X_j$. Giá trị quan sát $x_{i,j}$ không được làm feature đầu vào.
+- **Cross-fitting / Leave-Row-Out**: Khi chấm điểm cho ô ở hàng $i$, toàn bộ hàng $i$ (hoặc entity group liên quan) tuyệt đối không được xuất hiện trong tập context.
+- **Tách bạch điểm số theo kiểu dữ liệu**: Cột phân loại dùng Categorical Negative Log-Likelihood (NLL). Cột số dùng continuous density / tail score từ phân phối dự báo. Báo cáo phân tách theo từng loại cột; không tùy tiện coi xác suất rời rạc và mật độ liên tục là một thước đo đồng nhất.
+- **Bảo toàn ranh giới thông tin**: Giá trị sạch thật và nhãn lỗi thuộc về evaluation harness; mã nguồn thuật toán detector tuyệt đối không được truy cập.
+- **Kiểm soát rủi ro Trimming**: Không dùng nhãn thật để chọn tỷ lệ tỉa $q$. Mọi kết quả trimming phải so sánh có đối chứng với matched random-removal và kiểm tra tỷ lệ báo động giả trên các nhóm hiếm hợp lệ.
+- **Không suy diễn bảo đảm Conformal vô căn cứ**: Không tự ý tuyên bố "conformal coverage guarantees" khi context bị bẩn nếu không có chứng minh lý thuyết tương ứng.
+
+---
+
+## 4. Ràng buộc Backbone & Hạ tầng
+- Backbone chính: **TabPFN v2** (đã hỗ trợ phân phối liên tục và phân loại).
+- Backbone khảo sát: **TabICL** (lưu ý: TabICL v1 chỉ hỗ trợ classification; không dùng cho regression trừ khi có checkpoint v2 tương ứng).
+- Nguyên tắc an toàn: Không tự ý tải checkpoint nặng khi chưa có ủy quyền rõ ràng. Mọi kiểm thử ban đầu thực hiện trên CPU smoke test với dữ liệu synthetic/toy trước khi chạy confirmatory runs.
+
+---
+
+## 5. Tiêu chí Tiếp tục / Dừng (Go / No-Go Gates)
+- **G0 (Setup & Interface Gate)**: Pinned package, license tương thích, checkpoint nạp được trên môi trường local, API trả về phân phối xác suất hợp lệ.
+- **G1 (Protocol & Baseline Gate)**: Protocol cell-level công bằng, baseline DDC, CDC và uTabPFN chạy được trên cùng một tập ô đánh giá (eligible-cell universe).
+- **G2 (Empirical Mechanism Gate)**: Hiệu quả của Context Intervention / Trimming vượt trội hơn giải thích giản đơn về mặt tăng compute hoặc giảm mẫu khó.
+- *Nếu không qua G2*: Kích hoạt ngay Framing Dự phòng 1 (CS-ED: Abstention trên rare-valid cells) hoặc Framing Dự phòng 2 (Dual-ED: Thống kê robust + LLM semantic).
