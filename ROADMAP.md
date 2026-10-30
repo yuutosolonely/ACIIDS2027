@@ -1,38 +1,61 @@
-# Kế Hoạch Nghiên Cứu (Roadmap) — ACIIDS 2027
+# Kế hoạch điều phối CRIC-ED — ACIIDS 2027
 
-Cập nhật từ trạng thái thực tế: **29/10/2026**.
-Thời hạn nộp bài chính thức ACIIDS 2027: **31/10/2026, 23:59 AoE** (tương đương **01/11/2026, 18:59 ICT / Giờ Việt Nam**).
+Cập nhật: 2026-10-30, sau tiếp nhận `docs/handoffs/HANDOFF_20261030_CLAUDE_TO_CODEX.md`.
+Quyết định đang hiệu lực: **NO-GO cho hạn ACIIDS này**, theo `docs/DECISION_BRIEF_20261030.md`.
+Hướng nghiên cứu tiếp theo chưa được xác nhận nhất quán trong hồ sơ. Không tự chuyển hướng theo kết quả pilot.
 
----
+## Căn cứ và quyền hạn
 
-## Các Giai đoạn Thực hiện (Checkpoints)
+- Thứ tự thiết kế: `docs/IDEA.md` > `docs/experiment-plan.md` > tài liệu này. Protocol gốc `prereg/PREREGISTRATION.md` giữ nguyên làm hồ sơ lịch sử; deviation được ghi riêng.
+- `docs/AUTHORIZATION.md`: $0, local CPU validation; chưa có quyền mở rộng compute, chấp nhận điều khoản weights, publication hoặc submission.
+- Code và artifact v2 đã có ở local nhưng không thay thế quyết định của tác giả. Chưa tạo file khóa `prereg/PREREGISTRATION_V2.sha256`.
 
-1. **Giai đoạn Hiện tại (Hoàn tất Chuẩn hóa & Rà soát Đề xuất)**:
-   - Chuẩn hóa 100% workspace độc lập cho ACIIDS 2027; dọn sạch toàn bộ ngữ cảnh cũ.
-   - Xác minh chính sách ACIIDS 2027 (Springer LNCS/LNAI, quy định AI, độ dài 12–15 trang).
-   - Đánh giá lại Idea 3 dưới dạng **Đề xuất nghiên cứu (Proposal)**; mở rộng 3 hướng khả thi:
-     - *Hướng 1 (Khuyến nghị)*: CRIC-ED (Cell-level error detection chống self-contamination).
-     - *Hướng 2 (Dự phòng 1)*: CS-ED (Context sensitivity & selective abstention trên rare-valid cells).
-     - *Hướng 3 (Dự phòng 2)*: Dual-ED (Coordinate-wise robust deviance + zero-shot semantic, không phụ thuộc TFM).
+## Task tiếp nhận — COORD-20261030-INTAKE
 
-2. **Checkpoint CP0 (Giải quyết Trùng lặp & Ranh giới Khoa học)**:
-   - Rà soát ranh giới nhiệm vụ: Cell-ED khác biệt với Row Anomaly Detection (TACTIC, ZEN, TaskBridge), Label Error Detection (TICDA) và Data Imputation (CDC).
-   - Xác lập hệ thống Research Questions (RQ1–RQ3) có thể bác bỏ và protocol chống rò rỉ (cross-fitting).
+Owner: Codex coordinator, một phiên; không launch worker hoặc tạo worktree.
+Source: HEAD `06ded051a382bee8e6db47c582e46145fe544515` + working tree chưa commit của Claude và các file v2 bổ sung. Snapshot hash được lưu ở `docs/handoffs/COORDINATOR_INTAKE_20261030.json`.
 
-3. **Checkpoint CP1 / Cổng G0 (Kiểm thử Kỹ thuật Cục bộ — Zero-Cost CPU Smoke)**:
-   - Kiểm tra API phân phối đầu ra của TabPFN trên môi trường CPU cục bộ với dữ liệu mẫu nhỏ.
-   - Kiểm tra khả năng xử lý cột số và cột phân loại mà không cần GPU trả phí hay tải weights cồng kềnh.
+Phạm vi ghi: STATE, roadmap, banner thiết kế/harness, claim ledger và log hiệu chỉnh, audit reconciliation, setup validation và handoff tiếp nhận. Implementation, prereg v1/v2, checkpoints và artifact run hiện có giữ nguyên.
 
-4. **Checkpoint CP2 / Cổng G1 (Chạy Thí nghiệm Pilot & Quyết định Chốt Đề tài)**:
-   - Chạy pilot trên subset nhỏ (200 hàng) của benchmark RAHA (Hospital/Beers).
-   - So sánh trực tiếp giữa conditional TFM likelihood với DDC (thống kê robust) và frequency baseline.
-   - **Quyết định chốt**: Nếu pilot cho thấy hiệu quả rõ ràng và khả thi về mặt tài nguyên $\to$ chính thức chốt Hướng 1; nếu gặp vấn đề về minority false alarm $\to$ chuyển Hướng 2; nếu gặp rào cản tài nguyên/checkpoint $\to$ chuyển Hướng 3.
+Acceptance checks:
 
-5. **Checkpoint CP3 / Cổng G2 (Thực nghiệm Xác nhận & Ablation có Đối chứng)**:
-   - Chạy confirmatory runs có đối chứng (No trimming vs Random removal vs Influence trimming).
-   - Đo lường và ghi lại đầy đủ artifacts trong `experiments/runs/`, chi phí tính toán, CI và tỷ lệ coverage.
+- [x] Đọc state/authorization/prompt/handoff, kiểm cwd/HEAD/local changes.
+- [x] Chạy lại suite CPU, static setup, mirror check và MCP handshake offline.
+- [x] Đối soát archive hashes và checkpoint manifest bằng đọc file, không chạy model.
+- [x] Sửa phát biểu reproduction quá mức; giữ số liệu và log gốc để truy vết.
+- [x] Đồng bộ NO-GO, ghi rõ v2 chờ đối soát và điều kiện mở lại nghiên cứu.
+- [ ] Tác giả xác nhận có hay chưa phê duyệt hướng A và điều khoản tải weights sau bàn giao.
 
-6. **Checkpoint CP4 (Soạn thảo Bản thảo Springer LNAI & Đảm bảo Liêm chính)**:
-   - Soạn thảo manuscript 12–15 trang theo mẫu Springer LaTeX llncs.
-   - Kiểm tra tính nhất quán giữa số liệu trong bài với `docs/CLAIM_EVIDENCE.md`.
-   - Bổ sung tuyên bố minh bạch về AI (AI Disclosure) theo chuẩn Springer Nature.
+## Task tiếp nối — COORD-20261030-CPU-REMEDIATION
+
+Theo chỉ thị “tiếp tục đi”, Codex tiếp tục phần code/CPU validation được phép, không suy thành phê duyệt A hoặc điều khoản weights. Owner vẫn là một phiên Codex; không có agent khác.
+
+Own: `src/cric_ed/{conditional,benchmark,v2_contract}.py`, `experiments/tfm/{run_v2,analyze_v2}.py`, README pipeline, hai file test v2 và các bản ghi điều phối. Prereg v1/v2, model weights, artifact run cũ và baseline cũ giữ nguyên.
+
+- [x] Triển khai candidate nested pass 1 và kiểm perturbation/context dependencies bằng fake predictor.
+- [x] Kiểm source freeze, complete run grid, denominator/method arrays, seed alignment và refusal trước khi đọc data/ghi output khi chưa freeze.
+- [x] Ghi đủ context stages/IDs, giữ source row IDs, tính preprocessing/inner work vào timing.
+- [x] Toàn suite scientific environment 40 passed; static setup PASS, skill mirror MATCH.
+- [x] Ghi rõ thay đổi candidate chưa được duyệt vào design/plan/harness; giữ nguyên prereg.
+- [ ] Quyết định scope/quyền hạn, group/preprocessing boundary, matched compute và thống kê trước freeze.
+
+Snapshot/kết quả: `docs/handoffs/CPU_REMEDIATION_20261030.json`; handoff: `docs/handoffs/HANDOFF_20261030_CPU_REMEDIATION.md`. Không có research run mới.
+
+## Các bước tiếp theo và điều kiện hoàn tất
+
+Task tiếp nối `COORD-20261030-PREFLIGHT-RELIABILITY`: Codex own `run_record.py`, runtime checks trong `v2_contract.py`, runner/analysis journal integration, tests và `tools/check_inference_resolution.py`; ghi một amendment đề xuất, không áp dụng phương pháp mới vào prereg. Bản pin môi trường gốc được archive trước thay đổi setup.
+
+- [x] Test failure/interruption journaling, required-artifact finalization và refusal khi runtime chưa khớp.
+- [x] Kiểm provenance môi trường; sửa pin torch bị thiếu, giữ record cũ; ghi rõ system-site-packages.
+- [x] Toàn suite scientific 49 passed; tối thiểu 37 passed, 1 skipped; declared pins metadata MATCH.
+- [x] Đề xuất estimand/group/preprocessing/compute/statistical-unit/failure policy ở `docs/proposals/V2_AMENDMENT_20261030.md`.
+- [x] Enumeration DES-01 và snapshot `docs/handoffs/PREFLIGHT_RELIABILITY_20261030.json`; không có benchmark run mới.
+
+1. **Chốt phạm vi giai đoạn sau — chờ tác giả.** Ghi quyết định A/B, quyền tải/điều khoản/compute cụ thể trong authorization và decision brief; không suy từ câu “Author decisions” trong v2.
+2. **Rà protocol mới — đã sửa/kiểm CPU, phương pháp còn chờ.** Candidate đã sửa phụ thuộc qua pass 1 và kiểm grid/source; còn scope, group/fold, preprocessing, matched compute và đơn vị thống kê. Giải quyết finding còn mở trong audit; v2 chưa xác nhận frozen.
+3. **Khóa protocol/source — chưa mở.** Đóng băng cả protocol, scorer, runner và analysis; ghi manifest/splits/seeds/thresholds cùng bằng chứng trước confirmatory. Script phân tích phải từ chối bộ run thiếu hoặc trùng unit/seed, failed run phải được ghi đầy đủ.
+4. **CPU capability/pilot — phụ thuộc quyền và protocol.** Xác minh package/checkpoint/license riêng, API số/phân loại, context và thông tin không rò qua preprocessing/trimming. Smoke chỉ xác minh khả năng kỹ thuật; pilot benchmark không tự thành confirmatory evidence.
+5. **Confirmatory và review — chưa mở.** Chạy đủ thiết kế đã khóa, ghi mọi seed/failure/deviation; review đúng source snapshot khi được giao. Không dùng JSON dev để nâng gate hoặc khẳng định hiệu quả.
+6. **Manuscript/venue — chưa mở.** Giữ internal draft kết quả âm; chọn venue và xác minh CFP/policy khi tác giả quyết định. Không có task chuẩn bị gói nộp cho hạn đã NO-GO.
+
+P3 cleanup tên cũ/absolute paths và vendoring template Springer chưa thuộc task hiện tại. R2/R3, installer và builder không được chạy hoặc sửa.

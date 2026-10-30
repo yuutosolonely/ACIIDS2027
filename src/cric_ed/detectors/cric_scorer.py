@@ -37,7 +37,12 @@ class CRICDetector:
         self.seed = seed
         self.clip_max = clip_max
         self.rare_valid_patterns = rare_valid_patterns or {}
+        # Separate streams: base-context sampling is shared by every trimming arm with the
+        # same seed (paired design); trimming-only randomness must not shift that stream.
         self.rng = random.Random(seed)
+        self.trim_rng = random.Random(seed + 1_000_003)
+        # Optional audit log of (query_row, col_idx, base_context, active_context).
+        self.context_log: Optional[List[tuple]] = None
 
     def _compute_row_distance(
         self,
@@ -93,7 +98,7 @@ class CRICDetector:
         if self.trimming_mode == "matched_random":
             # Matched random removal: remove n_trim uniformly at random
             sample_pool = list(context_indices)
-            self.rng.shuffle(sample_pool)
+            self.trim_rng.shuffle(sample_pool)
             return sample_pool[:-n_trim]
 
         # Influence trimming: compute leverage/deviance to query row
@@ -130,6 +135,9 @@ class CRICDetector:
     def score_table(self, table: DirtyTable) -> List[CellScore]:
         scores: List[CellScore] = []
         n_rows = table.num_rows
+        # Re-seed per call so repeated scoring of the same table is deterministic.
+        self.rng = random.Random(self.seed)
+        self.trim_rng = random.Random(self.seed + 1_000_003)
 
         # 1. Establish Leave-Entity-Out cross-fitting folds
         folds = group_folds(table.entity_ids, self.n_splits, self.seed)
@@ -164,6 +172,8 @@ class CRICDetector:
 
                     # Apply context intervention / trimming
                     active_context = self._apply_trimming(base_context, q_row, col_idx, table, col_name)
+                    if self.context_log is not None:
+                        self.context_log.append((q_idx, col_idx, tuple(base_context), tuple(active_context)))
 
                     # Calculate In-Context Conditional Likelihood
                     if is_numeric:

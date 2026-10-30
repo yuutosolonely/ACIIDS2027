@@ -1,6 +1,11 @@
 # Idea 3 — Thiết kế nghiên cứu cho ACIIDS 2027
 
 Cập nhật: 2026-10-29.
+> **Đối soát 2026-10-30:** tác giả đã chọn NO-GO cho hạn ACIIDS này (`docs/DECISION_BRIEF_20261030.md`). Nội dung dưới đây giữ vai trò thiết kế đề xuất gốc; fallback không tự cấp quyền pivot. Candidate v2 ở `prereg/PREREGISTRATION_V2.md` chưa được xác nhận quyền hạn/đóng băng; các thay đổi phương pháp phải được chấp thuận và đồng bộ ở đây trước khi dùng làm protocol hiện hành. Trạng thái và task tiếp theo: `docs/STATE.md`, `ROADMAP.md`.
+
+Đề xuất sửa candidate (chưa chấp thuận): tính pass 1 bằng nested cross-fitting trong từng outer training pool; không tái dùng ma trận score toàn bảng để purification. Bản triển khai thử chỉ được kiểm trên fixture/fake predictor. Chi phí tăng, group boundary, final-pass transductive preprocessing và đơn vị thống kê vẫn cần quyết định trước freeze; xem `experiments/tfm/README.md`.
+
+Đề xuất phương pháp cụ thể để tác giả rà: `docs/proposals/V2_AMENDMENT_20261030.md`. Khuyến nghị strict group/inductive boundary và kết quả theo từng source table; conditions/seeds là repeated measurements. Đây chưa phải quyết định chấp thuận hoặc thay đổi protocol gốc.
 Working title: **CRIC-ED: Contamination-Resilient In-Context Likelihood for Cell-Level Error Detection in Tabular Foundation Models**
 (Tên trong source card ban đầu: TabFM-ED; xem `docs/BRAINSTORM.md` để biết toàn bộ 3 hướng phân tích).
 Stage: **Proposal / Hypothesis / Protocol Design (Đang xem xét dưới dạng đề xuất nghiên cứu; chưa chốt quyết định cuối cùng; chưa có kết quả thực nghiệm benchmark).**

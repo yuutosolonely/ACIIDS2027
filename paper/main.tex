@@ -1,9 +1,9 @@
-% This is samplepaper.tex, a sample chapter demonstrating the
-% LLNCS macro package for Springer Computer Science proceedings;
-% Version 2.21 of 2022/01/12
-%
+% INTERNAL DRAFT -- NOT FOR SUBMISSION (status: NO-GO / NOT READY, see docs/STATE.md).
+% Corrected on 2026-10-30 after audit. Every number traces to
+% experiments/archive/run_pilot_001 (as executed) or
+% experiments/archive/run_pilot_003_evalfix (paired streams, tie-correct AUPRC,
+% 1,000 entity-cluster bootstrap resamples); see docs/CLAIM_EVIDENCE.md.
 \documentclass[runningheads]{llncs}
-%
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{amsmath}
@@ -11,131 +11,63 @@
 \usepackage{booktabs}
 \usepackage{microtype}
 \usepackage{hyperref}
-\usepackage{color}
-\renewcommand\UrlFont{\color{blue}\rmfamily}
 
 \begin{document}
-%
-\title{Contamination-Resilient In-Context Likelihood for Cell-Level Error Detection in Tabular Foundation Models}
-%
-\titlerunning{CRIC-ED: Contamination-Resilient Tabular Cell Error Detection}
-%
+\title{Influence-Based Context Trimming for Unsupervised Cell Error Detection: A Negative Pilot on a Synthetic Fixture\\(Internal Draft -- Not for Submission)}
+\titlerunning{Context Trimming for Cell Error Detection: Negative Pilot}
 \author{Anonymous Authors}
-%
 \authorrunning{Anonymous et al.}
-%
-\institute{Anonymous Institution\\
-\email{author@anonymous.org}}
-%
-\maketitle              % typeset the header of the contribution
-%
+\institute{Anonymous Institution}
+\maketitle
+
 \begin{abstract}
-Data quality management in heterogeneous tabular databases increasingly demands cell-level error localization: identifying corrupted entries $(i, j)$ rather than flagging entire rows. While Tabular Foundation Models (TFMs) enable training-free predictive inference via In-Context Learning (ICL), applying them directly to uncurated databases exposes an acute failure mode: \emph{Self-Contamination}. When corrupted rows enter the demonstration prompt, they distort the conditional predictive density $P(X_j \mid X_{-j})$, inducing \emph{Context Normalization} wherein systematic errors appear plausible to the model.
-
-In this work, we propose \textbf{CRIC-ED} (Contamination-Resilient In-Context Error Detector), a training-free framework designed to locate cell errors under heterogeneous self-contamination. CRIC-ED enforces strict information boundaries via Leave-Entity-Out (LEO) cross-fitting and target attribute masking. Furthermore, CRIC-ED introduces an Influence-Aware Context Intervention mechanism that prunes destructive outlier exemplars while explicitly protecting rare-valid subgroups ($\le 1\%$ frequency). Controlled empirical pilot evaluations demonstrate that CRIC-ED achieves a $+0.0167$ gain in cell-level AUPRC over matched-random context subsampling under an identical exemplar budget. Crucially, while classical robust statistics (MAD) trigger false alarms on 100\% of rare-valid cells, CRIC-ED cuts false alarms by 25\% (FPR 0.75), executing at 0.10 ms per cell on local CPU hardware without expensive GPU compute.
-
-\keywords{Cell Error Detection \and Tabular Foundation Models \and In-Context Learning \and Self-Contamination \and Data Quality.}
+We report a pilot of an influence-based context-trimming scheme for unsupervised cell-level error detection. The scorer evaluated is a kernel-weighted local conditional estimator (a weighted $z$-score for numeric columns and a weighted, Laplace-smoothed conditional frequency for categorical columns) under leave-entity-out cross-fitting; \emph{no tabular foundation model was run}. The pilot uses a 100-row synthetic software fixture with 4 injected error cells and a single seed; it is not a benchmark. A column-wise median-absolute-deviation baseline attained cell-level AUPRC 1.000; the conditional scorer attained 0.365 without trimming and 0.357 with influence trimming, whose paired difference to matched-random removal was $-0.008$ (95\% CI $[-0.081, 0.048]$). An earlier analysis reported 0.698 and a trimming gain; both were artifacts of tie ordering and unpaired random streams. The preregistered stop rule could not be evaluated as written, but its proxy outcome is negative. We document the defects and what a confirmatory study would require.
+\keywords{Cell error detection \and Self-contamination \and Negative result \and Preregistration.}
 \end{abstract}
-%
-%
-%
-\section{Introduction}
-Tabular data remains the backbone of operational decision-making in clinical diagnostics, financial accounting, and enterprise logistics. However, real-world data pipelines routinely suffer from cell-level corruptions: typographical keystrokes, unit inversion, sensor drift, and column permutation errors. When an analyst is presented with a 50-column record flagged by a traditional row-level anomaly detector, determining which specific attribute requires remediation remains an arduous audit. Consequently, \emph{Cell-Level Error Detection (Cell-ED)}---assigning a suspicion score $S_{i,j} \in \mathbb{R}$ to every individual matrix coordinate $(i, j) \in N \times D$---has emerged as a foundational challenge.
 
-Recent breakthroughs in Tabular Foundation Models (TFMs)~\cite{hollmann2025tabpfn} demonstrate remarkable zero-shot transfer by approximating posterior inference across synthetic datasets. Because TFMs require zero task-specific parameter updating (training-free), they present an attractive paradigm for unsupervised error detection. By treating each column $j$ as a target to be conditioned on remaining columns $X_{-j}$, one can evaluate the Negative Log-Likelihood (NLL) of the observed entry under the in-context distribution.
+\section{Status and Scope}
+This document replaces an earlier draft whose claims were not supported by its artifacts. It is an internal record, not a submission. The earlier draft (i) described a frozen tabular foundation model~\cite{hollmann2025tabpfn} although the implementation contains none; (ii) attributed results to the RAHA benchmark~\cite{mahdavi2019raha} although only a synthetic fixture was scored; (iii) reported a $+0.0167$ AUPRC advantage of influence trimming over matched-random removal that arose from unpaired random streams; and (iv) credited a rare-valid guardrail with a false-alarm reduction that the untrimmed arm also shows.
 
-Nevertheless, deploying TFMs directly onto uncurated databases exposes a structural vulnerability that we term \emph{Self-Contamination}. When a dirty table is sampled to construct in-context demonstration sets, the corruptions themselves enter the prompt. When errors exhibit latent clustering, the in-context prior adapts to these corruptions, ``normalizing'' the error and degrading detection sensitivity. 
+\section{Scorer Actually Evaluated}
+For a dirty table with entity groups $\mathcal{E}(i)$, cell $(i,j)$ is scored from a context $\mathcal{C}$ of at most 30 rows drawn from the other folds of a 5-fold leave-entity-out partition, so no row of $\mathcal{E}(i)$ enters the context. Row distances $d(i,m)$ exclude the target column $j$ and the key column, use raw (unscaled) numeric differences and a Hamming penalty for categories, and give weights $w_m=\exp(-d(i,m)/2)$. Numeric cells receive $\min(|x_{ij}-\hat\mu|/\hat\sigma, 25)$ with weighted mean and standard deviation; categorical cells receive $-\log\frac{\sum_{m:x_{mj}=x_{ij}} w_m + 1}{\sum_m w_m + |V|}$. ``Influence'' trimming removes the 15\% of context rows with the largest $d(i,m)$; the preregistered influence score (a likelihood gradient norm or leave-one-out variance) was not implemented. Rows whose target value is in a supplied rare-valid list are exempt; in the pilot that list (\texttt{category\_c = RareDelta}, 4\% of rows, above the preregistered $\le 1\%$ criterion) was provided by the fixture author, i.e.\ it is oracle information.
 
-To overcome this dilemma without supervised error annotations, we make three core contributions:
-\begin{enumerate}
-    \item \textbf{Mechanistic Characterization of Cell Self-Contamination:} We isolate and analyze the coordinate-level Context Normalization phenomenon in training-free TFM inference.
-    \item \textbf{Methodological Invariant Framework:} We formalize Leave-Entity-Out (LEO) cross-fitting and target attribute masking, establishing provable insulation between query cells and their demonstration pool.
-    \item \textbf{Influence Trimming with Rare-Valid Guardrails:} We develop an influence-directed context pruning operator that discards high-leverage corrupted exemplars while mathematically shielding rare-valid domain categories, outperforming matched-random removal by $+0.0167$ AUPRC and reducing false alarms by 25\% on CPU runtimes.
-\end{enumerate}
-
-\section{Related Work and Task Boundaries}
-Scientific integrity requires disambiguating five adjacent tabular research problems:
-\begin{itemize}
-    \item \textbf{Cell Error Detection (Cell-ED):} Predicts matrix $S \in \mathbb{R}^{N \times D}$. CDC~\cite{jager2024cdc} pioneered cell error detection using pre-trained imputers followed by conformal residual calibration. However, CDC assumes a clean calibration split; in an unlabelled dirty table, self-contamination corrupts both the imputer and calibration quantiles. ZeroED~\cite{zeroed2025} uses LLM reasoning but suffers from latency ($>10$s per prompt).
-    \item \textbf{Row Anomaly Detection:} Predicts vector $s \in \mathbb{R}^N$. TACTIC~\cite{tactic2026} and ZEN~\cite{zen2026focus} studied in-context anomaly scoring with TabPFN, highlighting context instability. However, both produce only a 1-dimensional row score; duplicating row scores across columns distorts cell-level precision.
-    \item \textbf{Supervised Label Attribution:} TICDA~\cite{ticda2026} leverages linear surrogates to prune context, but operates strictly on single supervised classification targets rather than unsupervised mixed-type matrices.
-    \item \textbf{Classical Coordinate Statistics:} DDC~\cite{rousseeuw2018ddc} and Cellwise MCD~\cite{rayyan2023cellmcd} provide robust numeric deviance baselines, but cannot capture complex categorical relationships.
-\end{itemize}
-
-\section{The CRIC-ED Methodology}
-Let $\tilde{X} \in \mathcal{X}^{N \times D}$ be a heterogeneous dirty table consisting of $D$ columns (numerical indices $\mathcal{J}_{\text{num}}$ and categorical indices $\mathcal{J}_{\text{cat}}$). Let $\mathcal{E}(i)$ denote the entity group for row $i$.
-
-\subsection{Information Boundaries and LEO Cross-Fitting}
-To prevent data leakage, scoring cell $(i, j)$ satisfies two non-negotiable invariants:
-\begin{enumerate}
-    \item \textbf{Target Column Exclusion:} When evaluating column $j$, the conditioning feature vector is $\tilde{x}_{i, -j} \in \mathbb{R}^{D-1}$.
-    \item \textbf{Leave-Entity-Out (LEO) Partitioning:} Let $\mathcal{C}_{(-i)}$ denote the candidate exemplar pool. For all $k \in \mathcal{C}_{(-i)}$, we enforce $\mathcal{E}(k) \neq \mathcal{E}(i)$. Row $i$ never enters its own context pool.
-\end{enumerate}
-
-\subsection{Conditional In-Context Likelihood Scoring}
-Given a frozen foundation model $\theta$ and an active context $\mathcal{C}$:
-\begin{itemize}
-    \item For categorical attributes $j \in \mathcal{J}_{\text{cat}}$:
-    \begin{equation}
-        S_{i,j}^{\text{cat}} = -\log P_\theta(X_{i,j} = \tilde{x}_{i,j} \mid \tilde{x}_{i,-j}, \mathcal{C})
-    \end{equation}
-    estimated via in-context conditional frequency with Laplace smoothing.
-    \item For continuous numerical attributes $j \in \mathcal{J}_{\text{num}}$:
-    \begin{equation}
-        S_{i,j}^{\text{num}} = \frac{|\tilde{x}_{i,j} - \hat{\mu}_{i,j}(\mathcal{C})|}{\hat{\sigma}_{i,j}(\mathcal{C}) + \epsilon}
-    \end{equation}
-    where $\hat{\mu}$ and $\hat{\sigma}$ are conditional expectation and dispersion estimated from the in-context distribution.
-\end{itemize}
-
-\subsection{Influence-Aware Context Trimming with Rare-Valid Guardrails}
-When context $\mathcal{C}_0$ is sampled, self-contamination corrupts density estimates. CRIC-ED computes the leverage of each context row $m \in \mathcal{C}_0$ relative to query $\tilde{x}_{i,-j}$:
-\begin{equation}
-    L(m) = \|\tilde{x}_{m,-j} - \tilde{x}_{i,-j}\|
-\end{equation}
-The top $q\%$ exemplars with highest leverage are candidate outliers.
-\textbf{Rare-Valid Guardrail:} An exemplar $m$ is exempt from pruning if its observed value belongs to a registered domain minority ($\le 1\%$ frequency), preventing the detector from purging legitimate diversity.
-
-\section{Empirical Evaluation}
-
-\subsection{Experimental Setup}
-Experiments were conducted on the verified benchmark suite~\cite{mahdavi2020raha} under local CPU execution ($0 budget). Evaluated on all $M = N \times (D - 1)$ eligible non-primary-key cells. Coverage penalty rules apply: non-finite or crashed cells receive maximum penalty scores.
+\section{Pilot Protocol and Deviations}
+Fixture: 100 rows $\times$ 5 columns, 20 entities, 400 eligible cells, 4 error cells (1\%), one seed (42). The preregistration (\texttt{prereg/PREREGISTRATION.md}) names DDC, column-wise Isolation Forest, CDC~\cite{jager2024cdc} and an unsupervised TabPFN as baselines; none was run. The only baseline is a column-wise MAD score computed on all rows. Its stop rule compares raw TabPFN or CDC with CRIC-ED on a pilot benchmark; because neither exists here, the rule cannot be evaluated as written, and we report the untrimmed scorer as a proxy.
 
 \begin{table}[t]
 \centering
-\caption{Measured performance comparison on the benchmark evaluation fixture (\texttt{run\_pilot\_001}).}
-\label{tab:results}
-\begin{tabular}{lccccc}
+\caption{Pilot on the synthetic fixture (software-level evidence; 4 positives, 1 seed). Run 001: original execution and evaluator (ties broken by input order; matched-random arm on a different random stream). Run 003: same scorer with separated random streams (arms 2--4 share every base context), tie-invariant AUPRC (equal to scikit-learn's average precision), coverage penalty, 1{,}000 entity-cluster bootstrap resamples (990 with at least one positive).}
+\label{tab:pilot}
+\small\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lcccc}
 \toprule
-\textbf{Method / Arm} & \textbf{Overall AUPRC} & \textbf{Num AUPRC} & \textbf{Cat AUPRC} & \textbf{Rare-Valid FPR} & \textbf{Latency (ms/cell)} \\
+Arm & \multicolumn{2}{c}{AUPRC} & 95\% CI & Rare-valid \\
+ & run 001 & run 003 & run 003 & in top 5\% \\
 \midrule
-Arm 1: Classical MAD & 1.0000 & 1.0000 & 1.0000 & 1.0000 & \textbf{0.0015} \\
-Arm 2: CRIC-ED Raw & 0.6981 & 0.8095 & 1.0000 & 0.7500 & 0.0591 \\
-Arm 3: CRIC-ED Matched-Random & 0.6738 & 0.8095 & 1.0000 & 0.7500 & 0.0538 \\
-Arm 4: CRIC-ED Influence-Trimmed & \textbf{0.6905} & \textbf{0.8095} & \textbf{1.0000} & \textbf{0.7500} & \textbf{0.1027} \\
+MAD (column-wise) & 1.000 & 1.000 & [1.000, 1.000] & 4/4 \\
+Conditional scorer, no trimming & 0.698 & 0.365 & [0.292, 1.000] & 3/4 \\
+\quad + matched-random removal & 0.674 & 0.365 & [0.294, 1.000] & 3/4 \\
+\quad + influence trim (oracle list) & 0.691 & 0.357 & [0.278, 1.000] & 3/4 \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsection{Results and Discussion}
-Table~\ref{tab:results} presents the empirical results.
+\section{Findings}
+{\sloppy
 \begin{itemize}
-    \item \textbf{Trimming Delta:} Arm 4 achieves 0.6905 AUPRC compared to 0.6738 for Arm 3 ($+0.0167$ delta) under identical sample sizes ($K=25$), confirming the advantage of influence guidance over random removal.
-    \item \textbf{Rare-Valid Protection:} While Classical MAD achieved perfect AUPRC on synthetic extreme numeric deviations, it falsely flagged 100\% of rare-valid cells (\texttt{FPR = 1.0000}). CRIC-ED reduced this false positive rate to 0.7500.
-    \item \textbf{Latency:} CRIC-ED scored 400 coordinates in 0.051 seconds (0.10 ms/cell) on local CPU, demonstrating immediate real-world usability.
+\item MAD outperformed every conditional-scorer arm. Paired difference (untrimmed $-$ MAD): $-0.635$, 95\% CI $[-0.708, 0.000]$. The injected errors are three large numeric deviations and one out-of-domain category, which favour marginal statistics.
+\item Influence trimming was below the untrimmed scorer (paired $-0.008$, $[-0.042, 0.000]$) and below matched-random removal (paired $-0.008$, $[-0.081, 0.048]$). With 4 positives these intervals are wide and the trimming comparison is inconclusive; no trimming benefit is supported.
+\item The earlier 0.698 arose because six cells, two of them errors, share the clipped score 25; the original evaluator ordered tied cells by input order. With ties grouped, AUPRC is 0.365.
+\item All conditional-scorer arms place 3 of the 4 rare-valid cells inside the 5\% audit budget, versus 4 of 4 for MAD. The difference is one cell and is not attributable to trimming or to the guardrail.
 \end{itemize}
+\par}
 
-\section{Limitations}
-Our empirical evidence derives from verified controlled benchmark fixtures (\texttt{run\_pilot\_001}). Confirmatory evaluations on the full 4-dataset RAHA suite remain the next stage of investigation.
+\section{What a Confirmatory Study Would Need}
+An approved research path (a pinned, licence-checked foundation-model checkpoint, or a newly preregistered fallback without one), real benchmark tables with provenance, the preregistered baselines, at least five seeds, paired context logging, a detector-inferred rare-valid criterion and the preregistered influence score. Adjacent problems that must not be conflated with cell-level detection include row-level in-context anomaly detection~\cite{tactic2026,zen2026focus}, in-context data attribution for labelling errors~\cite{ticda2026}, LLM-based detection~\cite{zeroed2025}, and robust cellwise statistics~\cite{rousseeuw2018ddc,raymaekers2024cellmcd}.
 
-\section{Conclusion}
-CRIC-ED provides a training-free framework for tabular cell error detection resilient to self-contamination, combining LEO cross-fitting, influence-directed context trimming, and rare-valid guardrails.
+\subsubsection*{AI Disclosure.}
+AI tools assisted coding, auditing and drafting under human oversight; authors must verify all content before any use outside the project.
 
-\subsubsection*{Acknowledgements \& AI Disclosure.}
-The authors acknowledge the use of AI-assisted coding and editing tools under human oversight in accordance with Springer Nature publication policies. All derivations, measurements, and conclusions were verified by the authors.
-
-%
-% ---- Bibliography ----
-%
 \bibliographystyle{splncs04}
 \bibliography{references}
 \end{document}

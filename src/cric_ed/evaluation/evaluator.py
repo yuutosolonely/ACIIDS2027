@@ -12,51 +12,56 @@ from typing import Any, Dict, List, Optional, Sequence, Tuple
 from cric_ed.models import CellScore
 
 def compute_average_precision(scores: Sequence[float], labels: Sequence[int]) -> float:
-    """Compute Average Precision (AUPRC) using step-wise integration.
-    
-    Higher score indicates higher suspicion of error.
+    """Average Precision (AUPRC) with tied scores grouped into one threshold.
+
+    Higher score indicates higher suspicion of error. Tie handling matches
+    scikit-learn's `average_precision_score`, so input order cannot change the value.
+    Returns NaN when there are no positives (AUPRC is undefined).
     """
     if len(scores) != len(labels) or not scores:
-        return 0.0
+        return float("nan")
 
     positives = sum(labels)
     if positives == 0:
-        return 0.0
+        return float("nan")
 
-    # Sort descending by score, stable tie-breaking
-    paired = sorted(zip(scores, labels), key=lambda x: -x[0])
+    by_score: Dict[float, List[int]] = {}
+    for s, y in zip(scores, labels):
+        tally = by_score.setdefault(s, [0, 0])
+        tally[0] += 1
+        tally[1] += y
 
-    tp = 0
-    fp = 0
-    precisions = []
-    recalls = []
-
-    # Compute precision-recall points
-    cum_tp = 0
     ap = 0.0
-    prev_recall = 0.0
-
-    for i, (s, y) in enumerate(paired):
-        if y == 1:
-            cum_tp += 1
-        current_precision = cum_tp / (i + 1)
-        current_recall = cum_tp / positives
-
-        # Integrate area when recall increases
-        if current_recall > prev_recall:
-            ap += current_precision * (current_recall - prev_recall)
-            prev_recall = current_recall
-
+    cum_n = 0
+    cum_tp = 0
+    for s in sorted(by_score, reverse=True):
+        n, tp = by_score[s]
+        cum_n += n
+        cum_tp += tp
+        if tp:
+            ap += (cum_tp / cum_n) * (tp / positives)
     return float(ap)
+
+
+def apply_coverage_penalty(scores: List[float], failed: List[bool]) -> List[float]:
+    """Preregistered rule: failed or non-finite cells receive max finite score + 1.0."""
+    finite = [s for s, f in zip(scores, failed) if not f and math.isfinite(s)]
+    penalty = (max(finite) if finite else 0.0) + 1.0
+    return [penalty if (f or not math.isfinite(s)) else s for s, f in zip(scores, failed)]
+
 
 def cluster_bootstrap_auprc_ci(
     scores_by_row: Dict[int, List[float]],
     labels_by_row: Dict[int, List[int]],
     entity_to_rows: Dict[str, List[int]],
-    n_bootstraps: int = 200,
+    n_bootstraps: int = 1000,
     seed: int = 42
 ) -> Tuple[float, float, float]:
-    """Compute mean and 95% CI for AUPRC using cluster-preserving bootstrap over entities."""
+    """Mean and 95% percentile CI of AUPRC under an entity-cluster bootstrap.
+
+    Replicates without any positive cell are discarded (AUPRC undefined there);
+    `last_valid_replicates` records how many were kept.
+    """
     rng = random.Random(seed)
     unique_entities = list(entity_to_rows.keys())
     n_entities = len(unique_entities)
@@ -81,8 +86,12 @@ def cluster_bootstrap_auprc_ci(
                 boot_labels.extend(labels_by_row.get(r, []))
 
         ap = compute_average_precision(boot_scores, boot_labels)
-        boot_aps.append(ap)
+        if not math.isnan(ap):
+            boot_aps.append(ap)
 
+    cluster_bootstrap_auprc_ci.last_valid_replicates = len(boot_aps)
+    if not boot_aps:
+        return float("nan"), float("nan"), float("nan")
     boot_aps.sort()
     lower_idx = int(0.025 * len(boot_aps))
     upper_idx = int(0.975 * len(boot_aps))
@@ -90,14 +99,51 @@ def cluster_bootstrap_auprc_ci(
 
     return mean_ap, boot_aps[lower_idx], boot_aps[min(upper_idx, len(boot_aps) - 1)]
 
+def paired_bootstrap_delta(
+    scores_a: Dict[int, List[float]],
+    scores_b: Dict[int, List[float]],
+    labels_by_row: Dict[int, List[int]],
+    entity_to_rows: Dict[str, List[int]],
+    n_bootstraps: int = 1000,
+    seed: int = 42
+) -> Dict[str, Any]:
+    """Entity-cluster bootstrap of AUPRC(a) - AUPRC(b) on the same resampled cells."""
+    rng = random.Random(seed)
+    ents = list(entity_to_rows.keys())
+
+    def flat(sc, rows):
+        return [x for r in rows for x in sc.get(r, [])]
+
+    all_rows = [r for e in ents for r in entity_to_rows[e]]
+    lab = flat(labels_by_row, all_rows)
+    point = (compute_average_precision(flat(scores_a, all_rows), lab)
+             - compute_average_precision(flat(scores_b, all_rows), lab))
+    deltas = []
+    for _ in range(n_bootstraps):
+        rows = [r for e in (rng.choice(ents) for _ in ents) for r in entity_to_rows[e]]
+        lab = flat(labels_by_row, rows)
+        d = (compute_average_precision(flat(scores_a, rows), lab)
+             - compute_average_precision(flat(scores_b, rows), lab))
+        if not math.isnan(d):
+            deltas.append(d)
+    deltas.sort()
+    lo = deltas[int(0.025 * len(deltas))]
+    hi = deltas[min(int(0.975 * len(deltas)), len(deltas) - 1)]
+    return {"delta": round(point, 4), "ci95": [round(lo, 4), round(hi, 4)], "valid_replicates": len(deltas)}
+
+
 def evaluate_cell_scores(
     cell_scores: List[CellScore],
     ground_truth_errors: List[List[int]],
     entity_ids: List[str],
     numeric_col_indices: Sequence[int],
-    rare_valid_mask: Optional[List[List[bool]]] = None
+    rare_valid_mask: Optional[List[List[bool]]] = None,
+    n_bootstraps: int = 1000
 ) -> Dict[str, Any]:
     """Evaluate full cell predictions against isolated ground truth."""
+    eligible = [cs for cs in cell_scores if cs.is_eligible]
+    penalised = apply_coverage_penalty([cs.score for cs in eligible],
+                                       [bool(cs.failure_status) for cs in eligible])
     eligible_scores: List[float] = []
     eligible_labels: List[int] = []
 
@@ -116,14 +162,10 @@ def evaluate_cell_scores(
         scores_by_row[r] = []
         labels_by_row[r] = []
 
-    rare_valid_scores: List[float] = []
+    rare_valid_positions: List[int] = []
 
-    for cs in cell_scores:
-        if not cs.is_eligible:
-            continue
-
+    for cs, score in zip(eligible, penalised):
         true_label = ground_truth_errors[cs.row_idx][cs.col_idx]
-        score = cs.score
 
         eligible_scores.append(score)
         eligible_labels.append(true_label)
@@ -139,7 +181,7 @@ def evaluate_cell_scores(
             cat_labels.append(true_label)
 
         if rare_valid_mask and rare_valid_mask[cs.row_idx][cs.col_idx]:
-            rare_valid_scores.append(score)
+            rare_valid_positions.append(len(eligible_scores) - 1)
 
     # 1. Primary AUPRC
     overall_auprc = compute_average_precision(eligible_scores, eligible_labels)
@@ -148,8 +190,9 @@ def evaluate_cell_scores(
 
     # 2. Cluster Bootstrap CI
     mean_ap, ci_lower, ci_upper = cluster_bootstrap_auprc_ci(
-        scores_by_row, labels_by_row, entity_to_rows, n_bootstraps=100
+        scores_by_row, labels_by_row, entity_to_rows, n_bootstraps=n_bootstraps
     )
+    valid_replicates = cluster_bootstrap_auprc_ci.last_valid_replicates
 
     # 3. Budgeted Metrics (k = 1%, 5%, 10% of eligible cells)
     total_eligible = len(eligible_scores)
@@ -161,7 +204,8 @@ def evaluate_cell_scores(
 
     budgeted_results = {}
     positives = sum(eligible_labels)
-    sorted_idx = sorted(range(total_eligible), key=lambda i: -eligible_scores[i])
+    # Deterministic budget ranking: score descending, then cell order.
+    sorted_idx = sorted(range(total_eligible), key=lambda i: (-eligible_scores[i], i))
 
     for b_key, b_size in budgets.items():
         top_k = sorted_idx[:b_size]
@@ -178,11 +222,11 @@ def evaluate_cell_scores(
         }
 
     # 4. Rare-valid false positive alarm rate (fraction of rare-valid cells in top 5% audit budget)
+    # Membership in the exact top-k set, so ties at the boundary cannot enlarge the budget.
     rare_valid_fpr = 0.0
-    if rare_valid_scores and total_eligible > 0:
-        threshold_top5 = eligible_scores[sorted_idx[budgets["k_05"] - 1]]
-        alarms_on_rare = sum(1 for s in rare_valid_scores if s >= threshold_top5)
-        rare_valid_fpr = alarms_on_rare / len(rare_valid_scores)
+    if rare_valid_positions and total_eligible > 0:
+        top5 = set(sorted_idx[:budgets["k_05"]])
+        rare_valid_fpr = sum(1 for i in rare_valid_positions if i in top5) / len(rare_valid_positions)
 
     return {
         "eligible_cells": total_eligible,
@@ -191,6 +235,8 @@ def evaluate_cell_scores(
         "numeric_auprc": round(numeric_auprc, 4),
         "categorical_auprc": round(categorical_auprc, 4),
         "auprc_95_ci": [round(ci_lower, 4), round(ci_upper, 4)],
+        "bootstrap": {"unit": "entity", "requested": n_bootstraps, "valid_replicates": valid_replicates},
+        "failed_cells_penalised": sum(1 for cs in eligible if cs.failure_status),
         "budgeted_metrics": budgeted_results,
         "rare_valid_fpr_at_k05": round(rare_valid_fpr, 4)
     }

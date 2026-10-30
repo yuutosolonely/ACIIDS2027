@@ -1,0 +1,37 @@
+{
+  "run_id": "design_resolution_20261030",
+  "kind": "mathematical design diagnostic; no benchmark result",
+  "assumptions": "independent equiprobable signs at table level; all observed differences positive",
+  "config": {
+    "n_tables": 4,
+    "conditions_per_table": 3,
+    "rank_weights": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ]
+  },
+  "table_level": {
+    "assignments": 16,
+    "extreme": 1,
+    "minimum_one_sided_p": 0.0625
+  },
+  "naive_condition_level": {
+    "assignments": 4096,
+    "extreme": 1,
+    "minimum_one_sided_p": 0.000244140625
+  },
+  "source_revision": "06ded051a382bee8e6db47c582e46145fe544515",
+  "source_state": "uncommitted working tree; script hash identifies derivation",
+  "script_sha256": "f6ad3f09e5141f917bc63458f3ebb9b728ed90ca02d766dd479eaebcca933141",
+  "primary_source": "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.wilcoxon.html"
+}

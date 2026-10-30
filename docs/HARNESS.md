@@ -1,5 +1,11 @@
 # Harness vận hành và thực nghiệm
 
+> **Đối soát 2026-10-30:** mô tả “chưa có” dưới đây là trạng thái setup lịch sử. Working tree hiện có scorer/evaluator sửa lỗi và candidate loader/TFM adapter/analysis v2; code v2 chưa được kiểm định đầy đủ hoặc xác nhận quyền hạn. Suite hiện tại PASS không xác lập validation cho pipeline v2. Xem `docs/STATE.md` và `docs/review/AUDIT_20261030.md` trước khi chạy model.
+
+CPU remediation sau tiếp nhận: candidate v2 có test tổng hợp cho nested pass 1, target omission, paired contexts, oracle-input separation, timing, source freeze và run-grid validation. Toàn suite trong `.venv-tfm`: 40 passed; không chạy TFM/RAHA. Final-pass preprocessing vẫn transductive, group policy và đơn vị thống kê chưa được chốt; test PASS không đóng các finding phương pháp này. Contract kỹ thuật đề xuất: `experiments/tfm/README.md`.
+
+Reliability tiếp nối: `run_record.py` lưu attempt ở `.partial` với stage/source/lỗi; chỉ finalize khi đủ artifact. Runner kiểm 33 declared runtime pins, analysis yêu cầu completed journal khớp metadata. Toàn suite scientific environment hiện 49 passed; môi trường này kế thừa system site packages, không cô lập. Record pin cũ được archive trước khi bổ sung torch. Đề xuất ranh giới/thống kê trước freeze: `docs/proposals/V2_AMENDMENT_20261030.md` (chưa duyệt).
+
 ## Đã triển khai cho setup
 `tools/check_setup.py`: validate cấu hình, role/skill paths, mirror, policy/source manifest và scope hiện hành. `tools/check_mcp.py`: stdio initialize/list tools và gọi status offline. `tools/sync_skills.py`: manifest-aware mirror không xóa file không được quản lý. `tools/lit.py`, `verify_refs.py`: API công khai, cache trong `.cache/refcache/` của repo.
 

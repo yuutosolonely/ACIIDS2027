@@ -3,6 +3,12 @@
 Cập nhật: 2026-10-29.
 Trạng thái: **Protocol Design; Chưa đóng băng (Unfrozen); Chưa chạy confirmatory runs.**
 
+> **Ghi chú 2026-10-30:** tài liệu này là kế hoạch lịch sử. Protocol đóng băng hiện hành là `prereg/PREREGISTRATION.md` (không sửa). Trạng thái thực hiện và deviation: `docs/EXPERIMENT_LOG.md` §3–4, `docs/review/AUDIT_20261030.md`.
+
+Candidate v2 và đề xuất nested pass 1/kiểm freeze-source-grid ở `experiments/tfm/README.md` chưa phải amendment được duyệt. Chỉ validation CPU tổng hợp được thực hiện trong lượt remediation; không thay prereg v1/v2, không mở confirmatory.
+
+Chi tiết amendment đề xuất (chưa duyệt): `docs/proposals/V2_AMENDMENT_20261030.md`. Tài liệu nêu estimand, group/inductive boundary, matched-compute control, dependence theo source table và lý do khuyến nghị mô tả kết quả trên bộ bảng hiện tại. Run-attempt/runtime validation đã được kiểm trên fixtures, chưa có checkpoint capability hoặc benchmark validation.
+
 ---
 
 ## 1. Dữ liệu và Ranh giới Thông tin (Datasets & Information Boundaries)
