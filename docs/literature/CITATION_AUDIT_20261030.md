@@ -90,3 +90,17 @@ Support marked UNVERIFIED was not checked against the full paper in this session
 
 Access limits: ACM DL and DBLP returned 403/anti-bot pages; Nature redirected to a login wall,
 so Crossref was used for those records.
+
+
+## Addendum 2026-10-31 (Claude) — sources added to or changed in the manuscript
+
+Identity checks use primary records; "support" names the text actually read. Search snippets were not used as evidence.
+
+| Key | Identity source (checked 2026-10-31) | Content read | Sentence supported in paper | Limits |
+|---|---|---|---|---|
+| `chen2025autotest` | Author PDF (Microsoft Research), ACM reference line: Proc. ACM Manag. Data 3(3) (SIGMOD), Art. 133, 27 pp., DOI 10.1145/3725396; Crossref via `verify_reference` VERIFIED | Abstract, §on architecture (offline corpus training, online detection) | Learns semantic-domain constraints from a table corpus offline; detects erroneous column values without per-table expert constraints | Experiments not re-checked; not run |
+| `ahmadi2025matelda` | EDBT 2025 OpenProceedings PDF: pp. 364–376 (first page 364, 13 pp.), DOI 10.48786/edbt.2025.29 printed (DataCite DOI; Crossref API returns 404) | Abstract, introduction, baselines paragraph | Semi-supervised; folds cells of several tables by domain/quality similarity; labelling budget shared across tables | Not run |
+| `qin2026lucario` | Crossref: title, Qin/Li/Merlo, Inf. Softw. Technol. 192, 108035 (Apr 2026), CC-BY; Polytechnique Montréal record 71729 | Authors' replication-package README (unsupervised per-column type/categorical/numeric/regex constraint inference; default 95% coverage). Publisher full text blocked (HTTP 403, then CAPTCHA in browser — not bypassed) | Only: targets unsupervised, lightweight detection of pattern anomalies and outliers (title-level) | Abstract and experiments NOT read; no metric or dataset claim made |
+| `fibbi2026celltricc` | Crossref: title, 5 authors, J. Comput. Graph. Stat., online 21 Apr 2026, pp. 1–16, CC-BY | Authors' ICORS 2025 abstract (unitn.it): cellwise trimming as extra step in Stochastic EM for latent block models; count data (Poisson); trimmed ICL | Cellwise trimming has been built into model-based co-clustering | Journal full text blocked (403); paper sentence limited accordingly |
+| `bertiequille2026prior` | arXiv 2604.25154 — v2 (17 Sep 2026) retitled "Model-Aware Data Cleaning for Tabular Foundation Models"; v1 "Prior-Aligned …" | v1 and v2 abstracts and v2 comments (v2 corrects the prior-alignment framing; name now L2C-TFM) | Updated to v2: learns RL policies that sequence cleaning operators for TFM-oriented data preparation. Name "L2C2" removed from paper | Full text not re-read |
+| `tactic2026`, `ipas2026lucos`, `zeroed2025`, `zaccaria2025cellgmm` | arXiv API via `verify_reference`: VERIFIED (titles/authors unchanged) | Support as recorded in the 2026-10-30 audit above | Unchanged | — |

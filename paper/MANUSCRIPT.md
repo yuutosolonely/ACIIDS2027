@@ -125,7 +125,8 @@ perfect-context and no-intervention settings for TabPFN
 embeddings (Papastergios and Gounaris 2025). Its clean-context
 comparison is close to the motivation of our oracle diagnostic; the
 benefit of cleaner contexts is therefore not a new hypothesis introduced
-here. L2C2 learns sequences of cleaning operations for TFM-oriented data
+here. Model-aware cleaning learns reinforcement-learning policies that
+sequence cleaning operators for TFM-oriented data
 preparation (Berti-Equille 2026). We instead evaluate one fixed removal
 rule as a cell-ranking intervention without learning a cleaning policy.
 LUCoS selects representative contexts using unsupervised PFN embeddings,
@@ -543,8 +544,13 @@ headroom from cleaner contexts that the declared rule did not recover.
 LEO uses different bases, excludes observed keys only, and keeps
 transductive final encoding; its large drop on hospital suggests that
 the row-level primary analysis benefits from same-entity rows in the
-context. These contrasts diagnose sensitivity rather than isolate a
-single causal explanation.
+context. LightGBM purification was likewise not better than its random
+control on real errors ($`-0.055`$, $`-0.006`$, $`+0.000`$ and
+$`-0.028`$ for hospital, flights, beers and rayyan). The leaky
+diagnostic, which adds the query fold to the context, changed TabPFN AP
+by $`-0.048`$ to $`+0.046`$ across tables, so self-inclusion did not
+uniformly inflate this score. These contrasts diagnose sensitivity
+rather than isolate a single causal explanation.
 
 | Table | TFM raw $`-`$ LGBM | Oracle $`-`$ raw | TFM LEO $`-`$ raw |
 |:---|---:|---:|---:|
@@ -712,15 +718,6 @@ not an independent replication. Code and checkpoint licenses are
 separate, and redistribution must respect the pinned weight terms. Built
 with PriorLabs-TabPFN.
 
-#### Use of AI tools.
-
-AI coding and writing assistants (OpenAI Codex and Anthropic Claude)
-were used for literature search, implementation, test and audit scripts,
-experiment orchestration, analysis checks, and drafting and editing of
-this text. The author is responsible for the design decisions, has to
-verify every source, number and statement, and remains accountable for
-the paper; no AI system is an author.
-
 # Conclusion
 
 We evaluated a simple context-purification intervention for conditional
@@ -736,6 +733,19 @@ cross-dataset superiority claim. Broader conclusions require more
 datasets, other context strategies, direct cell-level competitors and
 dependence-aware validation.
 
+<div class="credits">
+
+### Use of AI tools.
+
+AI coding and writing assistants (OpenAI Codex and Anthropic Claude)
+were used for literature search, implementation, test and audit scripts,
+experiment orchestration, analysis checks, and drafting and editing of
+this text. The author is responsible for the design decisions, has to
+verify every source, number and statement, and remains accountable for
+the paper; no AI system is an author.
+
+</div>
+
 <div id="refs" class="references csl-bib-body hanging-indent">
 
 <div id="ref-ahmadi2025matelda" class="csl-entry">
@@ -749,9 +759,9 @@ the 28th International Conference on Extending Database Technology
 
 <div id="ref-bertiequille2026prior" class="csl-entry">
 
-Berti-Equille, Laure. 2026. *Prior-Aligned Data Cleaning for Tabular
-Foundation Models*. arXiv preprint arXiv:2604.25154v1.
-<https://arxiv.org/abs/2604.25154v1>.
+Berti-Equille, Laure. 2026. *Model-Aware Data Cleaning for Tabular
+Foundation Models*. arXiv preprint arXiv:2604.25154v2.
+<https://arxiv.org/abs/2604.25154v2>.
 
 </div>
 

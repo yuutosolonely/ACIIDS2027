@@ -1,7 +1,7 @@
 {
   "pandoc_version": "pandoc 3.12.1",
-  "expanded_source_sha256": "dccb534f47634424bee02a55209540f3e2b1ce57d975c42d9467165fa4d4d45a",
-  "markdown_sha256": "9cc03b7a0158739f20819beb7f5c9e0140de0c84464211793d20c15bac96d250",
+  "expanded_source_sha256": "3fd5c6fb9b3ad7d58e22ee99d169e04245054c0e06aa624d4bbf705758217e99",
+  "markdown_sha256": "c3ad4da29965f42a85356dd7f303cd30551791a8e10f860e4f87450015db9266",
   "warnings": "",
   "citation_style": "Pandoc default author-date; same BibTeX identities as PDF"
 }

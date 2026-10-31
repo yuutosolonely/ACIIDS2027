@@ -48,8 +48,12 @@ need not be positive and is not a theoretical upper bound. It was positive on ev
 real table, indicating headroom from cleaner contexts that the declared rule did not
 recover. LEO uses different bases, excludes observed keys only, and keeps transductive
 final encoding; its large drop on hospital suggests that the row-level primary analysis
-benefits from same-entity rows in the context. These contrasts diagnose sensitivity
-rather than isolate a single causal explanation.
+benefits from same-entity rows in the context. LightGBM purification was likewise
+not better than its random control on real errors ($-0.055$, $-0.006$, $+0.000$ and
+$-0.028$ for hospital, flights, beers and rayyan). The leaky diagnostic, which adds the
+query fold to the context, changed TabPFN AP by $-0.048$ to $+0.046$ across tables, so
+self-inclusion did not uniformly inflate this score. These contrasts diagnose
+sensitivity rather than isolate a single causal explanation.
 \input{generated/secondary}
 
 \subsection{Injection probes and rare-valid alarms}

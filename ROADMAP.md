@@ -76,3 +76,6 @@ P3 cleanup tên cũ/absolute paths và vendoring template Springer chưa thuộc
 ## Status update — 2026-10-31 (Claude, consistency review)
 
 Items 1–3 of the 17:00 ICT plan are done: grid 60/60, audits, analysis, same-script replay, tables, manuscript (15 pages) — see `docs/EXPERIMENT_LOG.md` §9. Acceptance review found and fixed: overstated "independent" wording; gate table inflated (G4 now PENDING, G5 draft complete pending author verification); fit-failure scope (>50% of TabPFN cells in one injected unit) under-reported — post hoc sensitivity added as exploratory; DDCcore ≡ RobustZ on real errors; timing periods undisclosed. Open, author-owned: (a) resolve NO-GO vs submit directive; (b) read and approve full manuscript; (c) session/track; (d) Disclosure of Interests content; (e) anonymity (not stated by official pages; check EasyChair). No independent review exists. Agents never submit.
+
+## Status update — 2026-10-31 (pass 2)
+Checkout/freeze packaging fixed in the index (nested `-text` attributes + renormalize; clean-export verification PASS); manuscript completed for author review. Remaining items are author-only: Disclosure of Interests text, submit decision, anonymity, track/session, acknowledgments. Commit pending user approval.

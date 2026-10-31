@@ -1,5 +1,7 @@
 # Trạng thái nghiên cứu CRIC-ED — ACIIDS 2027
 
+**Cập nhật 2026-10-31 (lượt 2, Claude):** sửa lỗi packaging freeze (blob của file được hash bị chuẩn hóa EOL trong `c3ee807`) bằng `.gitattributes` lồng `-text` + renormalize; `tools/check_checkout_integrity.py` PASS 6/6 trên export sạch của tree đã stage (HEAD `c3ee807` FAIL 6/6). Bản thảo: bổ sung LightGBM purify−random và leaky diagnostic, cập nhật trích dẫn L2C (arXiv v2), chuyển khai báo AI vào khối `credits` LNCS; PDF 15 trang. Các thay đổi đang **staged, chưa commit**.
+
 **Hiện hành — 2026-10-31 (rà soát nhất quán sau grid; Claude, theo yêu cầu người dùng):**
 - Source: HEAD `0aff63e` + working tree; freeze snapshot `c37e39ab…` kiểm lại bằng `verify_freeze` 2026-10-31: khớp. Không sửa run, split, seed, prereg hay phân tích confirmatory.
 - Grid v2.1: 60/60 units hoàn tất, cả TabPFN-v2 và LightGBM; artifact audit và split audit PASS (63.300 context records). Đây là artifact audit bằng script của chính dự án, không phải review độc lập.
@@ -7,7 +9,14 @@
 - Phát hiện mới: DDCcore trả điểm **giống hệt** RobustZ trên 20/20 unit real-error (50/60 tổng) vì không cặp cột số nào vượt ngưỡng tương quan; đã khai báo trong bài.
 - Phân tích chạy lại cùng script `analyze_v2.py` cho 6 file khớp từng byte: đây là **analysis replay cùng implementation**, không phải phân tích độc lập. Một unit (flights/real/s0) chạy lại cùng code: PASS_EXACT.
 - Bản thảo: 15 trang LNCS (template Springer 2.25), build sạch (0 overfull/undefined), đã xem trang 1, 10, 12, 15. Bỏ banner draft/fallback “pending”; thêm related work đã kiểm (Auto-Test, MaTElDa, LUCARIO, Cell-TRICC); viết lại results cân bằng (purify kém random ở 3/4 bảng; không method nào tốt nhất mọi bảng); khai báo gián đoạn grid/throttling ảnh hưởng timing; khai báo AI cụ thể. Text-overlap cục bộ: 0 cụm 12 từ (`docs/review/TEXT_OVERLAP_FINAL_20261031.json`).
-- Mâu thuẫn chưa giải quyết (cần tác giả): NO-GO hạn ACIIDS (DECISION_BRIEF/AUTHORIZATION) vs chỉ thị “prepare paper for author submission to ACIIDS 2027” (`paper/AUTHOR_METADATA.json`). Hạn nộp chính thức: 31/10/2026 23:59 AoE = 01/11/2026 18:59 ICT (kiểm lại trang chính thức 2026-10-31). Agent không nộp bài.
+- Trạng thái nộp bài (đối soát 2026-10-31): NO-GO ngày 2026-10-30 được giữ làm lịch sử; chỉ thị tác giả 11:45 ICT cùng ngày (DECISION_BRIEF) chuyển mục tiêu sang hoàn thiện bài để **tác giả tự nộp**. Chuẩn bị bản thảo được phép; nộp/không nộp là quyết định riêng của tác giả, chưa được đưa ra. Hạn chính thức 31/10/2026 23:59 AoE = 01/11/2026 18:59 ICT. Agent không nộp, không upload.
+
+## Câu hỏi cho tác giả (chỉ tác giả trả lời được)
+1. Nội dung mục bắt buộc “Disclosure of Interests” (LNCS): có xung đột lợi ích/tài trợ nào cần khai báo không?
+2. Có nộp bản này vào ACIIDS 2027 trước 01/11/2026 18:59 ICT không (sau khi đọc toàn văn)?
+3. Bản nộp để tên tác giả hay ẩn danh (trang chính thức không nêu; cần kiểm tra form EasyChair)?
+4. Track chính hay special session (DADIT/ADMTA chưa xác minh chi tiết)?
+5. Có cần mục Acknowledgments (tài trợ, hỗ trợ) không?
 
 ## 1. Trạng thái các Gate nghiên cứu
 
@@ -20,7 +29,7 @@
 | G2 Pilot/falsification | **PASS (development only)** | movies_1 dev runs + audit `v2_1_dev_artifact_audit_initial.json`; không phải bằng chứng hiệu năng. |
 | G3 Confirmatory data | **PASS có ghi chú** | 60/60, artifact+split audit PASS; 1 unit có 435 fit-failure (xem trên). |
 | G4 Independent review | **PENDING** | Chỉ có self-check của agent, artifact audit, replay cùng script. Chưa có reviewer/replication độc lập. |
-| G5 Manuscript | **DRAFT COMPLETE — chờ tác giả xác minh** | `paper/output/cric_ed_v2_1.pdf` 15 trang; mọi số truy về `docs/CLAIM_EVIDENCE.md`. Tác giả chưa đọc/duyệt toàn văn. |
+| G5 Manuscript | **COMPLETE FOR AUTHOR REVIEW — chờ tác giả xác minh; thiếu Disclosure of Interests (bắt buộc, chỉ tác giả điền)** | `paper/output/cric_ed_v2_1.pdf` 15 trang; mọi số truy về `docs/CLAIM_EVIDENCE.md`. Tác giả chưa đọc/duyệt toàn văn. |
 | G6 Human decision | **PENDING** | Quyết định nộp/không, giải quyết NO-GO, track/session, anonymity (trang chính thức không nêu), Disclosure of Interests. |
 
 ## 2. Artifact hiện có trong R1

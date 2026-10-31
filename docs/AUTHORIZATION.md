@@ -25,3 +25,10 @@ Người dùng giao tiếp quản điều phối của Claude, thực hiện ngh
 
 Ngân sách vẫn $0; không phát sinh quyền tải checkpoint/accept điều khoản mới, compute/API trả phí, launch agent/worktree, upload manuscript vào dịch vụ kiểm tra, publication hoặc submission. NO-GO cho hạn ACIIDS hiện tại vẫn hiệu lực. “Xóa dấu vết AI” được thực thi như biên tập văn phong tự nhiên, bỏ diễn đạt khuôn mẫu và kiểm tính nguyên bản; không xóa disclosure bắt buộc hoặc khai sai nguồn gốc. Bản thảo cần tác giả xác minh trước sử dụng bên ngoài.
 
+
+## Đối soát trạng thái nộp bài — 2026-10-31 (Claude)
+
+Câu “NO-GO cho hạn ACIIDS hiện tại vẫn hiệu lực” ở trên được giữ làm lịch sử. Theo `docs/DECISION_BRIEF_20261030.md` (mục “Chỉ thị mới của tác giả … 2026-10-30 ~11:45 ICT”), tác giả đã đổi mục tiêu kế hoạch sang hoàn thiện bài để **tác giả tự nộp** ACIIDS 2027. Trạng thái chính xác hiện hành:
+- Được phép: chuẩn bị, kiểm chứng và build bản thảo trong phạm vi $0 / CPU local.
+- Không được phép với agent: nộp bài, đăng nhập EasyChair, upload manuscript, push, xuất bản, liên hệ bên ngoài.
+- Chưa quyết định: việc **có nộp hay không** là quyết định riêng của tác giả sau khi đọc toàn văn; không suy ra từ chỉ thị chuẩn bị bài.

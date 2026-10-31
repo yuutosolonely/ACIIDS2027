@@ -1,0 +1,5 @@
+# Byte-stable evidence (packaging fix 2026-10-31, after the v2.1 experiments).
+# Files here are referenced by SHA-256 in the freeze, provenance or comparison
+# records, so Git must store and check them out with their exact recorded bytes.
+# The root .gitattributes (itself frozen) is left unchanged.
+* -text

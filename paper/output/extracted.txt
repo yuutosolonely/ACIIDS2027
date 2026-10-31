@@ -103,16 +103,16 @@ cell-level rankings under ﬁxed pretrained weights and nested selection, not a
 row-AUROC comparison.
 Data quality and context selection for TFMs. QualiTab evaluates imperfect
 data and contrasts perfect-data, perfect-context and no-intervention settings for
-TabPFN embeddings [13]. Its clean-context comparison is close to the motiva-
-tion of our oracle diagnostic; the beneﬁt of cleaner contexts is therefore not a
-new hypothesis introduced here. L2C2 learns sequences of cleaning operations
-for TFM-oriented data preparation [2]. We instead evaluate one ﬁxed removal
-rule as a cell-ranking intervention without learning a cleaning policy. LUCoS se-
-lects representative contexts using unsupervised PFN embeddings, then obtains
-labels for supervised prediction [6]. Our contexts contain observed target values
-from the dirty table, with no annotation oracle for deployment. Together these
-works rule out broad novelty claims about either TFM data cleaning or label-free
-context selection.
+TabPFN embeddings [13]. Its clean-context comparison is close to the motivation
+of our oracle diagnostic; the beneﬁt of cleaner contexts is therefore not a new
+hypothesis introduced here. Model-aware cleaning learns reinforcement-learning
+policies that sequence cleaning operators for TFM-oriented data preparation [2].
+We instead evaluate one ﬁxed removal rule as a cell-ranking intervention without
+learning a cleaning policy. LUCoS selects representative contexts using unsuper-
+vised PFN embeddings, then obtains labels for supervised prediction [6]. Our
+contexts contain observed target values from the dirty table, with no annotation
+oracle for deployment. Together these works rule out broad novelty claims about
+either TFM data cleaning or label-free context selection.
 Systems for heterogeneous error detection. Raha is a conﬁguration-free error-
 detection system and supplies the benchmark repository used here [10]. Auto-
 Test learns semantic-domain constraints from a large table corpus oﬄine and ap-
@@ -526,8 +526,9 @@ not be positive and is not a theoretical upper bound. It was positive on every
 real table, indicating headroom from cleaner contexts that the declared rule did
 not recover. LEO uses diﬀerent bases, excludes observed keys only, and keeps
 transductive ﬁnal encoding; its large drop on hospital suggests that the row-level
-primary analysis beneﬁts from same-entity rows in the context. These contrasts
-diagnose sensitivity rather than isolate a single causal explanation.
+primary analysis beneﬁts from same-entity rows in the context. LightGBM pu-
+riﬁcation was likewise not better than its random control on real errors (−0.055,
+−0.006, +0.000 and −0.028 for hospital, ﬂights, beers and rayyan). The leaky
 
 
 Context Puriﬁcation for Cell Error Detection
@@ -577,6 +578,10 @@ random
 rayyan
 systematic
 0.025 [0.019, 0.031] 0.355 [0.339, 0.374]
+diagnostic, which adds the query fold to the context, changed TabPFN AP by
+−0.048 to +0.046 across tables, so self-inclusion did not uniformly inﬂate this
+score. These contrasts diagnose sensitivity rather than isolate a single causal
+explanation.
 5.3
 Injection probes and rare-valid alarms
 Table 5 shows the two injection conditions. They remain separate from the
@@ -593,10 +598,6 @@ it on ﬂights; on hospital, the reduction coincided with a large AP loss, so fe
 rare-valid alarms do not by themselves indicate a better detector. No rare-valid
 mask was provided to puriﬁcation. The seed-level export retains R-precision, pre-
 cision at 1% and 5%, type-speciﬁc AP, support and undeﬁned-endpoint counts.
-5.4
-Post hoc sensitivity to the failed unit
-After inspecting the results, we recomputed the aﬀected random-injection con-
-trasts from the saved scores in two ways that were not preregistered: excluding
 
 
 12
@@ -626,6 +627,45 @@ rayyan
 0.559
 0.559
 0.492
+5.4
+Post hoc sensitivity to the failed unit
+After inspecting the results, we recomputed the aﬀected random-injection con-
+trasts from the saved scores in two ways that were not preregistered: excluding
+seed 4, and evaluating seed 4 only on cells where neither compared arm failed
+(8,800 of 19,000 cells, error rate 9.9% versus 10.1% among failed cells). The pro-
+tocol values remain the reported results. Puriﬁcation minus random was +0.131
+under the protocol, +0.163 over seeds 0–3 and +0.138 with failed cells dropped;
+the oracle gap was +0.220, +0.242 and +0.229. The sign of raw TabPFN mi-
+nus raw LightGBM changed: −0.094 under the protocol, −0.0002 over seeds 0–3
+and +0.016 with failed cells dropped. The failures thus do not create the hos-
+pital puriﬁcation gain under random injection, but the protocol value of the
+model contrast in that condition reﬂects the failures rather than model ranking.
+Real-error results are unaﬀected.
+5.5
+Compute and scope of interpretation
+Table 7 separates nested preparation from ﬁnal puriﬁcation work. The nested
+component is included in the inclusive puriﬁcation time, and adding it to ordi-
+nary random time produces the declared accounted matched-compute control
+with unchanged random scores. It is not a separately timed accuracy arm. Wall
+times come from concurrent local CPU execution. The grid was interrupted
+twice and resumed without changing code, inputs or threads, and some units
+ran while the operating system throttled background processes. Timings there-
+fore span three execution periods: the TabPFN raw time on hospital/real, for
+example, ranged from 6.8 to 46.2 minutes across seeds. The table supports order-
+of-magnitude statements only; within a unit, nested preparation was the dom-
+inant cost of puriﬁcation. Peak memory and actual neural forward-call counts
+were not measured.
+These conclusions concern this ﬁxed removal rule, the pinned weights, the
+support policy and the capped collection. The real-error contrasts and injection
+probes must be read together with baseline performance and rare-valid alarms.
+They do not establish that context puriﬁcation generally succeeds or fails, that
+clean contexts always help, or that an equal budget could not be better spent
+on another strategy. No outcome was used to revise the frozen design or select
+a subset of seeds.
+
+
+Context Puriﬁcation for Cell Error Detection
+13
 Table 7. TabPFN time in minutes per run, ﬁve-seed means on real data. Inclusive
 puriﬁcation equals nested preparation plus ﬁnal work. Concurrent local CPU jobs; no
 peak-memory or forward-call measurement asserted.
@@ -654,41 +694,6 @@ rayyan
 6.71
 1.20
 7.91
-seed 4, and evaluating seed 4 only on cells where neither compared arm failed
-(8,800 of 19,000 cells, error rate 9.9% versus 10.1% among failed cells). The pro-
-tocol values remain the reported results. Puriﬁcation minus random was +0.131
-under the protocol, +0.163 over seeds 0–3 and +0.138 with failed cells dropped;
-the oracle gap was +0.220, +0.242 and +0.229. The sign of raw TabPFN mi-
-nus raw LightGBM changed: −0.094 under the protocol, −0.0002 over seeds 0–3
-and +0.016 with failed cells dropped. The failures thus do not create the hos-
-pital puriﬁcation gain under random injection, but the protocol value of the
-model contrast in that condition reﬂects the failures rather than model ranking.
-Real-error results are unaﬀected.
-5.5
-Compute and scope of interpretation
-Table 7 separates nested preparation from ﬁnal puriﬁcation work. The nested
-component is included in the inclusive puriﬁcation time, and adding it to ordi-
-nary random time produces the declared accounted matched-compute control
-with unchanged random scores. It is not a separately timed accuracy arm. Wall
-times come from concurrent local CPU execution. The grid was interrupted
-twice and resumed without changing code, inputs or threads, and some units
-ran while the operating system throttled background processes. Timings there-
-fore span three execution periods: the TabPFN raw time on hospital/real, for
-example, ranged from 6.8 to 46.2 minutes across seeds. The table supports order-
-of-magnitude statements only; within a unit, nested preparation was the dom-
-inant cost of puriﬁcation. Peak memory and actual neural forward-call counts
-were not measured.
-
-
-Context Puriﬁcation for Cell Error Detection
-13
-These conclusions concern this ﬁxed removal rule, the pinned weights, the
-support policy and the capped collection. The real-error contrasts and injection
-probes must be read together with baseline performance and rare-valid alarms.
-They do not establish that context puriﬁcation generally succeeds or fails, that
-clean contexts always help, or that an equal budget could not be better spent
-on another strategy. No outcome was used to revise the frozen design or select
-a subset of seeds.
 6
 Limitations and Reproducibility
 The collection contains four capped source tables, so per-table comparisons can
@@ -723,24 +728,18 @@ with RobustZ on every real-error unit and adds no evidence about relational
 numerical detection. Reference CDC, reference DDC, unsupervised TabPFN ex-
 tensions, Auto-Test, MaTElDa and LUCARIO were not run, which precludes
 state-of-the-art claims.
-Reproduction requires the pinned data and weights, the source-freeze mani-
-fest, declared package versions and the retained predictions. The analysis script
-recreates metrics, intervals, tables and ﬁgures from those predictions; rerunning
 
 
 14
 Ngo Dang Trong Hieu
+Reproduction requires the pinned data and weights, the source-freeze mani-
+fest, declared package versions and the retained predictions. The analysis script
+recreates metrics, intervals, tables and ﬁgures from those predictions; rerunning
 it gave byte-identical outputs, and a separate audit checks input identity, context-
 boundary logs and AP against scikit-learn. These checks reuse our own imple-
 mentation and are not an independent replication. Code and checkpoint licenses
 are separate, and redistribution must respect the pinned weight terms. Built
 with PriorLabs-TabPFN.
-Use of AI tools. AI coding and writing assistants (OpenAI Codex and Anthropic
-Claude) were used for literature search, implementation, test and audit scripts,
-experiment orchestration, analysis checks, and drafting and editing of this text.
-The author is responsible for the design decisions, has to verify every source,
-number and statement, and remains accountable for the paper; no AI system is
-an author.
 7
 Conclusion
 We evaluated a simple context-puriﬁcation intervention for conditional cell-error
@@ -753,13 +752,18 @@ complete denominators, failure masks and explicit preparation cost were needed
 to interpret these results; they do not provide a robustness theorem or a cross-
 dataset superiority claim. Broader conclusions require more datasets, other con-
 text strategies, direct cell-level competitors and dependence-aware validation.
+Use of AI tools. AI coding and writing assistants (OpenAI Codex and Anthropic
+Claude) were used for literature search, implementation, test and audit scripts, experi-
+ment orchestration, analysis checks, and drafting and editing of this text. The author is
+responsible for the design decisions, has to verify every source, number and statement,
+and remains accountable for the paper; no AI system is an author.
 References
 1. Ahmadi, F., Speckmann, M., Kuhlmann, M.F., Abedjan, Z.: MaTElDa: Multi-table
 error detection. In: Proceedings of the 28th International Conference on Extending
 Database Technology (EDBT). pp. 364–376 (2025). https://doi.org/10.48786/
 edbt.2025.29
-2. Berti-Equille, L.: Prior-aligned data cleaning for tabular foundation models. arXiv
-preprint arXiv:2604.25154v1 (2026), https://arxiv.org/abs/2604.25154v1
+2. Berti-Equille, L.: Model-aware data cleaning for tabular foundation models. arXiv
+preprint arXiv:2604.25154v2 (2026), https://arxiv.org/abs/2604.25154v2
 3. Chen, Q., He, Y., Wong, R.C.W., Cui, W., Ge, S., Zhang, H., Zhang, D., Chaud-
 huri, S.: Auto-test: Learning semantic-domain constraints for unsupervised error
 detection in tables. Proceedings of the ACM on Management of Data 3(3), 133:1–
