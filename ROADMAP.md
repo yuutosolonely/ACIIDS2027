@@ -1,10 +1,21 @@
 # Kế hoạch điều phối CRIC-ED — ACIIDS 2027
 
-> **Trạng thái hiện hành 2026-10-31 (thay cho các checkpoint bên dưới, giữ làm lịch sử):** grid v2.1 60/60 đã xong; bản thảo 15 trang ở snapshot `8b122c2` cộng sửa đổi sau review G4 (chưa commit). NO-GO 2026-10-30 là lịch sử; chỉ thị 11:45 ICT cùng ngày chuyển mục tiêu sang hoàn thiện bài để tác giả tự nộp (xem `docs/AUTHORIZATION.md`, đối soát 2026-10-31). Việc còn lại chỉ thuộc tác giả: Disclosure of Interests, Acknowledgments, session, xác nhận metadata, quyết định nộp. Các mục “đang chạy”, “NO-GO đang hiệu lực” bên dưới là lịch sử.
 
-**Checkpoint10:00ICT:** T1/T2/T3 hoàn tất trong phạm vi đã ghi; T4 freeze `c37e39ab…` lúc02:58:59UTC; T5 fullgrid60 chạy từ02:59:15UTC,4process×2threads. Không sửa các file đã frozen trong lúc chạy. T6 chờgrid đầy đủ và audit; T7 đã có10trang phương pháp/protocol, cònresults và diễn giải từT6; T8 cònkiểm chứng/render/review. Bằng chứngdev lưu cả archive; khôngđưa vào confirmatory.
+## Trạng thái hiện hành — 2026-10-31
 
-**Lộ trình hiện hành sau tiếp quản checkpoint `0aff63e` (2026-10-30):** tác giả đã duyệt Path A và bốn quyết định v2.1 trong decision brief; chỉ Codex đang chạy và sở hữu tích hợp. T1 đã tích hợp WIP/test PASS (scientific68; minimal37/3skip; setupPASS; mirrorMATCH). T2 candidate v2.1 đã tích hợp, rà trước freeze. T3 đang chạy movies_1 seed0 ba điều kiện, hai model. Tiếp đến T4 freeze → T5 grid60 → T6 descriptive analysis → T7 manuscript/PDF12–15 trang → T8 kiểm chứng. Các task chờ A/B và strict-v3 bên dưới là lịch sử, không còn điều khiển kế hoạch. Không thay protocol vì mốc 8 giờ; yêu cầu thực nghiệm đầy đủ vẫn áp dụng. NO-GO deadline/submission vẫn giữ.
+Snapshot nền: `2d2250b603de9e7998fb0aecc537eedc3e2eb14e` trên `coord/v2-1-base`.
+
+- Confirmatory grid v2.1, artifact audit, split audit, analysis, manuscript, and 15-page PDF are complete. The freeze and experimental artifacts remain unchanged.
+- G4 is **REVIEW COMPLETE WITH OPEN FINDINGS**, not PASS: internal reviews were completed, but there is no full independent review or independent replication. See `docs/EXPERIMENT_LOG.md` §11.
+- Author decisions on competing interests, funding, acknowledgments, author name, metadata, and DADIT are recorded in `docs/STATE.md` and `paper/AUTHOR_METADATA.json`.
+- Remaining author actions: read and verify the complete manuscript and decide whether to submit. No submission, upload, publication, or push has been made by an agent.
+- `scratch/` is untracked and outside the project history. Preserve it; do not stage it accidentally.
+
+## Historical plans and checkpoints
+
+The dated plans and checkpoints below are retained for audit. Their task states describe earlier points in the project and do not override the current status above.
+
+**Checkpoint 10:00 ICT:** T1/T2/T3 complete within the recorded scope; T4 froze `c37e39ab…`; T5 launched the full grid. The later completion, interruptions, resumes, audits, and manuscript work are documented in `docs/EXPERIMENT_LOG.md`.
 
 Cập nhật: 2026-10-30, sau tiếp nhận `docs/handoffs/HANDOFF_20261030_CLAUDE_TO_CODEX.md`.
 Quyết định đang hiệu lực: **NO-GO cho hạn ACIIDS này**, theo `docs/DECISION_BRIEF_20261030.md`.

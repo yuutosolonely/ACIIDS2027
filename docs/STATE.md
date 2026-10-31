@@ -1,29 +1,28 @@
 # Trạng thái nghiên cứu CRIC-ED — ACIIDS 2027
 
-## Quyết định tác giả — 2026-10-31 (ghi bởi Claude)
+## Trạng thái hiện hành — 2026-10-31
 
-Tác giả trả lời “tôi đồng ý với những câu hỏi của bạn”; ghi nhận là đồng ý với từng phương án đề xuất: không có competing interests (câu Springer đã vào khối `credits`), không có tài trợ, bỏ Acknowledgments, nộp vào **DADIT** (chọn trong EasyChair khi nộp), bản nộp ghi tên tác giả, metadata trên PDF đúng, không thêm trích dẫn Baran, xóa `paper/output/rendered/page_16.png` cũ. Chi tiết: `paper/AUTHOR_METADATA.json` (`author_decisions_20261031`). Còn mở: tác giả đọc/duyệt toàn văn và quyết định có nộp hay không; G4 vẫn REVIEW COMPLETE WITH OPEN FINDINGS (finding Disclosure đã đóng; chưa có review độc lập đầy đủ). Agent không nộp/upload.
+Snapshot nền: `2d2250b603de9e7998fb0aecc537eedc3e2eb14e` trên `coord/v2-1-base`. Các mục bên dưới phản ánh trạng thái repo tại snapshot đó; cập nhật lại khi thay đổi nghiên cứu hoặc quyết định tác giả.
 
-## Trạng thái hiện hành — 2026-10-31 (sau review G4; Claude)
+- **Confirmatory grid:** 60/60 table–condition–seed units hoàn tất trên bốn bảng, ba điều kiện và năm seed; cả TabPFN-v2 và LightGBM được chạy trong từng unit. Artifact audit và split audit PASS; 63.300 context records được kiểm tra.
+- **Giới hạn kết quả:** 435 fit-failure của TabPFN xảy ra trong `hospital__inj-random__s4`; không có fit-failure trong các unit real-error. Purification kém matched random trên ba trong bốn bảng lỗi thật. Các chi tiết và số liệu truy từ `docs/CLAIM_EVIDENCE.md` đến run/artifact/config.
+- **Freeze và tái lập:** freeze `c37e39ab…` giữ nguyên. Analysis replay khớp byte với cùng script trên cùng predictions; đây không phải phân tích độc lập. Một unit được chạy lại cùng implementation và khớp artifacts; đây không phải independent software replication.
+- **Tác giả đã xác nhận:** không có competing interests, không có tài trợ; bỏ mục Acknowledgments; chọn DADIT, bản có tên tác giả, metadata đã xác nhận. Chi tiết được ghi trong `paper/AUTHOR_METADATA.json`.
+- **Nộp bài:** chưa có bài nào được submit, upload hoặc xuất bản. Quyết định có nộp hay không thuộc tác giả và vẫn đang chờ sau khi đọc toàn văn.
 
-- **Snapshot gần nhất đã commit:** `8b122c29fcc348b0ea189f94232e632dbce51389` (`coord/v2-1-base`). Các sửa đổi ghi dưới đây nằm trong **working tree, chưa commit**. `scratch/` untracked, không thuộc dự án.
-- **Freeze/packaging:** checkout sạch của `8b122c2` qua `tools/check_checkout_integrity.py` 6/6 (clone thật). Freeze `c37e39ab…` không đổi.
-- **G4 — REVIEW COMPLETE WITH OPEN FINDINGS (chưa PASS).** Có hai lượt review trên `8b122c2`:
-  1. Self-review read-only của Claude (cùng phiên đã biên tập bản thảo → không độc lập): 4 Major, 6 Minor.
-  2. Internal review của Codex, do người dùng dán vào phiên này 2026-10-31 (Codex từng điều phối/triển khai grid → độc lập hạn chế; không phải peer review hay independent replication): 3 Major, 1 Moderate.
-  Không lượt nào là review độc lập đầy đủ. Bảng finding và trạng thái đóng: `docs/EXPERIMENT_LOG.md` §11.
-- **Đã sửa trong working tree (chờ commit):** nguyên nhân DDCcore ≡ RobustZ (lỗi code đã freeze, không phải ngưỡng tương quan); penalty pass-1 quyết định 75,6% hàng bị purify loại trong unit s4; lần gián đoạn grid thứ ba; mô tả bootstrap là mô tả, không suy luận; thêm arXiv 2610.12005 vào related work; LightGBM LEO; oracle gap systematic > random; 40/40 unit injected đạt đúng 10%. PDF 15 trang.
-- **Còn mở, chỉ tác giả giải quyết:** (cập nhật: Disclosure, Acknowledgments, session, metadata đã quyết — xem khối “Quyết định tác giả”) đọc/duyệt toàn văn và quyết định nộp. Bản nộp ghi tên tác giả (tác giả xác nhận 2026-10-31).
-- **Nộp bài:** agent không nộp/không upload. Hạn 31/10/2026 23:59 AoE = 01/11/2026 18:59 ICT.
+| Gate | Trạng thái hiện hành | Ghi chú |
+|---|---|---|
+| G0 Setup/interface | PASS | Capability checks dùng dữ liệu tổng hợp; không phải kết quả benchmark. |
+| G1 Protocol/baseline | PASS (frozen) | Freeze v2.1; implementation baseline được phân biệt với DDC/CDC gốc. |
+| G2 Pilot/falsification | PASS (development only) | Không dùng làm bằng chứng hiệu năng confirmatory. |
+| G3 Confirmatory data | PASS có ghi chú | 60/60; một unit injection có fit-failure đã báo cáo. |
+| G4 Independent review | REVIEW COMPLETE WITH OPEN FINDINGS | Có các lượt internal review; chưa có review độc lập đầy đủ hoặc replication độc lập. Xem `docs/EXPERIMENT_LOG.md` §11. |
+| G5 Manuscript | COMPLETE FOR AUTHOR REVIEW | PDF 15 trang; disclosure đã điền theo xác nhận tác giả. Tác giả cần đọc và xác minh bản cuối. |
+| G6 Human decision | PENDING | Tác giả chưa quyết định có nộp bài hay không. |
 
-## Câu hỏi cho tác giả (cập nhật 2026-10-31)
-1. Xác nhận không có bất kỳ competing interest nào (không chỉ tài trợ) để dùng: "The author has no competing interests to declare that are relevant to the content of this article."
-2. Chọn session: DADIT (khuyến nghị) / track chính / DMPI.
-3. Acknowledgments: bỏ hẳn, hay thêm "This research received no external funding."?
-4. Có trích thêm Baran (README Raha đề nghị, không bắt buộc) không?
-5. Xác nhận ORCID 0009-0007-1773-3680, "Ton Duc Thang University", email in trên PDF.
+## Lịch sử và hồ sơ cũ
 
-> Các khối “Cập nhật … lượt 2”, “Hiện hành — 2026-10-31 (rà soát…)” và “Câu hỏi cho tác giả” cũ bên dưới là **lịch sử** (ghi trước commit `8b122c2` và trước review G4).
+Các ghi chú trạng thái, câu hỏi tác giả và bảng gate xuất hiện sau đây được giữ để truy vết các checkpoint trước. Nếu chúng mâu thuẫn với phần “Trạng thái hiện hành” ở trên, dùng phần hiện hành; không coi trạng thái cũ là chỉ thị hoặc ủy quyền mới.
 
 **Cập nhật 2026-10-31 (lượt 2, Claude):** sửa lỗi packaging freeze (blob của file được hash bị chuẩn hóa EOL trong `c3ee807`) bằng `.gitattributes` lồng `-text` + renormalize; `tools/check_checkout_integrity.py` PASS 6/6 trên export sạch của tree đã stage (HEAD `c3ee807` FAIL 6/6). Bản thảo: bổ sung LightGBM purify−random và leaky diagnostic, cập nhật trích dẫn L2C (arXiv v2), chuyển khai báo AI vào khối `credits` LNCS; PDF 15 trang. Các thay đổi đang **staged, chưa commit**.
 
