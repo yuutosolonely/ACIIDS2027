@@ -1,5 +1,9 @@
 # Trạng thái nghiên cứu CRIC-ED — ACIIDS 2027
 
+## Quyết định tác giả — 2026-10-31 (ghi bởi Claude)
+
+Tác giả trả lời “tôi đồng ý với những câu hỏi của bạn”; ghi nhận là đồng ý với từng phương án đề xuất: không có competing interests (câu Springer đã vào khối `credits`), không có tài trợ, bỏ Acknowledgments, nộp vào **DADIT** (chọn trong EasyChair khi nộp), bản nộp ghi tên tác giả, metadata trên PDF đúng, không thêm trích dẫn Baran, xóa `paper/output/rendered/page_16.png` cũ. Chi tiết: `paper/AUTHOR_METADATA.json` (`author_decisions_20261031`). Còn mở: tác giả đọc/duyệt toàn văn và quyết định có nộp hay không; G4 vẫn REVIEW COMPLETE WITH OPEN FINDINGS (finding Disclosure đã đóng; chưa có review độc lập đầy đủ). Agent không nộp/upload.
+
 ## Trạng thái hiện hành — 2026-10-31 (sau review G4; Claude)
 
 - **Snapshot gần nhất đã commit:** `8b122c29fcc348b0ea189f94232e632dbce51389` (`coord/v2-1-base`). Các sửa đổi ghi dưới đây nằm trong **working tree, chưa commit**. `scratch/` untracked, không thuộc dự án.
@@ -9,7 +13,7 @@
   2. Internal review của Codex, do người dùng dán vào phiên này 2026-10-31 (Codex từng điều phối/triển khai grid → độc lập hạn chế; không phải peer review hay independent replication): 3 Major, 1 Moderate.
   Không lượt nào là review độc lập đầy đủ. Bảng finding và trạng thái đóng: `docs/EXPERIMENT_LOG.md` §11.
 - **Đã sửa trong working tree (chờ commit):** nguyên nhân DDCcore ≡ RobustZ (lỗi code đã freeze, không phải ngưỡng tương quan); penalty pass-1 quyết định 75,6% hàng bị purify loại trong unit s4; lần gián đoạn grid thứ ba; mô tả bootstrap là mô tả, không suy luận; thêm arXiv 2610.12005 vào related work; LightGBM LEO; oracle gap systematic > random; 40/40 unit injected đạt đúng 10%. PDF 15 trang.
-- **Còn mở, chỉ tác giả giải quyết:** nội dung Disclosure of Interests (bắt buộc), Acknowledgments (tùy chọn), chọn session (khuyến nghị DADIT), xác nhận ORCID/đơn vị/email, quyết định nộp. Bản nộp ghi tên tác giả (tác giả xác nhận 2026-10-31).
+- **Còn mở, chỉ tác giả giải quyết:** (cập nhật: Disclosure, Acknowledgments, session, metadata đã quyết — xem khối “Quyết định tác giả”) đọc/duyệt toàn văn và quyết định nộp. Bản nộp ghi tên tác giả (tác giả xác nhận 2026-10-31).
 - **Nộp bài:** agent không nộp/không upload. Hạn 31/10/2026 23:59 AoE = 01/11/2026 18:59 ICT.
 
 ## Câu hỏi cho tác giả (cập nhật 2026-10-31)

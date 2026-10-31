@@ -750,6 +750,11 @@ this text. The author is responsible for the design decisions, has to
 verify every source, number and statement, and remains accountable for
 the paper; no AI system is an author.
 
+### 
+
+The author has no competing interests to declare that are relevant to
+the content of this article.
+
 </div>
 
 <div id="refs" class="references csl-bib-body hanging-indent">

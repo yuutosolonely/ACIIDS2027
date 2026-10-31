@@ -761,6 +761,8 @@ Claude) were used for literature search, implementation, test and audit scripts,
 ment orchestration, analysis checks, and drafting and editing of this text. The author is
 responsible for the design decisions, has to verify every source, number and statement,
 and remains accountable for the paper; no AI system is an author.
+Disclosure of Interests. The author has no competing interests to declare that are
+relevant to the content of this article.
 References
 1. Ahmadi, F., Speckmann, M., Kuhlmann, M.F., Abedjan, Z.: MaTElDa: Multi-table
 error detection. In: Proceedings of the 28th International Conference on Extending
@@ -772,14 +774,14 @@ preprint arXiv:2604.25154v2 (2026), https://arxiv.org/abs/2604.25154v2
 huri, S.: Auto-test: Learning semantic-domain constraints for unsupervised error
 detection in tables. Proceedings of the ACM on Management of Data 3(3), 133:1–
 133:27 (2025). https://doi.org/10.1145/3725396
-4. Fibbi, E., Perrotta, D., Torti, F., Van Aelst, S., Verdonck, T.: Cell-TRICC: A
-model-based approach to cellwise-trimmed co-clustering. Journal of Computa-
-tional and Graphical Statistics (2026). https://doi.org/10.1080/10618600.2026.
-2634828, published online 21 April 2026
 
 
 Context Puriﬁcation for Cell Error Detection
 15
+4. Fibbi, E., Perrotta, D., Torti, F., Van Aelst, S., Verdonck, T.: Cell-TRICC: A
+model-based approach to cellwise-trimmed co-clustering. Journal of Computa-
+tional and Graphical Statistics (2026). https://doi.org/10.1080/10618600.2026.
+2634828, published online 21 April 2026
 5. Hollmann, N., Müller, S., Purucker, L., Krishnakumar, A., Körfer, M., Hoo, S.B.,
 Schirrmeister, R.T., Hutter, F.: Accurate predictions on small data with a tab-
 ular foundation model. Nature 637, 319–326 (2025). https://doi.org/10.1038/

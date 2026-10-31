@@ -13,6 +13,17 @@
       "corresponding_email_status": "Confirmed on 2026-10-30 as ngodangtronghieu.dl2021@gmail.com (.comm was a typo)"
     }
   ],
-  "scholarly_verification": "Author verification of complete manuscript and evidence remains pending",
-  "publication_authorization": "Author directive (2026-10-30 ~11:45 ICT): prepare paper for author submission to ACIIDS 2027; agents never submit"
+  "scholarly_verification": "Author verification of the complete manuscript and evidence remains pending",
+  "publication_authorization": "Author directive (2026-10-30 ~11:45 ICT): prepare paper for author submission to ACIIDS 2027; agents never submit",
+  "author_decisions_20261031": {
+    "source": "Author replied 'tôi đồng ý với những câu hỏi của bạn' (2026-10-31) to the assistant's six questions; recorded as agreement with each proposed option as interpreted below.",
+    "competing_interests": "None; statement: 'The author has no competing interests to declare that are relevant to the content of this article.'",
+    "funding": "None (author statement 2026-10-31)",
+    "acknowledgments": "Omitted (optional in LNCS template)",
+    "session": "DADIT (Data Analytics, Database Systems and Intelligent Technologies) — selected by the author in EasyChair at submission",
+    "anonymity": "Submission carries the author's name (author decision 2026-10-31)",
+    "metadata_confirmed": "Name, ORCID 0009-0007-1773-3680, 'Ton Duc Thang University' and email as printed in the PDF",
+    "extra_citation_baran": "Not added (no default proposed; kept within 15 pages)",
+    "submit_decision": "Not asked; remains with the author"
+  }
 }
