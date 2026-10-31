@@ -1,5 +1,26 @@
 # Trạng thái nghiên cứu CRIC-ED — ACIIDS 2027
 
+## Trạng thái hiện hành — 2026-10-31 (sau review G4; Claude)
+
+- **Snapshot gần nhất đã commit:** `8b122c29fcc348b0ea189f94232e632dbce51389` (`coord/v2-1-base`). Các sửa đổi ghi dưới đây nằm trong **working tree, chưa commit**. `scratch/` untracked, không thuộc dự án.
+- **Freeze/packaging:** checkout sạch của `8b122c2` qua `tools/check_checkout_integrity.py` 6/6 (clone thật). Freeze `c37e39ab…` không đổi.
+- **G4 — REVIEW COMPLETE WITH OPEN FINDINGS (chưa PASS).** Có hai lượt review trên `8b122c2`:
+  1. Self-review read-only của Claude (cùng phiên đã biên tập bản thảo → không độc lập): 4 Major, 6 Minor.
+  2. Internal review của Codex, do người dùng dán vào phiên này 2026-10-31 (Codex từng điều phối/triển khai grid → độc lập hạn chế; không phải peer review hay independent replication): 3 Major, 1 Moderate.
+  Không lượt nào là review độc lập đầy đủ. Bảng finding và trạng thái đóng: `docs/EXPERIMENT_LOG.md` §11.
+- **Đã sửa trong working tree (chờ commit):** nguyên nhân DDCcore ≡ RobustZ (lỗi code đã freeze, không phải ngưỡng tương quan); penalty pass-1 quyết định 75,6% hàng bị purify loại trong unit s4; lần gián đoạn grid thứ ba; mô tả bootstrap là mô tả, không suy luận; thêm arXiv 2610.12005 vào related work; LightGBM LEO; oracle gap systematic > random; 40/40 unit injected đạt đúng 10%. PDF 15 trang.
+- **Còn mở, chỉ tác giả giải quyết:** nội dung Disclosure of Interests (bắt buộc), Acknowledgments (tùy chọn), chọn session (khuyến nghị DADIT), xác nhận ORCID/đơn vị/email, quyết định nộp. Bản nộp ghi tên tác giả (tác giả xác nhận 2026-10-31).
+- **Nộp bài:** agent không nộp/không upload. Hạn 31/10/2026 23:59 AoE = 01/11/2026 18:59 ICT.
+
+## Câu hỏi cho tác giả (cập nhật 2026-10-31)
+1. Xác nhận không có bất kỳ competing interest nào (không chỉ tài trợ) để dùng: "The author has no competing interests to declare that are relevant to the content of this article."
+2. Chọn session: DADIT (khuyến nghị) / track chính / DMPI.
+3. Acknowledgments: bỏ hẳn, hay thêm "This research received no external funding."?
+4. Có trích thêm Baran (README Raha đề nghị, không bắt buộc) không?
+5. Xác nhận ORCID 0009-0007-1773-3680, "Ton Duc Thang University", email in trên PDF.
+
+> Các khối “Cập nhật … lượt 2”, “Hiện hành — 2026-10-31 (rà soát…)” và “Câu hỏi cho tác giả” cũ bên dưới là **lịch sử** (ghi trước commit `8b122c2` và trước review G4).
+
 **Cập nhật 2026-10-31 (lượt 2, Claude):** sửa lỗi packaging freeze (blob của file được hash bị chuẩn hóa EOL trong `c3ee807`) bằng `.gitattributes` lồng `-text` + renormalize; `tools/check_checkout_integrity.py` PASS 6/6 trên export sạch của tree đã stage (HEAD `c3ee807` FAIL 6/6). Bản thảo: bổ sung LightGBM purify−random và leaky diagnostic, cập nhật trích dẫn L2C (arXiv v2), chuyển khai báo AI vào khối `credits` LNCS; PDF 15 trang. Các thay đổi đang **staged, chưa commit**.
 
 **Hiện hành — 2026-10-31 (rà soát nhất quán sau grid; Claude, theo yêu cầu người dùng):**
@@ -28,7 +49,7 @@
 | G1 Protocol/baseline | **PASS (frozen)** | `prereg/PREREGISTRATION_V2_1.freeze.json`, protocol SHA `eea8f0ee…`; baseline là bản cài của dự án (DDCcore ≠ DDC gốc, LGBM ≠ CDC). |
 | G2 Pilot/falsification | **PASS (development only)** | movies_1 dev runs + audit `v2_1_dev_artifact_audit_initial.json`; không phải bằng chứng hiệu năng. |
 | G3 Confirmatory data | **PASS có ghi chú** | 60/60, artifact+split audit PASS; 1 unit có 435 fit-failure (xem trên). |
-| G4 Independent review | **PENDING** | Chỉ có self-check của agent, artifact audit, replay cùng script. Chưa có reviewer/replication độc lập. |
+| G4 Independent review | **REVIEW COMPLETE WITH OPEN FINDINGS** (2026-10-31) | Self-review Claude + internal review Codex trên `8b122c2`; cả hai độc lập hạn chế. Findings sửa trong working tree; Disclosure of Interests còn mở. Chưa PASS. |
 | G5 Manuscript | **COMPLETE FOR AUTHOR REVIEW — chờ tác giả xác minh; thiếu Disclosure of Interests (bắt buộc, chỉ tác giả điền)** | `paper/output/cric_ed_v2_1.pdf` 15 trang; mọi số truy về `docs/CLAIM_EVIDENCE.md`. Tác giả chưa đọc/duyệt toàn văn. |
 | G6 Human decision | **PENDING** | Quyết định nộp/không, giải quyết NO-GO, track/session, anonymity (trang chính thức không nêu), Disclosure of Interests. |
 

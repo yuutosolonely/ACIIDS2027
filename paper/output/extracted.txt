@@ -29,7 +29,7 @@ Data errors can aﬀect only a few attributes of a record. A suspicious product
 measurement does not imply that its name and producer are wrong, and a rare
 bibliographic entry need not contain an error. This makes cell localization a dif-
 ferent objective from ranking entire rows as anomalies. Robust cellwise methods
-already exploit relationships among variables [15]; a foundation model does not
+already exploit relationships among variables [16]; a foundation model does not
 make that problem new. The question addressed here is whether the context used
 by a conditional predictor can be improved without access to clean examples or
 error labels.
@@ -47,15 +47,13 @@ can receive large suspicion scores. Removing the highest-scoring context cells�
 rows could therefore either improve the reference distribution or erase legitimate
 variation. Neither outcome follows from the model’s supervised prediction capa-
 bility.
-We study this intervention under a controlled cell-detection protocol. For each
-target column and outer query fold, a nested ﬁrst pass scores only the outer train-
-ing pool. The puriﬁcation arm removes context rows with the largest target-cell
-scores. A random arm removes exactly the same number of rows from the same
-base context. Both retain the same queries and evaluation denominator. The
-random arm’s accuracy is unchanged by ﬁrst-pass computation; we report that
-computation separately and also account for a random control charged the same
-preparation cost. This comparison distinguishes targeted selection from simply
-reducing context size, without presenting extra inference as a free intervention.
+We study this intervention under a controlled cell-detection protocol. For
+each target column and outer query fold, a nested ﬁrst pass scores only the
+outer training pool. The puriﬁcation arm removes context rows with the largest
+target-cell scores. A random arm removes exactly the same number of rows from
+the same base context. Both retain the same queries and evaluation denominator,
+which separates targeted selection from simply reducing context size; the extra
+ﬁrst-pass computation is reported separately.
 The empirical scope is deliberately speciﬁc: four capped benchmark tables,
 their real errors, two controlled corruption conditions and ﬁve seeds. Real-error
 puriﬁcation is primary; injections and an observed-key leave-entity-out analysis
@@ -71,11 +69,11 @@ named tables.
 2
 Related Work and Scope
 Cellwise detection and imputation. DDC uses robust relationships between nu-
-merical variables to predict cells and assess their residuals [15]. Its published
+merical variables to predict cells and assess their residuals [16]. Its published
 algorithm includes robust standardization, bivariate relations, prediction and
 deshrinkage. Our numerical DDCcore baseline is a simpler comparator and can-
 not establish a ranking against reference DDC. CellGMM addresses numerical
-populations with a mixture model and a detection–imputation step [16]; discard-
+populations with a mixture model and a detection–imputation step [17]; discard-
 ing an entire record can lose useful information from its other cells. Our removal
 operates on whole context rows for one target at a time and oﬀers no correspond-
 ing mixture-estimation or cell-repair guarantee. Cellwise trimming has also been
@@ -84,12 +82,12 @@ Conformal Data Cleaning (CDC) combines column prediction with calibrated
 prediction sets or intervals [7]. Its evaluated deployment scenario trains on clean
 data and subsequently encounters corrupted inputs. Our deployment arms re-
 ceive one dirty table and no clean calibration split. The LightGBM conditional
+comparator is inspired by column prediction but does not reproduce CDC, and
+our scores have no conformal coverage interpretation.
 
 
 Context Puriﬁcation for Cell Error Detection
 3
-comparator is inspired by column prediction but does not reproduce CDC, and
-our scores have no conformal coverage interpretation.
 Foundation models and contaminated contexts. TabPFN provides pretrained
 conditional prediction for small tabular problems [5]. We use pinned second-
 generation weights through an explicit adapter, rather than whichever model
@@ -103,37 +101,41 @@ cell-level rankings under ﬁxed pretrained weights and nested selection, not a
 row-AUROC comparison.
 Data quality and context selection for TFMs. QualiTab evaluates imperfect
 data and contrasts perfect-data, perfect-context and no-intervention settings for
-TabPFN embeddings [13]. Its clean-context comparison is close to the motivation
+TabPFN embeddings [14]. Its clean-context comparison is close to the motivation
 of our oracle diagnostic; the beneﬁt of cleaner contexts is therefore not a new
 hypothesis introduced here. Model-aware cleaning learns reinforcement-learning
 policies that sequence cleaning operators for TFM-oriented data preparation [2].
 We instead evaluate one ﬁxed removal rule as a cell-ranking intervention without
 learning a cleaning policy. LUCoS selects representative contexts using unsuper-
 vised PFN embeddings, then obtains labels for supervised prediction [6]. Our
-contexts contain observed target values from the dirty table, with no annotation
-oracle for deployment. Together these works rule out broad novelty claims about
-either TFM data cleaning or label-free context selection.
+contexts contain observed target values from the dirty table, with no annota-
+tion oracle for deployment. A study of test-time compute for TFMs reports that
+attention-guided row retrieval helps on some large tables but can fail badly, for
+example by distorting class composition, and that context expansion gives no
+consistent gain [13]. It concerns supervised prediction from labelled contexts, not
+detecting errors in a dirty context, so it is related evidence rather than a direct
+comparator. Together these works rule out broad novelty claims about TFM
+data cleaning, label-free context selection or context selection in general.
 Systems for heterogeneous error detection. Raha is a conﬁguration-free error-
 detection system and supplies the benchmark repository used here [10]. Auto-
-Test learns semantic-domain constraints from a large table corpus oﬄine and ap-
-plies them to detect erroneous column values without per-table supervision [3].
+Test learns semantic-domain constraints from a large table corpus oﬄine and
+applies them to detect erroneous column values without per-table supervision [3].
 MaTElDa is semi-supervised: it groups cells of several tables by domain and
 quality similarity so that a small labelling budget can be shared across tables [1].
 LUCARIO targets unsupervised, lightweight detection of pattern anomalies and
-outliers [14]. These are direct cell-level competitors with diﬀerent knowledge
+outliers [15]. These are direct cell-level competitors with diﬀerent knowledge
 sources (a table corpus, user labels, inferred constraints); none was run under
 our protocol. We use its paired dirty/clean tables, not a reimplementation of
 its complete detection workﬂow. ZeroED combines LLM-derived representations
-and labels with detector training [12]. That information and compute regime dif-
-fers from our label-free local deployment arms. We cite the checked preprint and
-make no unveriﬁed venue or latency claim. Neither system’s published headline
-score is an interchangeable baseline result for our capped-table protocol.
-Measured comparators. We run frequency and pattern scores, a robust numerical
-score, column-wise Isolation Forest [9], DDCcore and conditional LightGBM [8].
+and labels with detector training [12]. That information and compute regime
+diﬀers from our label-free local deployment arms. Neither system’s published
+headline score is an interchangeable baseline result for our capped-table protocol.
 
 
 4
 Ngo Dang Trong Hieu
+Measured comparators. We run frequency and pattern scores, a robust numerical
+score, column-wise Isolation Forest [9], DDCcore and conditional LightGBM [8].
 They test whether marginal rarity, simple numerical deviation or the choice of
 conditional model explains an eﬀect; they cannot rank the declared rule against
 every context-selection strategy.
@@ -177,13 +179,13 @@ b + 1
 The second term is a two-sided tail score, not a probability density. With fewer
 than ten parseable context targets or no numerical range, a smoothed exact-
 match frequency replaces that term. Unparseable query tokens use a smoothed
-nonparseability probability followed by their smoothed frequency among un-
-parseable context targets. These rules retain empty strings and formatting vari-
-ants rather than repairing them before detection.
 
 
 Context Puriﬁcation for Cell Error Detection
 5
+nonparseability probability followed by their smoothed frequency among un-
+parseable context targets. These rules retain empty strings and formatting vari-
+ants rather than repairing them before detection.
 For a categorical target with at most ten context classes, the model predicts
 class probabilities. With more classes, retain the nine most frequent and pool
 the others into an OTHER class. Divide OTHER mass by smoothed within-
@@ -203,7 +205,7 @@ These numerical and categorical scores share an orientation but have no proven
 common calibration. We therefore retain type-speciﬁc analyses alongside pooled
 AP.
 Relation to residual and conformal scores. DDC standardizes residuals from
-robust linear relations among numerical variables [15]; our scores instead come
+robust linear relations among numerical variables [16]; our scores instead come
 from the predictive distribution of a pretrained or task-ﬁtted model, without
 a linearity assumption. CDC calibrates prediction sets on clean data [7]. Our
 deployment arms have no clean calibration split and the context may contain
@@ -231,7 +233,6 @@ removing them preserves rare correct values.
 Controls, diagnostics and compute
 Raw retains Bf. Random removes rf rows without replacement using a separate
 deterministic stream for each seed, fold and target. Oracle keeps the same base
-IDs but substitutes clean target and feature values in the context; query values
 
 
 6
@@ -249,6 +250,7 @@ and remove rf rows.
 Fig. 1. Selection has no dependency on the outer query through the ﬁrst pass. Final
 encoding remains explicitly transductive. This is one trimming step, not an iterative
 procedure or a gradient-based inﬂuence estimate.
+IDs but substitutes clean target and feature values in the context; query values
 remain observed and the encoder remains dirty ﬁtted. Its gap is diagnostic and
 need not be positive. Leaky, on real-error conditions only, unions the query fold
 with the base; its intentional violation of exclusion is reported separately.
@@ -259,16 +261,16 @@ and shared or empty keys can merge entities. Bases diﬀer from row-level bases,
 and the ﬁnal encoder is still transductive; this arm is a boundary sensitivity
 analysis rather than proof of independence.
 Puriﬁcation requires up to K2d additional column tasks for nested scoring,
-besides up to Kd ﬁnal tasks. The corresponding number for a single raw or ran-
-dom arm is at most Kd; degenerate or unsupported targets can bypass a model
-ﬁt, while LightGBM residual calibration can require additional ﬁts. These are
-task-count bounds, not measured neural forward-call counts. We measure nested
-preparation and inclusive puriﬁcation time separately. The accounted matched-
-compute random cost is ordinary random time plus the same nested preparation
-time, using unchanged random scores. It must not be described as a separately
-timed end-to-end arm. No task-speciﬁc TabPFN weight update is performed; its
-context ﬁtting and preprocessing remain chargeable work. LightGBM, in con-
-trast, ﬁts task-speciﬁc trees for each context.
+besides up to Kd ﬁnal tasks. The corresponding number for a single raw or
+random arm is at most Kd; degenerate or unsupported targets can bypass a
+model ﬁt, while LightGBM residual calibration can require additional ﬁts. These
+are task-count bounds, not measured neural forward-call counts. We measure
+nested preparation and inclusive puriﬁcation time separately. The accounted
+matched-compute random cost is ordinary random time plus the same nested
+preparation time, using unchanged random scores; it is not a separately timed
+arm. No task-speciﬁc TabPFN weight update is performed; its context ﬁtting and
+preprocessing remain chargeable work. LightGBM, in contrast, ﬁts task-speciﬁc
+trees for each context.
 4
 Experimental Protocol
 4.1
@@ -300,9 +302,9 @@ value. Both target a 10% corruption rate. Attempted error types are sampled uni-
 formly from character edits, replacement by another column value, empty-string
 replacement, format changes and numeric rescaling. Rejected or unchanged pro-
 posals imply that realized type proportions are not uniform. A ﬁxed attempt
-guard can produce a shortfall; realized counts are reported rather than forced
-by an outcome-dependent rerun. These are string-level mechanism probes, not
-claims to reproduce every natural error process.
+guard could produce a shortfall, but all 40 injected units reached exactly the
+10% target. These are string-level mechanism probes, not claims to reproduce
+every natural error process.
 Run seeds are 0, 1, 2, 3, 4. The injection and context algorithms both use the
 run seed; their randomness is coupled rather than independently crossed. The
 primary contrast averages the ﬁve paired AP diﬀerences separately for each real
@@ -432,24 +434,25 @@ Completeness, support and primary comparison
 All 60 declared table–condition–seed units completed with both models, and the
 saved artifacts passed input, prediction and context-boundary checks. Prediction
 failures occurred in one unit only, hospital/random injection/seed 4. There,
-TabPFN raised 435 caught input-validation errors (non-ﬁnite encoded values) in
-the ﬁnal pass of every TabPFN arm and in the nested ﬁrst pass; LightGBM, the
-other 59 units and all real-error units had none. The failures cover 54% of that
-unit’s cells for raw, 53% for puriﬁcation, 51% for random and 15% for the oracle.
-Following the protocol, these cells keep their place in the denominator with a
-tied maximal score; the raw, random and puriﬁcation APs of that unit fall to
-about 0.11, close to its 10% error rate. Section 5.4 reports a post hoc sensitivity
-check. A separate ﬂights/real/seed-0 rerun reproduced every saved array and
-context record exactly; it is excluded from performance summaries. This is a
-same-implementation rerun, not an independent replication. Table 1 shows the
-real-data universe and conditional support.
+TabPFN raised 435 caught input-validation errors (non-ﬁnite encoded values)
+in the ﬁnal pass of every TabPFN arm and in the nested ﬁrst pass; LightGBM,
+the other 59 units and all real-error units had none. The failures cover 54% of
+that unit’s cells for raw, 53% for puriﬁcation, 51% for random and 15% for the
+oracle. Following the protocol, these cells keep their place in the denominator
+with a tied maximal score; the raw, random and puriﬁcation APs of that unit
+fall to about 0.11, close to its 10% error rate. Pass-1 failures receive the same
+penalty, so 76% of the rows removed in that unit’s successful puriﬁcation ﬁts
+were selected by the penalty rather than by suspicion scores. Section 5.4 reports
+a post hoc check. A separate ﬂights/real/seed-0 rerun reproduced every saved
+array and context record exactly; it is excluded from performance summaries.
+This is a same-implementation rerun, not an independent replication. Table 1
+shows the real-data universe and conditional support.
 The primary contrast compares puriﬁcation with random removal on each
 real table, averaging paired AP diﬀerences over all ﬁve seeds. Puriﬁcation was
 worse than random removal on three tables (hospital −0.1611, ﬂights −0.0493,
-rayyan −0.0300) and better on beers (+0.0257); all four descriptive intervals
-exclude zero. Table 2 gives the APs. The unweighted four-table mean is −0.0537,
-reported without a test or interval. The intervals condition on saved predictions;
-they do not resolve dependence among related rows or uncertainty across new
+rayyan −0.0300) and better on beers (+0.0257); every seed had the same sign
+as the table mean. Table 2 gives the APs. The unweighted four-table mean is
+−0.0537, reported without a test or interval. The row-bootstrap intervals are
 
 
 10
@@ -504,8 +507,10 @@ rayyan
 0.225
 0.143
 0.359
-tables. On real errors, therefore, the declared rule did not generally improve on
-removing the same number of randomly chosen rows.
+descriptive: they condition on saved predictions, may be too narrow when rows
+share entities, and do not cover new tables, so their exclusion of zero is not
+inferential evidence. On real errors, therefore, the declared rule did not generally
+improve on removing the same number of randomly chosen rows.
 5.2
 Comparators and information boundary
 Table 3 reports baseline APs on the same complete eligible universe. No method
@@ -514,21 +519,19 @@ was best on every table. Raw TabPFN had the highest real-error AP on hospital
 tern frequency was highest on ﬂights and beers and conditional LightGBM on
 rayyan. Frequency-based methods can score targets that the conditional pipeline
 declares unsupported, while RobustZ and DDCcore have numerical support only.
-On all 20 real-error units, DDCcore returned scores identical to RobustZ, be-
-cause no numerical column pair passed its correlation threshold (ﬂights has no
-numerical column); it diﬀered in only 10 of the 40 injected units. DDCcore and
-conditional LightGBM are separate implementations, not reproduced DDC or
-CDC systems.
+On all 20 real-error units, DDCcore returned scores identical to RobustZ (it dif-
+fered in 10 of the 40 injected units). This is a defect of our frozen DDCcore
+code: a median of pairwise slope ratios becomes undeﬁned when a predictor’s
+robust score is exactly zero, which disabled the relational prediction (ﬂights has
+no numerical column). We report the defect rather than correcting the conﬁr-
+matory run. DDCcore and conditional LightGBM are separate implementations,
+not reproduced DDC or CDC systems.
 Secondary diﬀerences in Table 4 distinguish conditional-model, oracle-context
 and observed-key boundary eﬀects. The oracle changes context targets and con-
 ditioning features together and retains the dirty-ﬁtted encoder, so its gap need
 not be positive and is not a theoretical upper bound. It was positive on every
 real table, indicating headroom from cleaner contexts that the declared rule did
 not recover. LEO uses diﬀerent bases, excludes observed keys only, and keeps
-transductive ﬁnal encoding; its large drop on hospital suggests that the row-level
-primary analysis beneﬁts from same-entity rows in the context. LightGBM pu-
-riﬁcation was likewise not better than its random control on real errors (−0.055,
-−0.006, +0.000 and −0.028 for hospital, ﬂights, beers and rayyan). The leaky
 
 
 Context Puriﬁcation for Cell Error Detection
@@ -578,10 +581,15 @@ random
 rayyan
 systematic
 0.025 [0.019, 0.031] 0.355 [0.339, 0.374]
-diagnostic, which adds the query fold to the context, changed TabPFN AP by
-−0.048 to +0.046 across tables, so self-inclusion did not uniformly inﬂate this
-score. These contrasts diagnose sensitivity rather than isolate a single causal
-explanation.
+transductive ﬁnal encoding. It lowered AP on every keyed table for both models
+(LightGBM: −0.283, −0.072, −0.026 on hospital, ﬂights, beers); the large drop
+on hospital suggests that the row-level primary analysis beneﬁts from same-
+entity rows in the context. LightGBM puriﬁcation was likewise not better than
+its random control on real errors (−0.055, −0.006, +0.000 and −0.028 for hos-
+pital, ﬂights, beers and rayyan). The leaky diagnostic, which adds the query
+fold to the context, changed TabPFN AP by −0.048 to +0.046 across tables,
+so self-inclusion did not uniformly inﬂate this score. These contrasts diagnose
+sensitivity rather than isolate a single causal explanation.
 5.3
 Injection probes and rare-valid alarms
 Table 5 shows the two injection conditions. They remain separate from the
@@ -590,14 +598,10 @@ string corruptions need not resemble natural error processes, and their seeds
 are coupled to context randomness. Under systematic injection, puriﬁcation was
 slightly better than random removal on all four tables (at most +0.025); under
 random injection the eﬀect ranged from −0.137 (ﬂights) to +0.131 (hospital).
-The hospital random-injection value contains the failed unit.
+The hospital random-injection value contains the failed unit. The oracle gap was
+larger under systematic than under random injection on every table.
 Table 6 reports rare-valid alarm fractions at the reference-error-count bud-
 get, with the valid-cell denominator. This is an evaluation-only operating point.
-Puriﬁcation lowered the alarm fraction on hospital, beers and rayyan and raised
-it on ﬂights; on hospital, the reduction coincided with a large AP loss, so fewer
-rare-valid alarms do not by themselves indicate a better detector. No rare-valid
-mask was provided to puriﬁcation. The seed-level export retains R-precision, pre-
-cision at 1% and 5%, type-speciﬁc AP, support and undeﬁned-endpoint counts.
 
 
 12
@@ -627,6 +631,10 @@ rayyan
 0.559
 0.559
 0.492
+Puriﬁcation lowered the alarm fraction on hospital, beers and rayyan and raised
+it on ﬂights; on hospital, the reduction coincided with a large AP loss, so fewer
+rare-valid alarms do not by themselves indicate a better detector. No rare-valid
+mask was provided to puriﬁcation.
 5.4
 Post hoc sensitivity to the failed unit
 After inspecting the results, we recomputed the aﬀected random-injection con-
@@ -640,28 +648,22 @@ nus raw LightGBM changed: −0.094 under the protocol, −0.0002 over seeds 0–
 and +0.016 with failed cells dropped. The failures thus do not create the hos-
 pital puriﬁcation gain under random injection, but the protocol value of the
 model contrast in that condition reﬂects the failures rather than model ranking.
+The dropped-cells variant still uses the penalty-driven removals described above.
 Real-error results are unaﬀected.
 5.5
 Compute and scope of interpretation
-Table 7 separates nested preparation from ﬁnal puriﬁcation work. The nested
-component is included in the inclusive puriﬁcation time, and adding it to ordi-
-nary random time produces the declared accounted matched-compute control
-with unchanged random scores. It is not a separately timed accuracy arm. Wall
-times come from concurrent local CPU execution. The grid was interrupted
-twice and resumed without changing code, inputs or threads, and some units
-ran while the operating system throttled background processes. Timings there-
-fore span three execution periods: the TabPFN raw time on hospital/real, for
-example, ranged from 6.8 to 46.2 minutes across seeds. The table supports order-
-of-magnitude statements only; within a unit, nested preparation was the dom-
-inant cost of puriﬁcation. Peak memory and actual neural forward-call counts
-were not measured.
-These conclusions concern this ﬁxed removal rule, the pinned weights, the
-support policy and the capped collection. The real-error contrasts and injection
-probes must be read together with baseline performance and rare-valid alarms.
-They do not establish that context puriﬁcation generally succeeds or fails, that
-clean contexts always help, or that an equal budget could not be better spent
-on another strategy. No outcome was used to revise the frozen design or select
-a subset of seeds.
+Table 7 separates nested preparation from ﬁnal puriﬁcation work; the accounted
+matched-compute control is deﬁned in Sect. 3. Wall times come from concur-
+rent local CPU execution. The grid was interrupted three times and resumed
+without changing code, inputs or threads; incomplete attempts were retained,
+and some units ran while the operating system throttled background processes.
+Timings therefore span several execution periods: the TabPFN raw time on hos-
+pital/real, for example, ranged from 6.8 to 46.2 minutes across seeds. The table
+supports order-of-magnitude statements only; within a unit, nested preparation
+was the dominant cost of puriﬁcation. Peak memory and actual neural forward-
+call counts were not measured.
+These conclusions concern this ﬁxed rule, the pinned weights and the capped
+tables; they do not show that puriﬁcation generally fails or that another use of
 
 
 Context Puriﬁcation for Cell Error Detection
@@ -694,6 +696,8 @@ rayyan
 6.71
 1.20
 7.91
+the same budget could not help. No outcome was used to revise the design or
+select seeds.
 6
 Limitations and Reproducibility
 The collection contains four capped source tables, so per-table comparisons can
@@ -725,13 +729,13 @@ matched-compute control does not test whether another use of the same compute,
 such as context ensembling, would help. Other selection strategies, context-size
 sweeps and clean-calibration regimes are outside this study. DDCcore coincided
 with RobustZ on every real-error unit and adds no evidence about relational
-numerical detection. Reference CDC, reference DDC, unsupervised TabPFN ex-
-tensions, Auto-Test, MaTElDa and LUCARIO were not run, which precludes
-state-of-the-art claims.
 
 
 14
 Ngo Dang Trong Hieu
+numerical detection. Reference CDC, reference DDC, unsupervised TabPFN ex-
+tensions, Auto-Test, MaTElDa and LUCARIO were not run, which precludes
+state-of-the-art claims.
 Reproduction requires the pinned data and weights, the source-freeze mani-
 fest, declared package versions and the retained predictions. The analysis script
 recreates metrics, intervals, tables and ﬁgures from those predictions; rerunning
@@ -772,14 +776,14 @@ detection in tables. Proceedings of the ACM on Management of Data 3(3), 133:1–
 model-based approach to cellwise-trimmed co-clustering. Journal of Computa-
 tional and Graphical Statistics (2026). https://doi.org/10.1080/10618600.2026.
 2634828, published online 21 April 2026
-5. Hollmann, N., Müller, S., Purucker, L., Krishnakumar, A., Körfer, M., Hoo, S.B.,
-Schirrmeister, R.T., Hutter, F.: Accurate predictions on small data with a tab-
-ular foundation model. Nature 637, 319–326 (2025). https://doi.org/10.1038/
-s41586-024-08328-6
 
 
 Context Puriﬁcation for Cell Error Detection
 15
+5. Hollmann, N., Müller, S., Purucker, L., Krishnakumar, A., Körfer, M., Hoo, S.B.,
+Schirrmeister, R.T., Hutter, F.: Accurate predictions on small data with a tab-
+ular foundation model. Nature 637, 319–326 (2025). https://doi.org/10.1038/
+s41586-024-08328-6
 6. Ipas, O., Gomez-Trenado, G., Romero-Zaliz, R., Triguero, I.: LUCoS: Latent
 unsupervised context selection for tabular foundation models. arXiv preprint
 arXiv:2605.27254v1 (2026), https://arxiv.org/abs/2605.27254v1
@@ -804,15 +808,19 @@ arXiv:2603.14171 (2026), https://arxiv.org/abs/2603.14171
 12. Ni, W., Zhang, K., Miao, X., Zhao, X., Wu, Y., Wang, Y., Yin, J.: ZeroED: Hybrid
 zero-shot error detection through large language model reasoning. arXiv preprint
 arXiv:2504.05345 (2025), https://arxiv.org/abs/2504.05345
-13. Papastergios, V., Gounaris, A.: Out in the wild: Investigating the impact of im-
+13. Ning, K., Biloš, M., Wilson, J.T., Zhang, Y., Rasul, K., Song, D., Schneider, A.,
+Nevmyvaka, Y.: Test-time compute for tabular foundation models: Mechanisms,
+gains, and limits. arXiv preprint arXiv:2610.12005v1 (2026), https://arxiv.org/
+abs/2610.12005v1
+14. Papastergios, V., Gounaris, A.: Out in the wild: Investigating the impact of im-
 perfect data on a tabular foundation model. In: 14th International Workshop
 on Quality in Databases (QDB) (2025), https://www.vldb.org/2025/Workshops/
 VLDB-Workshops-2025/QDB/QDB25_1.pdf
-14. Qin, Q., Li, H., Merlo, E.: Unsupervised, robust, and lightweight detection of data
+15. Qin, Q., Li, H., Merlo, E.: Unsupervised, robust, and lightweight detection of data
 pattern anomalies and outliers. Information and Software Technology 192, 108035
 (2026). https://doi.org/10.1016/j.infsof.2026.108035
-15. Rousseeuw, P.J., Van den Bossche, W.: Detecting deviating data cells. Technomet-
+16. Rousseeuw, P.J., Van den Bossche, W.: Detecting deviating data cells. Technomet-
 rics 60(2), 135–145 (2018). https://doi.org/10.1080/00401706.2017.1340909
-16. Zaccaria, G., García-Escudero, L.A., Greselin, F., Mayo-Íscar, A.: Cellwise outlier
+17. Zaccaria, G., García-Escudero, L.A., Greselin, F., Mayo-Íscar, A.: Cellwise outlier
 detection in heterogeneous populations. arXiv preprint arXiv:2409.07881v3 (2025),
 https://arxiv.org/abs/2409.07881v3

@@ -9,8 +9,9 @@ other 59 units and all real-error units had none. The failures cover 54\% of tha
 unit's cells for raw, 53\% for purification, 51\% for random and 15\% for the oracle.
 Following the protocol, these cells keep their place in the denominator with a tied
 maximal score; the raw, random and purification APs of that unit fall to about 0.11,
-close to its 10\% error rate.
-Section~\ref{sec:sens} reports a post hoc sensitivity check.
+close to its 10\% error rate. Pass-1 failures receive the same penalty, so 76\% of the
+rows removed in that unit's successful purification fits were selected by the penalty
+rather than by suspicion scores. Section~\ref{sec:sens} reports a post hoc check.
 A separate flights/real/seed-0 rerun reproduced every saved array and context record
 exactly; it is excluded from performance summaries. This is a same-implementation
 rerun, not an independent replication.
@@ -20,10 +21,11 @@ Table~\ref{tab:coverage} shows the real-data universe and conditional support.
 The primary contrast compares purification with random removal on each real table,
 averaging paired AP differences over all five seeds. Purification was worse than
 random removal on three tables (hospital $-0.1611$, flights $-0.0493$, rayyan $-0.0300$)
-and better on beers ($+0.0257$); all four descriptive intervals exclude zero.
+and better on beers ($+0.0257$); every seed had the same sign as the table mean.
 Table~\ref{tab:primary} gives the APs. The unweighted four-table mean is $-0.0537$,
-reported without a test or interval. The intervals condition on saved predictions;
-they do not resolve dependence among related rows or uncertainty across new tables.
+reported without a test or interval. The row-bootstrap intervals are descriptive: they
+condition on saved predictions, may be too narrow when rows share entities, and do
+not cover new tables, so their exclusion of zero is not inferential evidence.
 On real errors, therefore, the declared rule did not generally improve on removing
 the same number of randomly chosen rows.
 \input{generated/primary}
@@ -35,10 +37,12 @@ No method was best on every table. Raw TabPFN had the highest real-error AP on h
 frequency was highest on flights and beers and conditional LightGBM on rayyan.
 Frequency-based methods can score targets that the conditional pipeline declares
 unsupported, while RobustZ and DDCcore have numerical support only. On all 20
-real-error units, DDCcore returned scores identical to RobustZ, because no numerical
-column pair passed its correlation threshold (flights has no numerical column);
-it differed in only 10 of the 40 injected units. DDCcore and conditional LightGBM are
-separate implementations, not reproduced DDC or CDC systems.
+real-error units, DDCcore returned scores identical to RobustZ (it differed in 10 of
+the 40 injected units). This is a defect of our frozen DDCcore code: a median of
+pairwise slope ratios becomes undefined when a predictor's robust score is exactly
+zero, which disabled the relational prediction (flights has no numerical column).
+We report the defect rather than correcting the confirmatory run. DDCcore and
+conditional LightGBM are separate implementations, not reproduced DDC or CDC systems.
 \input{generated/baselines}
 
 Secondary differences in Table~\ref{tab:secondary} distinguish conditional-model,
@@ -47,8 +51,9 @@ and conditioning features together and retains the dirty-fitted encoder, so its 
 need not be positive and is not a theoretical upper bound. It was positive on every
 real table, indicating headroom from cleaner contexts that the declared rule did not
 recover. LEO uses different bases, excludes observed keys only, and keeps transductive
-final encoding; its large drop on hospital suggests that the row-level primary analysis
-benefits from same-entity rows in the context. LightGBM purification was likewise
+final encoding. It lowered AP on every keyed table for both models (LightGBM:
+$-0.283$, $-0.072$, $-0.026$ on hospital, flights, beers); the large drop on hospital
+suggests that the row-level primary analysis benefits from same-entity rows in the context. LightGBM purification was likewise
 not better than its random control on real errors ($-0.055$, $-0.006$, $+0.000$ and
 $-0.028$ for hospital, flights, beers and rayyan). The leaky diagnostic, which adds the
 query fold to the context, changed TabPFN AP by $-0.048$ to $+0.046$ across tables, so
@@ -64,6 +69,7 @@ processes, and their seeds are coupled to context randomness. Under systematic
 injection, purification was slightly better than random removal on all four tables
 (at most $+0.025$); under random injection the effect ranged from $-0.137$ (flights)
 to $+0.131$ (hospital). The hospital random-injection value contains the failed unit.
+The oracle gap was larger under systematic than under random injection on every table.
 \input{generated/probes}
 
 Table~\ref{tab:rare} reports rare-valid alarm fractions at the reference-error-count
@@ -71,8 +77,7 @@ budget, with the valid-cell denominator. This is an evaluation-only operating po
 Purification lowered the alarm fraction on hospital, beers and rayyan and raised it
 on flights; on hospital, the reduction coincided with a large AP loss, so fewer
 rare-valid alarms do not by themselves indicate a better detector. No rare-valid
-mask was provided to purification. The seed-level export retains R-precision,
-precision at 1\% and 5\%, type-specific AP, support and undefined-endpoint counts.
+mask was provided to purification.
 \input{generated/rare}
 
 \subsection{Post hoc sensitivity to the failed unit}\label{sec:sens}
@@ -86,25 +91,21 @@ $+0.220$, $+0.242$ and $+0.229$. The sign of raw TabPFN minus raw LightGBM chang
 $-0.094$ under the protocol, $-0.0002$ over seeds~0--3 and $+0.016$ with failed cells
 dropped. The failures thus do not create the hospital purification gain under random
 injection, but the protocol value of the model contrast in that condition reflects
-the failures rather than model ranking. Real-error results are unaffected.
+the failures rather than model ranking. The dropped-cells variant still uses the
+penalty-driven removals described above. Real-error results are unaffected.
 
 \subsection{Compute and scope of interpretation}
-Table~\ref{tab:cost} separates nested preparation from final purification work.
-The nested component is included in the inclusive purification time, and adding it
-to ordinary random time produces the declared accounted matched-compute control
-with unchanged random scores. It is not a separately timed accuracy arm. Wall times
-come from concurrent local CPU execution. The grid was interrupted twice and resumed
-without changing code, inputs or threads, and some units ran while the operating
-system throttled background processes. Timings therefore span three execution
-periods: the TabPFN raw time on hospital/real, for example, ranged from 6.8 to 46.2
+Table~\ref{tab:cost} separates nested preparation from final purification work;
+the accounted matched-compute control is defined in Sect.~\ref{sec:method}. Wall times come from
+concurrent local CPU execution. The grid was interrupted three times and
+resumed without changing code, inputs or threads; incomplete attempts were retained,
+and some units ran while the operating system throttled background processes.
+Timings therefore span several execution periods: the TabPFN raw time on hospital/real, for example, ranged from 6.8 to 46.2
 minutes across seeds. The table supports order-of-magnitude statements only;
 within a unit, nested preparation was the dominant cost of purification.
 Peak memory and actual neural forward-call counts were not measured.
 \input{generated/cost}
 
-These conclusions concern this fixed removal rule, the pinned weights, the
-support policy and the capped collection. The real-error contrasts and injection probes
-must be read together with baseline performance and rare-valid alarms. They do not
-establish that context purification generally succeeds or fails, that clean contexts
-always help, or that an equal budget could not be better spent on another strategy.
-No outcome was used to revise the frozen design or select a subset of seeds.
+These conclusions concern this fixed rule, the pinned weights and the capped tables;
+they do not show that purification generally fails or that another use of the same
+budget could not help. No outcome was used to revise the design or select seeds.

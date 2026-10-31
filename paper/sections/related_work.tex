@@ -40,8 +40,13 @@ rule as a cell-ranking intervention without learning a cleaning policy.
 LUCoS selects representative contexts using unsupervised PFN embeddings,
 then obtains labels for supervised prediction~\cite{ipas2026lucos}.
 Our contexts contain observed target values from the dirty table, with no
-annotation oracle for deployment. Together these works rule out broad novelty
-claims about either TFM data cleaning or label-free context selection.
+annotation oracle for deployment. A study of test-time compute for TFMs reports that
+attention-guided row retrieval helps on some large tables but can fail badly, for
+example by distorting class composition, and that context expansion gives no
+consistent gain~\cite{ning2026ttc}. It concerns supervised prediction from labelled
+contexts, not detecting errors in a dirty context, so it is related evidence rather
+than a direct comparator. Together these works rule out broad novelty claims about
+TFM data cleaning, label-free context selection or context selection in general.
 
 \paragraph{Systems for heterogeneous error detection.}
 Raha is a configuration-free error-detection system and supplies the benchmark
@@ -57,7 +62,7 @@ corpus, user labels, inferred constraints); none was run under our protocol. We 
 not a reimplementation of its complete detection workflow. ZeroED combines
 LLM-derived representations and labels with detector training~\cite{zeroed2025}.
 That information and compute regime differs from our label-free local deployment
-arms. We cite the checked preprint and make no unverified venue or latency claim.
+arms.
 Neither system's published headline score is an interchangeable baseline result
 for our capped-table protocol.
 

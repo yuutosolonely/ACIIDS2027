@@ -25,8 +25,8 @@ occurrences of the same column value. Both target a $10\%$ corruption rate.
 Attempted error types are sampled uniformly from character edits, replacement
 by another column value, empty-string replacement, format changes and numeric
 rescaling. Rejected or unchanged proposals imply that realized type proportions
-are not uniform. A fixed attempt guard can produce a shortfall; realized counts
-are reported rather than forced by an outcome-dependent rerun. These are
+are not uniform. A fixed attempt guard could produce a shortfall, but all 40
+injected units reached exactly the 10\% target. These are
 string-level mechanism probes, not claims to reproduce every natural error process.
 
 Run seeds are $0,1,2,3,4$. The injection and context algorithms both use the

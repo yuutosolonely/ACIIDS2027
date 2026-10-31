@@ -262,3 +262,29 @@ Source: HEAD `0aff63e` + working tree; `verify_freeze` khớp snapshot `c37e39ab
 - **Bản thảo:** thêm LightGBM purify−random và leaky diagnostic (method hứa báo cáo; CLM-21); trích dẫn L2C chuyển sang arXiv v2 (đổi tiêu đề, sửa framing); khai báo AI chuyển vào `credits` LNCS; Disclosure of Interests (bắt buộc theo `llncs.cls` 2.23) để trống chờ tác giả — chỉ là comment trong source, không in ra PDF.
 - **Literature:** LUCARIO publisher chặn (403, CAPTCHA — không vượt); Cell-TRICC đọc abstract ICORS 2025 của tác giả. Phụ lục trong `docs/literature/CITATION_AUDIT_20261030.md`.
 - **Kiểm tra:** build 15 trang, 0 overfull/undefined; 16 khóa cite đều có trong bib, không có ref thiếu label; PDF không chứa TODO/pending/draft/??; 154 số thập phân trong PDF đều có trong Markdown; đã xem trang 6, 11, 14.
+
+## 11. Review G4 trên `8b122c2` và sửa đổi theo findings — 2026-10-31 (Claude)
+
+**Ghi bổ sung — gián đoạn grid lần thứ ba (trước đây chưa ghi):** lần resume thứ hai kết thúc `incomplete` lúc 2026-10-30T17:38:47Z với 41/60 unit (`resume_status_20261030T113433Z.json`). Resume thứ ba bắt đầu 18:23:00Z (`resume_20261030T182300Z.json`, lý do “external interruption of the original grid process tree”, launcher `python.exe`, 4 workers × 2 threads, freeze `c37e39ab…`), di chuyển 4 partial (`beers__inj-systematic__s0`, `hospital__inj-systematic__s0`, `hospital__inj-systematic__s1`, `rayyan__inj-systematic__s0`) sang `experiments/runs/v2_1_interrupted/*.20261030T182300Z`, chạy 19 unit còn lại, hoàn tất 60/60 lúc 20:48:37Z (`resume_status_20261030T182300Z.json`). Log unthrottle dừng ở 17:38:34Z, nên trạng thái throttling của giai đoạn này không được ghi. Đây là coordinator resolution hồi tố cho yêu cầu prereg §8; kết quả số được kỳ vọng không đổi vì code tất định (suy luận; chưa kiểm riêng các unit của giai đoạn này).
+
+**Hai lượt review trên `8b122c29fcc348b0ea189f94232e632dbce51389`:**
+- (A) Self-review read-only của Claude — cùng phiên đã biên tập bản thảo, **không độc lập**. Kiểm tra đã chạy: AP tính lại bằng sklearn (khớp), bootstrap riêng (RNG 12345, 300 draws; hospital [−0,207, −0,109] vs báo cáo [−0,202, −0,114]), provenance PDF/MD khớp, phân tích penalty pass-1 s4, tương quan/slope DDCcore trên dữ liệu RAHA local.
+- (B) Internal review của Codex — báo cáo do người dùng dán vào phiên 2026-10-31; báo cáo nêu verifier packaging 6/6 và 19/19 source hash khớp. Codex từng điều phối/triển khai grid nên độc lập hạn chế; không phải peer review/independent replication. Báo cáo này không có file trong repo; nội dung được tóm tắt ở đây.
+
+| ID | Nguồn | Severity | Finding | Trạng thái 2026-10-31 |
+|---|---|---|---|---|
+| A-MAJ-1 | Claude | Major | Nguyên nhân DDCcore ≡ RobustZ sai; thực chất là lỗi `np.median`/NaN trong code đã freeze | Đã sửa results.tex, CLM-19, STATE (working tree) |
+| A-MAJ-2 | Claude | Major | Penalty pass-1 quyết định 75,6% hàng bị purify loại ở s4, chưa nêu | Đã sửa results.tex (§5.1, §5.4), CLM-18 |
+| A-MAJ-3 | Claude | Major | Gián đoạn grid lần 3 chưa ghi; bài ghi “twice” | Đã ghi log (trên); bài sửa “three times” |
+| A-MAJ-4 / B-2 | Cả hai | Major | Thiếu Disclosure of Interests (bắt buộc LNCS) và xác nhận acknowledgments/session | **Mở** — chờ tác giả |
+| B-1 | Codex | Major | STATE/ROADMAP không khớp snapshot | Đã thêm khối trạng thái hiện hành; khối cũ ghi là lịch sử |
+| B-3 | Codex | Major (framing) | Thiếu đối chiếu arXiv 2610.12005 (context construction cho TFM) | Đã thêm vào related work; nguồn đọc: abstract + HTML §1–8 |
+| B-4 | Codex | Moderate | Câu “all four intervals exclude zero” dễ hiểu như suy luận | Đã viết lại: khoảng mô tả, không phải bằng chứng suy luận; thêm “mọi seed cùng dấu” |
+| A-m1 | Claude | Minor | Thiếu mô tả oracle-gap systematic vs random | Đã thêm |
+| A-m2 | Claude | Minor | Thiếu LightGBM raw_leo−raw | Đã thêm |
+| A-m3 | Claude | Minor | “realized counts are reported” nhưng không báo cáo | Đã thay: 40/40 unit đúng 10% |
+| A-m4 | Claude | Minor | Caption Bảng 5 không đánh dấu dòng hospital/random | Không sửa (bảng sinh tự động có provenance hash); text đã nêu |
+| A-m5 | Claude | Minor | STATE dòng 3 lỗi thời | Đã xử lý cùng B-1 |
+| A-m6 | Claude | Minor | Hỗ trợ nguồn cho câu CDC chưa kiểm lại; LUCARIO chỉ mức tiêu đề; Cell-TRICC journal chưa đọc | Mở (giới hạn truy cập), ghi trong citation audit |
+
+Bản thảo vẫn 15 trang sau khi rút gọn câu trùng lặp ở intro/method/results/related work. G4 chuyển thành **REVIEW COMPLETE WITH OPEN FINDINGS**; chưa PASS vì A-MAJ-4/B-2 còn mở và chưa có review độc lập đầy đủ. Chưa commit.

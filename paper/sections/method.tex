@@ -1,4 +1,4 @@
-\section{Conditional Scoring and Context Purification}
+\section{Conditional Scoring and Context Purification}\label{sec:method}
 \subsection{Task and information boundary}
 Let $\widetilde X$ be an observed table with $n$ rows and $d$ eligible columns.
 The detector outputs $S\in\mathbb R^{n\times d}$, with larger values indicating
@@ -123,7 +123,7 @@ fit, while LightGBM residual calibration can require additional fits.
 These are task-count bounds, not measured neural forward-call counts.
 We measure nested preparation and inclusive purification time separately.
 The accounted matched-compute random cost is ordinary random time plus the
-same nested preparation time, using unchanged random scores. It must not be
-described as a separately timed end-to-end arm. No task-specific TabPFN weight
+same nested preparation time, using unchanged random scores; it is not a separately
+timed arm. No task-specific TabPFN weight
 update is performed; its context fitting and preprocessing remain chargeable
 work. LightGBM, in contrast, fits task-specific trees for each context.

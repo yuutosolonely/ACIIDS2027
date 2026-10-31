@@ -21,11 +21,8 @@ We study this intervention under a controlled cell-detection protocol. For each 
 column and outer query fold, a nested first pass scores only the outer training pool.
 The purification arm removes context rows with the largest target-cell scores. A random
 arm removes exactly the same number of rows from the same base context. Both retain
-the same queries and evaluation denominator. The random arm's accuracy is unchanged
-by first-pass computation; we report that computation separately and also account for
-a random control charged the same preparation cost. This comparison distinguishes
-targeted selection from simply reducing context size, without presenting extra inference
-as a free intervention.
+the same queries and evaluation denominator, which separates targeted selection from
+simply reducing context size; the extra first-pass computation is reported separately.
 
 The empirical scope is deliberately specific: four capped benchmark tables, their
 real errors, two controlled corruption conditions and five seeds. Real-error

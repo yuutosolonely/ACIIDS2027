@@ -57,12 +57,9 @@ For each target column and outer query fold, a nested first pass scores
 only the outer training pool. The purification arm removes context rows
 with the largest target-cell scores. A random arm removes exactly the
 same number of rows from the same base context. Both retain the same
-queries and evaluation denominator. The random arm’s accuracy is
-unchanged by first-pass computation; we report that computation
-separately and also account for a random control charged the same
-preparation cost. This comparison distinguishes targeted selection from
-simply reducing context size, without presenting extra inference as a
-free intervention.
+queries and evaluation denominator, which separates targeted selection
+from simply reducing context size; the extra first-pass computation is
+reported separately.
 
 The empirical scope is deliberately specific: four capped benchmark
 tables, their real errors, two controlled corruption conditions and five
@@ -132,9 +129,15 @@ rule as a cell-ranking intervention without learning a cleaning policy.
 LUCoS selects representative contexts using unsupervised PFN embeddings,
 then obtains labels for supervised prediction (Ipas et al. 2026). Our
 contexts contain observed target values from the dirty table, with no
-annotation oracle for deployment. Together these works rule out broad
-novelty claims about either TFM data cleaning or label-free context
-selection.
+annotation oracle for deployment. A study of test-time compute for TFMs
+reports that attention-guided row retrieval helps on some large tables
+but can fail badly, for example by distorting class composition, and
+that context expansion gives no consistent gain (Ning et al. 2026). It
+concerns supervised prediction from labelled contexts, not detecting
+errors in a dirty context, so it is related evidence rather than a
+direct comparator. Together these works rule out broad novelty claims
+about TFM data cleaning, label-free context selection or context
+selection in general.
 
 #### Systems for heterogeneous error detection.
 
@@ -152,8 +155,7 @@ constraints); none was run under our protocol. We use its paired
 dirty/clean tables, not a reimplementation of its complete detection
 workflow. ZeroED combines LLM-derived representations and labels with
 detector training (Ni et al. 2025). That information and compute regime
-differs from our label-free local deployment arms. We cite the checked
-preprint and make no unverified venue or latency claim. Neither system’s
+differs from our label-free local deployment arms. Neither system’s
 published headline score is an interchangeable baseline result for our
 capped-table protocol.
 
@@ -306,10 +308,10 @@ require additional fits. These are task-count bounds, not measured
 neural forward-call counts. We measure nested preparation and inclusive
 purification time separately. The accounted matched-compute random cost
 is ordinary random time plus the same nested preparation time, using
-unchanged random scores. It must not be described as a separately timed
-end-to-end arm. No task-specific TabPFN weight update is performed; its
-context fitting and preprocessing remain chargeable work. LightGBM, in
-contrast, fits task-specific trees for each context.
+unchanged random scores; it is not a separately timed arm. No
+task-specific TabPFN weight update is performed; its context fitting and
+preprocessing remain chargeable work. LightGBM, in contrast, fits
+task-specific trees for each context.
 
 # Experimental Protocol
 
@@ -343,9 +345,9 @@ $`10\%`$ corruption rate. Attempted error types are sampled uniformly
 from character edits, replacement by another column value, empty-string
 replacement, format changes and numeric rescaling. Rejected or unchanged
 proposals imply that realized type proportions are not uniform. A fixed
-attempt guard can produce a shortfall; realized counts are reported
-rather than forced by an outcome-dependent rerun. These are string-level
-mechanism probes, not claims to reproduce every natural error process.
+attempt guard could produce a shortfall, but all 40 injected units
+reached exactly the 10% target. These are string-level mechanism probes,
+not claims to reproduce every natural error process.
 
 Run seeds are $`0,1,2,3,4`$. The injection and context algorithms both
 use the run seed; their randomness is coupled rather than independently
@@ -460,12 +462,14 @@ real-error units had none. The failures cover 54% of that unit’s cells
 for raw, 53% for purification, 51% for random and 15% for the oracle.
 Following the protocol, these cells keep their place in the denominator
 with a tied maximal score; the raw, random and purification APs of that
-unit fall to about 0.11, close to its 10% error rate.
-Section <a href="#sec:sens" data-reference-type="ref"
-data-reference="sec:sens">5.4</a> reports a post hoc sensitivity check.
-A separate flights/real/seed-0 rerun reproduced every saved array and
-context record exactly; it is excluded from performance summaries. This
-is a same-implementation rerun, not an independent replication.
+unit fall to about 0.11, close to its 10% error rate. Pass-1 failures
+receive the same penalty, so 76% of the rows removed in that unit’s
+successful purification fits were selected by the penalty rather than by
+suspicion scores. Section <a href="#sec:sens" data-reference-type="ref"
+data-reference="sec:sens">5.4</a> reports a post hoc check. A separate
+flights/real/seed-0 rerun reproduced every saved array and context
+record exactly; it is excluded from performance summaries. This is a
+same-implementation rerun, not an independent replication.
 Table <a href="#tab:coverage" data-reference-type="ref"
 data-reference="tab:coverage">1</a> shows the real-data universe and
 conditional support.
@@ -485,14 +489,15 @@ The primary contrast compares purification with random removal on each
 real table, averaging paired AP differences over all five seeds.
 Purification was worse than random removal on three tables (hospital
 $`-0.1611`$, flights $`-0.0493`$, rayyan $`-0.0300`$) and better on
-beers ($`+0.0257`$); all four descriptive intervals exclude zero.
+beers ($`+0.0257`$); every seed had the same sign as the table mean.
 Table <a href="#tab:primary" data-reference-type="ref"
 data-reference="tab:primary">2</a> gives the APs. The unweighted
 four-table mean is $`-0.0537`$, reported without a test or interval. The
-intervals condition on saved predictions; they do not resolve dependence
-among related rows or uncertainty across new tables. On real errors,
-therefore, the declared rule did not generally improve on removing the
-same number of randomly chosen rows.
+row-bootstrap intervals are descriptive: they condition on saved
+predictions, may be too narrow when rows share entities, and do not
+cover new tables, so their exclusion of zero is not inferential
+evidence. On real errors, therefore, the declared rule did not generally
+improve on removing the same number of randomly chosen rows.
 
 | Table    |   Raw | Random | Purify | $`\Delta`$ \[95% interval\] |
 |:---------|------:|-------:|-------:|----------------------------:|
@@ -517,10 +522,13 @@ frequency was highest on flights and beers and conditional LightGBM on
 rayyan. Frequency-based methods can score targets that the conditional
 pipeline declares unsupported, while RobustZ and DDCcore have numerical
 support only. On all 20 real-error units, DDCcore returned scores
-identical to RobustZ, because no numerical column pair passed its
-correlation threshold (flights has no numerical column); it differed in
-only 10 of the 40 injected units. DDCcore and conditional LightGBM are
-separate implementations, not reproduced DDC or CDC systems.
+identical to RobustZ (it differed in 10 of the 40 injected units). This
+is a defect of our frozen DDCcore code: a median of pairwise slope
+ratios becomes undefined when a predictor’s robust score is exactly
+zero, which disabled the relational prediction (flights has no numerical
+column). We report the defect rather than correcting the confirmatory
+run. DDCcore and conditional LightGBM are separate implementations, not
+reproduced DDC or CDC systems.
 
 | Table    |    VF |    PF | RobustZ | Col.IF | DDCcore |  LGBM |
 |:---------|------:|------:|--------:|-------:|--------:|------:|
@@ -542,15 +550,17 @@ dirty-fitted encoder, so its gap need not be positive and is not a
 theoretical upper bound. It was positive on every real table, indicating
 headroom from cleaner contexts that the declared rule did not recover.
 LEO uses different bases, excludes observed keys only, and keeps
-transductive final encoding; its large drop on hospital suggests that
-the row-level primary analysis benefits from same-entity rows in the
-context. LightGBM purification was likewise not better than its random
-control on real errors ($`-0.055`$, $`-0.006`$, $`+0.000`$ and
-$`-0.028`$ for hospital, flights, beers and rayyan). The leaky
-diagnostic, which adds the query fold to the context, changed TabPFN AP
-by $`-0.048`$ to $`+0.046`$ across tables, so self-inclusion did not
-uniformly inflate this score. These contrasts diagnose sensitivity
-rather than isolate a single causal explanation.
+transductive final encoding. It lowered AP on every keyed table for both
+models (LightGBM: $`-0.283`$, $`-0.072`$, $`-0.026`$ on hospital,
+flights, beers); the large drop on hospital suggests that the row-level
+primary analysis benefits from same-entity rows in the context. LightGBM
+purification was likewise not better than its random control on real
+errors ($`-0.055`$, $`-0.006`$, $`+0.000`$ and $`-0.028`$ for hospital,
+flights, beers and rayyan). The leaky diagnostic, which adds the query
+fold to the context, changed TabPFN AP by $`-0.048`$ to $`+0.046`$
+across tables, so self-inclusion did not uniformly inflate this score.
+These contrasts diagnose sensitivity rather than isolate a single causal
+explanation.
 
 | Table | TFM raw $`-`$ LGBM | Oracle $`-`$ raw | TFM LEO $`-`$ raw |
 |:---|---:|---:|---:|
@@ -574,7 +584,8 @@ randomness. Under systematic injection, purification was slightly better
 than random removal on all four tables (at most $`+0.025`$); under
 random injection the effect ranged from $`-0.137`$ (flights) to
 $`+0.131`$ (hospital). The hospital random-injection value contains the
-failed unit.
+failed unit. The oracle gap was larger under systematic than under
+random injection on every table.
 
 | Table    |  Injection |       Purify $`-`$ random |       Oracle $`-`$ raw |
 |:---------|-----------:|--------------------------:|-----------------------:|
@@ -598,9 +609,7 @@ is an evaluation-only operating point. Purification lowered the alarm
 fraction on hospital, beers and rayyan and raised it on flights; on
 hospital, the reduction coincided with a large AP loss, so fewer
 rare-valid alarms do not by themselves indicate a better detector. No
-rare-valid mask was provided to purification. The seed-level export
-retains R-precision, precision at 1% and 5%, type-specific AP, support
-and undefined-endpoint counts.
+rare-valid mask was provided to purification.
 
 | Table    | Rare-valid cells | TFM raw | Random | Purify |
 |:---------|-----------------:|--------:|-------:|-------:|
@@ -627,25 +636,25 @@ sign of raw TabPFN minus raw LightGBM changed: $`-0.094`$ under the
 protocol, $`-0.0002`$ over seeds 0–3 and $`+0.016`$ with failed cells
 dropped. The failures thus do not create the hospital purification gain
 under random injection, but the protocol value of the model contrast in
-that condition reflects the failures rather than model ranking.
-Real-error results are unaffected.
+that condition reflects the failures rather than model ranking. The
+dropped-cells variant still uses the penalty-driven removals described
+above. Real-error results are unaffected.
 
 ## Compute and scope of interpretation
 
 Table <a href="#tab:cost" data-reference-type="ref"
 data-reference="tab:cost">7</a> separates nested preparation from final
-purification work. The nested component is included in the inclusive
-purification time, and adding it to ordinary random time produces the
-declared accounted matched-compute control with unchanged random scores.
-It is not a separately timed accuracy arm. Wall times come from
-concurrent local CPU execution. The grid was interrupted twice and
-resumed without changing code, inputs or threads, and some units ran
-while the operating system throttled background processes. Timings
-therefore span three execution periods: the TabPFN raw time on
-hospital/real, for example, ranged from 6.8 to 46.2 minutes across
-seeds. The table supports order-of-magnitude statements only; within a
-unit, nested preparation was the dominant cost of purification. Peak
-memory and actual neural forward-call counts were not measured.
+purification work; the accounted matched-compute control is defined in
+Sect. <a href="#sec:method" data-reference-type="ref"
+data-reference="sec:method">3</a>. Wall times come from concurrent local
+CPU execution. The grid was interrupted three times and resumed without
+changing code, inputs or threads; incomplete attempts were retained, and
+some units ran while the operating system throttled background
+processes. Timings therefore span several execution periods: the TabPFN
+raw time on hospital/real, for example, ranged from 6.8 to 46.2 minutes
+across seeds. The table supports order-of-magnitude statements only;
+within a unit, nested preparation was the dominant cost of purification.
+Peak memory and actual neural forward-call counts were not measured.
 
 | Table    |   Raw | Random | Nested | Purify final | Purify total |
 |:---------|------:|-------:|-------:|-------------:|-------------:|
@@ -659,13 +668,10 @@ purification equals nested preparation plus final work. Concurrent local
 CPU jobs; no peak-memory or forward-call measurement asserted.
 {#tab:cost}
 
-These conclusions concern this fixed removal rule, the pinned weights,
-the support policy and the capped collection. The real-error contrasts
-and injection probes must be read together with baseline performance and
-rare-valid alarms. They do not establish that context purification
-generally succeeds or fails, that clean contexts always help, or that an
-equal budget could not be better spent on another strategy. No outcome
-was used to revise the frozen design or select a subset of seeds.
+These conclusions concern this fixed rule, the pinned weights and the
+capped tables; they do not show that purification generally fails or
+that another use of the same budget could not help. No outcome was used
+to revise the design or select seeds.
 
 # Limitations and Reproducibility
 
@@ -851,6 +857,14 @@ Inference*. arXiv preprint arXiv:2603.14171.
 Ni, Wei, Kaihang Zhang, Xiaoye Miao, et al. 2025. *ZeroED: Hybrid
 Zero-Shot Error Detection Through Large Language Model Reasoning*. arXiv
 preprint arXiv:2504.05345. <https://arxiv.org/abs/2504.05345>.
+
+</div>
+
+<div id="ref-ning2026ttc" class="csl-entry">
+
+Ning, Kanghui, Marin Biloš, James T. Wilson, et al. 2026. *Test-Time
+Compute for Tabular Foundation Models: Mechanisms, Gains, and Limits*.
+arXiv preprint arXiv:2610.12005v1. <https://arxiv.org/abs/2610.12005v1>.
 
 </div>
 

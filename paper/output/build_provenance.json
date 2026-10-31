@@ -1,6 +1,6 @@
 {
   "pages": 15,
-  "pdf_sha256": "8cd3560983f300fef75c6477d38226cb8bf08de5998f7a6729d9b06aef847d81",
+  "pdf_sha256": "4a1464a07abfbe0e6e59b585b1bb15034be6b070886293e2b00f62dbf74af1b1",
   "template": {
     "url": "https://cms-resources.apps.public.k8s.springernature.io/springer-cms/rest/v1/content/27851904/data/LaTeX2e%20Proceedings%20Template%20ZIP",
     "retrieved_utc": "2026-10-30T02:31:00.907142+00:00",
@@ -15,7 +15,7 @@
   },
   "sources_sha256": {
     "main.tex": "109c82e7a3014106c543f920b0fcdf0a5cd9268b9a138389c7702b674b6f6627",
-    "references.bib": "fd2733f7bd72db36237cca6833cab045dadea5c2430d3044a509b26877f60ee7",
+    "references.bib": "80ba7e2bdcab087bbe0281bae84988a5783efe3fee1a396aca64b00920ebbcd6",
     "generated/baselines.tex": "ba04cfe399fe6e784450b50c550eee741b994d6d1f78fae7934712a2f4fa88a1",
     "generated/cost.tex": "826010ec9dd31a174b722a19239f97632b97aafeb157fa92ca148127617b995c",
     "generated/coverage.tex": "d6b264446854260e9c0140b5b90719d3ec29b0f47e38f43b36729a6d7ddd44fd",
@@ -27,12 +27,12 @@
     "sections/abstract.tex": "4d79122025975602c85dbc849f3950b1acd7d07e5fd5b06ffa80103202ed232a",
     "sections/conclusion.tex": "7eab5401a21fb623018e381fc78be407bd770f41ec490e8154d2122b691528cd",
     "sections/credits.tex": "8037f09416a6a3b8a320d1065ccda334c338c03902890b1f29bc4e002d59c749",
-    "sections/introduction.tex": "866aeb9c4a066d7422688e5e5d946d7ff76c60abf830b923095318f512206aba",
+    "sections/introduction.tex": "eccf9a6eae74687ee1880f1215adb86be8c55b4fd7a3da8bd7fad2601b18eaac",
     "sections/limitations.tex": "f80919eab6d66b6f6d4a68ccf4bed9aaac9bba224dd4197cfab9776995772d35",
-    "sections/method.tex": "6cdba0fdafc26e501aaea71833c51ef0efa9d650520124975331c61d5a0b34ea",
-    "sections/protocol.tex": "c17e2f8dd3506749fba3f98798f23f42f16e4460aec103968ffc4a8bafebc060",
-    "sections/related_work.tex": "ae620086222cebade3b29751e3fd6612505e11e65a6c008a21df22cb9142d5b6",
-    "sections/results.tex": "21485894fada1ca2d72f79991f7bac5dbc5fdedd5ff5dd9a4ccb44287e1c6095"
+    "sections/method.tex": "6be250f5172a227711769ccce131d8b3496d23242ff321ec2367340a53ff83ff",
+    "sections/protocol.tex": "5fb185b43704f27722c320b315e419ede6015078cb8005c2d69421d822cc2094",
+    "sections/related_work.tex": "15902f7cb8a87f476b8de12d1e3a0ba5a399c40d43da17859c713621ab4b6a50",
+    "sections/results.tex": "aab17831d7d687c4b63dfa673bad71009600236b356c680f93bdf9d15388ade3"
   },
   "compiler": "tectonic --only-cached --keep-logs --keep-intermediates main.tex"
 }
