@@ -1,0 +1,138 @@
+{
+  "updated_utc": "2026-10-30T20:48:37.174377+00:00",
+  "runs": [
+    {
+      "run_id": "rayyan__inj-systematic__s0",
+      "exit_code": 0,
+      "elapsed_seconds": 943.114951,
+      "finished_utc": "2026-10-30T18:38:43.603196+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "beers__inj-systematic__s0",
+      "exit_code": 0,
+      "elapsed_seconds": 1591.0084975,
+      "finished_utc": "2026-10-30T18:49:31.496544+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "flights__inj-systematic__s1",
+      "exit_code": 0,
+      "elapsed_seconds": 1114.7926496999994,
+      "finished_utc": "2026-10-30T18:57:18.481336+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "beers__inj-systematic__s1",
+      "exit_code": 0,
+      "elapsed_seconds": 1250.1826342000004,
+      "finished_utc": "2026-10-30T19:10:21.801022+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "rayyan__inj-systematic__s1",
+      "exit_code": 0,
+      "elapsed_seconds": 800.6979718000002,
+      "finished_utc": "2026-10-30T19:10:39.254608+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "flights__inj-systematic__s2",
+      "exit_code": 0,
+      "elapsed_seconds": 603.1990590000005,
+      "finished_utc": "2026-10-30T19:20:42.550346+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "hospital__inj-systematic__s0",
+      "exit_code": 0,
+      "elapsed_seconds": 4478.6534574,
+      "finished_utc": "2026-10-30T19:37:39.140942+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "hospital__inj-systematic__s1",
+      "exit_code": 0,
+      "elapsed_seconds": 4496.631016699999,
+      "finished_utc": "2026-10-30T19:37:57.119372+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "beers__inj-systematic__s2",
+      "exit_code": 0,
+      "elapsed_seconds": 1110.7002774000002,
+      "finished_utc": "2026-10-30T19:39:13.332953+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "flights__inj-systematic__s3",
+      "exit_code": 0,
+      "elapsed_seconds": 607.2204124,
+      "finished_utc": "2026-10-30T19:49:20.633258+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "rayyan__inj-systematic__s2",
+      "exit_code": 0,
+      "elapsed_seconds": 725.0654160999993,
+      "finished_utc": "2026-10-30T19:49:44.289488+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "rayyan__inj-systematic__s3",
+      "exit_code": 0,
+      "elapsed_seconds": 747.7931751999995,
+      "finished_utc": "2026-10-30T20:02:12.171258+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "beers__inj-systematic__s3",
+      "exit_code": 0,
+      "elapsed_seconds": 1079.4375663,
+      "finished_utc": "2026-10-30T20:07:20.160913+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "hospital__inj-systematic__s2",
+      "exit_code": 0,
+      "elapsed_seconds": 3799.876602199999,
+      "finished_utc": "2026-10-30T20:13:41.766055+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "flights__inj-systematic__s4",
+      "exit_code": 0,
+      "elapsed_seconds": 604.0084854000015,
+      "finished_utc": "2026-10-30T20:17:24.247216+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "rayyan__inj-systematic__s4",
+      "exit_code": 0,
+      "elapsed_seconds": 767.8249103999988,
+      "finished_utc": "2026-10-30T20:30:12.141118+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "beers__inj-systematic__s4",
+      "exit_code": 0,
+      "elapsed_seconds": 1083.986966299999,
+      "finished_utc": "2026-10-30T20:31:45.840992+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "hospital__inj-systematic__s3",
+      "exit_code": 0,
+      "elapsed_seconds": 3634.0621347999995,
+      "finished_utc": "2026-10-30T20:38:31.290127+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "hospital__inj-systematic__s4",
+      "exit_code": 0,
+      "elapsed_seconds": 2784.7884981999996,
+      "finished_utc": "2026-10-30T20:48:37.061640+00:00",
+      "fit_failure_events": 0
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-31",
+  "scope": "Packaging check after v2.1 experiments: do clean checkouts reproduce recorded evidence bytes? Read-only; no freeze, run, split or analysis regenerated.",
+  "script": "tools/check_checkout_integrity.py",
+  "script_sha256": "a771705c3c30c3cdec9e4b7611465a5a317c43f2b0b10f4bbe1052207e0fae99",
+  "head_c3ee807_git_archive": {
+    "all_ok": false,
+    "failed": [
+      "v2_1_freeze (experiments/tfm_env_freeze.txt first)",
+      "analysis_replay_bytes",
+      "generated_tables_provenance",
+      "archive_SHA256SUMS",
+      "split_manifest_vs_split_audit",
+      "prereg_v1_vs_intake_record"
+    ]
+  },
+  "fix": "Nested .gitattributes (* -text) in data/manifests, prereg, experiments/validation, experiments/exploratory, paper/generated, paper/output; /tfm_env_freeze.txt -text in experiments/; git add --renormalize of those paths and experiments/archive. Root .gitattributes unchanged.",
+  "eol_only_proof": "67 modified blobs at first staging differ from HEAD only by CRLF/LF",
+  "staged_tree_git_archive": {
+    "tree": "5e9731f8ea6826f83974c2589cbce93b172a92f6",
+    "all_ok": true,
+    "checks": {
+      "v2_1_freeze": true,
+      "analysis_replay_bytes": true,
+      "generated_tables_provenance": true,
+      "archive_SHA256SUMS": true,
+      "split_manifest_vs_split_audit": true,
+      "prereg_v1_vs_intake_record": true
+    }
+  },
+  "staged_tree_checkout_index": "6/6 PASS",
+  "working_tree": "6/6 PASS",
+  "note": "This record was added after the verified tree was computed; it is not itself an input to any check. Not committed at time of writing."
+}

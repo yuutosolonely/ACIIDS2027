@@ -1,0 +1,50 @@
+{
+  "copied_at": "2026-10-28",
+  "files": [
+    {
+      "source": "F:\\competitions\\ACIIDS\\ACIIDS2027_team_package\\01_RANKING_AND_TEAM_PLAN_VI.md",
+      "destination": "docs/context/team_package/01_RANKING_AND_TEAM_PLAN_VI.md",
+      "sha256": "f649a673327e609c1f6addf776d5e94864abd3dd83a3abd7fc6d4090c44ac6b3"
+    },
+    {
+      "source": "F:\\competitions\\ACIIDS\\ACIIDS2027_team_package\\IDEA_1_CertiClean.md",
+      "destination": "docs/context/team_package/IDEA_1_CertiClean.md",
+      "sha256": "d1db154dac5ddacea835f68c36cc9c4712ec7c9b166d6a68ff2d367d90647777"
+    },
+    {
+      "source": "F:\\competitions\\ACIIDS\\ACIIDS2027_team_package\\IDEA_2_VeriRule.md",
+      "destination": "docs/context/team_package/IDEA_2_VeriRule.md",
+      "sha256": "5dc272bf4d5bb4488d818fce71249b4d3dc051bf8ae6e94bba3c92af646d0c95"
+    },
+    {
+      "source": "F:\\competitions\\ACIIDS\\ACIIDS2027_team_package\\IDEA_3_TabFM-ED.md",
+      "destination": "docs/context/team_package/IDEA_3_TabFM-ED.md",
+      "sha256": "bfb2340edb41ab451e63df1eb903e82c738476e0e39e87e962e3323d76b8e765"
+    },
+    {
+      "source": "F:\\competitions\\ACIIDS\\ACIIDS2027_team_package\\IDEA_4_EquiSchema.md",
+      "destination": "docs/context/team_package/IDEA_4_EquiSchema.md",
+      "sha256": "c28d4c077546798685a38fbc323cd7fbcd3fdbe8fe4fe0450175c6aafa4e2e4f"
+    },
+    {
+      "source": "F:\\competitions\\ACIIDS\\ACIIDS2027_team_package\\IDEA_5_CertiNeg.md",
+      "destination": "docs/context/team_package/IDEA_5_CertiNeg.md",
+      "sha256": "b54bfaa9915b58386e13ad59a6192aade8b05e3a426c2b35a8e42c912021d3f8"
+    },
+    {
+      "source": "F:\\competitions\\ACIIDS\\ACIIDS2027_team_package\\IDEA_L1_CertiClause.md",
+      "destination": "docs/context/team_package/IDEA_L1_CertiClause.md",
+      "sha256": "ec170b98fd0552b7715040e81c7eea8453fbae6b149d2d26d23201f04bece7fb"
+    },
+    {
+      "source": "F:\\competitions\\ACIIDS\\ACIIDS2027_team_package\\IDEA_L2_LexApplicable.md",
+      "destination": "docs/context/team_package/IDEA_L2_LexApplicable.md",
+      "sha256": "11d8c03e3d2bcc62256acf448b47be40bc2360fb41f2eaac8ad108a30c8a9500"
+    },
+    {
+      "source": "F:\\competitions\\ACIIDS\\ACIIDS2027_team_package\\IDEA_L3_LexConsolidate.md",
+      "destination": "docs/context/team_package/IDEA_L3_LexConsolidate.md",
+      "sha256": "c97e5e1983598c3f24f7026b91fea59639c73b40c0f518927b7651b4b692ce0b"
+    }
+  ]
+}

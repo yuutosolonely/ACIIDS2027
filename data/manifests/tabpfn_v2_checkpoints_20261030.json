@@ -1,0 +1,27 @@
+{
+  "downloaded": "2026-10-30",
+  "license": "Prior Labs License v1.1 (Apache-2.0 + Paragraph 10 attribution)",
+  "package": "tabpfn==9.2.0",
+  "files": {
+    "Prior-Labs/TabPFN-v2-clf@275f19d2add9c2c0de38f9ebaded3856599fa2e7/tabpfn-v2-classifier.ckpt": {
+      "path": "checkpoints/TabPFN-v2-clf/tabpfn-v2-classifier.ckpt",
+      "bytes": 29016968,
+      "sha256": "f65a35685aeef42e31b796d9bfa34e68d6fc780bc98e7bff7763802964cf435f"
+    },
+    "Prior-Labs/TabPFN-v2-clf@275f19d2add9c2c0de38f9ebaded3856599fa2e7/LICENSE.txt": {
+      "path": "checkpoints/TabPFN-v2-clf/LICENSE.txt",
+      "bytes": 11483,
+      "sha256": "08b1851b4b6136b5fb0cb124d3258e0d91e3e1623f1be5904b77e4d270d112d8"
+    },
+    "Prior-Labs/TabPFN-v2-reg@02a44705ff7790b50cded404bc59adb94da456a1/tabpfn-v2-regressor.ckpt": {
+      "path": "checkpoints/TabPFN-v2-reg/tabpfn-v2-regressor.ckpt",
+      "bytes": 44390977,
+      "sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736"
+    },
+    "Prior-Labs/TabPFN-v2-reg@02a44705ff7790b50cded404bc59adb94da456a1/LICENSE.txt": {
+      "path": "checkpoints/TabPFN-v2-reg/LICENSE.txt",
+      "bytes": 11483,
+      "sha256": "08b1851b4b6136b5fb0cb124d3258e0d91e3e1623f1be5904b77e4d270d112d8"
+    }
+  }
+}

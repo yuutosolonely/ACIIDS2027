@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "aciids-lab": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--locked",
+        "python",
+        "tools/mcp/research_lab.py"
+      ],
+      "env": {
+        "PYTHONIOENCODING": "utf-8"
+      }
+    }
+  }
+}

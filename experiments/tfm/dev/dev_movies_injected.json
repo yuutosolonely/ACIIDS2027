@@ -1,0 +1,63 @@
+{
+ "role": "DEV ONLY (movies_1 subsample, designated development set)",
+ "results": [
+  {
+   "structure": "random",
+   "errors": 1600,
+   "baselines": {
+    "VF": 0.0847,
+    "PF": 0.1623,
+    "RobustZ": 0.1806,
+    "ColumnIF": 0.3792,
+    "DDCcore": 0.1806
+   },
+   "lgbm": {
+    "raw": 0.1629,
+    "random": 0.1621,
+    "random_sec": 10.5,
+    "purify": 0.2001,
+    "purify_sec": 9.6,
+    "oracle": 0.2154,
+    "oracle_sec": 11.0
+   },
+   "tabpfn-v2": {
+    "raw": 0.2212,
+    "random": 0.2202,
+    "random_sec": 56.7,
+    "purify": 0.2572,
+    "purify_sec": 55.2,
+    "oracle": 0.2969,
+    "oracle_sec": 62.6
+   }
+  },
+  {
+   "structure": "systematic",
+   "errors": 1600,
+   "baselines": {
+    "VF": 0.0601,
+    "PF": 0.0949,
+    "RobustZ": 0.1287,
+    "ColumnIF": 0.16,
+    "DDCcore": 0.1287
+   },
+   "lgbm": {
+    "raw": 0.2229,
+    "random": 0.2261,
+    "random_sec": 11.3,
+    "purify": 0.2338,
+    "purify_sec": 11.1,
+    "oracle": 0.6363,
+    "oracle_sec": 11.5
+   },
+   "tabpfn-v2": {
+    "raw": 0.1939,
+    "random": 0.1932,
+    "random_sec": 53.6,
+    "purify": 0.2205,
+    "purify_sec": 53.8,
+    "oracle": 0.8639,
+    "oracle_sec": 60.9
+   }
+  }
+ ]
+}

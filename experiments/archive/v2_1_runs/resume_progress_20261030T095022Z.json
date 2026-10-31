@@ -1,0 +1,30 @@
+{
+  "updated_utc": "2026-10-30T11:31:52.927276+00:00",
+  "runs": [
+    {
+      "run_id": "flights__real__s4",
+      "exit_code": 0,
+      "elapsed_seconds": 3030.707633400001,
+      "finished_utc": "2026-10-30T10:40:53.383434+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "beers__real__s4",
+      "exit_code": 3221225786,
+      "elapsed_seconds": 3056.9720554000087,
+      "finished_utc": "2026-10-30T11:31:50.541147+00:00"
+    },
+    {
+      "run_id": "hospital__real__s3",
+      "exit_code": 2,
+      "elapsed_seconds": 6089.069613799991,
+      "finished_utc": "2026-10-30T11:31:51.744436+00:00"
+    },
+    {
+      "run_id": "hospital__real__s4",
+      "exit_code": 2,
+      "elapsed_seconds": 6090.251065400007,
+      "finished_utc": "2026-10-30T11:31:52.927276+00:00"
+    }
+  ]
+}

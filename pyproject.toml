@@ -1,0 +1,16 @@
+[project]
+name = "aciids-cric-ed-research"
+version = "0.1.0"
+description = "Research setup and evidence harness for ACIIDS 2027 Idea 3"
+requires-python = ">=3.11"
+dependencies = ["mcp>=2.3,<3", "pyyaml>=6,<7"]
+
+[dependency-groups]
+dev = ["pytest>=9,<10"]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "tools"]

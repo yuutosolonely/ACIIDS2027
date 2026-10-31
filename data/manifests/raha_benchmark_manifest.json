@@ -1,0 +1,47 @@
+{
+  "manifest_version": "1.0.0",
+  "created_at": "2026-10-29",
+  "provenance": {
+    "suite": "RAHA Benchmark Suite",
+    "upstream_url": "https://github.com/BigDaMa/raha",
+    "upstream_commit": "fa52db9a37fa203f57cebe6520b98031d7fbeaa7",
+    "license": "Apache-2.0 / Academic Evaluation Use"
+  },
+  "datasets": [
+    {
+      "id": "beers",
+      "display_name": "Beers Benchmark",
+      "num_rows": 2410,
+      "num_columns": 11,
+      "entity_group_key": "brewery_id",
+      "numeric_columns": ["id", "abv", "ibu", "ounces"],
+      "categorical_columns": ["brewery_id", "brewery_name", "city", "state", "beer_name", "style"],
+      "rare_valid_controls": [
+        {"column": "style", "value": "Flanders Red Ale", "marginal_rate": 0.004},
+        {"column": "abv", "range": [0.12, 0.20], "marginal_rate": 0.008}
+      ],
+      "dev_sample_size": 200,
+      "eligible_cell_universe": "all_except_id"
+    },
+    {
+      "id": "hospital",
+      "display_name": "Hospital Provider Directory",
+      "num_rows": 1000,
+      "num_columns": 19,
+      "entity_group_key": "Provider Number",
+      "numeric_columns": ["ZIP Code", "Phone Number"],
+      "categorical_columns": ["Provider Number", "Hospital Name", "Address 1", "City", "State", "County Name", "Emergency Service"],
+      "rare_valid_controls": [
+        {"column": "State", "value": "GU", "marginal_rate": 0.002},
+        {"column": "Emergency Service", "value": "Yes", "marginal_rate": 0.08}
+      ],
+      "dev_sample_size": 200,
+      "eligible_cell_universe": "all_except_id"
+    }
+  ],
+  "invariants": {
+    "clean_leakage_prohibited": true,
+    "group_cross_fitting_mandatory": true,
+    "unsupported_cells_penalized": true
+  }
+}

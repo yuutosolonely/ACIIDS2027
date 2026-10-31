@@ -1,0 +1,8 @@
+[project]
+idea = "CRIC-ED"
+venue = "ACIIDS 2027"
+
+[compute]
+paid_compute_authorized = false
+budget_total_usd = 0.0
+note = "No paid-compute budget established; no paid-run tool is exposed."

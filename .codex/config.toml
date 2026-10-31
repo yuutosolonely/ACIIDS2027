@@ -1,0 +1,9 @@
+web_search = "live"
+
+[mcp_servers.aciids_lab]
+command = "uv"
+args = ["run", "--locked", "python", "tools/mcp/research_lab.py"]
+env = { PYTHONIOENCODING = "utf-8" }
+startup_timeout_sec = 60
+tool_timeout_sec = 300
+enabled_tools = ["lit_search", "paper_details", "verify_reference", "research_status"]

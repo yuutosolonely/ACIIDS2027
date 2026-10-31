@@ -1,0 +1,7 @@
+{
+  "stage": "wait_for_resumed_grid",
+  "status": "running",
+  "updated_utc": "2026-10-30T11:34:56.738061+00:00",
+  "pid": 54136,
+  "source_snapshot_sha256": "c37e39ab8168ed2fda38e9a6e952a15114bda4faa595356c7aeeb5f633bf5678"
+}

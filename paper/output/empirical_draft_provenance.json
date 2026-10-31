@@ -1,0 +1,52 @@
+{
+  "status": "INTERNAL_DRAFT_REQUIRES_NUMERICAL_INTERPRETIVE_AND_VISUAL_REVIEW",
+  "analysis_sha256": "68db9d735c102d76f69d8cc49087290f36edaab3c87aa2642d66c0222177dcaf",
+  "audit_sha256": "04e452fdcbf7eb49ebd3c3db9dba86729a3dcdad422c89b678d3b97b1cc83547",
+  "script_sha256": "eb77cb9b699451e36d7179e0dbd2c60462928a097e85653a99f96d6a671822a7",
+  "primary_effects": {
+    "hospital": {
+      "delta": -0.16113212524610673,
+      "ci95": [
+        -0.2022987511824795,
+        -0.11371490453946345
+      ],
+      "valid": 1000,
+      "attempted": 1000,
+      "bootstrap_seed": 2027,
+      "category": "primary"
+    },
+    "flights": {
+      "delta": -0.04925656865292842,
+      "ci95": [
+        -0.05665272216196931,
+        -0.04102738253637131
+      ],
+      "valid": 1000,
+      "attempted": 1000,
+      "bootstrap_seed": 2027,
+      "category": "primary"
+    },
+    "beers": {
+      "delta": 0.02572975658271321,
+      "ci95": [
+        0.019083554654806986,
+        0.033138128865822104
+      ],
+      "valid": 1000,
+      "attempted": 1000,
+      "bootstrap_seed": 2027,
+      "category": "primary"
+    },
+    "rayyan": {
+      "delta": -0.030009136704397466,
+      "ci95": [
+        -0.0390995400626923,
+        -0.02040536763179959
+      ],
+      "valid": 1000,
+      "attempted": 1000,
+      "bootstrap_seed": 2027,
+      "category": "primary"
+    }
+  }
+}

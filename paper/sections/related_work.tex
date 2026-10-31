@@ -1,0 +1,75 @@
+\section{Related Work and Scope}
+\paragraph{Cellwise detection and imputation.}
+DDC uses robust relationships between numerical variables to predict cells and assess
+their residuals~\cite{rousseeuw2018ddc}. Its published algorithm includes robust
+standardization, bivariate relations, prediction and deshrinkage. Our numerical
+DDCcore baseline is a simpler comparator and cannot establish a ranking against
+reference DDC. CellGMM addresses numerical populations with a mixture model
+and a detection--imputation step~\cite{zaccaria2025cellgmm}; discarding an entire
+record can lose useful information from its other cells. Our removal operates
+on whole context rows for one target at a time and offers no corresponding
+mixture-estimation or cell-repair guarantee. Cellwise trimming has also been built
+into model-based co-clustering~\cite{fibbi2026celltricc}, so trimming as such is not new here. Conformal Data Cleaning (CDC) combines column prediction with
+calibrated prediction sets or intervals~\cite{jager2024cdc}. Its evaluated deployment
+scenario trains on clean data and subsequently encounters corrupted inputs.
+Our deployment arms receive one dirty table and no clean calibration split.
+The LightGBM conditional comparator is inspired by column prediction but does not
+reproduce CDC, and our scores have no conformal coverage interpretation.
+
+\paragraph{Foundation models and contaminated contexts.}
+TabPFN provides pretrained conditional prediction for small tabular
+problems~\cite{hollmann2025tabpfn}. We use pinned second-generation weights through
+an explicit adapter, rather than whichever model a current package would select
+by default. Unsupervised extensions of TabPFN also use conditional prediction;
+we do not claim this reduction as novel or call our raw arm a reproduction of
+the extensions. TACTIC explicitly studies contaminated contexts for row anomaly
+detection~\cite{tactic2026}. Its anomaly-oriented pretraining and row-level
+evaluation address a related robustness problem. Consequently, context contamination
+itself is established prior work; our intervention concerns cell-level rankings
+under fixed pretrained weights and nested selection, not a row-AUROC comparison.
+
+\paragraph{Data quality and context selection for TFMs.}
+QualiTab evaluates imperfect data and contrasts perfect-data, perfect-context
+and no-intervention settings for TabPFN embeddings~\cite{papastergios2025wild}.
+Its clean-context comparison is close to the motivation of our oracle diagnostic;
+the benefit of cleaner contexts is therefore not a new hypothesis introduced here.
+Model-aware cleaning learns reinforcement-learning policies that sequence cleaning
+operators for TFM-oriented data
+preparation~\cite{bertiequille2026prior}. We instead evaluate one fixed removal
+rule as a cell-ranking intervention without learning a cleaning policy.
+LUCoS selects representative contexts using unsupervised PFN embeddings,
+then obtains labels for supervised prediction~\cite{ipas2026lucos}.
+Our contexts contain observed target values from the dirty table, with no
+annotation oracle for deployment. A study of test-time compute for TFMs reports that
+attention-guided row retrieval helps on some large tables but can fail badly, for
+example by distorting class composition, and that context expansion gives no
+consistent gain~\cite{ning2026ttc}. It concerns supervised prediction from labelled
+contexts, not detecting errors in a dirty context, so it is related evidence rather
+than a direct comparator. Together these works narrow what can be claimed as new:
+TFM-oriented data cleaning and label-free context selection already have precedents,
+so our contribution is limited to the cell-level, dirty-context setting studied here.
+
+\paragraph{Systems for heterogeneous error detection.}
+Raha is a configuration-free error-detection system and supplies the benchmark
+repository used here~\cite{mahdavi2019raha}.
+Auto-Test learns semantic-domain constraints from a large table corpus offline and
+applies them to detect erroneous column values without per-table
+supervision~\cite{chen2025autotest}. MaTElDa is semi-supervised: it groups cells of
+several tables by domain and quality similarity so that a small labelling budget
+can be shared across tables~\cite{ahmadi2025matelda}. LUCARIO targets unsupervised,
+lightweight detection of pattern anomalies and outliers~\cite{qin2026lucario}.
+These are direct cell-level competitors with different knowledge sources (a table
+corpus, user labels, inferred constraints); none was run under our protocol. We use its paired dirty/clean tables,
+not a reimplementation of its complete detection workflow. ZeroED combines
+LLM-derived representations and labels with detector training~\cite{zeroed2025}.
+That information and compute regime differs from our label-free local deployment
+arms.
+Neither system's published headline score is an interchangeable baseline result
+for our capped-table protocol.
+
+\paragraph{Measured comparators.}
+We run frequency and pattern scores, a robust numerical score, column-wise
+Isolation Forest~\cite{liu2008isolation}, DDCcore and conditional
+LightGBM~\cite{ke2017lightgbm}. They test whether marginal rarity, simple numerical
+deviation or the choice of conditional model explains an effect; they cannot rank
+the declared rule against every context-selection strategy.

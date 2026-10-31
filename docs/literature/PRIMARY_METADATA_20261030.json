@@ -1,0 +1,3034 @@
+{
+  "baran": {
+    "url": "https://api.crossref.org/works/10.14778/3407790.3407801",
+    "access_date": "2026-10-30",
+    "records": [
+      {
+        "DOI": "10.14778/3407790.3407801",
+        "title": [
+          "Baran"
+        ],
+        "author": [
+          {
+            "given": "Mohammad",
+            "family": "Mahdavi",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "Technische Universität Berlin"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Ziawasch",
+            "family": "Abedjan",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Technische Universität Berlin"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "container-title": [
+          "Proceedings of the VLDB Endowment"
+        ],
+        "volume": "13",
+        "issue": "12",
+        "page": "1948-1961",
+        "published": {
+          "date-parts": [
+            [
+              2020,
+              7
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2020,
+              7
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2020,
+              8
+            ]
+          ]
+        },
+        "type": "journal-article",
+        "URL": "https://doi.org/10.14778/3407790.3407801",
+        "abstract": "<jats:p>Traditional error correction solutions leverage handmaid rules or master data to find the correct values. Both are often amiss in real-world scenarios. Therefore, it is desirable to additionally learn corrections from a limited number of example repairs. To effectively generalize example repairs, it is necessary to capture the entire context of each erroneous value. A context comprises the value itself, the co-occurring values inside the same tuple, and all values that define the attribute type. Typically, an error corrector based on any of these context information undergoes an individual process of operations that is not always easy to integrate with other types of error correctors. In this paper, we present a new error correction system, Baran, which provides a unifying abstraction for integrating multiple error corrector models that can be pretrained and updated in the same way. Because of the holistic nature of our approach, we generate more correction candidates than state of the art and, because of the underlying context-aware data representation, we achieve high precision. We show that, by pretraining our models based on Wikipedia revisions, our system can further improve its overall precision and recall. In our experiments, Baran significantly outperforms state-of-the-art error correction systems in terms of effectiveness and human involvement requiring only 20 labeled tuples.</jats:p>"
+      }
+    ]
+  },
+  "raha": {
+    "url": "https://api.crossref.org/works/10.1145/3299869.3324956",
+    "access_date": "2026-10-30",
+    "records": [
+      {
+        "DOI": "10.1145/3299869.3324956",
+        "title": [
+          "Raha"
+        ],
+        "author": [
+          {
+            "given": "Mohammad",
+            "family": "Mahdavi",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "TU Berlin, Berlin, Germany"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Ziawasch",
+            "family": "Abedjan",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "TU Berlin, Berlin, Germany"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Raul",
+            "family": "Castro Fernandez",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "MIT, Cambridge, MA, USA"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Samuel",
+            "family": "Madden",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "MIT, Cambridge, MA, USA"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Mourad",
+            "family": "Ouzzani",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "QCRI, HBKU, Doha, Qatar"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Michael",
+            "family": "Stonebraker",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "MIT, Cambridge, MA, USA"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Nan",
+            "family": "Tang",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "QCRI, HBKU, Doha, Qatar"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "container-title": [
+          "Proceedings of the 2019 International Conference on Management of Data"
+        ],
+        "page": "865-882",
+        "published": {
+          "date-parts": [
+            [
+              2019,
+              6,
+              25
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2019,
+              6,
+              25
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2019,
+              6,
+              25
+            ]
+          ]
+        },
+        "type": "proceedings-article",
+        "URL": "https://doi.org/10.1145/3299869.3324956"
+      }
+    ]
+  },
+  "tabpfn": {
+    "url": "https://api.crossref.org/works/10.1038/s41586-024-08328-6",
+    "access_date": "2026-10-30",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  "ddc": {
+    "url": "https://api.crossref.org/works/10.1080/00401706.2017.1340909",
+    "access_date": "2026-10-30",
+    "records": [
+      {
+        "DOI": "10.1080/00401706.2017.1340909",
+        "title": [
+          "Detecting Deviating Data Cells"
+        ],
+        "author": [
+          {
+            "given": "Peter J.",
+            "family": "Rousseeuw",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "Department of Mathematics, KU Leuven, Leuven, Belgium"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Wannes Van Den",
+            "family": "Bossche",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Department of Mathematics, KU Leuven, Leuven, Belgium"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "container-title": [
+          "Technometrics"
+        ],
+        "volume": "60",
+        "issue": "2",
+        "page": "135-145",
+        "published": {
+          "date-parts": [
+            [
+              2017,
+              12,
+              6
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2017,
+              12,
+              6
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2018,
+              4,
+              3
+            ]
+          ]
+        },
+        "type": "journal-article",
+        "URL": "https://doi.org/10.1080/00401706.2017.1340909"
+      }
+    ]
+  },
+  "cellmcd": {
+    "url": "https://api.crossref.org/works/10.1080/01621459.2023.2267777",
+    "access_date": "2026-10-30",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  "autodetect": {
+    "url": "https://api.crossref.org/works/10.1145/3183713.3196889",
+    "access_date": "2026-10-30",
+    "records": [
+      {
+        "DOI": "10.1145/3183713.3196889",
+        "title": [
+          "Auto-Detect"
+        ],
+        "author": [
+          {
+            "given": "Zhipeng",
+            "family": "Huang",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "University of Hong Kong, Hong Kong, China"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Yeye",
+            "family": "He",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Microsoft Research, Redmond, WA, USA"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "container-title": [
+          "Proceedings of the 2018 International Conference on Management of Data"
+        ],
+        "page": "1377-1392",
+        "published": {
+          "date-parts": [
+            [
+              2018,
+              5,
+              27
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2018,
+              5,
+              27
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2018,
+              5,
+              27
+            ]
+          ]
+        },
+        "type": "proceedings-article",
+        "URL": "https://doi.org/10.1145/3183713.3196889"
+      }
+    ]
+  },
+  "unidetect": {
+    "url": "https://api.crossref.org/works/10.1145/3299869.3319855",
+    "access_date": "2026-10-30",
+    "records": [
+      {
+        "DOI": "10.1145/3299869.3319855",
+        "title": [
+          "Uni-Detect"
+        ],
+        "author": [
+          {
+            "given": "Pei",
+            "family": "Wang",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "Simon Fraser University, Burnaby, BC, Canada"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Yeye",
+            "family": "He",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Microsoft Research, Redmond, WA, USA"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "container-title": [
+          "Proceedings of the 2019 International Conference on Management of Data"
+        ],
+        "page": "811-828",
+        "published": {
+          "date-parts": [
+            [
+              2019,
+              6,
+              25
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2019,
+              6,
+              25
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2019,
+              6,
+              25
+            ]
+          ]
+        },
+        "type": "proceedings-article",
+        "URL": "https://doi.org/10.1145/3299869.3319855"
+      }
+    ]
+  },
+  "picket": {
+    "url": "https://api.crossref.org/works/10.1007/s00778-021-00699-w",
+    "access_date": "2026-10-30",
+    "records": [
+      {
+        "DOI": "10.1007/s00778-021-00699-w",
+        "title": [
+          "Picket: guarding against corrupted data in tabular data during learning and inference"
+        ],
+        "author": [
+          {
+            "ORCID": "https://orcid.org/0000-0001-6979-9461",
+            "authenticated-orcid": false,
+            "given": "Zifan",
+            "family": "Liu",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Zhechun",
+            "family": "Zhou",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Theodoros",
+            "family": "Rekatsinas",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "container-title": [
+          "The VLDB Journal"
+        ],
+        "volume": "31",
+        "issue": "5",
+        "page": "927-955",
+        "published": {
+          "date-parts": [
+            [
+              2021,
+              10,
+              12
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2021,
+              10,
+              12
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2022,
+              9
+            ]
+          ]
+        },
+        "type": "journal-article",
+        "URL": "https://doi.org/10.1007/s00778-021-00699-w"
+      }
+    ]
+  },
+  "holoclean": {
+    "url": "https://api.crossref.org/works?rows=2&query.title=HoloClean%3A%20Holistic%20Data%20Repairs%20with%20Probabilistic%20Inference",
+    "access_date": "2026-10-30",
+    "records": [
+      {
+        "DOI": "10.1109/icdm.2010.18",
+        "title": [
+          "Probabilistic Inference Protection on Anonymized Data"
+        ],
+        "author": [
+          {
+            "given": "Raymond Chi-Wing",
+            "family": "Wong",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Ada Wai-Chee",
+            "family": "Fu",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Ke",
+            "family": "Wang",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Yabo",
+            "family": "Xu",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Jian",
+            "family": "Pei",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Philip S.",
+            "family": "Yu",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          }
+        ],
+        "container-title": [
+          "2010 IEEE International Conference on Data Mining"
+        ],
+        "page": "1127-1132",
+        "published": {
+          "date-parts": [
+            [
+              2010,
+              12
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2010,
+              12
+            ]
+          ]
+        },
+        "type": "proceedings-article",
+        "URL": "https://doi.org/10.1109/icdm.2010.18"
+      },
+      {
+        "DOI": "10.1037/rev0000469",
+        "title": [
+          "Imprecise probabilistic inference from sequential data."
+        ],
+        "author": [
+          {
+            "ORCID": "https://orcid.org/0000-0001-6710-1488",
+            "authenticated-orcid": false,
+            "given": "Arthur",
+            "family": "Prat-Carrabin",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0001-5485-5280",
+            "authenticated-orcid": false,
+            "given": "Michael",
+            "family": "Woodford",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "container-title": [
+          "Psychological Review"
+        ],
+        "volume": "131",
+        "issue": "5",
+        "page": "1161-1207",
+        "published": {
+          "date-parts": [
+            [
+              2024,
+              10
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2024,
+              10
+            ]
+          ]
+        },
+        "type": "journal-article",
+        "URL": "https://doi.org/10.1037/rev0000469"
+      }
+    ]
+  },
+  "holodetect": {
+    "url": "https://api.crossref.org/works?rows=2&query.title=HoloDetect%3A%20Few-Shot%20Learning%20for%20Error%20Detection",
+    "access_date": "2026-10-30",
+    "records": [
+      {
+        "DOI": "10.1007/978-981-96-4467-4_10",
+        "title": [
+          "Few-Shot Learning on Image Detection"
+        ],
+        "author": [
+          {
+            "given": "Xiang",
+            "family": "Chen",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Jiong",
+            "family": "Liang",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Mingwei",
+            "family": "Cheng",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Yuhan",
+            "family": "Sun",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Xi",
+            "family": "Wang",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          }
+        ],
+        "container-title": [
+          "Lecture Notes in Electrical Engineering",
+          "Advances in Printing, Packaging and Communication Technologies"
+        ],
+        "page": "92-99",
+        "published": {
+          "date-parts": [
+            [
+              2025
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2025,
+              4,
+              1
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2025
+            ]
+          ]
+        },
+        "type": "book-chapter",
+        "URL": "https://doi.org/10.1007/978-981-96-4467-4_10"
+      },
+      {
+        "DOI": "10.1007/978-3-031-66694-0_21",
+        "title": [
+          "Few-Shot Learning with Novelty Detection"
+        ],
+        "author": [
+          {
+            "ORCID": "https://orcid.org/0000-0001-6742-9504",
+            "authenticated-orcid": false,
+            "given": "Kim",
+            "family": "Bjerge",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-3564-6528",
+            "authenticated-orcid": false,
+            "given": "Paul",
+            "family": "Bodesheim",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0003-3739-8983",
+            "authenticated-orcid": false,
+            "given": "Henrik",
+            "family": "Karstoft",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          }
+        ],
+        "container-title": [
+          "Communications in Computer and Information Science",
+          "Deep Learning Theory and Applications"
+        ],
+        "page": "340-363",
+        "published": {
+          "date-parts": [
+            [
+              2024
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2024,
+              8,
+              21
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2024
+            ]
+          ]
+        },
+        "type": "book-chapter",
+        "URL": "https://doi.org/10.1007/978-3-031-66694-0_21"
+      }
+    ]
+  },
+  "ed2": {
+    "url": "https://api.crossref.org/works?rows=2&query.title=ED2%3A%20A%20Case%20for%20Active%20Learning%20in%20Error%20Detection",
+    "access_date": "2026-10-30",
+    "records": [
+      {
+        "DOI": "10.1145/3357384.3358129",
+        "title": [
+          "ED2: A Case for Active Learning in Error Detection"
+        ],
+        "author": [
+          {
+            "given": "Felix",
+            "family": "Neutatz",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "DFKI GmbH, Berlin, Germany"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Mohammad",
+            "family": "Mahdavi",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "TU Berlin, Berlin, Germany"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Ziawasch",
+            "family": "Abedjan",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "TU Berlin &amp; DFKI GmbH, Berlin, Germany"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "container-title": [
+          "Proceedings of the 28th ACM International Conference on Information and Knowledge Management"
+        ],
+        "page": "2249-2252",
+        "published": {
+          "date-parts": [
+            [
+              2019,
+              11,
+              3
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2019,
+              11,
+              3
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2019,
+              11,
+              3
+            ]
+          ]
+        },
+        "type": "proceedings-article",
+        "URL": "https://doi.org/10.1145/3357384.3358129"
+      },
+      {
+        "DOI": "10.1145/3539597.3570368",
+        "title": [
+          "Active Ensemble Learning for Knowledge Graph Error Detection"
+        ],
+        "author": [
+          {
+            "ORCID": "https://orcid.org/0000-0003-2117-6083",
+            "authenticated-orcid": false,
+            "given": "Junnan",
+            "family": "Dong",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "The Hong Kong Polytechnic University, Hong Kong, China"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-0247-4942",
+            "authenticated-orcid": false,
+            "given": "Qinggang",
+            "family": "Zhang",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "The Hong Kong Polytechnic University, Hong Kong, China"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-3867-900X",
+            "authenticated-orcid": false,
+            "given": "Xiao",
+            "family": "Huang",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "The Hong Kong Polytechnic University, Hong Kong, China"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0001-8999-968X",
+            "authenticated-orcid": false,
+            "given": "Qiaoyu",
+            "family": "Tan",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Texas A&amp;M University, College Station, TX, USA"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-6677-7504",
+            "authenticated-orcid": false,
+            "given": "Daochen",
+            "family": "Zha",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Rice University, Houston, TX, USA"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-0924-0743",
+            "authenticated-orcid": false,
+            "given": "Zhao",
+            "family": "Zihao",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "The Hong Kong Polytechnic University, Hong Kong, China"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "container-title": [
+          "Proceedings of the Sixteenth ACM International Conference on Web Search and Data Mining"
+        ],
+        "page": "877-885",
+        "published": {
+          "date-parts": [
+            [
+              2023,
+              2,
+              27
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2023,
+              2,
+              27
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2023,
+              2,
+              27
+            ]
+          ]
+        },
+        "type": "proceedings-article",
+        "URL": "https://doi.org/10.1145/3539597.3570368"
+      }
+    ]
+  },
+  "rein": {
+    "url": "https://api.crossref.org/works?rows=2&query.title=REIN%3A%20A%20Comprehensive%20Benchmark%20Framework%20for%20Data%20Cleaning%20Methods%20in%20ML%20Pipelines",
+    "access_date": "2026-10-30",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  "detectingerrors": {
+    "url": "https://api.crossref.org/works?rows=2&query.title=Detecting%20Data%20Errors%3A%20Where%20are%20we%20and%20what%20needs%20to%20be%20done%3F",
+    "access_date": "2026-10-30",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  "confident": {
+    "url": "https://api.crossref.org/works?rows=2&query.title=Confident%20Learning%3A%20Estimating%20Uncertainty%20in%20Dataset%20Labels",
+    "access_date": "2026-10-30",
+    "error": "HTTP Error 429: Too Many Requests"
+  },
+  "lts": {
+    "url": "https://api.crossref.org/works?rows=2&query.title=Least%20Median%20of%20Squares%20Regression",
+    "access_date": "2026-10-30",
+    "records": [
+      {
+        "DOI": "10.1080/01621459.1984.10477105",
+        "title": [
+          "Least Median of Squares Regression"
+        ],
+        "author": [
+          {
+            "given": "Peter J.",
+            "family": "Rousseeuw",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "container-title": [
+          "Journal of the American Statistical Association"
+        ],
+        "volume": "79",
+        "issue": "388",
+        "page": "871-880",
+        "published": {
+          "date-parts": [
+            [
+              1984,
+              12
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              1984,
+              12
+            ]
+          ]
+        },
+        "type": "journal-article",
+        "URL": "https://doi.org/10.1080/01621459.1984.10477105"
+      },
+      {
+        "DOI": "10.1016/s0895-7177(02)00069-9",
+        "title": [
+          "Least trimmed squares regression, least median squares regression, and mathematical programming"
+        ],
+        "author": [
+          {
+            "given": "A.",
+            "family": "Giloni",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "M.",
+            "family": "Padberg",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "container-title": [
+          "Mathematical and Computer Modelling"
+        ],
+        "volume": "35",
+        "issue": "9-10",
+        "page": "1043-1060",
+        "published": {
+          "date-parts": [
+            [
+              2002,
+              5
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2002,
+              5
+            ]
+          ]
+        },
+        "type": "journal-article",
+        "URL": "https://doi.org/10.1016/s0895-7177(02)00069-9"
+      }
+    ]
+  },
+  "realistic": {
+    "url": "https://api.crossref.org/works/10.1145/3774914",
+    "access_date": "2026-10-30",
+    "records": [
+      {
+        "DOI": "10.1145/3774914",
+        "title": [
+          "Towards Realistic Error Models for Tabular Data"
+        ],
+        "author": [
+          {
+            "ORCID": "https://orcid.org/0009-0003-2275-3038",
+            "authenticated-orcid": false,
+            "given": "Philipp",
+            "family": "Jung",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "Department VI, Berlin University of Applied Sciences and Technology",
+                "place": [
+                  "Berlin, Germany"
+                ]
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0001-9420-8571",
+            "authenticated-orcid": false,
+            "given": "Sebastian",
+            "family": "Jäger",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Department VI, Berlin University of Applied Sciences and Technology",
+                "place": [
+                  "Berlin, Germany"
+                ]
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0009-0003-6546-2994",
+            "authenticated-orcid": false,
+            "given": "Nicholas",
+            "family": "Chandler",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Department VI, Berlin University of Applied Sciences and Technology",
+                "place": [
+                  "Berlin, Germany"
+                ]
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-3422-1026",
+            "authenticated-orcid": false,
+            "given": "Felix",
+            "family": "Biessmann",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Department VI, Berlin University of Applied Sciences and Technology",
+                "place": [
+                  "Berlin, Germany"
+                ]
+              },
+              {
+                "name": "Einstein Center Digital Future",
+                "place": [
+                  "Berlin, Germany"
+                ]
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "container-title": [
+          "Journal of Data and Information Quality"
+        ],
+        "volume": "17",
+        "issue": "4",
+        "page": "1-27",
+        "published": {
+          "date-parts": [
+            [
+              2025,
+              12,
+              4
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2025,
+              12,
+              4
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2025,
+              12,
+              31
+            ]
+          ]
+        },
+        "type": "journal-article",
+        "URL": "https://doi.org/10.1145/3774914",
+        "abstract": "<jats:p>Errors in data are a key challenge in modern data management and processing systems. Monitoring and mitigating risks associated with errors in data transformations and downstream applications, such as Machine Learning (ML) model training, requires a profound understanding of error generation and impact of errors on data pipelines. Unfortunately, scientific progress in the field is facing two main challenges: For one, research on data errors often does not adhere to the FAIR (Findable, Accessible, Interoperable, and Reusable) principles, which impedes reproducibility and comparisons. Second, existing data error models are oversimplified and fail to capture the complex statistical dependencies underlying the types and distributions of errors observed in real-world data. Building on prior work in the database management systems and statistics literature, we extend the theory on missing values to encompass a broader range of errors in tables and provide an overview of relevant error types. Combining error sampling mechanisms often observed in real data with a comprehensive categorization of errors, we introduce a latent factor model for tabular data errors that is simple to implement and can effectively model realistic error dependencies. Error sampling is decoupled from error types, which allows for simple extensions with more error types or sampling mechanisms. Using established benchmarks, we evaluate our model in two application scenarios, data cleaning and tabular ML tasks. In a comprehensive suite of experiments we demonstrate the impact of realistic error models on data cleaning benchmarks. Our results also show that a simple generative error model captures a wide range of error mechanisms and offers a convenient formalization of data perturbations to improve the generalizability, robustness and reproducibility of data cleaning research.</jats:p>"
+      }
+    ]
+  },
+  "arxiv_holoclean": {
+    "url": "https://arxiv.org/abs/1702.00820",
+    "access_date": "2026-10-30",
+    "metadata": {
+      "citation_title": [
+        "HoloClean: Holistic Data Repairs with Probabilistic Inference"
+      ],
+      "citation_author": [
+        "Rekatsinas, Theodoros",
+        "Chu, Xu",
+        "Ilyas, Ihab F.",
+        "Ré, Christopher"
+      ],
+      "citation_date": [
+        "2017/02/02"
+      ],
+      "citation_online_date": [
+        "2017/02/02"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/1702.00820"
+      ],
+      "citation_arxiv_id": [
+        "1702.00820"
+      ],
+      "citation_abstract": [
+        "We introduce HoloClean, a framework for holistic data repairing driven by probabilistic inference. HoloClean unifies existing qualitative data repairing approaches, which rely on integrity constraints or external data sources, with quantitative data repairing methods, which leverage statistical properties of the input data. Given an inconsistent dataset as input, HoloClean automatically generates a probabilistic program that performs data repairing. Inspired by recent theoretical advances in probabilistic inference, we introduce a series of optimizations which ensure that inference over HoloClean's probabilistic model scales to instances with millions of tuples. We show that HoloClean scales to instances with millions of tuples and find data repairs with an average precision of ~90% and an average recall of above ~76% across a diverse array of datasets exhibiting different types of errors. This yields an average F1 improvement of more than 2x against state-of-the-art methods."
+      ]
+    },
+    "submission_history": "Submission history From: Theodoros Rekatsinas [ view email ] [v1] Thu, 2 Feb 2017 20:25:41 UTC (602 KB)",
+    "abstract_read": "We introduce HoloClean, a framework for holistic data repairing driven by probabilistic inference. HoloClean unifies existing qualitative data repairing approaches, which rely on integrity constraints or external data sources, with quantitative data repairing methods, which leverage statistical properties of the input data. Given an inconsistent dataset as input, HoloClean automatically generates a probabilistic program that performs data repairing. Inspired by recent theoretical advances in probabilistic inference, we introduce a series of optimizations which ensure that inference over HoloClean's probabilistic model scales to instances with millions of tuples. We show that HoloClean scales to instances with millions of tuples and find data repairs with an average precision of ~90% and an average recall of above ~76% across a diverse array of datasets exhibiting different types of errors. This yields an average F1 improvement of more than 2x against state-of-the-art methods."
+  },
+  "arxiv_holodetect": {
+    "url": "https://arxiv.org/abs/1904.02285",
+    "access_date": "2026-10-30",
+    "metadata": {
+      "citation_title": [
+        "HoloDetect: Few-Shot Learning for Error Detection"
+      ],
+      "citation_author": [
+        "Heidari, Alireza",
+        "McGrath, Joshua",
+        "Ilyas, Ihab F.",
+        "Rekatsinas, Theodoros"
+      ],
+      "citation_doi": [
+        "10.1145/3299869.3319888"
+      ],
+      "citation_date": [
+        "2019/04/04"
+      ],
+      "citation_online_date": [
+        "2019/04/04"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/1904.02285"
+      ],
+      "citation_arxiv_id": [
+        "1904.02285"
+      ],
+      "citation_abstract": [
+        "We introduce a few-shot learning framework for error detection. We show that data augmentation (a form of weak supervision) is key to training high-quality, ML-based error detection models that require minimal human involvement. Our framework consists of two parts: (1) an expressive model to learn rich representations that capture the inherent syntactic and semantic heterogeneity of errors; and (2) a data augmentation model that, given a small seed of clean records, uses dataset-specific transformations to automatically generate additional training data. Our key insight is to learn data augmentation policies from the noisy input dataset in a weakly supervised manner. We show that our framework detects errors with an average precision of ~94% and an average recall of ~93% across a diverse array of datasets that exhibit different types and amounts of errors. We compare our approach to a comprehensive collection of error detection methods, ranging from traditional rule-based methods to ensemble-based and active learning approaches. We show that data augmentation yields an average improvement of 20 F1 points while it requires access to 3x fewer labeled examples compared to other ML approaches."
+      ]
+    },
+    "submission_history": "Submission history From: Theodoros Rekatsinas [ view email ] [v1] Thu, 4 Apr 2019 00:38:59 UTC (2,223 KB)",
+    "abstract_read": "We introduce a few-shot learning framework for error detection. We show that data augmentation (a form of weak supervision) is key to training high-quality, ML-based error detection models that require minimal human involvement. Our framework consists of two parts: (1) an expressive model to learn rich representations that capture the inherent syntactic and semantic heterogeneity of errors; and (2) a data augmentation model that, given a small seed of clean records, uses dataset-specific transformations to automatically generate additional training data. Our key insight is to learn data augmentation policies from the noisy input dataset in a weakly supervised manner. We show that our framework detects errors with an average precision of ~94% and an average recall of ~93% across a diverse array of datasets that exhibit different types and amounts of errors. We compare our approach to a comprehensive collection of error detection methods, ranging from traditional rule-based methods to ensemble-based and active learning approaches. We show that data augmentation yields an average improvement of 20 F1 points while it requires access to 3x fewer labeled examples compared to other ML approaches."
+  },
+  "arxiv_ed2": {
+    "url": "https://arxiv.org/abs/1908.06309",
+    "access_date": "2026-10-30",
+    "metadata": {
+      "citation_title": [
+        "ED2: Two-stage Active Learning for Error Detection -- Technical Report"
+      ],
+      "citation_author": [
+        "Neutatz, Felix",
+        "Mahdavi, Mohammad",
+        "Abedjan, Ziawasch"
+      ],
+      "citation_date": [
+        "2019/08/17"
+      ],
+      "citation_online_date": [
+        "2019/08/17"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/1908.06309"
+      ],
+      "citation_arxiv_id": [
+        "1908.06309"
+      ],
+      "citation_abstract": [
+        "Traditional error detection approaches require user-defined parameters and rules. Thus, the user has to know both the error detection system and the data. However, we can also formulate error detection as a semi-supervised classification problem that only requires domain expertise. The challenges for such an approach are twofold: (1) to represent the data in a way that enables a classification model to identify various kinds of data errors, and (2) to pick the most promising data values for learning. In this paper, we address these challenges with ED2, our new example-driven error detection method. First, we present a new two-dimensional multi-classifier sampling strategy for active learning. Second, we propose novel multi-column features. The combined application of these techniques provides fast convergence of the classification task with high detection accuracy. On several real-world datasets, ED2 requires, on average, less than 1% labels to outperform existing error detection approaches. This report extends the peer-reviewed paper \"ED2: A Case for Active Learning in Error Detection\". All source code related to this project is available on GitHub."
+      ]
+    },
+    "submission_history": "Submission history From: Felix Neutatz [ view email ] [v1] Sat, 17 Aug 2019 15:13:12 UTC (291 KB)",
+    "abstract_read": "Traditional error detection approaches require user-defined parameters and rules. Thus, the user has to know both the error detection system and the data. However, we can also formulate error detection as a semi-supervised classification problem that only requires domain expertise. The challenges for such an approach are twofold: (1) to represent the data in a way that enables a classification model to identify various kinds of data errors, and (2) to pick the most promising data values for learning. In this paper, we address these challenges with ED2, our new example-driven error detection method. First, we present a new two-dimensional multi-classifier sampling strategy for active learning. Second, we propose novel multi-column features. The combined application of these techniques provides fast convergence of the classification task with high detection accuracy. On several real-world datasets, ED2 requires, on average, less than 1% labels to outperform existing error detection approaches. This report extends the peer-reviewed paper \"ED2: A Case for Active Learning in Error Detection\". All source code related to this project is available on GitHub."
+  },
+  "arxiv_picket": {
+    "url": "https://arxiv.org/abs/2006.04730",
+    "access_date": "2026-10-30",
+    "metadata": {
+      "citation_title": [
+        "Picket: Guarding Against Corrupted Data in Tabular Data during Learning and Inference"
+      ],
+      "citation_author": [
+        "Liu, Zifan",
+        "Zhou, Zhechun",
+        "Rekatsinas, Theodoros"
+      ],
+      "citation_date": [
+        "2020/06/08"
+      ],
+      "citation_online_date": [
+        "2021/07/26"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/2006.04730"
+      ],
+      "citation_arxiv_id": [
+        "2006.04730"
+      ],
+      "citation_abstract": [
+        "Data corruption is an impediment to modern machine learning deployments. Corrupted data can severely bias the learned model and can also lead to invalid inferences. We present, Picket, a simple framework to safeguard against data corruptions during both training and deployment of machine learning models over tabular data. For the training stage, Picket identifies and removes corrupted data points from the training data to avoid obtaining a biased model. For the deployment stage, Picket flags, in an online manner, corrupted query points to a trained machine learning model that due to noise will result in incorrect predictions. To detect corrupted data, Picket uses a self-supervised deep learning model for mixed-type tabular data, which we call PicketNet. To minimize the burden of deployment, learning a PicketNet model does not require any human-labeled data. Picket is designed as a plugin that can increase the robustness of any machine learning pipeline. We evaluate Picket on a diverse array of real-world data considering different corruption models that include systematic and adversarial noise during both training and testing. We show that Picket consistently safeguards against corrupted data during both training and deployment of various models ranging from SVMs to neural networks, beating a diverse array of competing methods that span from data quality validation models to robust outlier-detection models."
+      ]
+    },
+    "submission_history": "Submission history From: Zifan Liu [ view email ] [v1] Mon, 8 Jun 2020 16:37:25 UTC (3,989 KB) [v2] Thu, 29 Oct 2020 19:31:09 UTC (4,190 KB) [v3] Mon, 26 Jul 2021 04:09:01 UTC (7,282 KB)",
+    "abstract_read": "Data corruption is an impediment to modern machine learning deployments. Corrupted data can severely bias the learned model and can also lead to invalid inferences. We present, Picket, a simple framework to safeguard against data corruptions during both training and deployment of machine learning models over tabular data. For the training stage, Picket identifies and removes corrupted data points from the training data to avoid obtaining a biased model. For the deployment stage, Picket flags, in an online manner, corrupted query points to a trained machine learning model that due to noise will result in incorrect predictions. To detect corrupted data, Picket uses a self-supervised deep learning model for mixed-type tabular data, which we call PicketNet. To minimize the burden of deployment, learning a PicketNet model does not require any human-labeled data. Picket is designed as a plugin that can increase the robustness of any machine learning pipeline. We evaluate Picket on a diverse array of real-world data considering different corruption models that include systematic and adversarial noise during both training and testing. We show that Picket consistently safeguards against corrupted data during both training and deployment of various models ranging from SVMs to neural networks, beating a diverse array of competing methods that span from data quality validation models to robust outlier-detection models."
+  },
+  "arxiv_ddc": {
+    "url": "https://arxiv.org/abs/1601.07251",
+    "access_date": "2026-10-30",
+    "metadata": {
+      "citation_title": [
+        "Detecting deviating data cells"
+      ],
+      "citation_author": [
+        "Rousseeuw, Peter J.",
+        "Bossche, Wannes Van den"
+      ],
+      "citation_doi": [
+        "10.1080/00401706.2017.1340909"
+      ],
+      "citation_date": [
+        "2016/01/27"
+      ],
+      "citation_online_date": [
+        "2017/10/14"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/1601.07251"
+      ],
+      "citation_arxiv_id": [
+        "1601.07251"
+      ],
+      "citation_abstract": [
+        "A multivariate dataset consists of $n$ cases in $d$ dimensions, and is often stored in an $n$ by $d$ data matrix. It is well-known that real data may contain outliers. Depending on the situation, outliers may be (a) undesirable errors which can adversely affect the data analysis, or (b) valuable nuggets of unexpected information. In statistics and data analysis the word outlier usually refers to a row of the data matrix, and the methods to detect such outliers only work when at least half the rows are clean. But often many rows have a few contaminated cell values, which may not be visible by looking at each variable (column) separately. We propose the first method to detect deviating data cells in a multivariate sample which takes the correlations between the variables into account. It has no restriction on the number of clean rows, and can deal with high dimensions. Other advantages are that it provides estimates of the `expected' values of the outlying cells, while imputing missing values at the same time. We illustrate the method on several real data sets, where it uncovers more structure than found by purely columnwise methods or purely rowwise methods. The proposed method can help to diagnose why a certain row is outlying, e.g. in process control. It may also serve as an initial step for estimating multivariate location and scatter matrices."
+      ]
+    },
+    "submission_history": "Submission history From: Peter Rousseeuw [ view email ] [v1] Wed, 27 Jan 2016 03:12:45 UTC (98 KB) [v2] Wed, 6 Jul 2016 15:23:26 UTC (138 KB) [v3] Tue, 29 Nov 2016 22:12:43 UTC (112 KB) [v4] Sat, 14 Oct 2017 10:07:43 UTC (217 KB)",
+    "abstract_read": "A multivariate dataset consists of $n$ cases in $d$ dimensions, and is often stored in an $n$ by $d$ data matrix. It is well-known that real data may contain outliers. Depending on the situation, outliers may be (a) undesirable errors which can adversely affect the data analysis, or (b) valuable nuggets of unexpected information. In statistics and data analysis the word outlier usually refers to a row of the data matrix, and the methods to detect such outliers only work when at least half the rows are clean. But often many rows have a few contaminated cell values, which may not be visible by looking at each variable (column) separately. We propose the first method to detect deviating data cells in a multivariate sample which takes the correlations between the variables into account. It has no restriction on the number of clean rows, and can deal with high dimensions. Other advantages are that it provides estimates of the `expected' values of the outlying cells, while imputing missing values at the same time. We illustrate the method on several real data sets, where it uncovers more structure than found by purely columnwise methods or purely rowwise methods. The proposed method can help to diagnose why a certain row is outlying, e.g. in process control. It may also serve as an initial step for estimating multivariate location and scatter matrices."
+  },
+  "arxiv_cellmcd": {
+    "url": "https://arxiv.org/abs/2207.13493",
+    "access_date": "2026-10-30",
+    "metadata": {
+      "citation_title": [
+        "The Cellwise Minimum Covariance Determinant Estimator"
+      ],
+      "citation_author": [
+        "Raymaekers, Jakob",
+        "Rousseeuw, Peter J."
+      ],
+      "citation_doi": [
+        "10.1080/01621459.2023.2267777"
+      ],
+      "citation_date": [
+        "2022/07/27"
+      ],
+      "citation_online_date": [
+        "2023/11/15"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/2207.13493"
+      ],
+      "citation_arxiv_id": [
+        "2207.13493"
+      ],
+      "citation_abstract": [
+        "The usual Minimum Covariance Determinant (MCD) estimator of a covariance matrix is robust against casewise outliers. These are cases (that is, rows of the data matrix) that behave differently from the majority of cases, raising suspicion that they might belong to a different population. On the other hand, cellwise outliers are individual cells in the data matrix. When a row contains one or more outlying cells, the other cells in the same row still contain useful information that we wish to preserve. We propose a cellwise robust version of the MCD method, called cellMCD. Its main building blocks are observed likelihood and a penalty term on the number of flagged cellwise outliers. It possesses good breakdown properties. We construct a fast algorithm for cellMCD based on concentration steps (C-steps) that always lower the objective. The method performs well in simulations with cellwise outliers, and has high finite-sample efficiency on clean data. It is illustrated on real data with visualizations of the results."
+      ]
+    },
+    "submission_history": "Submission history From: Peter Rousseeuw [ view email ] [v1] Wed, 27 Jul 2022 12:33:51 UTC (207 KB) [v2] Wed, 15 Nov 2023 11:04:00 UTC (241 KB)",
+    "abstract_read": "The usual Minimum Covariance Determinant (MCD) estimator of a covariance matrix is robust against casewise outliers. These are cases (that is, rows of the data matrix) that behave differently from the majority of cases, raising suspicion that they might belong to a different population. On the other hand, cellwise outliers are individual cells in the data matrix. When a row contains one or more outlying cells, the other cells in the same row still contain useful information that we wish to preserve. We propose a cellwise robust version of the MCD method, called cellMCD. Its main building blocks are observed likelihood and a penalty term on the number of flagged cellwise outliers. It possesses good breakdown properties. We construct a fast algorithm for cellMCD based on concentration steps (C-steps) that always lower the objective. The method performs well in simulations with cellwise outliers, and has high finite-sample efficiency on clean data. It is illustrated on real data with visualizations of the results."
+  },
+  "arxiv_zeroed": {
+    "url": "https://arxiv.org/abs/2504.05345",
+    "access_date": "2026-10-30",
+    "metadata": {
+      "citation_title": [
+        "ZeroED: Hybrid Zero-shot Error Detection through Large Language Model Reasoning"
+      ],
+      "citation_author": [
+        "Ni, Wei",
+        "Zhang, Kaihang",
+        "Miao, Xiaoye",
+        "Zhao, Xiangyu",
+        "Wu, Yangyang",
+        "Wang, Yaoshu",
+        "Yin, Jianwei"
+      ],
+      "citation_date": [
+        "2025/04/06"
+      ],
+      "citation_online_date": [
+        "2025/04/06"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/2504.05345"
+      ],
+      "citation_arxiv_id": [
+        "2504.05345"
+      ],
+      "citation_abstract": [
+        "Error detection (ED) in tabular data is crucial yet challenging due to diverse error types and the need for contextual understanding. Traditional ED methods often rely heavily on manual criteria and labels, making them labor-intensive. Large language models (LLM) can minimize human effort but struggle with errors requiring a comprehensive understanding of data context. In this paper, we propose ZeroED, a novel hybrid zero-shot error detection framework, which combines LLM reasoning ability with the manual label-based ED pipeline. ZeroED operates in four steps, i.e., feature representation, error labeling, training data construction, and detector training. Initially, to enhance error distinction, ZeroED generates rich data representations using error reason-aware binary features, pre-trained embeddings, and statistical features. Then, ZeroED employs LLM to label errors holistically through in-context learning, guided by a two-step reasoning process for detailed error detection guidelines. To reduce token costs, LLMs are applied only to representative data selected via clustering-based sampling. High-quality training data is constructed through in-cluster label propagation and LLM augmentation with verification. Finally, a classifier is trained to detect all errors. Extensive experiments on seven public datasets demonstrate that, ZeroED substantially outperforms state-of-the-art methods by a maximum 30% improvement in F1 score and up to 90% token cost reduction."
+      ]
+    },
+    "submission_history": "Submission history From: Wei Ni [ view email ] [v1] Sun, 6 Apr 2025 10:28:41 UTC (2,489 KB)",
+    "abstract_read": "Error detection (ED) in tabular data is crucial yet challenging due to diverse error types and the need for contextual understanding. Traditional ED methods often rely heavily on manual criteria and labels, making them labor-intensive. Large language models (LLM) can minimize human effort but struggle with errors requiring a comprehensive understanding of data context. In this paper, we propose ZeroED, a novel hybrid zero-shot error detection framework, which combines LLM reasoning ability with the manual label-based ED pipeline. ZeroED operates in four steps, i.e., feature representation, error labeling, training data construction, and detector training. Initially, to enhance error distinction, ZeroED generates rich data representations using error reason-aware binary features, pre-trained embeddings, and statistical features. Then, ZeroED employs LLM to label errors holistically through in-context learning, guided by a two-step reasoning process for detailed error detection guidelines. To reduce token costs, LLMs are applied only to representative data selected via clustering-based sampling. High-quality training data is constructed through in-cluster label propagation and LLM augmentation with verification. Finally, a classifier is trained to detect all errors. Extensive experiments on seven public datasets demonstrate that, ZeroED substantially outperforms state-of-the-art methods by a maximum 30% improvement in F1 score and up to 90% token cost reduction."
+  },
+  "arxiv_forested": {
+    "url": "https://arxiv.org/abs/2512.07246",
+    "access_date": "2026-10-30",
+    "metadata": {
+      "citation_title": [
+        "Ensembling LLM-Induced Decision Trees for Explainable and Robust Error Detection"
+      ],
+      "citation_author": [
+        "Wang, Mengqi",
+        "Wang, Jianwei",
+        "Liu, Qing",
+        "Xu, Xiwei",
+        "Xing, Zhenchang",
+        "Zhu, Liming",
+        "Bain, Michael",
+        "Zhang, Wenjie"
+      ],
+      "citation_date": [
+        "2025/12/08"
+      ],
+      "citation_online_date": [
+        "2026/07/29"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/2512.07246"
+      ],
+      "citation_arxiv_id": [
+        "2512.07246"
+      ],
+      "citation_abstract": [
+        "Error detection (ED), which aims to identify incorrect or inconsistent cell values in tabular data, is important for ensuring data quality. Recent state-of-the-art ED methods leverage the pre-trained knowledge and semantic capability of large language models (LLMs) to directly label whether a cell is erroneous. However, this LLM-as-a-labeler pipeline produces predictions through an implicit black-box process with limited traceability and explicit justification, and relies on stochastic single-pass inference, resulting in inconsistent and insufficiently robust detections across contexts. To address these limitations, we propose an LLM-as-an-inducer framework that uses an LLM to induce a decision tree for ED, termed TreeED, and ensembles multiple such trees for consensus detection, termed ForestED. Based on prompts derived from data context, decision tree specifications, and output requirements, TreeED queries the LLM to induce a decision tree skeleton whose root-to-leaf paths specify the stepwise procedure for evaluating a sample. Each tree contains three types of nodes: (1) rule nodes that perform simple validation checks, such as format or range constraints; (2) Graph Neural Network (GNN) nodes that capture complex patterns, such as functional dependencies; and (3) leaf nodes that output the final decision as error or clean. ForestED employs uncertainty sampling to obtain multiple informative row subsets and constructs a decision tree for each subset using TreeED. It then applies an Expectation-Maximization-based algorithm to jointly estimate tree reliability and optimize the consensus ED prediction. Experiments demonstrate that our methods are accurate, explainable, and robust, achieving an average F1-score improvement of 16.1% over the best baseline."
+      ]
+    },
+    "submission_history": "Submission history From: Mengqi Wang [ view email ] [v1] Mon, 8 Dec 2025 07:40:48 UTC (839 KB) [v2] Mon, 27 Jul 2026 11:55:13 UTC (496 KB) [v3] Wed, 29 Jul 2026 04:24:14 UTC (496 KB)",
+    "abstract_read": "Error detection (ED), which aims to identify incorrect or inconsistent cell values in tabular data, is important for ensuring data quality. Recent state-of-the-art ED methods leverage the pre-trained knowledge and semantic capability of large language models (LLMs) to directly label whether a cell is erroneous. However, this LLM-as-a-labeler pipeline produces predictions through an implicit black-box process with limited traceability and explicit justification, and relies on stochastic single-pass inference, resulting in inconsistent and insufficiently robust detections across contexts. To address these limitations, we propose an LLM-as-an-inducer framework that uses an LLM to induce a decision tree for ED, termed TreeED, and ensembles multiple such trees for consensus detection, termed ForestED. Based on prompts derived from data context, decision tree specifications, and output requirements, TreeED queries the LLM to induce a decision tree skeleton whose root-to-leaf paths specify the stepwise procedure for evaluating a sample. Each tree contains three types of nodes: (1) rule nodes that perform simple validation checks, such as format or range constraints; (2) Graph Neural Network (GNN) nodes that capture complex patterns, such as functional dependencies; and (3) leaf nodes that output the final decision as error or clean. ForestED employs uncertainty sampling to obtain multiple informative row subsets and constructs a decision tree for each subset using TreeED. It then applies an Expectation-Maximization-based algorithm to jointly estimate tree reliability and optimize the consensus ED prediction. Experiments demonstrate that our methods are accurate, explainable, and robust, achieving an average F1-score improvement of 16.1% over the best baseline."
+  },
+  "arxiv_autotest": {
+    "url": "https://arxiv.org/abs/2504.10762",
+    "access_date": "2026-10-30",
+    "metadata": {
+      "citation_title": [
+        "Auto-Test: Learning Semantic-Domain Constraints for Unsupervised Error Detection in Tables"
+      ],
+      "citation_author": [
+        "Chen, Qixu",
+        "He, Yeye",
+        "Wong, Raymond Chi-Wing",
+        "Cui, Weiwei",
+        "Ge, Song",
+        "Zhang, Haidong",
+        "Zhang, Dongmei",
+        "Chaudhuri, Surajit"
+      ],
+      "citation_date": [
+        "2025/04/14"
+      ],
+      "citation_online_date": [
+        "2025/04/14"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/2504.10762"
+      ],
+      "citation_arxiv_id": [
+        "2504.10762"
+      ],
+      "citation_abstract": [
+        "Data cleaning is a long-standing challenge in data management. While powerful logic and statistical algorithms have been developed to detect and repair data errors in tables, existing algorithms predominantly rely on domain-experts to first manually specify data-quality constraints specific to a given table, before data cleaning algorithms can be applied. In this work, we propose a new class of data-quality constraints that we call Semantic-Domain Constraints, which can be reliably inferred and automatically applied to any tables, without requiring domain-experts to manually specify on a per-table basis. We develop a principled framework to systematically learn such constraints from table corpora using large-scale statistical tests, which can further be distilled into a core set of constraints using our optimization framework, with provable quality guarantees. Extensive evaluations show that this new class of constraints can be used to both (1) directly detect errors on real tables in the wild, and (2) augment existing expert-driven data-cleaning techniques as a new class of complementary constraints. Our extensively labeled benchmark dataset with 2400 real data columns, as well as our code are available at https://github.com/qixuchen/AutoTest to facilitate future research."
+      ]
+    },
+    "submission_history": "Submission history From: Yeye He [ view email ] [v1] Mon, 14 Apr 2025 23:26:55 UTC (7,011 KB)",
+    "abstract_read": "Data cleaning is a long-standing challenge in data management. While powerful logic and statistical algorithms have been developed to detect and repair data errors in tables, existing algorithms predominantly rely on domain-experts to first manually specify data-quality constraints specific to a given table, before data cleaning algorithms can be applied. In this work, we propose a new class of data-quality constraints that we call Semantic-Domain Constraints, which can be reliably inferred and automatically applied to any tables, without requiring domain-experts to manually specify on a per-table basis. We develop a principled framework to systematically learn such constraints from table corpora using large-scale statistical tests, which can further be distilled into a core set of constraints using our optimization framework, with provable quality guarantees. Extensive evaluations show that this new class of constraints can be used to both (1) directly detect errors on real tables in the wild, and (2) augment existing expert-driven data-cleaning techniques as a new class of complementary constraints. Our extensively labeled benchmark dataset with 2400 real data columns, as well as our code are available at this https URL to facilitate future research."
+  },
+  "arxiv_fomo": {
+    "url": "https://arxiv.org/abs/2409.05672",
+    "access_date": "2026-10-30",
+    "metadata": {
+      "citation_title": [
+        "FoMo-0D: A Foundation Model for Zero-shot Tabular Outlier Detection"
+      ],
+      "citation_author": [
+        "Shen, Yuchen",
+        "Wen, Haomin",
+        "Akoglu, Leman"
+      ],
+      "citation_date": [
+        "2024/09/09"
+      ],
+      "citation_online_date": [
+        "2025/09/24"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/2409.05672"
+      ],
+      "citation_arxiv_id": [
+        "2409.05672"
+      ],
+      "citation_abstract": [
+        "Outlier detection (OD) has a vast literature as it finds numerous real-world applications. Being an unsupervised task, model selection is a key bottleneck for OD without label supervision. Despite a long list of available OD algorithms with tunable hyperparameters, the lack of systematic approaches for unsupervised algorithm and hyperparameter selection limits their effective use in practice. In this paper, we present FoMo-0D, a pre-trained Foundation Model for zero/0-shot OD on tabular data, which bypasses the hurdle of model selection altogether. Having been pre-trained on synthetic data, FoMo-0D can directly predict the (outlier/inlier) label of test samples without parameter fine-tuning -- requiring no labeled data, and no additional training or hyperparameter tuning when given a new task. Extensive experiments on 57 real-world datasets against 26 baselines show that FoMo-0D is highly competitive; outperforming the majority of the baselines with no statistically significant difference from the 2nd best method. Further, FoMo-0D is efficient in inference time requiring only 7.7 ms per sample on average, with at least 7x speed-up compared to previous methods. To facilitate future research, our implementations for data synthesis and pre-training as well as model checkpoints are openly available at https://github.com/A-Chicharito-S/FoMo-0D."
+      ]
+    },
+    "submission_history": "Submission history From: Yuchen Shen [ view email ] [v1] Mon, 9 Sep 2024 14:41:24 UTC (944 KB) [v2] Thu, 6 Feb 2025 19:40:04 UTC (988 KB) [v3] Sat, 17 May 2025 02:42:04 UTC (1,393 KB) [v4] Wed, 24 Sep 2025 18:42:57 UTC (1,452 KB)",
+    "abstract_read": "Outlier detection (OD) has a vast literature as it finds numerous real-world applications. Being an unsupervised task, model selection is a key bottleneck for OD without label supervision. Despite a long list of available OD algorithms with tunable hyperparameters, the lack of systematic approaches for unsupervised algorithm and hyperparameter selection limits their effective use in practice. In this paper, we present FoMo-0D, a pre-trained Foundation Model for zero/0-shot OD on tabular data, which bypasses the hurdle of model selection altogether. Having been pre-trained on synthetic data, FoMo-0D can directly predict the (outlier/inlier) label of test samples without parameter fine-tuning -- requiring no labeled data, and no additional training or hyperparameter tuning when given a new task. Extensive experiments on 57 real-world datasets against 26 baselines show that FoMo-0D is highly competitive; outperforming the majority of the baselines with no statistically significant difference from the 2nd best method. Further, FoMo-0D is efficient in inference time requiring only 7.7 ms per sample on average, with at least 7x speed-up compared to previous methods. To facilitate future research, our implementations for data synthesis and pre-training as well as model checkpoints are openly available at this https URL ."
+  },
+  "arxiv_outformer": {
+    "url": "https://arxiv.org/abs/2602.03018",
+    "access_date": "2026-10-30",
+    "metadata": {
+      "citation_title": [
+        "From Zero to Hero: Advancing Zero-Shot Foundation Models for Tabular Outlier Detection"
+      ],
+      "citation_author": [
+        "Ding, Xueying",
+        "Wen, Haomin",
+        "Klüttermann, Simon",
+        "Akoglu, Leman"
+      ],
+      "citation_date": [
+        "2026/02/03"
+      ],
+      "citation_online_date": [
+        "2026/05/29"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/2602.03018"
+      ],
+      "citation_arxiv_id": [
+        "2602.03018"
+      ],
+      "citation_abstract": [
+        "Outlier detection (OD) is widely used in practice; but its effective deployment on new tasks is hindered by lack of labeled outliers, which makes algorithm and hyperparameter selection notoriously hard. Foundation models (FMs) have transformed ML, and OD is no exception: Shen et. al. (2025) introduced FoMo-0D, the first FM for OD, achieving remarkable performance against numerous baselines. This work introduces OUTFORMER, which advances FoMo-0D with (1) a mixture of synthetic priors and (2) self-evolving curriculum training. OUTFORMER is pretrained solely on synthetic labeled datasets and infers test labels of a new task by using its training data as in-context input. Inference is fast and zero-shot, requiring merely forward pass and no labeled outliers. Thanks to in-context learning, it requires zero additional work-no OD model training or bespoke model selection-enabling truly plug-and-play deployment. OUTFORMER achieves state-of-the-art performance on the prominent AdBench, as well as two new large-scale OD benchmarks that we introduce, comprising over 1,500 datasets, while maintaining speedy inference."
+      ]
+    },
+    "submission_history": "Submission history From: Xueying Ding [ view email ] [v1] Tue, 3 Feb 2026 02:38:49 UTC (4,313 KB) [v2] Fri, 29 May 2026 21:23:51 UTC (3,736 KB)",
+    "abstract_read": "Outlier detection (OD) is widely used in practice; but its effective deployment on new tasks is hindered by lack of labeled outliers, which makes algorithm and hyperparameter selection notoriously hard. Foundation models (FMs) have transformed ML, and OD is no exception: Shen et. al. (2025) introduced FoMo-0D, the first FM for OD, achieving remarkable performance against numerous baselines. This work introduces OUTFORMER, which advances FoMo-0D with (1) a mixture of synthetic priors and (2) self-evolving curriculum training. OUTFORMER is pretrained solely on synthetic labeled datasets and infers test labels of a new task by using its training data as in-context input. Inference is fast and zero-shot, requiring merely forward pass and no labeled outliers. Thanks to in-context learning, it requires zero additional work-no OD model training or bespoke model selection-enabling truly plug-and-play deployment. OUTFORMER achieves state-of-the-art performance on the prominent AdBench, as well as two new large-scale OD benchmarks that we introduce, comprising over 1,500 datasets, while maintaining speedy inference."
+  },
+  "arxiv_tactic": {
+    "url": "https://arxiv.org/abs/2603.14171",
+    "access_date": "2026-10-30",
+    "metadata": {
+      "citation_title": [
+        "TACTIC for Navigating the Unknown: Tabular Anomaly deteCTion via In-Context inference"
+      ],
+      "citation_author": [
+        "Marszałek, Patryk",
+        "Kuśmierczyk, Tomasz",
+        "Śmieja, Marek"
+      ],
+      "citation_date": [
+        "2026/03/15"
+      ],
+      "citation_online_date": [
+        "2026/03/15"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/2603.14171"
+      ],
+      "citation_arxiv_id": [
+        "2603.14171"
+      ],
+      "citation_abstract": [
+        "Anomaly detection for tabular data has been a long-standing unsupervised learning problem that remains a major challenge for current deep learning models. Recently, in-context learning has emerged as a new paradigm that has shifted efforts from task-specific optimization to large-scale pretraining aimed at creating foundation models that generalize across diverse datasets. Although in-context models, such as TabPFN, perform well in supervised problems, their learned classification-based priors may not readily extend to anomaly detection. In this paper, we study in-context models for anomaly detection and show that the unsupervised extensions to TabPFN exhibit unstable behavior, particularly in noisy or contaminated contexts, in addition to the high computational cost. We address these challenges and introduce TACTIC, an in-context anomaly detection approach based on pretraining with anomaly-centric synthetic priors, which provides fast and data-dependent reasoning about anomalies while avoiding dataset-specific tuning. In contrast to typical score-based approaches, which produce uncalibrated anomaly scores that require post-processing (e.g. threshold selection or ranking heuristics), the proposed model is trained as a discriminative predictor, enabling unambiguous anomaly decisions in a single forward pass. Through experiments on real-world datasets, we examine the performance of TACTIC in clean and noisy contexts with varying anomaly rates and different anomaly types, as well as the impact of prior choices on detection quality. Our experiments clearly show that specialized anomaly-centric in-context models such as TACTIC are highly competitive compared to other task-specific methods."
+      ]
+    },
+    "submission_history": "Submission history From: Patryk Marszałek [ view email ] [v1] Sun, 15 Mar 2026 01:06:24 UTC (956 KB)",
+    "abstract_read": "Anomaly detection for tabular data has been a long-standing unsupervised learning problem that remains a major challenge for current deep learning models. Recently, in-context learning has emerged as a new paradigm that has shifted efforts from task-specific optimization to large-scale pretraining aimed at creating foundation models that generalize across diverse datasets. Although in-context models, such as TabPFN, perform well in supervised problems, their learned classification-based priors may not readily extend to anomaly detection. In this paper, we study in-context models for anomaly detection and show that the unsupervised extensions to TabPFN exhibit unstable behavior, particularly in noisy or contaminated contexts, in addition to the high computational cost. We address these challenges and introduce TACTIC, an in-context anomaly detection approach based on pretraining with anomaly-centric synthetic priors, which provides fast and data-dependent reasoning about anomalies while avoiding dataset-specific tuning. In contrast to typical score-based approaches, which produce uncalibrated anomaly scores that require post-processing (e.g. threshold selection or ranking heuristics), the proposed model is trained as a discriminative predictor, enabling unambiguous anomaly decisions in a single forward pass. Through experiments on real-world datasets, we examine the performance of TACTIC in clean and noisy contexts with varying anomaly rates and different anomaly types, as well as the impact of prior choices on detection quality. Our experiments clearly show that specialized anomaly-centric in-context models such as TACTIC are highly competitive compared to other task-specific methods."
+  },
+  "arxiv_zen": {
+    "url": "https://arxiv.org/abs/2610.06693",
+    "access_date": "2026-10-30",
+    "metadata": {
+      "citation_title": [
+        "Adapting prior-data fitted networks for tabular anomaly detection"
+      ],
+      "citation_author": [
+        "Bershtman, Maximilian",
+        "Cohen, Niv"
+      ],
+      "citation_date": [
+        "2026/10/05"
+      ],
+      "citation_online_date": [
+        "2026/10/05"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/2610.06693"
+      ],
+      "citation_arxiv_id": [
+        "2610.06693"
+      ],
+      "citation_abstract": [
+        "While deep features have transformed anomaly detection in images and video, their impact on tabular data has been less substantial, partly due to the limited availability of strong deep representations. Recently, prior-data fitted networks (PFNs) have emerged as a promising source of such representations for tabular data. In this work, we investigate how PFN representations can be adapted and leveraged for anomaly detection. The question is harder than it looks. No anomalies are available before deploy- ment, so model parameters cannot be tuned with supervision, and the reference set that defines normal behavior may itself contain the very anomalies it is supposed to reveal. We begin our study using frozen TabPFN features. Scoring each sam- ple by its distance to its nearest neighbors in feature space already gives strong results. We identify which layers to use and a feature-extraction procedure suited to the task. Next, to further improve performance, we use the reference set to fine- tune the model, so that the resulting features better separate normal samples from anomalies. On the ADBench benchmark, our fine-tuning free approach (ZEN) reaches a higher mean AUROC than every baseline, and our fine-tuned method (FOCUS) improves on it further. Our approach also generalizes across PFN models."
+      ]
+    },
+    "submission_history": "Submission history From: Maximilian Bershtman [ view email ] [v1] Mon, 5 Oct 2026 16:54:50 UTC (337 KB)",
+    "abstract_read": "While deep features have transformed anomaly detection in images and video, their impact on tabular data has been less substantial, partly due to the limited availability of strong deep representations. Recently, prior-data fitted networks (PFNs) have emerged as a promising source of such representations for tabular data. In this work, we investigate how PFN representations can be adapted and leveraged for anomaly detection. The question is harder than it looks. No anomalies are available before deploy- ment, so model parameters cannot be tuned with supervision, and the reference set that defines normal behavior may itself contain the very anomalies it is supposed to reveal. We begin our study using frozen TabPFN features. Scoring each sam- ple by its distance to its nearest neighbors in feature space already gives strong results. We identify which layers to use and a feature-extraction procedure suited to the task. Next, to further improve performance, we use the reference set to fine- tune the model, so that the resulting features better separate normal samples from anomalies. On the ADBench benchmark, our fine-tuning free approach (ZEN) reaches a higher mean AUROC than every baseline, and our fine-tuned method (FOCUS) improves on it further. Our approach also generalizes across PFN models."
+  },
+  "arxiv_ticda": {
+    "url": "https://arxiv.org/abs/2610.07996",
+    "access_date": "2026-10-30",
+    "metadata": {
+      "citation_title": [
+        "TICDA: Tabular In-Context Data Attribution"
+      ],
+      "citation_author": [
+        "Benihaddadene, Yacine",
+        "Bhan, Milan",
+        "Dugelay, Eliot",
+        "Jawhar, Mohammed",
+        "Wong, Benjamin",
+        "Chesneau, Nicolas",
+        "Nguyen, Duong"
+      ],
+      "citation_date": [
+        "2026/10/06"
+      ],
+      "citation_online_date": [
+        "2026/10/06"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/2610.07996"
+      ],
+      "citation_arxiv_id": [
+        "2610.07996"
+      ],
+      "citation_abstract": [
+        "Tabular foundation models (TFMs) achieve strong predictive performance by conditioning on labeled demonstrations provided in context, without any parameter update. Yet how individual demonstrations shape a given prediction remains poorly understood. This gap matters in practice: the context is often assembled from whatever labeled data is available, potentially leading to the inclusion of mislabeled, redundant, or low-quality examples that degrade performance. Standard data attribution methods do not transfer to the TFM setting: resampling-based approaches such as DemoShapley require a combinatorial number of forward passes, and gradient-based estimators such as influence functions require computing training point's effect on the model parameters, which in-context learning never updates. We introduce TICDA, a method that measures the influence of every demonstration in the context directly from linear surrogates trained on TFM latent embeddings, in a single forward pass and at negligible cost. We show that TICDA offers the best compromise against competitors across four tasks: detecting labeling errors, curating context to preserve predictive accuracy while lowering inference cost, producing attribution scores that transfer across TFMs, and supporting an acquisition strategy for efficient active learning."
+      ]
+    },
+    "submission_history": "Submission history From: Milan Bhan [ view email ] [v1] Tue, 6 Oct 2026 08:55:27 UTC (1,068 KB)",
+    "abstract_read": "Tabular foundation models (TFMs) achieve strong predictive performance by conditioning on labeled demonstrations provided in context, without any parameter update. Yet how individual demonstrations shape a given prediction remains poorly understood. This gap matters in practice: the context is often assembled from whatever labeled data is available, potentially leading to the inclusion of mislabeled, redundant, or low-quality examples that degrade performance. Standard data attribution methods do not transfer to the TFM setting: resampling-based approaches such as DemoShapley require a combinatorial number of forward passes, and gradient-based estimators such as influence functions require computing training point's effect on the model parameters, which in-context learning never updates. We introduce TICDA, a method that measures the influence of every demonstration in the context directly from linear surrogates trained on TFM latent embeddings, in a single forward pass and at negligible cost. We show that TICDA offers the best compromise against competitors across four tasks: detecting labeling errors, curating context to preserve predictive accuracy while lowering inference cost, producing attribution scores that transfer across TFMs, and supporting an acquisition strategy for efficient active learning."
+  },
+  "arxiv_taskbridge": {
+    "url": "https://arxiv.org/abs/2609.36968",
+    "access_date": "2026-10-30",
+    "metadata": {
+      "citation_title": [
+        "TaskBridge: Bridging Unsupervised Tabular Anomaly Detection and In-Context Learning via Virtual Tasks"
+      ],
+      "citation_author": [
+        "Choi, Doyun",
+        "Lee, Dooho",
+        "Yoo, Jaemin"
+      ],
+      "citation_date": [
+        "2026/09/29"
+      ],
+      "citation_online_date": [
+        "2026/09/29"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/2609.36968"
+      ],
+      "citation_arxiv_id": [
+        "2609.36968"
+      ],
+      "citation_abstract": [
+        "Unsupervised tabular anomaly detection (TAD) aims to identify anomalous rows in tabular data using normal training samples. While conventional methods rely on dataset-specific training and configuration search, recent tabular foundation models (TFMs) enable zero-shot anomaly detection on unseen datasets via in-context learning. Most TFM-based approaches, however, require anomaly-specific pretraining from scratch, making detection inherently dependent on synthetic TAD-specific priors and costly to update. Some approaches instead repurpose pretrained general-purpose TFMs for TAD to avoid this burden, but rely on computationally expensive formulations with restrictive anomaly inductive biases. In this work, we introduce TaskBridge, a new framework that efficiently repurposes pretrained general-purpose TFMs for unsupervised TAD by constructing virtual supervised tasks that directly recast anomaly detection as supervised in-context inference of TFMs. The resulting virtual tasks induce predictive structures under which normal queries and their target pairs receive high support, whereas anomalies tend to violate the induced structures and receive lower support, providing direct anomaly evidence. Across 790 real-world datasets, TaskBridge consistently outperforms 30 baselines, including state-of-the-art TFM-based approaches, without anomaly-specific TFM pretraining or dataset-specific model optimization."
+      ]
+    },
+    "submission_history": "Submission history From: Doyun Choi [ view email ] [v1] Tue, 29 Sep 2026 08:05:14 UTC (869 KB)",
+    "abstract_read": "Unsupervised tabular anomaly detection (TAD) aims to identify anomalous rows in tabular data using normal training samples. While conventional methods rely on dataset-specific training and configuration search, recent tabular foundation models (TFMs) enable zero-shot anomaly detection on unseen datasets via in-context learning. Most TFM-based approaches, however, require anomaly-specific pretraining from scratch, making detection inherently dependent on synthetic TAD-specific priors and costly to update. Some approaches instead repurpose pretrained general-purpose TFMs for TAD to avoid this burden, but rely on computationally expensive formulations with restrictive anomaly inductive biases. In this work, we introduce TaskBridge, a new framework that efficiently repurposes pretrained general-purpose TFMs for unsupervised TAD by constructing virtual supervised tasks that directly recast anomaly detection as supervised in-context inference of TFMs. The resulting virtual tasks induce predictive structures under which normal queries and their target pairs receive high support, whereas anomalies tend to violate the induced structures and receive lower support, providing direct anomaly evidence. Across 790 real-world datasets, TaskBridge consistently outperforms 30 baselines, including state-of-the-art TFM-based approaches, without anomaly-specific TFM pretraining or dataset-specific model optimization."
+  },
+  "arxiv_confident": {
+    "url": "https://arxiv.org/abs/1911.00068",
+    "access_date": "2026-10-30",
+    "metadata": {
+      "citation_title": [
+        "Confident Learning: Estimating Uncertainty in Dataset Labels"
+      ],
+      "citation_author": [
+        "Northcutt, Curtis G.",
+        "Jiang, Lu",
+        "Chuang, Isaac L."
+      ],
+      "citation_journal_title": [
+        "Journal of Artificial Intelligence Research"
+      ],
+      "citation_publication_date": [
+        "2021"
+      ],
+      "citation_online_date": [
+        "2022/08/22"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/1911.00068"
+      ],
+      "citation_arxiv_id": [
+        "1911.00068"
+      ],
+      "citation_abstract": [
+        "Learning exists in the context of data, yet notions of confidence typically focus on model predictions, not label quality. Confident learning (CL) is an alternative approach which focuses instead on label quality by characterizing and identifying label errors in datasets, based on the principles of pruning noisy data, counting with probabilistic thresholds to estimate noise, and ranking examples to train with confidence. Whereas numerous studies have developed these principles independently, here, we combine them, building on the assumption of a class-conditional noise process to directly estimate the joint distribution between noisy (given) labels and uncorrupted (unknown) labels. This results in a generalized CL which is provably consistent and experimentally performant. We present sufficient conditions where CL exactly finds label errors, and show CL performance exceeding seven recent competitive approaches for learning with noisy labels on the CIFAR dataset. Uniquely, the CL framework is not coupled to a specific data modality or model (e.g., we use CL to find several label errors in the presumed error-free MNIST dataset and improve sentiment classification on text data in Amazon Reviews). We also employ CL on ImageNet to quantify ontological class overlap (e.g., estimating 645 \"missile\" images are mislabeled as their parent class \"projectile\"), and moderately increase model accuracy (e.g., for ResNet) by cleaning data prior to training. These results are replicable using the open-source cleanlab release."
+      ]
+    },
+    "submission_history": "Submission history From: Curtis Northcutt [ view email ] [v1] Thu, 31 Oct 2019 19:26:33 UTC (5,947 KB) [v2] Fri, 21 Feb 2020 22:16:56 UTC (11,711 KB) [v3] Fri, 4 Sep 2020 08:12:20 UTC (11,007 KB) [v4] Mon, 15 Feb 2021 23:56:53 UTC (22,061 KB) [v5] Thu, 8 Apr 2021 20:00:05 UTC (21,851 KB) [v6] Mon, 22 Aug 2022 00:58:03 UTC (21,851 KB)",
+    "abstract_read": "Learning exists in the context of data, yet notions of confidence typically focus on model predictions, not label quality. Confident learning (CL) is an alternative approach which focuses instead on label quality by characterizing and identifying label errors in datasets, based on the principles of pruning noisy data, counting with probabilistic thresholds to estimate noise, and ranking examples to train with confidence. Whereas numerous studies have developed these principles independently, here, we combine them, building on the assumption of a class-conditional noise process to directly estimate the joint distribution between noisy (given) labels and uncorrupted (unknown) labels. This results in a generalized CL which is provably consistent and experimentally performant. We present sufficient conditions where CL exactly finds label errors, and show CL performance exceeding seven recent competitive approaches for learning with noisy labels on the CIFAR dataset. Uniquely, the CL framework is not coupled to a specific data modality or model (e.g., we use CL to find several label errors in the presumed error-free MNIST dataset and improve sentiment classification on text data in Amazon Reviews). We also employ CL on ImageNet to quantify ontological class overlap (e.g., estimating 645 \"missile\" images are mislabeled as their parent class \"projectile\"), and moderately increase model accuracy (e.g., for ResNet) by cleaning data prior to training. These results are replicable using the open-source cleanlab release."
+  },
+  "arxiv_modelaware": {
+    "url": "https://arxiv.org/abs/2604.25154",
+    "access_date": "2026-10-30",
+    "metadata": {
+      "citation_title": [
+        "Model-Aware Data Cleaning for Tabular Foundation Models"
+      ],
+      "citation_author": [
+        "Berti-Equille, Laure"
+      ],
+      "citation_date": [
+        "2026/04/28"
+      ],
+      "citation_online_date": [
+        "2026/09/17"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/2604.25154"
+      ],
+      "citation_arxiv_id": [
+        "2604.25154"
+      ],
+      "citation_abstract": [
+        "Tabular Foundation Models (TFMs) achieve state-of-the-art zero-shot accuracy on small tabular datasets, but their in-context learning assumes approximately clean inputs: real- world missing values, outliers, and duplicates create a prior mismatch that degrades both accuracy and calibration. We study reinforcement learning for tabular data cleaning, a learned policy that sequences cleaning operators and introduce L2C-TFM with a model-aware reward (TFMAwareReward). We are explicit about what this reward optimizes: it regularizes the Wasserstein distance between the cleaned and the original (dirty) data, a distributional-stability term, which we measure as a diagnostic. Across six experiments on ten OpenML datasets: (i) three of seven reward designs collapse to degenerate strategies, so reward engineering is non-trivial; (ii) under an 8-seed repeated-holdout protocol the model-aware reward matches a random-forest-reward baseline on accuracy (p=0.38), with a benefit confined to minority-class macro-F1 under class imbalance that is partly a reward-agnostic calibrated-threshold effect; and (iii) a policy pre-trained on one dataset transfers to held-out datasets. A diagnostic analysis shows that the two distances are distinct objectives: cleaning tends to move data away from the prior, and prior-distance, not distance-to-dirty, is what tracks downstream quality. We therefore treat prior alignment as a motivating objective and a target for future work, not a property of the reward evaluated here. Code, datasets, and the nested evaluation harness are available at https://github.com/LaureBerti/Learn2Clean/tree/master/Learn2Clean_TFM."
+      ]
+    },
+    "submission_history": "Submission history From: Laure Berti-Equille [ view email ] [v1] Tue, 28 Apr 2026 02:56:17 UTC (174 KB) [v2] Thu, 17 Sep 2026 07:25:36 UTC (156 KB)",
+    "abstract_read": "Tabular Foundation Models (TFMs) achieve state-of-the-art zero-shot accuracy on small tabular datasets, but their in-context learning assumes approximately clean inputs: real- world missing values, outliers, and duplicates create a prior mismatch that degrades both accuracy and calibration. We study reinforcement learning for tabular data cleaning, a learned policy that sequences cleaning operators and introduce L2C-TFM with a model-aware reward (TFMAwareReward). We are explicit about what this reward optimizes: it regularizes the Wasserstein distance between the cleaned and the original (dirty) data, a distributional-stability term, which we measure as a diagnostic. Across six experiments on ten OpenML datasets: (i) three of seven reward designs collapse to degenerate strategies, so reward engineering is non-trivial; (ii) under an 8-seed repeated-holdout protocol the model-aware reward matches a random-forest-reward baseline on accuracy (p=0.38), with a benefit confined to minority-class macro-F1 under class imbalance that is partly a reward-agnostic calibrated-threshold effect; and (iii) a policy pre-trained on one dataset transfers to held-out datasets. A diagnostic analysis shows that the two distances are distinct objectives: cleaning tends to move data away from the prior, and prior-distance, not distance-to-dirty, is what tracks downstream quality. We therefore treat prior alignment as a motivating objective and a target for future work, not a property of the reward evaluated here. Code, datasets, and the nested evaluation harness are available at this https URL ."
+  },
+  "arxiv_noise": {
+    "url": "https://arxiv.org/abs/2604.04868",
+    "access_date": "2026-10-30",
+    "metadata": {
+      "citation_title": [
+        "Noise Immunity in In-Context Tabular Learning: An Empirical Robustness Analysis of TabPFN's Attention Mechanisms"
+      ],
+      "citation_author": [
+        "Hu, James",
+        "Ghelichi, Mahdi"
+      ],
+      "citation_date": [
+        "2026/04/06"
+      ],
+      "citation_online_date": [
+        "2026/04/07"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/2604.04868"
+      ],
+      "citation_arxiv_id": [
+        "2604.04868"
+      ],
+      "citation_abstract": [
+        "Tabular foundation models (TFMs) such as TabPFN (Tabular Prior-Data Fitted Network) are designed to generalize across heterogeneous tabular datasets through in-context learning (ICL). They perform prediction in a single forward pass conditioned on labeled examples without dataset-specific parameter updates. This paradigm is particularly attractive in industrial domains (e.g., finance and healthcare) where tabular prediction is pervasive. Retraining a bespoke model for each new table can be costly or infeasible in these settings, while data quality issues such as irrelevant predictors, correlated feature groups, and label noise are common. In this paper, we provide strong empirical evidence that TabPFN is highly robust under these sub-optimal conditions. We study TabPFN and its attention mechanisms for binary classification problems with controlled synthetic perturbations that vary: (i) dataset width by injecting random uncorrelated features and by introducing nonlinearly correlated features, (ii) dataset size by increasing the number of training rows, and (iii) label quality by increasing the fraction of mislabeled targets. Beyond predictive performance, we analyze internal signals including attention concentration and attention-based feature ranking metrics. Across these parametric tests, TabPFN is remarkably resilient: ROC-AUC remains high, attention stays structured and sharp, and informative features are highly ranked by attention-based metrics. Qualitative visualizations with attention heatmaps, feature-token embeddings, and SHAP plots further support a consistent pattern across layers in which TabPFN increasingly concentrates on useful features while separating their signals from noise. Together, these findings suggest that TabPFN is a robust TFM capable of maintaining both predictive performance and coherent internal behavior under various scenarios of data imperfections."
+      ]
+    },
+    "submission_history": "Submission history From: James Hu [ view email ] [v1] Mon, 6 Apr 2026 17:16:37 UTC (1,943 KB) [v2] Tue, 7 Apr 2026 19:13:07 UTC (1,883 KB)",
+    "abstract_read": "Tabular foundation models (TFMs) such as TabPFN (Tabular Prior-Data Fitted Network) are designed to generalize across heterogeneous tabular datasets through in-context learning (ICL). They perform prediction in a single forward pass conditioned on labeled examples without dataset-specific parameter updates. This paradigm is particularly attractive in industrial domains (e.g., finance and healthcare) where tabular prediction is pervasive. Retraining a bespoke model for each new table can be costly or infeasible in these settings, while data quality issues such as irrelevant predictors, correlated feature groups, and label noise are common. In this paper, we provide strong empirical evidence that TabPFN is highly robust under these sub-optimal conditions. We study TabPFN and its attention mechanisms for binary classification problems with controlled synthetic perturbations that vary: (i) dataset width by injecting random uncorrelated features and by introducing nonlinearly correlated features, (ii) dataset size by increasing the number of training rows, and (iii) label quality by increasing the fraction of mislabeled targets. Beyond predictive performance, we analyze internal signals including attention concentration and attention-based feature ranking metrics. Across these parametric tests, TabPFN is remarkably resilient: ROC-AUC remains high, attention stays structured and sharp, and informative features are highly ranked by attention-based metrics. Qualitative visualizations with attention heatmaps, feature-token embeddings, and SHAP plots further support a consistent pattern across layers in which TabPFN increasingly concentrates on useful features while separating their signals from noise. Together, these findings suggest that TabPFN is a robust TFM capable of maintaining both predictive performance and coherent internal behavior under various scenarios of data imperfections."
+  },
+  "arxiv_contextual": {
+    "url": "https://arxiv.org/abs/2509.09030",
+    "access_date": "2026-10-30",
+    "metadata": {
+      "citation_title": [
+        "Contextual Learning for Anomaly Detection in Tabular Data"
+      ],
+      "citation_author": [
+        "King, Spencer",
+        "Zhang, Zhilu",
+        "Yu, Ruofan",
+        "Coskun, Baris",
+        "Ding, Wei",
+        "Cui, Qian"
+      ],
+      "citation_date": [
+        "2025/09/10"
+      ],
+      "citation_online_date": [
+        "2025/11/18"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/2509.09030"
+      ],
+      "citation_arxiv_id": [
+        "2509.09030"
+      ],
+      "citation_abstract": [
+        "Anomaly detection is critical in domains such as cybersecurity and finance, especially when working with large-scale tabular data. Yet, unsupervised anomaly detection-where no labeled anomalies are available-remains challenging because traditional deep learning methods model a single global distribution, assuming all samples follow the same behavior. In contrast, real-world data often contain heterogeneous contexts (e.g., different users, accounts, or devices), where globally rare events may be normal within specific conditions. We introduce a contextual learning framework that explicitly models how normal behavior varies across contexts by learning conditional data distributions $P(\\mathbf{Y} \\mid \\mathbf{C})$ rather than a global joint distribution $P(\\mathbf{X})$. The framework encompasses (1) a probabilistic formulation for context-conditioned learning, (2) a principled bilevel optimization strategy for automatically selecting informative context features using early validation loss, and (3) theoretical grounding through variance decomposition and discriminative learning principles. We instantiate this framework using a novel conditional Wasserstein autoencoder as a simple yet effective model for tabular anomaly detection. Extensive experiments across eight benchmark datasets demonstrate that contextual learning consistently outperforms global approaches-even when the optimal context is not intuitively obvious-establishing a new foundation for anomaly detection in heterogeneous tabular data."
+      ]
+    },
+    "submission_history": "Submission history From: Spencer King [ view email ] [v1] Wed, 10 Sep 2025 22:01:11 UTC (448 KB) [v2] Tue, 18 Nov 2025 05:50:55 UTC (394 KB)",
+    "abstract_read": "Anomaly detection is critical in domains such as cybersecurity and finance, especially when working with large-scale tabular data. Yet, unsupervised anomaly detection-where no labeled anomalies are available-remains challenging because traditional deep learning methods model a single global distribution, assuming all samples follow the same behavior. In contrast, real-world data often contain heterogeneous contexts (e.g., different users, accounts, or devices), where globally rare events may be normal within specific conditions. We introduce a contextual learning framework that explicitly models how normal behavior varies across contexts by learning conditional data distributions $P(\\mathbf{Y} \\mid \\mathbf{C})$ rather than a global joint distribution $P(\\mathbf{X})$. The framework encompasses (1) a probabilistic formulation for context-conditioned learning, (2) a principled bilevel optimization strategy for automatically selecting informative context features using early validation loss, and (3) theoretical grounding through variance decomposition and discriminative learning principles. We instantiate this framework using a novel conditional Wasserstein autoencoder as a simple yet effective model for tabular anomaly detection. Extensive experiments across eight benchmark datasets demonstrate that contextual learning consistently outperforms global approaches-even when the optimal context is not intuitively obvious-establishing a new foundation for anomaly detection in heterogeneous tabular data."
+  },
+  "arxiv_llmad": {
+    "url": "https://arxiv.org/abs/2406.16308",
+    "access_date": "2026-10-30",
+    "metadata": {
+      "citation_title": [
+        "Anomaly Detection of Tabular Data Using LLMs"
+      ],
+      "citation_author": [
+        "Li, Aodong",
+        "Zhao, Yunhan",
+        "Qiu, Chen",
+        "Kloft, Marius",
+        "Smyth, Padhraic",
+        "Rudolph, Maja",
+        "Mandt, Stephan"
+      ],
+      "citation_date": [
+        "2024/06/24"
+      ],
+      "citation_online_date": [
+        "2024/06/24"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/2406.16308"
+      ],
+      "citation_arxiv_id": [
+        "2406.16308"
+      ],
+      "citation_abstract": [
+        "Large language models (LLMs) have shown their potential in long-context understanding and mathematical reasoning. In this paper, we study the problem of using LLMs to detect tabular anomalies and show that pre-trained LLMs are zero-shot batch-level anomaly detectors. That is, without extra distribution-specific model fitting, they can discover hidden outliers in a batch of data, demonstrating their ability to identify low-density data regions. For LLMs that are not well aligned with anomaly detection and frequently output factual errors, we apply simple yet effective data-generating processes to simulate synthetic batch-level anomaly detection datasets and propose an end-to-end fine-tuning strategy to bring out the potential of LLMs in detecting real anomalies. Experiments on a large anomaly detection benchmark (ODDS) showcase i) GPT-4 has on-par performance with the state-of-the-art transductive learning-based anomaly detection methods and ii) the efficacy of our synthetic dataset and fine-tuning strategy in aligning LLMs to this task."
+      ]
+    },
+    "submission_history": "Submission history From: Aodong Li [ view email ] [v1] Mon, 24 Jun 2024 04:17:03 UTC (928 KB)",
+    "abstract_read": "Large language models (LLMs) have shown their potential in long-context understanding and mathematical reasoning. In this paper, we study the problem of using LLMs to detect tabular anomalies and show that pre-trained LLMs are zero-shot batch-level anomaly detectors. That is, without extra distribution-specific model fitting, they can discover hidden outliers in a batch of data, demonstrating their ability to identify low-density data regions. For LLMs that are not well aligned with anomaly detection and frequently output factual errors, we apply simple yet effective data-generating processes to simulate synthetic batch-level anomaly detection datasets and propose an end-to-end fine-tuning strategy to bring out the potential of LLMs in detecting real anomalies. Experiments on a large anomaly detection benchmark (ODDS) showcase i) GPT-4 has on-par performance with the state-of-the-art transductive learning-based anomaly detection methods and ii) the efficacy of our synthetic dataset and fine-tuning strategy in aligning LLMs to this task."
+  },
+  "holoclean_exact": {
+    "url": "https://api.crossref.org/works/10.14778/3137628.3137631",
+    "access_date": "2026-10-30",
+    "records": [
+      {
+        "DOI": "10.14778/3137628.3137631",
+        "title": [
+          "HoloClean"
+        ],
+        "subtitle": [
+          "holistic data repairs with probabilistic inference"
+        ],
+        "author": [
+          {
+            "given": "Theodoros",
+            "family": "Rekatsinas",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "Stanford University"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Xu",
+            "family": "Chu",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "University of Waterloo"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Ihab F.",
+            "family": "Ilyas",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "University of Waterloo"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Christopher",
+            "family": "Ré",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Stanford University"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "container-title": [
+          "Proceedings of the VLDB Endowment"
+        ],
+        "volume": "10",
+        "issue": "11",
+        "page": "1190-1201",
+        "published": {
+          "date-parts": [
+            [
+              2017,
+              8
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2017,
+              8
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2017,
+              8
+            ]
+          ]
+        },
+        "type": "journal-article",
+        "URL": "https://doi.org/10.14778/3137628.3137631"
+      }
+    ]
+  },
+  "holoclean_alternate": {
+    "url": "https://api.crossref.org/works/10.14778/3137628.3137663",
+    "access_date": "2026-10-30",
+    "records": [
+      {
+        "DOI": "10.14778/3137628.3137663",
+        "title": [
+          "Data vocalization"
+        ],
+        "subtitle": [
+          "optimizing voice output of relational data"
+        ],
+        "author": [
+          {
+            "given": "Immanuel",
+            "family": "Trummer",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "Cornell University"
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Jiancheng",
+            "family": "Zhu",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Cornell University"
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          },
+          {
+            "given": "Mark",
+            "family": "Bryan",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Cornell University"
+              }
+            ],
+            "role": [
+              {
+                "role": "author",
+                "vocabulary": "crossref"
+              }
+            ]
+          }
+        ],
+        "container-title": [
+          "Proceedings of the VLDB Endowment"
+        ],
+        "volume": "10",
+        "issue": "11",
+        "page": "1574-1585",
+        "published": {
+          "date-parts": [
+            [
+              2017,
+              8
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2017,
+              8
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2017,
+              8
+            ]
+          ]
+        },
+        "type": "journal-article",
+        "URL": "https://doi.org/10.14778/3137628.3137663"
+      }
+    ]
+  },
+  "holodetect_exact": {
+    "url": "https://api.crossref.org/works/10.1145/3299869.3319888",
+    "access_date": "2026-10-30",
+    "records": [
+      {
+        "DOI": "10.1145/3299869.3319888",
+        "title": [
+          "HoloDetect"
+        ],
+        "subtitle": [
+          "Few-Shot Learning for Error Detection"
+        ],
+        "author": [
+          {
+            "given": "Alireza",
+            "family": "Heidari",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "University of Waterloo, Waterloo, Canada"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Joshua",
+            "family": "McGrath",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "University of Wisconsin-Madison, Madison, WI, USA"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Ihab F.",
+            "family": "Ilyas",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "University of Waterloo, Waterloo, Canada"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Theodoros",
+            "family": "Rekatsinas",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "University of Wisconsin-Madison, Madison, WI, USA"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "container-title": [
+          "Proceedings of the 2019 International Conference on Management of Data"
+        ],
+        "page": "829-846",
+        "published": {
+          "date-parts": [
+            [
+              2019,
+              6,
+              25
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2019,
+              6,
+              25
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2019,
+              6,
+              25
+            ]
+          ]
+        },
+        "type": "proceedings-article",
+        "URL": "https://doi.org/10.1145/3299869.3319888"
+      }
+    ]
+  },
+  "cellmcd_retry": {
+    "url": "https://api.crossref.org/works/10.1080/01621459.2023.2267777",
+    "access_date": "2026-10-30",
+    "records": [
+      {
+        "DOI": "10.1080/01621459.2023.2267777",
+        "title": [
+          "The Cellwise Minimum Covariance Determinant Estimator"
+        ],
+        "subtitle": [],
+        "author": [
+          {
+            "given": "Jakob",
+            "family": "Raymaekers",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "Department of Quantitative Economics, Maastricht University",
+                "place": [
+                  "Maastricht, The Netherlands"
+                ]
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-3807-5353",
+            "authenticated-orcid": false,
+            "given": "Peter J.",
+            "family": "Rousseeuw",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Section of Statistics and Data Science, University of Leuven",
+                "place": [
+                  "Leuven, Belgium"
+                ]
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "container-title": [
+          "Journal of the American Statistical Association"
+        ],
+        "volume": "119",
+        "issue": "548",
+        "page": "2610-2621",
+        "published": {
+          "date-parts": [
+            [
+              2023,
+              11,
+              22
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2023,
+              11,
+              22
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2024,
+              10
+            ]
+          ]
+        },
+        "type": "journal-article",
+        "URL": "https://doi.org/10.1080/01621459.2023.2267777"
+      }
+    ]
+  },
+  "tabpfn_retry": {
+    "url": "https://api.crossref.org/works/10.1038/s41586-024-08328-6",
+    "access_date": "2026-10-30",
+    "records": [
+      {
+        "DOI": "10.1038/s41586-024-08328-6",
+        "title": [
+          "Accurate predictions on small data with a tabular foundation model"
+        ],
+        "subtitle": [],
+        "author": [
+          {
+            "ORCID": "https://orcid.org/0000-0001-8556-518X",
+            "authenticated-orcid": false,
+            "given": "Noah",
+            "family": "Hollmann",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0009-0000-0795-6097",
+            "authenticated-orcid": false,
+            "given": "Samuel",
+            "family": "Müller",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0009-0001-1181-0549",
+            "authenticated-orcid": false,
+            "given": "Lennart",
+            "family": "Purucker",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0009-0000-0688-9435",
+            "authenticated-orcid": false,
+            "given": "Arjun",
+            "family": "Krishnakumar",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Max",
+            "family": "Körfer",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Shi Bin",
+            "family": "Hoo",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-5518-7445",
+            "authenticated-orcid": false,
+            "given": "Robin Tibor",
+            "family": "Schirrmeister",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-2037-3694",
+            "authenticated-orcid": false,
+            "given": "Frank",
+            "family": "Hutter",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "container-title": [
+          "Nature"
+        ],
+        "volume": "637",
+        "issue": "8045",
+        "page": "319-326",
+        "published": {
+          "date-parts": [
+            [
+              2025,
+              1,
+              8
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2025,
+              1,
+              8
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2025,
+              1,
+              9
+            ]
+          ]
+        },
+        "type": "journal-article",
+        "URL": "https://doi.org/10.1038/s41586-024-08328-6"
+      }
+    ]
+  },
+  "confident_exact": {
+    "url": "https://api.crossref.org/works/10.1613/jair.1.12125",
+    "access_date": "2026-10-30",
+    "records": [
+      {
+        "DOI": "10.1613/jair.1.12125",
+        "title": [
+          "Confident Learning: Estimating Uncertainty in Dataset Labels"
+        ],
+        "subtitle": [],
+        "author": [
+          {
+            "given": "Curtis",
+            "family": "Northcutt",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Lu",
+            "family": "Jiang",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Isaac",
+            "family": "Chuang",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "container-title": [
+          "Journal of Artificial Intelligence Research"
+        ],
+        "volume": "70",
+        "page": "1373-1411",
+        "published": {
+          "date-parts": [
+            [
+              2021,
+              4,
+              14
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2021,
+              4,
+              14
+            ]
+          ]
+        },
+        "type": "journal-article",
+        "URL": "https://doi.org/10.1613/jair.1.12125"
+      }
+    ]
+  },
+  "detectingerrors_exact": {
+    "url": "https://api.crossref.org/works/10.14778/2994509.2994518",
+    "access_date": "2026-10-30",
+    "records": [
+      {
+        "DOI": "10.14778/2994509.2994518",
+        "title": [
+          "Detecting data errors"
+        ],
+        "subtitle": [
+          "where are we and what needs to be done?"
+        ],
+        "author": [
+          {
+            "given": "Ziawasch",
+            "family": "Abedjan",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "MIT CSAIL"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Xu",
+            "family": "Chu",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "University of Waterloo"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Dong",
+            "family": "Deng",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Tsinghua University"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Raul Castro",
+            "family": "Fernandez",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "MIT CSAIL"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Ihab F.",
+            "family": "Ilyas",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "University of Waterloo"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Mourad",
+            "family": "Ouzzani",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Qatar Computing Research Institute, HBKU"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Paolo",
+            "family": "Papotti",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Arizona State University"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Michael",
+            "family": "Stonebraker",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "MIT CSAIL"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Nan",
+            "family": "Tang",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Qatar Computing Research Institute, HBKU"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "container-title": [
+          "Proceedings of the VLDB Endowment"
+        ],
+        "volume": "9",
+        "issue": "12",
+        "page": "993-1004",
+        "published": {
+          "date-parts": [
+            [
+              2016,
+              8
+            ]
+          ]
+        },
+        "published-online": {
+          "date-parts": [
+            [
+              2016,
+              8
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2016,
+              8
+            ]
+          ]
+        },
+        "type": "journal-article",
+        "URL": "https://doi.org/10.14778/2994509.2994518"
+      }
+    ]
+  },
+  "propagation": {
+    "url": "https://api.crossref.org/works/10.1214/07-AOS588",
+    "access_date": "2026-10-30",
+    "records": [
+      {
+        "DOI": "10.1214/07-aos588",
+        "title": [
+          "Propagation of outliers in multivariate data"
+        ],
+        "subtitle": [],
+        "author": [
+          {
+            "given": "Fatemah",
+            "family": "Alqallaf",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Stefan",
+            "family": "Van Aelst",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Victor J.",
+            "family": "Yohai",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Ruben H.",
+            "family": "Zamar",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ],
+        "container-title": [
+          "The Annals of Statistics"
+        ],
+        "volume": "37",
+        "issue": "1",
+        "page": "311-331",
+        "published": {
+          "date-parts": [
+            [
+              2009,
+              2,
+              1
+            ]
+          ]
+        },
+        "published-print": {
+          "date-parts": [
+            [
+              2009,
+              2,
+              1
+            ]
+          ]
+        },
+        "type": "journal-article",
+        "URL": "https://doi.org/10.1214/07-aos588"
+      }
+    ]
+  },
+  "rein_exact": {
+    "url": "https://api.crossref.org/works/10.48786/edbt.2023.43",
+    "access_date": "2026-10-30",
+    "error": "HTTP Error 404: Not Found"
+  },
+  "utabpfn": {
+    "url": "https://raw.githubusercontent.com/PriorLabs/tabpfn-extensions/766e5ac7472ea24bd695b73ca0c6ddc415d18bdd/src/tabpfn_extensions/unsupervised/unsupervised.py",
+    "access_date": "2026-10-30",
+    "commit": "766e5ac7472ea24bd695b73ca0c6ddc415d18bdd",
+    "commit_date": "2026-08-31T09:48:04Z",
+    "sha256": "dff14b283f65262cc180ad0598292f050db216059da172980464148203064cb3",
+    "symbols_inspected": [
+      "fit",
+      "impute_",
+      "outliers_single_permutation_",
+      "outliers"
+    ],
+    "source_kind": "official implementation; not a paper"
+  }
+}

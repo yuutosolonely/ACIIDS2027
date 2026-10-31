@@ -1,0 +1,3 @@
+name = "literature"
+description = "Tìm primary papers và closest-work delta cho Idea 3"
+developer_instructions = "Read AGENTS.md and docs/prompts/LITERATURE.md. Search public topics across sources, verify identity and inspect methods. Distinguish cell/row/label tasks and preprint/accepted status. Return query log, sources, locations and overlap. No unpublished draft in external queries. Do not launch additional agents or paid jobs without applicable user authorization."

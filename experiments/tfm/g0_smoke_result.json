@@ -1,0 +1,53 @@
+{
+  "python": "3.12.6",
+  "torch": "2.11.0+cpu",
+  "tabpfn": "9.2.0",
+  "threads": 8,
+  "n_ctx": 500,
+  "n_query": 200,
+  "d": 10,
+  "runs": [
+    {
+      "model": "regressor",
+      "n_estimators": 1,
+      "seconds": 2.27,
+      "nll_finite": true,
+      "outliers_in_top5": 5,
+      "nll_outlier_mean": 23.31,
+      "nll_inlier_median": -0.02
+    },
+    {
+      "model": "classifier",
+      "n_estimators": 1,
+      "seconds": 1.4,
+      "proba_rows_sum_to_1": true,
+      "classes": [
+        0,
+        1,
+        2
+      ],
+      "accuracy": 0.99
+    },
+    {
+      "model": "regressor",
+      "n_estimators": 4,
+      "seconds": 3.83,
+      "nll_finite": true,
+      "outliers_in_top5": 5,
+      "nll_outlier_mean": 22.68,
+      "nll_inlier_median": -0.01
+    },
+    {
+      "model": "classifier",
+      "n_estimators": 4,
+      "seconds": 3.87,
+      "proba_rows_sum_to_1": true,
+      "classes": [
+        0,
+        1,
+        2
+      ],
+      "accuracy": 0.985
+    }
+  ]
+}

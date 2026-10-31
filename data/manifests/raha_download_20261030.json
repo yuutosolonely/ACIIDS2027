@@ -1,0 +1,26 @@
+{
+  "created_at": "2026-10-30",
+  "source": "https://github.com/BigDaMa/raha",
+  "upstream_commit": "7be1334b8c7bbdac3f47ef514fb3e1e8c5fc181c",
+  "license": "Apache-2.0 (repository LICENSE.md, fetched at the same commit; dataset-level terms not separately stated)",
+  "local_path": "data/raw/raha (gitignored)",
+  "downloaded_by": "coordinator session 2026-10-30, public HTTPS, no cost, no account",
+  "sha256": {
+    "beers/clean.csv": "373227df59ad197e154dd5149125789e415019535c7223355e9486ee1b3b93de",
+    "beers/dirty.csv": "7110bf4931a9445a1675e544d6c996817c739136239f8a2b02e088c7ec0a1f68",
+    "flights/clean.csv": "0acfcfd8985b06fdd363965c9e8d9522c43e7589a93d79ae7dc311e1c37fdf3b",
+    "flights/dirty.csv": "1b5c1afa10aa0e7c20fd7e14d05c56772715b2771aa0f5fa67ed1709e1eecd46",
+    "hospital/clean.csv": "ea3ee44998455c0b491750c348509de176c758a3bbf58e4530c0a136bb248b4b",
+    "hospital/dirty.csv": "dbc5575b915fe8b5e0ac6dc6172f38ba91e611fdb76d09a8f4a81cb7ea9925ac",
+    "movies_1/clean.csv": "22a84e70d153d809341c55cf8e8154beebe1836456f617bf8277b953a762bfca",
+    "movies_1/dirty.csv": "bed752115dd0a5925ea36db443ff6835d10a5a8d2f549299535b14f8ac324316",
+    "rayyan/clean.csv": "23159f43c0706782388ed8957ad0c74eb7b88bc98f34d65bd49296e186d4673f",
+    "rayyan/dirty.csv": "7e25e6db262b0c72ca2d9735d5959599cf5a582e1c705459507c7b45d0d1d174"
+  },
+  "access_disclosure": {
+    "all five datasets": "descriptive profiling of dirty vs clean (shape, per-column error rate, two example error pairs per column) was printed on 2026-10-30 BEFORE any confirmatory protocol existed",
+    "movies_1": "exploratory detector runs (experiments/exploratory/explore_cced_movies_001.json); designated development set",
+    "hospital, flights, beers, rayyan": "no detector has been run on these tables as of this manifest"
+  },
+  "note": "Download happened before the 2026-10-30 author directive restricting new dataset downloads; RAHA was already the planned benchmark in docs/experiment-plan.md. Recorded as a deviation in docs/EXPERIMENT_LOG.md."
+}

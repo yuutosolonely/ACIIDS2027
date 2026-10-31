@@ -1,0 +1,33 @@
+{
+  "checked_at": "2026-10-28",
+  "discovery": "web search; third-party discovery results not treated as scientific evidence",
+  "queries": [
+    "\"tabular foundation\" \"error detection\" cell cleaning",
+    "\"TabPFN\" \"data cleaning\" \"2026\"",
+    "\"tabular\" \"cell-level\" \"error detection\" \"2026\"",
+    "\"TabPFN\" \"unsupervised\" \"density\" anomaly paper",
+    "\"ZeroED\" error detection 2026 2025 ICDE",
+    "\"Conformal Data Cleaning\" 2025 2026 error detection",
+    "\"tabular foundation\" \"contamination\" in-context",
+    "\"cell-level\" \"TabPFN\"",
+    "\"FoMo-0D\" paper arxiv",
+    "\"TACTIC\" \"tabular\" anomaly paper",
+    "\"cellwise\" \"outlier\" \"conditional\" \"2025\" detection",
+    "\"DetectDeviatingCells\" paper 2017 Rousseeuw Bossche",
+    "\"cellMCD\" \"2023\" paper",
+    "\"TabPFN\" \"cellwise\""
+  ],
+  "verification_sources": [
+    "arxiv.org",
+    "proceedings.mlr.press",
+    "official author GitHub repositories",
+    "publisher DOI pages",
+    "ieee-icde.org/2025/research-papers/"
+  ],
+  "limits": [
+    "Targeted scan, not exhaustive systematic review",
+    "Selected primary HTML sections, not all PDFs read",
+    "No experiments reproduced",
+    "No cross-task universal SOTA ranking"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "analysis_sha256": "68db9d735c102d76f69d8cc49087290f36edaab3c87aa2642d66c0222177dcaf",
+  "audit_sha256": "04e452fdcbf7eb49ebd3c3db9dba86729a3dcdad422c89b678d3b97b1cc83547",
+  "script_sha256": "9548cbe7a807ccd8a9831709b87f79fd409e3939ebe6b112cbf821e61bdf8fae",
+  "outputs_sha256": {
+    "baselines.tex": "ba04cfe399fe6e784450b50c550eee741b994d6d1f78fae7934712a2f4fa88a1",
+    "cost.tex": "826010ec9dd31a174b722a19239f97632b97aafeb157fa92ca148127617b995c",
+    "coverage.tex": "d6b264446854260e9c0140b5b90719d3ec29b0f47e38f43b36729a6d7ddd44fd",
+    "mechanism_deltas.pdf": "993c31694e871f952553ee7c7d0a5f0bc9906ef340176e3244c7fa55c4ffd5ca",
+    "numbers.tex": "5650e68d900290bd1d9797acc1c847299528f09ecab6eb8ab32a734ead996612",
+    "primary.tex": "78ab03a8f475be95a95b4f4683067f21a47de20836c2625132f96900684bb184",
+    "primary_deltas.pdf": "8132c315054fe5482be1992ba8b1c228cde85bd64acb4fb26b87bcb3b32cdb64",
+    "probes.tex": "9e5a5c4560bdfcf88efc2656dcba347c8dddda52862cf7243db514214fed6635",
+    "rare.tex": "3373940e14d0f4ee6305fc753a9dcfc62182d43c140eec116927088ae12dba8f",
+    "secondary.tex": "a349d0c1f19f3ebe3103b711d36bc00392f9f14297cb869ec92d7bbb08af70f7"
+  }
+}

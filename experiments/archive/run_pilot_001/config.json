@@ -1,0 +1,16 @@
+{
+  "run_id": "run_pilot_001",
+  "dataset": "toy_mixed",
+  "num_rows": 100,
+  "num_cols": 5,
+  "eligible_cells": 400,
+  "seeds": [
+    42
+  ],
+  "arms": [
+    "arm1_classical_mad",
+    "arm2_cric_raw_context",
+    "arm3_cric_matched_random",
+    "arm4_cric_influence_trimming"
+  ]
+}

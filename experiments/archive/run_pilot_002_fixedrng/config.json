@@ -1,0 +1,36 @@
+{
+  "run_id": "run_pilot_002_fixedrng",
+  "dataset": "toy_mixed",
+  "num_rows": 100,
+  "num_cols": 5,
+  "eligible_cells": 400,
+  "seeds": [
+    42
+  ],
+  "arms": [
+    "arm1_classical_mad",
+    "arm2_cric_raw_context",
+    "arm3_cric_matched_random",
+    "arm4_cric_influence_trimming"
+  ],
+  "data_role": "synthetic software fixture (not a benchmark)",
+  "cric_params": {
+    "context_size": 30,
+    "trim_ratio": 0.15,
+    "n_splits": 5,
+    "seed": 42
+  },
+  "rare_valid_patterns_arm4": {
+    "category_c": [
+      "RareDelta"
+    ]
+  },
+  "rare_valid_patterns_source": "fixture-author oracle (not inferred by the detector)",
+  "bootstrap_resamples": 100,
+  "git": {
+    "commit": "06ded051a382bee8e6db47c582e46145fe544515",
+    "dirty_files": 5
+  },
+  "fixture_sha256": "1abe6b9b99f32eebfd7ffbcf89da1e876e2cd47b32229308b952e146fa5de39c",
+  "scorer_sha256": "d563ebfd3f8cb62abaf72a1a125c5d17c54c3fef05863323a5396e41ed089e60"
+}

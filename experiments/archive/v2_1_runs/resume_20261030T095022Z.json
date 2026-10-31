@@ -1,0 +1,228 @@
+{
+  "started_utc": "2026-10-30T09:50:22.657607+00:00",
+  "reason": "external interruption of the original grid process tree",
+  "workers": 4,
+  "threads_per_process": 2,
+  "python_executable": "F:\\competitions\\ACIIDS\\ACIIDS2027\\.venv-tfm\\Scripts\\python.exe",
+  "prereg_sha256": "eea8f0ee8b217458a82b073bac5261f43ab8056e1b4eb32a170e5aece061543a",
+  "source_snapshot_sha256": "c37e39ab8168ed2fda38e9a6e952a15114bda4faa595356c7aeeb5f633bf5678",
+  "code_sha256": {
+    "src/cric_ed/conditional.py": "4001f9c53d91300b4cdbb3262d82851fa254e29ff8ef0fb37d60aab2cc1c219f",
+    "src/cric_ed/baselines.py": "a7e79639d4756bd3e5b4c978121eeb92cc363bd01d5d0f1c725b061a7b03ff8b",
+    "src/cric_ed/benchmark.py": "9428429b53291ffdfd4c0c53dc62ed48691a9af184e21d8b97654f5104f8f866",
+    "src/cric_ed/v2_contract.py": "576219f7c25300426efb010c610131d089a7c53fd6abc1fe665b216cc2a44202",
+    "src/cric_ed/run_record.py": "18df9f5d3ec70747468e56b7ff7c55e151073fc3b6fe1acd30266ded00784209",
+    "experiments/tfm/run_v2.py": "b24c62ca4174d8d9afc2a47b2a79f5e87996d1e3b4ee952a1106a5d947da94cf",
+    "experiments/tfm/analyze_v2.py": "1f57ceee29a3109c44f3f37d2579e5f84519a8d63e3389cf1941d76b2456365b"
+  },
+  "completed_before_resume": [
+    "hospital__real__s0",
+    "flights__real__s0",
+    "beers__real__s0",
+    "rayyan__real__s0",
+    "hospital__real__s1",
+    "flights__real__s1",
+    "beers__real__s1",
+    "rayyan__real__s1",
+    "flights__real__s2",
+    "beers__real__s2",
+    "rayyan__real__s2",
+    "flights__real__s3",
+    "beers__real__s3",
+    "rayyan__real__s3"
+  ],
+  "moved_partials": [
+    {
+      "from": "experiments\\runs\\v2_1\\flights__real__s4.partial",
+      "to": "experiments\\runs\\v2_1_interrupted\\flights__real__s4.partial.20261030T095022Z",
+      "attempt": {
+        "status": "running",
+        "stage": "score:lgbm:purify",
+        "request": {
+          "table": "flights",
+          "condition": "real",
+          "seed": 4,
+          "models": [
+            "lgbm",
+            "tabpfn-v2"
+          ],
+          "threads": 2,
+          "role": "confirmatory",
+          "prereg_sha256": "eea8f0ee8b217458a82b073bac5261f43ab8056e1b4eb32a170e5aece061543a",
+          "source_snapshot_sha256": "c37e39ab8168ed2fda38e9a6e952a15114bda4faa595356c7aeeb5f633bf5678",
+          "code_sha256": {
+            "src/cric_ed/conditional.py": "4001f9c53d91300b4cdbb3262d82851fa254e29ff8ef0fb37d60aab2cc1c219f",
+            "src/cric_ed/baselines.py": "a7e79639d4756bd3e5b4c978121eeb92cc363bd01d5d0f1c725b061a7b03ff8b",
+            "src/cric_ed/benchmark.py": "9428429b53291ffdfd4c0c53dc62ed48691a9af184e21d8b97654f5104f8f866",
+            "src/cric_ed/v2_contract.py": "576219f7c25300426efb010c610131d089a7c53fd6abc1fe665b216cc2a44202",
+            "src/cric_ed/run_record.py": "18df9f5d3ec70747468e56b7ff7c55e151073fc3b6fe1acd30266ded00784209",
+            "experiments/tfm/run_v2.py": "b24c62ca4174d8d9afc2a47b2a79f5e87996d1e3b4ee952a1106a5d947da94cf",
+            "experiments/tfm/analyze_v2.py": "1f57ceee29a3109c44f3f37d2579e5f84519a8d63e3389cf1941d76b2456365b"
+          },
+          "git": {
+            "commit": "0aff63e292da7a071368f594015089d5d746fa05",
+            "dirty_files": 77
+          },
+          "python": "3.12.6"
+        },
+        "started_at": "2026-10-30T05:05:49.883816+00:00"
+      }
+    },
+    {
+      "from": "experiments\\runs\\v2_1\\hospital__real__s2.partial",
+      "to": "experiments\\runs\\v2_1_interrupted\\hospital__real__s2.partial.20261030T095022Z",
+      "attempt": {
+        "status": "running",
+        "stage": "score:tabpfn-v2:raw_leo",
+        "request": {
+          "table": "hospital",
+          "condition": "real",
+          "seed": 2,
+          "models": [
+            "lgbm",
+            "tabpfn-v2"
+          ],
+          "threads": 2,
+          "role": "confirmatory",
+          "prereg_sha256": "eea8f0ee8b217458a82b073bac5261f43ab8056e1b4eb32a170e5aece061543a",
+          "source_snapshot_sha256": "c37e39ab8168ed2fda38e9a6e952a15114bda4faa595356c7aeeb5f633bf5678",
+          "code_sha256": {
+            "src/cric_ed/conditional.py": "4001f9c53d91300b4cdbb3262d82851fa254e29ff8ef0fb37d60aab2cc1c219f",
+            "src/cric_ed/baselines.py": "a7e79639d4756bd3e5b4c978121eeb92cc363bd01d5d0f1c725b061a7b03ff8b",
+            "src/cric_ed/benchmark.py": "9428429b53291ffdfd4c0c53dc62ed48691a9af184e21d8b97654f5104f8f866",
+            "src/cric_ed/v2_contract.py": "576219f7c25300426efb010c610131d089a7c53fd6abc1fe665b216cc2a44202",
+            "src/cric_ed/run_record.py": "18df9f5d3ec70747468e56b7ff7c55e151073fc3b6fe1acd30266ded00784209",
+            "experiments/tfm/run_v2.py": "b24c62ca4174d8d9afc2a47b2a79f5e87996d1e3b4ee952a1106a5d947da94cf",
+            "experiments/tfm/analyze_v2.py": "1f57ceee29a3109c44f3f37d2579e5f84519a8d63e3389cf1941d76b2456365b"
+          },
+          "git": {
+            "commit": "0aff63e292da7a071368f594015089d5d746fa05",
+            "dirty_files": 60
+          },
+          "python": "3.12.6"
+        },
+        "started_at": "2026-10-30T03:39:10.026168+00:00"
+      }
+    },
+    {
+      "from": "experiments\\runs\\v2_1\\hospital__real__s3.partial",
+      "to": "experiments\\runs\\v2_1_interrupted\\hospital__real__s3.partial.20261030T095022Z",
+      "attempt": {
+        "status": "running",
+        "stage": "score:tabpfn-v2:purify",
+        "request": {
+          "table": "hospital",
+          "condition": "real",
+          "seed": 3,
+          "models": [
+            "lgbm",
+            "tabpfn-v2"
+          ],
+          "threads": 2,
+          "role": "confirmatory",
+          "prereg_sha256": "eea8f0ee8b217458a82b073bac5261f43ab8056e1b4eb32a170e5aece061543a",
+          "source_snapshot_sha256": "c37e39ab8168ed2fda38e9a6e952a15114bda4faa595356c7aeeb5f633bf5678",
+          "code_sha256": {
+            "src/cric_ed/conditional.py": "4001f9c53d91300b4cdbb3262d82851fa254e29ff8ef0fb37d60aab2cc1c219f",
+            "src/cric_ed/baselines.py": "a7e79639d4756bd3e5b4c978121eeb92cc363bd01d5d0f1c725b061a7b03ff8b",
+            "src/cric_ed/benchmark.py": "9428429b53291ffdfd4c0c53dc62ed48691a9af184e21d8b97654f5104f8f866",
+            "src/cric_ed/v2_contract.py": "576219f7c25300426efb010c610131d089a7c53fd6abc1fe665b216cc2a44202",
+            "src/cric_ed/run_record.py": "18df9f5d3ec70747468e56b7ff7c55e151073fc3b6fe1acd30266ded00784209",
+            "experiments/tfm/run_v2.py": "b24c62ca4174d8d9afc2a47b2a79f5e87996d1e3b4ee952a1106a5d947da94cf",
+            "experiments/tfm/analyze_v2.py": "1f57ceee29a3109c44f3f37d2579e5f84519a8d63e3389cf1941d76b2456365b"
+          },
+          "git": {
+            "commit": "0aff63e292da7a071368f594015089d5d746fa05",
+            "dirty_files": 60
+          },
+          "python": "3.12.6"
+        },
+        "started_at": "2026-10-30T04:20:09.005165+00:00"
+      }
+    },
+    {
+      "from": "experiments\\runs\\v2_1\\hospital__real__s4.partial",
+      "to": "experiments\\runs\\v2_1_interrupted\\hospital__real__s4.partial.20261030T095022Z",
+      "attempt": {
+        "status": "running",
+        "stage": "score:lgbm:oracle",
+        "request": {
+          "table": "hospital",
+          "condition": "real",
+          "seed": 4,
+          "models": [
+            "lgbm",
+            "tabpfn-v2"
+          ],
+          "threads": 2,
+          "role": "confirmatory",
+          "prereg_sha256": "eea8f0ee8b217458a82b073bac5261f43ab8056e1b4eb32a170e5aece061543a",
+          "source_snapshot_sha256": "c37e39ab8168ed2fda38e9a6e952a15114bda4faa595356c7aeeb5f633bf5678",
+          "code_sha256": {
+            "src/cric_ed/conditional.py": "4001f9c53d91300b4cdbb3262d82851fa254e29ff8ef0fb37d60aab2cc1c219f",
+            "src/cric_ed/baselines.py": "a7e79639d4756bd3e5b4c978121eeb92cc363bd01d5d0f1c725b061a7b03ff8b",
+            "src/cric_ed/benchmark.py": "9428429b53291ffdfd4c0c53dc62ed48691a9af184e21d8b97654f5104f8f866",
+            "src/cric_ed/v2_contract.py": "576219f7c25300426efb010c610131d089a7c53fd6abc1fe665b216cc2a44202",
+            "src/cric_ed/run_record.py": "18df9f5d3ec70747468e56b7ff7c55e151073fc3b6fe1acd30266ded00784209",
+            "experiments/tfm/run_v2.py": "b24c62ca4174d8d9afc2a47b2a79f5e87996d1e3b4ee952a1106a5d947da94cf",
+            "experiments/tfm/analyze_v2.py": "1f57ceee29a3109c44f3f37d2579e5f84519a8d63e3389cf1941d76b2456365b"
+          },
+          "git": {
+            "commit": "0aff63e292da7a071368f594015089d5d746fa05",
+            "dirty_files": 77
+          },
+          "python": "3.12.6"
+        },
+        "started_at": "2026-10-30T05:03:07.408241+00:00"
+      }
+    }
+  ],
+  "units_to_run": [
+    "hospital__real__s2",
+    "hospital__real__s3",
+    "hospital__real__s4",
+    "flights__real__s4",
+    "beers__real__s4",
+    "rayyan__real__s4",
+    "hospital__inj-random__s0",
+    "flights__inj-random__s0",
+    "beers__inj-random__s0",
+    "rayyan__inj-random__s0",
+    "hospital__inj-random__s1",
+    "flights__inj-random__s1",
+    "beers__inj-random__s1",
+    "rayyan__inj-random__s1",
+    "hospital__inj-random__s2",
+    "flights__inj-random__s2",
+    "beers__inj-random__s2",
+    "rayyan__inj-random__s2",
+    "hospital__inj-random__s3",
+    "flights__inj-random__s3",
+    "beers__inj-random__s3",
+    "rayyan__inj-random__s3",
+    "hospital__inj-random__s4",
+    "flights__inj-random__s4",
+    "beers__inj-random__s4",
+    "rayyan__inj-random__s4",
+    "hospital__inj-systematic__s0",
+    "flights__inj-systematic__s0",
+    "beers__inj-systematic__s0",
+    "rayyan__inj-systematic__s0",
+    "hospital__inj-systematic__s1",
+    "flights__inj-systematic__s1",
+    "beers__inj-systematic__s1",
+    "rayyan__inj-systematic__s1",
+    "hospital__inj-systematic__s2",
+    "flights__inj-systematic__s2",
+    "beers__inj-systematic__s2",
+    "rayyan__inj-systematic__s2",
+    "hospital__inj-systematic__s3",
+    "flights__inj-systematic__s3",
+    "beers__inj-systematic__s3",
+    "rayyan__inj-systematic__s3",
+    "hospital__inj-systematic__s4",
+    "flights__inj-systematic__s4",
+    "beers__inj-systematic__s4",
+    "rayyan__inj-systematic__s4"
+  ]
+}

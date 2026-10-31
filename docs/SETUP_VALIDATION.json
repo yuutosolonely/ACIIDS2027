@@ -1,0 +1,35 @@
+{
+  "checked_at": "2026-10-29",
+  "target": "F:/competitions/ACIIDS/ACIIDS2027",
+  "static_setup": "PASS",
+  "local_skills_quick_validate": 7,
+  "skills_installed": 9,
+  "skill_mirror_sync": "MATCH",
+  "pytest": {
+    "passed_observed": 10,
+    "errors_observed": 1,
+    "status": "BLOCKED_BY_SANDBOX_TEMP_PERMISSION",
+    "detail": "PermissionError creating unique basetemp under .cache/pytest during the pre-edit audit; not a code assertion failure; suite not rerun after edits."
+  },
+  "mcp": {
+    "previous_handshake": "PASS",
+    "protocol": "2025-11-25",
+    "tools": [
+      "lit_search",
+      "paper_details",
+      "verify_reference",
+      "research_status"
+    ],
+    "status_after_edits": "NOT_RUN"
+  },
+  "models_installed": false,
+  "research_runs": 0,
+  "research_stage": "PROPOSAL",
+  "paid_compute_authorized": false,
+  "paper_compiled": false,
+  "antigravity_agents_defined": 7,
+  "antigravity_runtime_discovery": "NOT_VERIFIED",
+  "git_committed": false,
+  "source_snapshots": 9,
+  "python_package": "cric_ed"
+}

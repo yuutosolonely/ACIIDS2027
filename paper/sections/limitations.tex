@@ -1,0 +1,42 @@
+\section{Limitations and Reproducibility}
+The collection contains four capped source tables, so per-table comparisons can
+expose heterogeneous effects but not population-wide superiority. Descriptive data
+access preceded the amended specification, which limits claims of an untouched
+benchmark. Exact reference disagreement includes formatting changes and possible
+ambiguity in benchmark corrections. Our corruptions start from the clean reference,
+may be easier than natural errors and share the seed with context sampling; they
+are mechanism probes, not substitutes for the real-error experiment. The oracle
+changes all context features, so its gap does not isolate target-cell contamination.
+
+The final encoder observes all dirty rows, and the primary analysis allows other
+records of the same entity in the context. Observed-key LEO cannot repair key errors
+or stop the encoder from seeing held-out rows. Row-bootstrap intervals may be too
+narrow under dependence, omit retraining and new-table variation, and are not
+multiplicity-controlled.
+
+Numerical tail scores and categorical probabilities are not proven equally calibrated.
+LightGBM treats frequency-rank codes as numerical covariates, whereas TabPFN receives
+categorical indices, so the model contrast also reflects feature handling. Marginal
+baselines use whole observed columns, while conditional models exclude query folds.
+Whole-universe penalties keep unsupported and failed cells in the denominator, but
+do not make support equivalent; in one injected unit the failure penalty covered about
+half of all TabPFN cells and reversed one secondary contrast. Rare-valid alarm rates
+cover a reference-defined subset and do not establish protection of legitimate
+minority values.
+
+Purification is one suspicion-based rule at one removal fraction and context cap;
+it is neither an influence function nor a robustness theorem. The accounted
+matched-compute control does not test whether another use of the same compute,
+such as context ensembling, would help. Other selection strategies, context-size
+sweeps and clean-calibration regimes are outside this study. DDCcore coincided with
+RobustZ on every real-error unit and adds no evidence about relational numerical
+detection. Reference CDC, reference DDC, unsupervised TabPFN extensions, Auto-Test,
+MaTElDa and LUCARIO were not run, which precludes state-of-the-art claims.
+
+Reproduction requires the pinned data and weights, the source-freeze manifest,
+declared package versions and the retained predictions. The analysis script recreates
+metrics, intervals, tables and figures from those predictions; rerunning it gave
+byte-identical outputs, and a separate audit checks input identity, context-boundary
+logs and AP against scikit-learn. These checks reuse our own implementation and are
+not an independent replication. Code and checkpoint licenses are separate, and
+redistribution must respect the pinned weight terms. Built with PriorLabs-TabPFN.

@@ -1,0 +1,47 @@
+{
+  "kind": "local runtime metadata provenance; no model imported",
+  "python": "3.12.6 (tags/v3.12.6:a4a2d2b, Sep  6 2024, 20:11:23) [MSC v.1940 64 bit (AMD64)]",
+  "executable": "F:\\competitions\\ACIIDS\\ACIIDS2027\\.venv-tfm\\Scripts\\python.exe",
+  "prefix": "F:\\competitions\\ACIIDS\\ACIIDS2027\\.venv-tfm",
+  "base_prefix": "D:\\python",
+  "include_system_site_packages": true,
+  "pyvenv_cfg_sha256": "9b0c6e6de43821337c31fbb633012f1f1e2e6ae1138d215ff880c1152bce689d",
+  "before_pin_record_sha256": "6cd293ce90ba56a52cde28ca065df843d296d85eada1e0b7c02730895affd3c6",
+  "before_pin_record_archive": "experiments/archive/tfm_env_freeze_before_core_pin_20261030.txt",
+  "current_pin_record_sha256": "e8ee2a0966f2ad6f3a775e45c2dd18f69412939c018917635e8db986e8ce657f",
+  "core": {
+    "torch": {
+      "version": "2.11.0",
+      "installation_root": "D:\\python\\Lib\\site-packages"
+    },
+    "tabpfn": {
+      "version": "9.2.0",
+      "installation_root": "F:\\competitions\\ACIIDS\\ACIIDS2027\\.venv-tfm\\Lib\\site-packages"
+    },
+    "lightgbm": {
+      "version": "4.6.0",
+      "installation_root": "F:\\competitions\\ACIIDS\\ACIIDS2027\\.venv-tfm\\Lib\\site-packages"
+    },
+    "numpy": {
+      "version": "2.5.4",
+      "installation_root": "F:\\competitions\\ACIIDS\\ACIIDS2027\\.venv-tfm\\Lib\\site-packages"
+    },
+    "pandas": {
+      "version": "3.1.0",
+      "installation_root": "F:\\competitions\\ACIIDS\\ACIIDS2027\\.venv-tfm\\Lib\\site-packages"
+    },
+    "scipy": {
+      "version": "1.18.1",
+      "installation_root": "F:\\competitions\\ACIIDS\\ACIIDS2027\\.venv-tfm\\Lib\\site-packages"
+    },
+    "scikit-learn": {
+      "version": "1.9.1",
+      "installation_root": "F:\\competitions\\ACIIDS\\ACIIDS2027\\.venv-tfm\\Lib\\site-packages"
+    }
+  },
+  "limitations": [
+    "version metadata does not pin wheel/build artifacts",
+    "system-site-packages enabled; not an isolated environment",
+    "complete dependency/build/license freeze remains pending"
+  ]
+}
