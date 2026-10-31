@@ -103,21 +103,22 @@ class Encoder:
 class TabPFNModel:
     name = "tabpfn-v2"
 
-    def __init__(self, clf_path, reg_path, n_estimators=1, seed=0):
+    def __init__(self, clf_path, reg_path, n_estimators=1, seed=0, threads=3):
         from tabpfn import TabPFNClassifier, TabPFNRegressor
         self._C, self._R = TabPFNClassifier, TabPFNRegressor
         self.clf_path, self.reg_path, self.n_est, self.seed = str(clf_path), str(reg_path), n_estimators, seed
+        self.threads = threads
 
     def class_proba(self, Xc, yc, Xq, cat_idx):
         m = self._C(model_path=self.clf_path, device="cpu", n_estimators=self.n_est, random_state=self.seed,
-                    categorical_features_indices=cat_idx or None, ignore_pretraining_limits=True)
+                    categorical_features_indices=cat_idx or None, ignore_pretraining_limits=True, n_jobs=self.threads)
         m.fit(Xc, yc)
         return m.classes_, m.predict_proba(Xq)
 
     def tail(self, Xc, yc, Xq, yq, cat_idx):
         import torch
         m = self._R(model_path=self.reg_path, device="cpu", n_estimators=self.n_est, random_state=self.seed,
-                    categorical_features_indices=cat_idx or None, ignore_pretraining_limits=True)
+                    categorical_features_indices=cat_idx or None, ignore_pretraining_limits=True, n_jobs=self.threads)
         m.fit(Xc, yc)
         full = m.predict(Xq, output_type="full")
         y = torch.as_tensor(yq, dtype=full["logits"].dtype).unsqueeze(-1)
@@ -235,7 +236,7 @@ def folds_and_bases(n, k, cap, seed, groups=None):
         folds = [np.sort(perm[f::k]) for f in range(k)]
     else:
         groups = np.asarray(groups)
-        if len(groups) != n:
+        if groups.ndim != 1 or len(groups) != n or pd.isna(groups).any():
             raise ValueError("One group key per row is required")
         uniq = rng.permutation(np.unique(groups))
         if len(uniq) < k:
@@ -255,7 +256,7 @@ def score_table(dirty, cols, model, arm, seed, k=5, cap=512, q=0.15, pass1=None,
     """Candidate scorer; purification isolates all pass-1 work from the outer fold.
 
     Global pass-1 matrices are rejected because their scores may depend on the outer
-    query fold. This correction is not an approved amendment to preregistration v2.
+    query fold. Nested pass-1 and row-primary/LEO-secondary follow the v2.1 decisions.
     The declared transductive final-pass encoding remains visible in context logs.
     """
     t0 = time.perf_counter()  # includes typing, encoding and nested first-pass work
@@ -332,6 +333,11 @@ def _score_table(dirty, cols, model, arm, seed, k, cap, q, clean, log,
             try:
                 S[qrows, j] = score_column(model, spec, j, Xc, vsrc[spec.name][ctx], Xq, vals_d[spec.name][qrows],
                                            enc.categorical_idx(j))
+                bad = int((~np.isfinite(S[qrows, j])).sum())
+                if bad and log is not None:
+                    log.failures.append({"seed": seed, "fold": f, "column": spec.name,
+                                         "arm": arm, "stage": stage, "outer_fold": outer_fold,
+                                         "nonfinite_cells": bad, "error": "Nonfinite model output"})
             except Exception as e:  # preregistered: failed cells get the coverage penalty later
                 S[qrows, j] = np.nan
                 if log is not None:

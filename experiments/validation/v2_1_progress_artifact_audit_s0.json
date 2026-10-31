@@ -1,0 +1,111 @@
+{
+  "status": "PARTIAL_TECHNICAL_CHECK_ONLY",
+  "scope": "First real seed0 from each table; not complete-grid analysis or acceptance",
+  "prereg_sha256": "eea8f0ee8b217458a82b073bac5261f43ab8056e1b4eb32a170e5aece061543a",
+  "source_snapshot_sha256": "c37e39ab8168ed2fda38e9a6e952a15114bda4faa595356c7aeeb5f633bf5678",
+  "code_sha256": {
+    "src/cric_ed/conditional.py": "4001f9c53d91300b4cdbb3262d82851fa254e29ff8ef0fb37d60aab2cc1c219f",
+    "src/cric_ed/baselines.py": "a7e79639d4756bd3e5b4c978121eeb92cc363bd01d5d0f1c725b061a7b03ff8b",
+    "src/cric_ed/benchmark.py": "9428429b53291ffdfd4c0c53dc62ed48691a9af184e21d8b97654f5104f8f866",
+    "src/cric_ed/v2_contract.py": "576219f7c25300426efb010c610131d089a7c53fd6abc1fe665b216cc2a44202",
+    "src/cric_ed/run_record.py": "18df9f5d3ec70747468e56b7ff7c55e151073fc3b6fe1acd30266ded00784209",
+    "experiments/tfm/run_v2.py": "b24c62ca4174d8d9afc2a47b2a79f5e87996d1e3b4ee952a1106a5d947da94cf",
+    "experiments/tfm/analyze_v2.py": "1f57ceee29a3109c44f3f37d2579e5f84519a8d63e3389cf1941d76b2456365b"
+  },
+  "runs": [
+    {
+      "table": "hospital",
+      "condition": "real",
+      "seed": 0,
+      "contexts_verified": 2090,
+      "fit_failure_events": 0,
+      "final_nonfinite_cells": {
+        "lgbm__raw__nan_cells": 0,
+        "lgbm__random__nan_cells": 0,
+        "lgbm__purify__nan_cells": 0,
+        "lgbm__oracle__nan_cells": 0,
+        "lgbm__leaky__nan_cells": 0,
+        "lgbm__raw_leo__nan_cells": 0,
+        "tabpfn-v2__raw__nan_cells": 0,
+        "tabpfn-v2__random__nan_cells": 0,
+        "tabpfn-v2__purify__nan_cells": 0,
+        "tabpfn-v2__oracle__nan_cells": 0,
+        "tabpfn-v2__leaky__nan_cells": 0,
+        "tabpfn-v2__raw_leo__nan_cells": 0
+      },
+      "errors": 509,
+      "cells": 19000,
+      "scores_sha256": "61e4b45885809e4fa132b4267f8b33a30b3a516897ddbc60f7ad480a737d6a87"
+    },
+    {
+      "table": "flights",
+      "condition": "real",
+      "seed": 0,
+      "contexts_verified": 660,
+      "fit_failure_events": 0,
+      "final_nonfinite_cells": {
+        "lgbm__raw__nan_cells": 0,
+        "lgbm__random__nan_cells": 0,
+        "lgbm__purify__nan_cells": 0,
+        "lgbm__oracle__nan_cells": 0,
+        "lgbm__leaky__nan_cells": 0,
+        "lgbm__raw_leo__nan_cells": 0,
+        "tabpfn-v2__raw__nan_cells": 0,
+        "tabpfn-v2__random__nan_cells": 0,
+        "tabpfn-v2__purify__nan_cells": 0,
+        "tabpfn-v2__oracle__nan_cells": 0,
+        "tabpfn-v2__leaky__nan_cells": 0,
+        "tabpfn-v2__raw_leo__nan_cells": 0
+      },
+      "errors": 2033,
+      "cells": 6000,
+      "scores_sha256": "7a99bffb8c68b8e873b19f4b53b5b20c4786f135a089fa84d420b58fce9f1f1f"
+    },
+    {
+      "table": "beers",
+      "condition": "real",
+      "seed": 0,
+      "contexts_verified": 990,
+      "fit_failure_events": 0,
+      "final_nonfinite_cells": {
+        "lgbm__raw__nan_cells": 0,
+        "lgbm__random__nan_cells": 0,
+        "lgbm__purify__nan_cells": 0,
+        "lgbm__oracle__nan_cells": 0,
+        "lgbm__leaky__nan_cells": 0,
+        "lgbm__raw_leo__nan_cells": 0,
+        "tabpfn-v2__raw__nan_cells": 0,
+        "tabpfn-v2__random__nan_cells": 0,
+        "tabpfn-v2__purify__nan_cells": 0,
+        "tabpfn-v2__oracle__nan_cells": 0,
+        "tabpfn-v2__leaky__nan_cells": 0,
+        "tabpfn-v2__raw_leo__nan_cells": 0
+      },
+      "errors": 1815,
+      "cells": 9000,
+      "scores_sha256": "c91b1ed0aa0555aad2c171c86db453880dd7fe55ab2bd884c05d564b6246bcdf"
+    },
+    {
+      "table": "rayyan",
+      "condition": "real",
+      "seed": 0,
+      "contexts_verified": 1000,
+      "fit_failure_events": 0,
+      "final_nonfinite_cells": {
+        "lgbm__raw__nan_cells": 0,
+        "lgbm__random__nan_cells": 0,
+        "lgbm__purify__nan_cells": 0,
+        "lgbm__oracle__nan_cells": 0,
+        "lgbm__leaky__nan_cells": 0,
+        "tabpfn-v2__raw__nan_cells": 0,
+        "tabpfn-v2__random__nan_cells": 0,
+        "tabpfn-v2__purify__nan_cells": 0,
+        "tabpfn-v2__oracle__nan_cells": 0,
+        "tabpfn-v2__leaky__nan_cells": 0
+      },
+      "errors": 948,
+      "cells": 10000,
+      "scores_sha256": "29e0720f2838e20d88649485ba314cad94801a69f71129b8e72cb3c3b6f92e67"
+    }
+  ]
+}

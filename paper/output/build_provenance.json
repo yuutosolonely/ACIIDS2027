@@ -1,0 +1,37 @@
+{
+  "pages": 15,
+  "pdf_sha256": "642b4f8f57cb62b40a582b43fef5d78b370430b17cfd6226abf7ab0b0435e3a8",
+  "template": {
+    "url": "https://cms-resources.apps.public.k8s.springernature.io/springer-cms/rest/v1/content/27851904/data/LaTeX2e%20Proceedings%20Template%20ZIP",
+    "retrieved_utc": "2026-10-30T02:31:00.907142+00:00",
+    "zip_sha256": "42afb32ed4fadc9e209134ec65dab1bd2a7ead42f9a3f8abb184f250c4a197b9",
+    "files_sha256": {
+      "history.txt": "9a4a85d0e7ab49fa35c638fee5e4083ae2b5bd0f5a943113098dc2e86e62d261",
+      "splncs04.bst": "f36c3a17e5304a692706359aafa9de709395a085e579eb47c027095aeaa35174",
+      "readme.txt": "d5a69ddfcd5d316877c301e9504c6302d1f1dc7b2c8f128d8066cdd0b0a7e21a",
+      "llncs.cls": "04ec99046ad9867f6cd54ffd1ef8c47c767b327d1baec77536db0528cd492fa2"
+    },
+    "scope": "Public official template; no manuscript upload; retain embedded license notices"
+  },
+  "sources_sha256": {
+    "main.tex": "2aa623ccc1ae73a9b4ea72898a4d4e1743ad89a1906d992a99d2f7789aa53200",
+    "references.bib": "96760a7a111c3395344a26bb20ac1e0196cf839363f3fadd522212a71b2621dd",
+    "generated/baselines.tex": "ba04cfe399fe6e784450b50c550eee741b994d6d1f78fae7934712a2f4fa88a1",
+    "generated/cost.tex": "826010ec9dd31a174b722a19239f97632b97aafeb157fa92ca148127617b995c",
+    "generated/coverage.tex": "d6b264446854260e9c0140b5b90719d3ec29b0f47e38f43b36729a6d7ddd44fd",
+    "generated/numbers.tex": "5650e68d900290bd1d9797acc1c847299528f09ecab6eb8ab32a734ead996612",
+    "generated/primary.tex": "78ab03a8f475be95a95b4f4683067f21a47de20836c2625132f96900684bb184",
+    "generated/probes.tex": "9e5a5c4560bdfcf88efc2656dcba347c8dddda52862cf7243db514214fed6635",
+    "generated/rare.tex": "3373940e14d0f4ee6305fc753a9dcfc62182d43c140eec116927088ae12dba8f",
+    "generated/secondary.tex": "a349d0c1f19f3ebe3103b711d36bc00392f9f14297cb869ec92d7bbb08af70f7",
+    "sections/abstract.tex": "4d79122025975602c85dbc849f3950b1acd7d07e5fd5b06ffa80103202ed232a",
+    "sections/conclusion.tex": "7eab5401a21fb623018e381fc78be407bd770f41ec490e8154d2122b691528cd",
+    "sections/introduction.tex": "866aeb9c4a066d7422688e5e5d946d7ff76c60abf830b923095318f512206aba",
+    "sections/limitations.tex": "dc0d78167c3f02869a05c3819fa2d1f0e3ae747cab70764db811867a2f832c9c",
+    "sections/method.tex": "6cdba0fdafc26e501aaea71833c51ef0efa9d650520124975331c61d5a0b34ea",
+    "sections/protocol.tex": "c17e2f8dd3506749fba3f98798f23f42f16e4460aec103968ffc4a8bafebc060",
+    "sections/related_work.tex": "54c6a92ffc9b6d43c64be53c8d41110162ac9cc334648b82fbe6e7cfa49478a7",
+    "sections/results.tex": "a0a6bb263294ec75db957dce251fe15d3a95dd4b900c74ba5b2179aac5120d1b"
+  },
+  "compiler": "tectonic --only-cached --keep-logs --keep-intermediates main.tex"
+}

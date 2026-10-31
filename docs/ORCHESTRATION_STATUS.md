@@ -1,5 +1,7 @@
 # Orchestration Dashboard — CRIC-ED / ACIIDS 2027
 
+> **SUPERSEDED / WITHDRAWN 2026-10-31:** trạng thái gate dưới đây (2026-10-29) dựa trên pilot `run_pilot_001` có claim đã rút (CLM-02, CLM-03) và ghi “Independent Review PASS” không có reviewer độc lập. Không dùng làm trạng thái hiện hành; xem `docs/STATE.md`.
+
 Cập nhật: 2026-10-29.
 Điều phối viên chính: Lead Research Coordinator (Antigravity).
 Trạng thái tổng thể: **GATE G6 REACHED — READY FOR HUMAN AUTHOR SUBMISSION.**

@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{3.5pt}
+\caption{TabPFN time in minutes per run, five-seed means on real data. Inclusive purification equals nested preparation plus final work. Concurrent local CPU jobs; no peak-memory or forward-call measurement asserted.}
+\label{tab:cost}
+\begin{tabular}{lrrrrr}
+\toprule
+Table & Raw & Random & Nested & Purify final & Purify total \\
+\midrule
+hospital & 30.31 & 27.49 & 68.57 & 9.70 & 78.26 \\
+flights & 1.34 & 1.26 & 8.92 & 1.56 & 10.48 \\
+beers & 4.45 & 3.92 & 21.19 & 3.90 & 25.08 \\
+rayyan & 2.59 & 2.57 & 6.71 & 1.20 & 7.91 \\
+\bottomrule
+\end{tabular}
+\end{table}

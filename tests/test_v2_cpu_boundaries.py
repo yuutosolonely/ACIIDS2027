@@ -98,12 +98,9 @@ def test_timing_includes_preprocessing(monkeypatch):
     assert log.seconds[("raw", 0)] == 10.0
 
 
-def test_analysis_rejects_partial_hypothesis_grid_and_nonfinite_estimates():
-    d = {"delta": 0.1, "ci95": [0.01, 0.2]}
-    with pytest.raises(ValueError, match="all declared"):
-        analysis.decide([d] * 11)
-    with pytest.raises(ValueError, match="finite"):
-        analysis.decide([d] * 11 + [{"delta": float("nan"), "ci95": [0.0, 0.2]}])
+def test_analysis_has_no_cross_dataset_hypothesis_verdict():
+    assert not hasattr(analysis, "decide")
+    assert not hasattr(analysis, "holm")
 
 
 def test_bootstrap_keeps_all_seeds_in_each_valid_replicate(monkeypatch):
@@ -128,7 +125,7 @@ def synthetic_run(meta_seed=0, condition="real"):
     for b in BASELINES:
         arrays[f"baseline__{b}"] = np.zeros(E.shape)
     for m in MODELS:
-        for a in ("raw", "random", "purify", "oracle") + (("leaky",) if condition == "real" else ()):
+        for a in ("raw", "random", "purify", "oracle") + (("leaky", "raw_leo") if condition == "real" else ()):
             arrays[f"{m}__{a}"] = np.zeros(E.shape)
             arrays[f"{m}__{a}__nan_cells"] = np.zeros(E.shape, bool)
     return meta, arrays

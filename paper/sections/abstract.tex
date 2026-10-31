@@ -1,0 +1,16 @@
+Conditional prediction can score individual cells of a dirty table, but the
+reference examples used by a tabular foundation model can themselves be corrupted.
+We evaluate a fixed purification rule that removes context rows with the largest
+nested out-of-fold target-cell scores, with all first-pass work isolated from the
+outer query fold. A paired random-removal control holds base contexts and removal
+counts fixed, and nested preparation costs are reported explicitly. The study covers
+four capped benchmark tables, real and two injected-error conditions, five seeds,
+and both TabPFN-2 and LightGBM. On real errors, purification was worse than matched
+random removal on three tables and better on one (TabPFN AP difference $-0.161$
+on hospital, $-0.049$ on flights, $+0.026$ on beers and $-0.030$ on rayyan), and no detector,
+including the simple baselines, was best on every table. These are per-table
+findings with conditional row-bootstrap uncertainty, not a population-wide verdict.
+We also report support, failures, rare-valid alarms, boundary sensitivity and
+compute on the complete eligible-cell universe. The results argue for testing
+context selection against matched random removal rather than assuming that a
+cleaner-looking context helps.

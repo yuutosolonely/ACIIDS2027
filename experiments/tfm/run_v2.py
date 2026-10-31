@@ -2,9 +2,7 @@
 (table, condition, seed) under experiments/runs/v2/ and never overwrites an existing one.
 
 Confirmatory tables require both the protocol hash and a full source freeze manifest.
-The candidate's nested purification amendment must be approved before any such freeze.
-
-Usage (isolated env): .venv-tfm/Scripts/python.exe experiments/tfm/run_v2.py --table hospital
+Usage (existing scientific env): .venv-tfm/Scripts/python.exe experiments/tfm/run_v2.py --table movies_1
     --condition real --seeds 0 1 2 3 4
 """
 from __future__ import annotations
@@ -12,6 +10,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import platform
 import subprocess
 import sys
@@ -55,19 +54,21 @@ def check_prereg(table: str):
     return {"role": "confirmatory", **verify_freeze(REPO)}
 
 
-def run(table: str, condition: str, seed: int, models: list[str], out_root: Path):
+def run(table: str, condition: str, seed: int, models: list[str], out_root: Path, threads=3):
     run_started = time.perf_counter()
     role = check_prereg(table)
     if condition not in {"real", "inj-random", "inj-systematic"} or type(seed) is not int:
         raise ValueError("Invalid condition or seed")
     if len(set(models)) != len(models) or not models or set(models) - set(MODELS):
         raise ValueError("Unknown, empty or duplicate model list")
+    if type(threads) is not int or threads < 1:
+        raise ValueError("threads must be a positive integer")
     if table in CONFIRMATORY and (seed not in SEEDS or set(models) != set(MODELS)):
         raise ValueError("Confirmatory runs require both declared models and a declared seed")
     out = out_root / f"{table}__{condition}__s{seed}"
     if out.exists():
         raise FileExistsError("Refusing to reuse an existing run: " + str(out))
-    request = {"table": table, "condition": condition, "seed": seed, "models": models,
+    request = {"table": table, "condition": condition, "seed": seed, "models": models, "threads": threads,
                **role, "git": git_state(), "python": platform.python_version(),
                "code_sha256": {p: sha(REPO / p) for p in SOURCE_FILES}}
     with run_attempt(out, request, required=("scores.npz", "contexts.jsonl", "meta.json")) as attempt:
@@ -76,13 +77,13 @@ def run(table: str, condition: str, seed: int, models: list[str], out_root: Path
         attempt.phase("verify_inputs")
         checkpoint_ids = verify_local_inputs(REPO, table)
         meta = _execute_run(table, condition, seed, models, role, checkpoint_ids,
-                            runtime_versions, run_started, attempt)
+                            runtime_versions, run_started, attempt, threads)
     print(f"done {out.name} errors={meta['errors']} failures={len(meta['failures'])} "
           f"time={meta['wall_clock_sec']:.0f}s", flush=True)
 
 
 def _execute_run(table, condition, seed, models, role, checkpoint_ids,
-                 runtime_versions, run_started, attempt):
+                 runtime_versions, run_started, attempt, threads=3):
     tmp = attempt.directory
     attempt.phase("load_table")
     t = get_table(table, condition, seed)
@@ -96,7 +97,7 @@ def _execute_run(table, condition, seed, models, role, checkpoint_ids,
         timing[f"baseline__{name}"] = round(time.perf_counter() - t0, 3)
     for mname in models:
         attempt.phase("model_setup:" + mname)
-        model = TabPFNModel(CLF, REG, n_estimators=1, seed=seed) if mname == "tabpfn-v2" else LGBMModel(seed)
+        model = TabPFNModel(CLF, REG, n_estimators=1, seed=seed, threads=threads) if mname == "tabpfn-v2" else LGBMModel(seed)
         log = RunLog()
         attempt.phase("score:" + mname + ":raw")
         raw, specs = score_table(t.dirty, cols, model, "raw", seed, log=log)
@@ -129,7 +130,10 @@ def _execute_run(table, condition, seed, models, role, checkpoint_ids,
         "column_specs": [s.__dict__ for s in column_specs(t.dirty, cols)],
         "table_meta": t.meta, "timing_sec": timing, "failures": failures,
         "params": {"folds": 5, "context_cap": 512, "q": 0.15, "tabpfn_n_estimators": 1, "rate": 0.10,
+                   "threads": threads, "lgbm_n_jobs": 1,
                    "entity_key_leo": __import__("cric_ed.benchmark", fromlist=["ENTITY_KEYS"]).ENTITY_KEYS.get(table)},
+        "hardware": {"logical_cpus": os.cpu_count(), "machine": platform.machine(),
+                     "processor": platform.processor()},
         "git": git_state(), "python": platform.python_version(),
         "runtime_versions": runtime_versions,
         "code_sha256": {p: sha(REPO / p) for p in SOURCE_FILES},
@@ -150,13 +154,26 @@ def main():
     ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2, 3, 4])
     ap.add_argument("--models", nargs="+", default=["lgbm", "tabpfn-v2"])
     ap.add_argument("--out", default=str(REPO / "experiments/runs/v2"))
+    ap.add_argument("--threads", type=int, default=3,
+                    help="Torch/BLAS/TabPFN CPU threads per process; LGBM stays at n_jobs=1")
     a = ap.parse_args()
     if any(m not in ("lgbm", "tabpfn-v2") for m in a.models) or len(set(a.models)) != len(a.models):
         ap.error("Expected distinct models from {lgbm, tabpfn-v2}")
     if len(set(a.seeds)) != len(a.seeds):
         ap.error("Duplicate seeds are not allowed")
-    for s in a.seeds:
-        run(a.table, a.condition, s, a.models, Path(a.out))
+    if a.threads < 1:
+        ap.error("--threads must be positive")
+    for key in ("OMP_NUM_THREADS", "MKL_NUM_THREADS", "OPENBLAS_NUM_THREADS", "NUMEXPR_NUM_THREADS"):
+        os.environ[key] = str(a.threads)
+    os.environ["HF_HUB_OFFLINE"] = "1"
+    os.environ["TABPFN_DISABLE_TELEMETRY"] = "1"
+    os.environ["TABPFN_MODEL_CACHE_SIZE"] = "0"
+    import torch
+    from threadpoolctl import threadpool_limits
+    torch.set_num_threads(a.threads)
+    with threadpool_limits(limits=a.threads):
+        for s in a.seeds:
+            run(a.table, a.condition, s, a.models, Path(a.out), threads=a.threads)
 
 
 if __name__ == "__main__":

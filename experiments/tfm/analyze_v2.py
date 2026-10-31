@@ -1,26 +1,23 @@
-"""Candidate analysis for preregistration v2. Reads experiments/runs/v2/*/ and writes
-experiments/archive/v2_analysis/ (results.json, CSV/LaTeX tables, figures).
-
-Every number in the paper must come from the files this script writes.
-"""
+"""Per-source-table descriptive analysis for v2.1; no cross-dataset verdict."""
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import sys
 from collections import defaultdict
 from pathlib import Path
 
 import numpy as np
-from scipy.stats import wilcoxon
 
 REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO / "src"))
 from cric_ed.v2_contract import (  # noqa: E402
-    BASELINES, CONDITIONS, MODELS, TABLES,
+    BASELINES, CONDITIONS, MODELS, TABLES, SOURCE_FILES, sha256,
     checkpoint_hashes, validate_run_grid, validate_run_metadata, verify_freeze,
 )
-ARMS = ("raw", "random", "purify", "oracle", "leaky")
+from cric_ed.benchmark import DEVELOPMENT, ENTITY_KEYS  # noqa: E402
+ARMS = ("raw", "random", "purify", "oracle", "leaky", "raw_leo")
 B = 1000
 
 
@@ -78,6 +75,8 @@ def validate_arrays(meta, arrs):
         raise ValueError("Binary error mask with positive count matching metadata required")
     required = [f"baseline__{b}" for b in BASELINES]
     arms = ("raw", "random", "purify", "oracle") + (("leaky",) if meta["condition"] == "real" else ())
+    if meta["condition"] == "real" and meta.get("table") in ENTITY_KEYS:
+        arms += ("raw_leo",)
     required += [f"{m}__{a}" for m in MODELS for a in arms]
     for key in required:
         if key not in arrs or arrs[key].shape != shape or not np.isfinite(arrs[key]).all():
@@ -88,16 +87,21 @@ def validate_arrays(meta, arrs):
                 raise ValueError("Missing or invalid failure mask: " + key)
 
 
-def load(run_root: Path, expected=None):
+def load(run_root: Path, expected=None, development=False):
     if expected is None:
-        expected = {**verify_freeze(REPO), "checkpoint_sha256": checkpoint_hashes(REPO)}
+        expected = ({"code_sha256": {p: sha256(REPO / p) for p in SOURCE_FILES}}
+                    if development else verify_freeze(REPO))
+        expected = {**expected, "checkpoint_sha256": checkpoint_hashes(REPO)}
     units = defaultdict(list)
     identities = []
     for d in sorted(run_root.glob("*__*__s*")):
         if d.name.endswith(".partial"):
             raise ValueError("Unresolved partial run: " + d.name)
         meta = json.loads((d / "meta.json").read_text(encoding="utf-8"))
-        table, condition, seed = validate_run_metadata(meta, expected)
+        if development:
+            table, condition, seed = validate_development_metadata(meta, expected)
+        else:
+            table, condition, seed = validate_run_metadata(meta, expected)
         attempt = json.loads((d / "attempt.json").read_text(encoding="utf-8"))
         if attempt.get("status") != "completed" or any(
                 attempt.get("request", {}).get(key) != meta.get(key)
@@ -110,7 +114,14 @@ def load(run_root: Path, expected=None):
         validate_arrays(meta, arrs)
         units[(table, condition)].append((meta, arrs))
         identities.append((table, condition, seed))
-    validate_run_grid(identities)
+    if development:
+        if len(identities) != len(set(identities)) or not identities:
+            raise ValueError("Empty or duplicate development runs")
+        seeds = {s for _, _, s in identities}
+        if set(identities) != {(DEVELOPMENT[0], c, s) for c in CONDITIONS for s in seeds}:
+            raise ValueError("Development analysis requires all conditions and the same seeds")
+    else:
+        validate_run_grid(identities)
     for runs in units.values():
         runs.sort(key=lambda r: r[0]["seed"])
         ref_meta, ref_arrs = runs[0]
@@ -119,7 +130,26 @@ def load(run_root: Path, expected=None):
                     meta["eligible_columns"] != ref_meta["eligible_columns"] or
                     not np.array_equal(arrs["clean_values"], ref_arrs["clean_values"])):
                 raise ValueError("Row or column alignment differs across seeds")
+            if meta["condition"] == "real" and not np.array_equal(arrs["errors"], ref_arrs["errors"]):
+                raise ValueError("Real error masks differ across seeds")
     return units
+
+
+def validate_development_metadata(meta, expected):
+    """The explicit development bypass can never admit a confirmatory table."""
+    table, condition, seed = (meta.get(k) for k in ("table", "condition", "seed"))
+    if (table not in DEVELOPMENT or meta.get("role") != "development" or
+            condition not in CONDITIONS or type(seed) is not int):
+        raise ValueError("Development mode accepts movies_1 development artifacts only")
+    if meta.get("status") != "completed" or not isinstance(meta.get("failures"), list):
+        raise ValueError("Completed status and explicit failure list required")
+    models = meta.get("models", [])
+    if len(models) != len(MODELS) or set(models) != set(MODELS):
+        raise ValueError("Both declared models are required exactly once")
+    for key in ("code_sha256", "checkpoint_sha256"):
+        if key not in expected or meta.get(key) != expected[key]:
+            raise ValueError("Development run differs from current " + key)
+    return table, condition, seed
 
 
 def methods_of(arrs):
@@ -138,7 +168,17 @@ def unit_metrics(runs):
         for m in methods_of(arrs):
             S = arrs[m]
             r = res[m]
+            method_sup = (np.array([s["kind"] == "numeric" for s in meta["column_specs"]])
+                          if m in {"baseline__RobustZ", "baseline__DDCcore"} else
+                          sup if m.split("__")[0] in MODELS else np.ones(E.shape[1], dtype=bool))
+            r["supported_cells"].append(int(E.shape[0] * method_sup.sum()))
+            r["supported_errors"].append(int(E[:, method_sup].sum()))
+            r["rare_valid_cells"].append(int(rv.sum()))
             r["auprc"].append(ap_fast(S.ravel(), E.ravel()))
+            for kind in ("numeric", "categorical"):
+                selected = np.array([spec["kind"] == kind for spec in meta["column_specs"]])
+                if selected.any():
+                    r["auprc_" + kind].append(ap_fast(S[:, selected].ravel(), E[:, selected].ravel()))
             top = topk_mask(S, k)
             r["r_precision"].append(float(E[top].mean()))
             for frac, key in ((0.01, "p_at_1pct"), (0.05, "p_at_5pct")):
@@ -146,8 +186,8 @@ def unit_metrics(runs):
             r["rare_valid_alarm"].append(float(top[rv].mean()) if rv.any() else float("nan"))
             if m.split("__")[0] in MODELS:
                 r["nan_cells"].append(int(arrs.get(m + "__nan_cells", np.zeros(1)).sum()))
-            if sup.any() and E[:, sup].any():
-                r["auprc_supported_cols"].append(ap_fast(S[:, sup].ravel(), E[:, sup].ravel()))
+            if method_sup.any() and E[:, method_sup].any():
+                r["auprc_supported_cols"].append(ap_fast(S[:, method_sup].ravel(), E[:, method_sup].ravel()))
             if meta["condition"] == "real":
                 keep = E.mean(0) <= 0.5
                 if E[:, keep].any():
@@ -155,7 +195,15 @@ def unit_metrics(runs):
         res["_coverage"]["cells_supported"].append(float(sup.mean()))
         res["_coverage"]["errors_in_supported"].append(float(E[:, sup].sum() / max(E.sum(), 1)))
         res["_coverage"]["error_rate"].append(float(E.mean()))
-    return {m: {k: float(np.nanmean(v)) for k, v in d.items()} for m, d in res.items()}
+        res["_coverage"]["cells"].append(int(E.size))
+        res["_coverage"]["errors"].append(int(E.sum()))
+        res["_coverage"]["rare_valid_cells"].append(int(rv.sum()))
+        if meta["condition"] != "real":
+            target = round(meta.get("params", {}).get("rate", 0.1) * E.size)
+            res["_coverage"]["injection_target"].append(target)
+            res["_coverage"]["injection_shortfall"].append(target - int(E.sum()))
+    return {m: {k: (float(np.nanmean(v)) if np.isfinite(v).any() else float("nan"))
+                for k, v in d.items()} for m, d in res.items()}
 
 
 def paired_delta(runs, a, b, seed=2027):
@@ -178,123 +226,198 @@ def paired_delta(runs, a, b, seed=2027):
     if not boots:
         raise ValueError("No valid bootstrap replicates for the fixed seed mean")
     lo, hi = np.percentile(boots, [2.5, 97.5])
-    return {"delta": float(point), "ci95": [float(lo), float(hi)], "valid": len(boots)}
+    return {"delta": float(point), "ci95": [float(lo), float(hi)], "valid": len(boots),
+            "attempted": B, "bootstrap_seed": seed}
 
 
-def decide(deltas):
-    if len(deltas) != len(TABLES) * len(CONDITIONS):
-        raise ValueError("Hypothesis verdict requires all declared dataset-condition units")
-    d = np.array([x["delta"] for x in deltas])
-    if not np.isfinite(d).all() or any(len(x["ci95"]) != 2 or not np.isfinite(x["ci95"]).all()
-                                     for x in deltas):
-        raise ValueError("Hypothesis inputs must be finite paired estimates")
-    pos_ci = sum(1 for x in deltas if x["ci95"][0] > 0)
-    p = float(wilcoxon(d, alternative="greater").pvalue) if np.any(d != 0) else 1.0
-    supported = p < 0.05 and pos_ci >= 8
-    verdict = "supported" if supported else ("reversed" if np.median(d) < 0 else "not supported")
-    return {"n_units": len(deltas), "median_delta": float(np.median(d)), "mean_delta": float(d.mean()),
-            "units_ci_above_0": pos_ci, "wilcoxon_p_one_sided": p, "verdict": verdict}
+
+COMPARISONS = {
+    "purify_minus_random": ("tabpfn-v2__purify", "tabpfn-v2__random"),
+    "tfm_minus_lgbm_raw": ("tabpfn-v2__raw", "lgbm__raw"),
+    "oracle_minus_raw": ("tabpfn-v2__oracle", "tabpfn-v2__raw"),
+    "purify_minus_raw": ("tabpfn-v2__purify", "tabpfn-v2__raw"),
+    "lgbm_purify_minus_random": ("lgbm__purify", "lgbm__random"),
+}
 
 
-def holm(pvals: dict):
-    items = sorted(pvals.items(), key=lambda kv: kv[1])
-    out, m, running = {}, len(items), 0.0
-    for i, (k, p) in enumerate(items):
-        running = max(running, min(1.0, (m - i) * p))
-        out[k] = running
-    return out
+def cost_metrics(runs):
+    """Shared work is measured once; matched-budget totals are derived, not additive arms."""
+    vals = defaultdict(list)
+    for meta, _ in runs:
+        timing = meta.get("timing_sec", {})
+        for key, value in timing.items():
+            if not np.isfinite(value) or value < 0:
+                raise ValueError("Invalid nonnegative finite timing: " + key)
+            vals[key].append(float(value))
+        if "wall_clock_sec" in meta:
+            vals["wall_clock_sec"].append(meta["wall_clock_sec"])
+        for model in MODELS:
+            nested = timing.get(model + "__pass1_nested")
+            purify = timing.get(model + "__purify")
+            random = timing.get(model + "__random")
+            if None not in (nested, purify, random):
+                if nested > purify + 0.002:  # serialization rounding only
+                    raise ValueError("Nested cost exceeds inclusive purification time")
+                vals[model + "__purify_final"].append(max(0.0, purify - nested))
+                vals[model + "__random_matched_total"].append(random + nested)
+    return {key: float(np.mean(values)) for key, values in vals.items()}
+
+
+def analyze(units, development=False):
+    result = {
+        "role": "development" if development else "confirmatory",
+        "reporting": "per-source-table descriptive; no cross-dataset superiority verdict",
+        "uncertainty": "95% percentile row bootstrap; same rows across arms and seeds; fixed seed mean",
+        "uncertainty_scope": "Conditional on these source tables and context seeds; assumes independent rows. "
+                             "Repeated entities can invalidate row-bootstrap coverage; LEO does not fix this.",
+        "bootstrap_replicates": B, "units": {}, "macro_descriptive": {}, "provenance": [],
+        "cost_accounting": "pass1_nested is included in purify; purify_final subtracts it. "
+                           "random_matched_total adds the same shared pass1 cost to random. "
+                           "Do not sum these overlapping timing entries.",
+    }
+    macros = defaultdict(list)
+    for (table, condition), runs in sorted(units.items()):
+        pairs = dict(COMPARISONS)
+        if condition == "real":
+            for model in MODELS:
+                pairs[model + "_leaky_minus_raw"] = (model + "__leaky", model + "__raw")
+        if condition == "real" and table in ENTITY_KEYS:
+            for model in MODELS:
+                pairs[model + "_raw_leo_minus_raw"] = (model + "__raw_leo", model + "__raw")
+        unit = {"seeds": [m["seed"] for m, _ in runs], "metrics": unit_metrics(runs),
+                "paired": {}, "cost_seconds_seed_mean": cost_metrics(runs),
+                "failures": [{"seed": m["seed"], "events": m["failures"]} for m, _ in runs]}
+        unit["seed_metrics"] = [{"seed": meta["seed"], "metrics": unit_metrics([(meta, arrs)])}
+                                for meta, arrs in runs]
+        unit["metric_defined_seed_counts"] = {
+            method: {metric: int(sum(np.isfinite(x["metrics"].get(method, {}).get(metric, float("nan")))
+                                      for x in unit["seed_metrics"]))
+                     for metric in measures} for method, measures in unit["metrics"].items()}
+        for name, (a, b) in pairs.items():
+            effect = paired_delta(runs, a, b)
+            effect["category"] = (("primary" if condition == "real" else "mechanism_probe")
+                                  if name == "purify_minus_random" else "secondary")
+            unit["paired"][name] = effect
+            macros[(condition, name)].append((table, effect["delta"]))
+        result["units"][f"{table}|{condition}"] = unit
+        for meta, _ in runs:
+            result["provenance"].append({k: meta.get(k) for k in (
+                "table", "condition", "seed", "git", "code_sha256", "checkpoint_sha256",
+                "prereg_sha256", "source_snapshot_sha256", "runtime_versions", "params")})
+    for (condition, name), values in sorted(macros.items()):
+        result["macro_descriptive"][f"{condition}|{name}"] = {
+            "mean_delta": float(np.mean([v for _, v in values])),
+            "tables": [t for t, _ in values], "n_tables": len(values),
+            "scope": "Unweighted descriptive mean across named source tables; no macro CI or test",
+        }
+    result["mechanism_oracle_gap_difference_descriptive"] = {}
+    for table in sorted({t for t, _ in units}):
+        random_key, systematic_key = table + "|inj-random", table + "|inj-systematic"
+        if random_key in result["units"] and systematic_key in result["units"]:
+            result["mechanism_oracle_gap_difference_descriptive"][table] = {
+                "systematic_minus_random": (result["units"][systematic_key]["paired"]["oracle_minus_raw"]["delta"] -
+                                             result["units"][random_key]["paired"]["oracle_minus_raw"]["delta"]),
+                "scope": "Derived difference between seed-mean oracle gaps; descriptive, no separate CI or independent-condition test"}
+    return result
+
+
+def _json_safe(value):
+    if isinstance(value, np.generic):
+        return _json_safe(value.item())
+    if isinstance(value, dict):
+        return {k: _json_safe(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [_json_safe(v) for v in value]
+    if isinstance(value, float) and not np.isfinite(value):
+        return None
+    return value
 
 
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--runs", default=str(REPO / "experiments/runs/v2"))
-    ap.add_argument("--out", default=str(REPO / "experiments/archive/v2_analysis"))
-    a = ap.parse_args()
-    out = Path(a.out)
-    units = load(Path(a.runs))
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--runs", default=str(REPO / "experiments/runs/v2"))
+    parser.add_argument("--out", default=str(REPO / "experiments/archive/v2_1_analysis"))
+    parser.add_argument("--development", action="store_true",
+                        help="Only movies_1, all three conditions, same seeds; never confirmatory tables")
+    args = parser.parse_args()
+    out = Path(args.out)
     if out.exists():
         raise ValueError("Refusing to overwrite an existing analysis directory")
-    keys = [(t, c) for t in TABLES for c in CONDITIONS]
-    result = {"units": {}, "hypotheses": {}, "seeds_per_unit": {f"{t}|{c}": len(units[(t, c)]) for t, c in keys}}
-    comparisons = {
-        "H1_tfm_minus_lgbm": ("tabpfn-v2__raw", "lgbm__raw"),
-        "H2a_oracle_minus_raw": ("tabpfn-v2__oracle", "tabpfn-v2__raw"),
-        "H3_purify_minus_random": ("tabpfn-v2__purify", "tabpfn-v2__random"),
-        "S_purify_minus_raw": ("tabpfn-v2__purify", "tabpfn-v2__raw"),
-        "S_lgbm_purify_minus_random": ("lgbm__purify", "lgbm__random"),
-    }
-    deltas = defaultdict(list)
-    for t, c in keys:
-        runs = units[(t, c)]
-        u = {"metrics": unit_metrics(runs), "paired": {}}
-        for name, (x, y) in comparisons.items():
-            if x in runs[0][1] and y in runs[0][1]:
-                d = paired_delta(runs, x, y)
-                u["paired"][name] = d
-                deltas[name].append(d)
-        result["units"][f"{t}|{c}"] = u
-        print(f"{t}|{c}: " + ", ".join(f"{k}={v['delta']:+.3f}" for k, v in u["paired"].items()), flush=True)
-    for name in ("H1_tfm_minus_lgbm", "H2a_oracle_minus_raw", "H3_purify_minus_random"):
-        if deltas[name]:
-            result["hypotheses"][name] = decide(deltas[name])
-    if result["hypotheses"]:
-        adj = holm({k: v["wilcoxon_p_one_sided"] for k, v in result["hypotheses"].items()})
-        for k, v in adj.items():
-            result["hypotheses"][k]["holm_p"] = v
-    gaps = {}
-    for t in TABLES:
-        g = {c: result["units"].get(f"{t}|{c}", {}).get("paired", {}).get("H2a_oracle_minus_raw", {}).get("delta")
-             for c in ("inj-random", "inj-systematic")}
-        if None not in g.values():
-            gaps[t] = {"gap_random": g["inj-random"], "gap_systematic": g["inj-systematic"],
-                       "systematic_minus_random": g["inj-systematic"] - g["inj-random"]}
-    result["H2b_descriptive"] = gaps
-    out.mkdir(parents=True, exist_ok=False)  # create output only after validation/analysis
-    (out / "results.json").write_text(json.dumps(result, indent=1) + "\n", encoding="utf-8")
+    units = load(Path(args.runs), development=args.development)
+    result = analyze(units, development=args.development)
+    out.mkdir(parents=True, exist_ok=False)
+    (out / "results.json").write_text(json.dumps(_json_safe(result), indent=2, allow_nan=False) + "\n",
+                                      encoding="utf-8")
     write_tables(result, out)
     write_figures(result, out)
+    print(f"Wrote {result['role']} descriptive analysis to {out}", flush=True)
 
 
-def write_tables(result, out: Path):
-    show = ["baseline__VF", "baseline__PF", "baseline__RobustZ", "baseline__ColumnIF", "baseline__DDCcore",
-            "lgbm__raw", "tabpfn-v2__raw", "tabpfn-v2__random", "tabpfn-v2__purify", "tabpfn-v2__oracle"]
-    rows = ["unit," + ",".join(show) + ",error_rate,cells_supported,errors_in_supported"]
-    for u, v in result["units"].items():
-        m = v["metrics"]
-        rows.append(u + "," + ",".join(f"{m.get(s, {}).get('auprc', float('nan')):.4f}" for s in show) + "," +
-                    ",".join(f"{m['_coverage'][k]:.4f}" for k in ("error_rate", "cells_supported", "errors_in_supported")))
-    (out / "auprc_table.csv").write_text("\n".join(rows) + "\n", encoding="utf-8")
-    rows = ["unit,comparison,delta,ci_lo,ci_hi"]
-    for u, v in result["units"].items():
-        for k, d in v["paired"].items():
-            rows.append(f"{u},{k},{d['delta']:.4f},{d['ci95'][0]:.4f},{d['ci95'][1]:.4f}")
-    (out / "paired_deltas.csv").write_text("\n".join(rows) + "\n", encoding="utf-8")
+def _write_table(out, name, fields, rows):
+    with (out / (name + ".csv")).open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.writer(handle)
+        writer.writerow(fields)
+        writer.writerows(rows)
+    def tex(value):
+        if isinstance(value, float):
+            return f"{value:.6f}" if np.isfinite(value) else "--"
+        return str(value).replace("\\", r"\textbackslash{}").replace("_", r"\_").replace("%", r"\%")
+    lines = [r"\begin{tabular}{" + "l" * len(fields) + "}", r"\hline",
+             " & ".join(map(tex, fields)) + r" \\", r"\hline"]
+    lines += [" & ".join(map(tex, row)) + r" \\" for row in rows]
+    lines += [r"\hline", r"\end{tabular}"]
+    (out / (name + ".tex")).write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
-def write_figures(result, out: Path):
+def write_tables(result, out):
+    metrics, paired, costs, macros, seed_metrics = [], [], [], [], []
+    for unit, values in result["units"].items():
+        table, condition = unit.split("|")
+        for method, measures in values["metrics"].items():
+            for metric, value in measures.items():
+                metrics.append([table, condition, method, metric, value])
+        for name, effect in values["paired"].items():
+            paired.append([table, condition, effect["category"], name, effect["delta"],
+                           *effect["ci95"], effect["valid"], len(values["seeds"])])
+        for component, seconds in values["cost_seconds_seed_mean"].items():
+            costs.append([table, condition, component, seconds])
+        for seed in values.get("seed_metrics", []):
+            for method, measures in seed["metrics"].items():
+                for metric, value in measures.items():
+                    seed_metrics.append([table, condition, seed["seed"], method, metric, value])
+    for key, values in result["macro_descriptive"].items():
+        condition, name = key.split("|")
+        macros.append([condition, name, values["mean_delta"], values["n_tables"]])
+    _write_table(out, "metrics", ["table", "condition", "method", "metric", "seed_mean"], metrics)
+    _write_table(out, "seed_metrics", ["table", "condition", "seed", "method", "metric", "value"], seed_metrics)
+    _write_table(out, "paired_deltas", ["table", "condition", "category", "comparison", "delta", "ci_lo",
+                                       "ci_hi", "bootstrap_valid", "seeds"], paired)
+    _write_table(out, "costs", ["table", "condition", "component", "seconds_seed_mean"], costs)
+    _write_table(out, "macro_descriptive", ["condition", "comparison", "mean_delta", "tables"], macros)
+
+
+def write_figures(result, out):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    names = [("H3_purify_minus_random", "purify − random"), ("S_purify_minus_raw", "purify − raw"),
-             ("H1_tfm_minus_lgbm", "TabPFN − LGBM"), ("H2a_oracle_minus_raw", "oracle − raw")]
-    units = list(result["units"].keys())
-    fig, axes = plt.subplots(1, len(names), figsize=(12, 0.32 * len(units) + 1.2), sharey=True)
-    for ax, (k, lab) in zip(axes, names):
-        for i, u in enumerate(units):
-            d = result["units"][u]["paired"].get(k)
-            if d:
-                ax.errorbar(d["delta"], i, xerr=[[d["delta"] - d["ci95"][0]], [d["ci95"][1] - d["delta"]]],
-                            fmt="o", color="#1f4e79", ms=3, capsize=2, lw=1)
-        ax.axvline(0, color="#999", lw=0.8)
-        ax.set_title(lab, fontsize=9)
-        ax.tick_params(labelsize=7)
-    axes[0].set_yticks(range(len(units)))
-    axes[0].set_yticklabels(units, fontsize=7)
-    axes[0].invert_yaxis()
-    fig.supxlabel("Δ AUPRC (seed mean, 95% row-bootstrap CI)", fontsize=8)
-    fig.tight_layout()
-    fig.savefig(out / "paired_deltas.pdf")
-    fig.savefig(out / "paired_deltas.png", dpi=150)
+    for category, conditions in (("primary", ("real",)), ("mechanism", CONDITIONS[1:])):
+        selected = [(key, val["paired"]["purify_minus_random"])
+                    for key, val in result["units"].items() if key.split("|")[1] in conditions]
+        fig, ax = plt.subplots(figsize=(7, max(2.5, 0.4 * len(selected) + 1)))
+        for i, (_, effect) in enumerate(selected):
+            lo, hi = effect["ci95"]
+            # A percentile CI need not contain the original point estimate.
+            ax.plot([lo, hi], [i, i], color="#1f4e79", lw=1.5)
+            ax.plot(effect["delta"], i, "o", color="#1f4e79", ms=4)
+        ax.axvline(0, color="#999999", lw=0.8)
+        ax.set_yticks(range(len(selected)), [key for key, _ in selected])
+        ax.invert_yaxis()
+        ax.set_xlabel("TabPFN purify - random AUPRC (seed mean, 95% row-bootstrap CI)")
+        ax.set_title(result["role"] + ": " + category + " descriptive effects")
+        fig.tight_layout()
+        for suffix in ("pdf", "png"):
+            fig.savefig(out / f"{category}_deltas.{suffix}", dpi=150)
+        plt.close(fig)
 
 
 if __name__ == "__main__":

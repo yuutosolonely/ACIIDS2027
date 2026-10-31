@@ -1,0 +1,31 @@
+{
+  "status": "completed",
+  "stage": "finalize",
+  "request": {
+    "table": "movies_1",
+    "condition": "inj-random",
+    "seed": 0,
+    "models": [
+      "lgbm",
+      "tabpfn-v2"
+    ],
+    "threads": 3,
+    "role": "development",
+    "git": {
+      "commit": "0aff63e292da7a071368f594015089d5d746fa05",
+      "dirty_files": 24
+    },
+    "python": "3.12.6",
+    "code_sha256": {
+      "src/cric_ed/conditional.py": "c0f78835ede95438deaec3880ed05653992dba87154ae7ca8c4ba83390fb5ee0",
+      "src/cric_ed/baselines.py": "a7e79639d4756bd3e5b4c978121eeb92cc363bd01d5d0f1c725b061a7b03ff8b",
+      "src/cric_ed/benchmark.py": "9428429b53291ffdfd4c0c53dc62ed48691a9af184e21d8b97654f5104f8f866",
+      "src/cric_ed/v2_contract.py": "576219f7c25300426efb010c610131d089a7c53fd6abc1fe665b216cc2a44202",
+      "src/cric_ed/run_record.py": "18df9f5d3ec70747468e56b7ff7c55e151073fc3b6fe1acd30266ded00784209",
+      "experiments/tfm/run_v2.py": "415059ebe20f3b481fc1a0df18608c6394df00c041d3b4862b7712c3ecf7e1f8",
+      "experiments/tfm/analyze_v2.py": "d833111bc69159611a6b1e69bc5a61bacb641521c05508ec770162d8abdb7434"
+    }
+  },
+  "started_at": "2026-10-30T02:24:36.764421+00:00",
+  "finished_at": "2026-10-30T02:48:53.062673+00:00"
+}

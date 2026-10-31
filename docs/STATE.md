@@ -1,20 +1,27 @@
 # Trạng thái nghiên cứu CRIC-ED — ACIIDS 2027
 
-Cập nhật: 2026-10-30 (candidate v2: CPU remediation, attempt journal và đề xuất phương pháp).
-Trạng thái tổng: **NO-GO FOR THIS DEADLINE (quyết định tác giả 2026-10-30) / NOT READY.** Chưa có bằng chứng confirmatory được đối soát. Có artifact smoke/dev TFM bổ sung sau bàn giao; quyền hạn, nguồn run và protocol v2 đang chờ làm rõ, không dùng để nâng gate.
-Bản ghi trước (2026-10-29, "G6 READY") đã bị thu hồi; vẫn còn trong Git history (commit `06ded05`).
+**Hiện hành — 2026-10-31 (rà soát nhất quán sau grid; Claude, theo yêu cầu người dùng):**
+- Source: HEAD `0aff63e` + working tree; freeze snapshot `c37e39ab…` kiểm lại bằng `verify_freeze` 2026-10-31: khớp. Không sửa run, split, seed, prereg hay phân tích confirmatory.
+- Grid v2.1: 60/60 units hoàn tất, cả TabPFN-v2 và LightGBM; artifact audit và split audit PASS (63.300 context records). Đây là artifact audit bằng script của chính dự án, không phải review độc lập.
+- Fit-failure: chỉ `hospital__inj-random__s4`; 435 lỗi TabPFN (input chứa giá trị vô hạn) ở final pass của cả bốn arm TabPFN và nested pass 1; LightGBM 0. Phạt cực đại phủ 54% ô (raw), 53% (purify), 51% (random), 15% (oracle); AP raw/random/purify của unit này ≈0.11. Sensitivity post hoc (exploratory, không preregister) `experiments/exploratory/v2_1_fit_failure_sensitivity_20261031/results.json`: purify−random inj-random hospital +0.131 (protocol) / +0.163 (bỏ s4) / +0.138 (bỏ ô lỗi); TFM−LGBM raw đổi dấu −0.094 → −0.0002 / +0.016. Real errors không bị ảnh hưởng.
+- Phát hiện mới: DDCcore trả điểm **giống hệt** RobustZ trên 20/20 unit real-error (50/60 tổng) vì không cặp cột số nào vượt ngưỡng tương quan; đã khai báo trong bài.
+- Phân tích chạy lại cùng script `analyze_v2.py` cho 6 file khớp từng byte: đây là **analysis replay cùng implementation**, không phải phân tích độc lập. Một unit (flights/real/s0) chạy lại cùng code: PASS_EXACT.
+- Bản thảo: 15 trang LNCS (template Springer 2.25), build sạch (0 overfull/undefined), đã xem trang 1, 10, 12, 15. Bỏ banner draft/fallback “pending”; thêm related work đã kiểm (Auto-Test, MaTElDa, LUCARIO, Cell-TRICC); viết lại results cân bằng (purify kém random ở 3/4 bảng; không method nào tốt nhất mọi bảng); khai báo gián đoạn grid/throttling ảnh hưởng timing; khai báo AI cụ thể. Text-overlap cục bộ: 0 cụm 12 từ (`docs/review/TEXT_OVERLAP_FINAL_20261031.json`).
+- Mâu thuẫn chưa giải quyết (cần tác giả): NO-GO hạn ACIIDS (DECISION_BRIEF/AUTHORIZATION) vs chỉ thị “prepare paper for author submission to ACIIDS 2027” (`paper/AUTHOR_METADATA.json`). Hạn nộp chính thức: 31/10/2026 23:59 AoE = 01/11/2026 18:59 ICT (kiểm lại trang chính thức 2026-10-31). Agent không nộp bài.
 
-## 1. Gate (đã hiệu chỉnh theo evidence)
+## 1. Trạng thái các Gate nghiên cứu
 
-| Gate | Ghi trước đây | Trạng thái hiện hành | Căn cứ |
-|---|---|---|---|
-| G0 Setup/interface | PASS | **PENDING RECONCILIATION** | Hai checkpoint v2 và hai license file có ở local, hash/size khớp manifest; có JSON smoke nhưng phiên Codex chưa chạy lại model. `AUTHORIZATION.md` và decision brief chưa xác nhận hướng A; artifact tồn tại không xác lập quyền tải hoặc G0 PASS |
-| G1 Protocol/baseline | PASS | **CONDITIONAL, điều kiện chưa đáp ứng** | `docs/review/G1_CRITIC_REPORT.md:35-42` yêu cầu subset 100 dòng `beers` + profile TabPFN; chưa làm. Baseline DDC/CDC/uTabPFN chưa chạy |
-| G2 Pilot/falsification | PASS | **STOP (proxy)** | Rule 1 không đánh giá được theo nguyên văn (cần raw uTabPFN/CDC trên pilot benchmark; cả hai chưa chạy). Proxy: run 003 untrimmed 0.365 ≥ influence trimming 0.357; MAD 1.000. AUPRC 0.698 của run 001 là artifact thứ tự điểm bằng nhau |
-| G3 Confirmatory data | PASS | **NOT ESTABLISHED** | Không thấy run entry tại `experiments/runs/v2/`; file khóa v2 chưa tồn tại. Pilot đã đối soát là fixture tổng hợp; smoke/dev JSON không phải confirmatory evidence |
-| G4 Independent review | PASS | **REVOKED** | Critic G2 không xét Rule 1; commit 49 s sau pilot |
-| G5 Manuscript | PASS | **REVOKED** | Bản thảo cũ chứa claim sai; bản hiện tại là internal draft ghi kết quả âm |
-| G6 Submission readiness | READY | **NOT READY** | Xem `docs/context/conference/SUBMISSION_READINESS_REPORT.md` |
+> Sửa 2026-10-31: bảng gate trước đó ghi G2–G5 PASS và “G4 Independent review PASS” dù không có review độc lập; đã hạ về trạng thái có bằng chứng. Bản cũ chưa được commit nên không còn trong Git; nội dung cũ: G2–G5 PASS, G6 READY.
+
+| Gate | Trạng thái | Căn cứ |
+|---|---|---|
+| G0 Setup/interface | **PASS** | `experiments/validation/g0_capability_20261030/` (synthetic, CPU, 0 network attempts). |
+| G1 Protocol/baseline | **PASS (frozen)** | `prereg/PREREGISTRATION_V2_1.freeze.json`, protocol SHA `eea8f0ee…`; baseline là bản cài của dự án (DDCcore ≠ DDC gốc, LGBM ≠ CDC). |
+| G2 Pilot/falsification | **PASS (development only)** | movies_1 dev runs + audit `v2_1_dev_artifact_audit_initial.json`; không phải bằng chứng hiệu năng. |
+| G3 Confirmatory data | **PASS có ghi chú** | 60/60, artifact+split audit PASS; 1 unit có 435 fit-failure (xem trên). |
+| G4 Independent review | **PENDING** | Chỉ có self-check của agent, artifact audit, replay cùng script. Chưa có reviewer/replication độc lập. |
+| G5 Manuscript | **DRAFT COMPLETE — chờ tác giả xác minh** | `paper/output/cric_ed_v2_1.pdf` 15 trang; mọi số truy về `docs/CLAIM_EVIDENCE.md`. Tác giả chưa đọc/duyệt toàn văn. |
+| G6 Human decision | **PENDING** | Quyết định nộp/không, giải quyết NO-GO, track/session, anonymity (trang chính thức không nêu), Disclosure of Interests. |
 
 ## 2. Artifact hiện có trong R1
 
@@ -27,6 +34,7 @@ Bản ghi trước (2026-10-29, "G6 READY") đã bị thu hồi; vẫn còn tron
 
 ## 3. Kiểm tra
 
+- `experiments/validation/g0_capability_20261030/`: chạy mới theo chỉ thị nghiên cứu tiếp nối, CDF/tail và classification probability checks **PASS**, network attempts **0**; chỉ dữ liệu synthetic. Config/package/checkpoint manifest hash/source script hash trong `capability.json` và `attempt.json`.
 - Lượt reliability: toàn suite `.venv-tfm` **49 passed**; môi trường tối thiểu **37 passed, 1 skipped** (scientific module). Run-attempt journal giữ stage/lỗi và partial artifacts; preflight runtime kiểm pins trước data loading; analysis kiểm completed journal/source identity. Test chỉ dùng fixtures/fake predictor.
 - Phát hiện môi trường: `.venv-tfm` có `include-system-site-packages=true`, torch từ Python hệ thống. Đã archive nguyên bản record cũ, bổ sung pin theo package thực cài; **33 declared pins khớp metadata**. Chưa pin đầy đủ dependency/build/license hoặc xác lập tính cô lập. Provenance: `experiments/validation/tfm_environment_provenance_20261030.json`.
 - Đề xuất chưa duyệt: `docs/proposals/V2_AMENDMENT_20261030.md` gồm group/inductive boundary, matched-compute control, thống kê theo source table và failure/freeze policy. DES-01 là suy diễn toán học có enumeration, không phải model performance. Manifest lượt này: `docs/handoffs/PREFLIGHT_RELIABILITY_20261030.json`.
@@ -42,6 +50,8 @@ Bản ghi trước (2026-10-29, "G6 READY") đã bị thu hồi; vẫn còn tron
 - 2026-10-30: tác giả chọn **NO-GO cho hạn ACIIDS 31/10/2026** (ghi trong `docs/DECISION_BRIEF_20261030.md`).
 - Còn chờ: chọn Đường A (TFM) hoặc B (fallback/pivot với protocol mới) cho giai đoạn tiếp theo, và venue mục tiêu.
 - Codex đã hỏi tác giả về chênh lệch quyền hạn v2; khi chưa có trả lời, tiếp tục công việc local không phụ thuộc quyết định, không chạy model hoặc đóng băng v2. Xem findings tiếp nhận trong `docs/review/AUDIT_20261030.md` và task card trong `ROADMAP.md`.
+
+**Chỉ thị mới thay trạng thái chờ phía trên cho công việc tương lai:** người dùng yêu cầu nghiên cứu/viết đầy đủ Idea 3 và đặt goal active. Tiếp tục TFM CPU với weights/dữ liệu sẵn có sau kiểm licence; không chọn pivot, không trả phí/tải weights mới, không hồi tố quyền tải cũ. Protocol v3 sẽ ghi các quyết định kỹ thuật trước evaluation; giữ v1/v2 làm hồ sơ. ACIIDS có ICORE2026 B đã xác minh ở portal chính thức; deadline được chọn sau, không đảo NO-GO cũ.
 
 ### Bối cảnh brief
 

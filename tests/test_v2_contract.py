@@ -18,8 +18,8 @@ def _freeze(root):
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text("synthetic freeze fixture: " + rel, encoding="utf-8")
         files[rel] = hashlib.sha256(p.read_bytes()).hexdigest()
-    (root / "prereg/PREREGISTRATION_V2.sha256").write_text(files[PREREG])
-    lock = root / "prereg/PREREGISTRATION_V2.freeze.json"
+    (root / "prereg/PREREGISTRATION_V2_1.sha256").write_text(files[PREREG])
+    lock = root / "prereg/PREREGISTRATION_V2_1.freeze.json"
     lock.write_text(json.dumps({"schema_version": 1, "files_sha256": files}))
     return files
 
@@ -35,20 +35,20 @@ def test_freeze_requires_analysis_and_detects_changed_source(tmp_path):
 
 def test_protocol_hash_alone_does_not_freeze_pipeline(tmp_path):
     _freeze(tmp_path)
-    (tmp_path / "prereg/PREREGISTRATION_V2.freeze.json").unlink()
+    (tmp_path / "prereg/PREREGISTRATION_V2_1.freeze.json").unlink()
     with pytest.raises(ValueError, match="not frozen"):
         verify_freeze(tmp_path)
 
 
 def test_freeze_rejects_missing_analysis_and_disagreeing_protocol(tmp_path):
     files = _freeze(tmp_path)
-    lock = tmp_path / "prereg/PREREGISTRATION_V2.freeze.json"
+    lock = tmp_path / "prereg/PREREGISTRATION_V2_1.freeze.json"
     del files["experiments/tfm/analyze_v2.py"]
     lock.write_text(json.dumps({"schema_version": 1, "files_sha256": files}))
     with pytest.raises(ValueError, match="omits required"):
         verify_freeze(tmp_path)
     _freeze(tmp_path)
-    (tmp_path / "prereg/PREREGISTRATION_V2.sha256").write_text("0" * 64)
+    (tmp_path / "prereg/PREREGISTRATION_V2_1.sha256").write_text("0" * 64)
     with pytest.raises(ValueError, match="disagree"):
         verify_freeze(tmp_path)
 
@@ -56,7 +56,7 @@ def test_freeze_rejects_missing_analysis_and_disagreeing_protocol(tmp_path):
 def test_freeze_rejects_path_outside_repository(tmp_path):
     files = _freeze(tmp_path)
     files["../outside"] = "0" * 64
-    (tmp_path / "prereg/PREREGISTRATION_V2.freeze.json").write_text(
+    (tmp_path / "prereg/PREREGISTRATION_V2_1.freeze.json").write_text(
         json.dumps({"schema_version": 1, "files_sha256": files}))
     with pytest.raises(ValueError, match="escapes"):
         verify_freeze(tmp_path)

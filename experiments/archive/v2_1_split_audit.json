@@ -1,0 +1,248 @@
+{
+  "status": "PASS",
+  "source_snapshot_sha256": "c37e39ab8168ed2fda38e9a6e952a15114bda4faa595356c7aeeb5f633bf5678",
+  "split_sha256": "48e5ddec3d8bc3df79e593e7fa3386ac740c4ce7bdf53684b3d17aa74c7df88a",
+  "script_sha256": "5fa8a8e9d2ead6d6fb736ae24d2db7bd7c767a6d8f7e66e1cc5075435f755d48",
+  "runs": [
+    {
+      "run_id": "beers__inj-random__s0",
+      "contexts_checked": 810
+    },
+    {
+      "run_id": "beers__inj-random__s1",
+      "contexts_checked": 810
+    },
+    {
+      "run_id": "beers__inj-random__s2",
+      "contexts_checked": 810
+    },
+    {
+      "run_id": "beers__inj-random__s3",
+      "contexts_checked": 810
+    },
+    {
+      "run_id": "beers__inj-random__s4",
+      "contexts_checked": 810
+    },
+    {
+      "run_id": "beers__inj-systematic__s0",
+      "contexts_checked": 810
+    },
+    {
+      "run_id": "beers__inj-systematic__s1",
+      "contexts_checked": 810
+    },
+    {
+      "run_id": "beers__inj-systematic__s2",
+      "contexts_checked": 810
+    },
+    {
+      "run_id": "beers__inj-systematic__s3",
+      "contexts_checked": 810
+    },
+    {
+      "run_id": "beers__inj-systematic__s4",
+      "contexts_checked": 810
+    },
+    {
+      "run_id": "beers__real__s0",
+      "contexts_checked": 990
+    },
+    {
+      "run_id": "beers__real__s1",
+      "contexts_checked": 990
+    },
+    {
+      "run_id": "beers__real__s2",
+      "contexts_checked": 990
+    },
+    {
+      "run_id": "beers__real__s3",
+      "contexts_checked": 990
+    },
+    {
+      "run_id": "beers__real__s4",
+      "contexts_checked": 990
+    },
+    {
+      "run_id": "flights__inj-random__s0",
+      "contexts_checked": 540
+    },
+    {
+      "run_id": "flights__inj-random__s1",
+      "contexts_checked": 540
+    },
+    {
+      "run_id": "flights__inj-random__s2",
+      "contexts_checked": 540
+    },
+    {
+      "run_id": "flights__inj-random__s3",
+      "contexts_checked": 540
+    },
+    {
+      "run_id": "flights__inj-random__s4",
+      "contexts_checked": 540
+    },
+    {
+      "run_id": "flights__inj-systematic__s0",
+      "contexts_checked": 540
+    },
+    {
+      "run_id": "flights__inj-systematic__s1",
+      "contexts_checked": 540
+    },
+    {
+      "run_id": "flights__inj-systematic__s2",
+      "contexts_checked": 540
+    },
+    {
+      "run_id": "flights__inj-systematic__s3",
+      "contexts_checked": 540
+    },
+    {
+      "run_id": "flights__inj-systematic__s4",
+      "contexts_checked": 540
+    },
+    {
+      "run_id": "flights__real__s0",
+      "contexts_checked": 660
+    },
+    {
+      "run_id": "flights__real__s1",
+      "contexts_checked": 660
+    },
+    {
+      "run_id": "flights__real__s2",
+      "contexts_checked": 660
+    },
+    {
+      "run_id": "flights__real__s3",
+      "contexts_checked": 660
+    },
+    {
+      "run_id": "flights__real__s4",
+      "contexts_checked": 660
+    },
+    {
+      "run_id": "hospital__inj-random__s0",
+      "contexts_checked": 1710
+    },
+    {
+      "run_id": "hospital__inj-random__s1",
+      "contexts_checked": 1710
+    },
+    {
+      "run_id": "hospital__inj-random__s2",
+      "contexts_checked": 1710
+    },
+    {
+      "run_id": "hospital__inj-random__s3",
+      "contexts_checked": 1710
+    },
+    {
+      "run_id": "hospital__inj-random__s4",
+      "contexts_checked": 1710
+    },
+    {
+      "run_id": "hospital__inj-systematic__s0",
+      "contexts_checked": 1710
+    },
+    {
+      "run_id": "hospital__inj-systematic__s1",
+      "contexts_checked": 1710
+    },
+    {
+      "run_id": "hospital__inj-systematic__s2",
+      "contexts_checked": 1710
+    },
+    {
+      "run_id": "hospital__inj-systematic__s3",
+      "contexts_checked": 1710
+    },
+    {
+      "run_id": "hospital__inj-systematic__s4",
+      "contexts_checked": 1710
+    },
+    {
+      "run_id": "hospital__real__s0",
+      "contexts_checked": 2090
+    },
+    {
+      "run_id": "hospital__real__s1",
+      "contexts_checked": 2090
+    },
+    {
+      "run_id": "hospital__real__s2",
+      "contexts_checked": 2090
+    },
+    {
+      "run_id": "hospital__real__s3",
+      "contexts_checked": 2090
+    },
+    {
+      "run_id": "hospital__real__s4",
+      "contexts_checked": 2090
+    },
+    {
+      "run_id": "rayyan__inj-random__s0",
+      "contexts_checked": 900
+    },
+    {
+      "run_id": "rayyan__inj-random__s1",
+      "contexts_checked": 900
+    },
+    {
+      "run_id": "rayyan__inj-random__s2",
+      "contexts_checked": 900
+    },
+    {
+      "run_id": "rayyan__inj-random__s3",
+      "contexts_checked": 900
+    },
+    {
+      "run_id": "rayyan__inj-random__s4",
+      "contexts_checked": 900
+    },
+    {
+      "run_id": "rayyan__inj-systematic__s0",
+      "contexts_checked": 900
+    },
+    {
+      "run_id": "rayyan__inj-systematic__s1",
+      "contexts_checked": 900
+    },
+    {
+      "run_id": "rayyan__inj-systematic__s2",
+      "contexts_checked": 900
+    },
+    {
+      "run_id": "rayyan__inj-systematic__s3",
+      "contexts_checked": 900
+    },
+    {
+      "run_id": "rayyan__inj-systematic__s4",
+      "contexts_checked": 900
+    },
+    {
+      "run_id": "rayyan__real__s0",
+      "contexts_checked": 1000
+    },
+    {
+      "run_id": "rayyan__real__s1",
+      "contexts_checked": 1000
+    },
+    {
+      "run_id": "rayyan__real__s2",
+      "contexts_checked": 1000
+    },
+    {
+      "run_id": "rayyan__real__s3",
+      "contexts_checked": 1000
+    },
+    {
+      "run_id": "rayyan__real__s4",
+      "contexts_checked": 1000
+    }
+  ]
+}

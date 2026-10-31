@@ -1,0 +1,7 @@
+{
+  "status": "failed",
+  "stage": "serialize_results",
+  "error": "TypeError: Object of type int64 is not JSON serializable",
+  "resolution": "Fixed conversion before source freeze; retain this attempt; replay into reconciled_02",
+  "detector_runs_affected": false
+}

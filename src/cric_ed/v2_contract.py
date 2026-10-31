@@ -114,9 +114,12 @@ def verify_local_inputs(root: Path, table: str) -> dict:
             raise ValueError("Dataset differs from pinned manifest: " + rel)
     model_manifest = json.loads((root / "data/manifests/tabpfn_v2_checkpoints_20261030.json").read_text())
     for entry in model_manifest["files"].values():
-        path = (root / entry["path"]).resolve()
-        if not path.is_relative_to(root.resolve()):
+        rel = Path(entry["path"])
+        # Dedicated worktrees intentionally mount the existing checkpoints read-only.
+        # Validate the lexical manifest path, then verify every mounted file's bytes.
+        if rel.is_absolute() or ".." in rel.parts or not rel.parts or rel.parts[0] != "checkpoints":
             raise ValueError("Checkpoint path escapes repository")
+        path = root / rel
         if not path.is_file() or sha256(path) != entry["sha256"] or path.stat().st_size != entry["bytes"]:
             raise ValueError("Checkpoint/license differs from pinned manifest: " + entry["path"])
     return checkpoint_hashes(root)

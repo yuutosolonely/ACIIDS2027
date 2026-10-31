@@ -1,0 +1,33 @@
+{
+  "status": "completed",
+  "stage": "finalize",
+  "request": {
+    "table": "flights",
+    "condition": "inj-systematic",
+    "seed": 3,
+    "models": [
+      "lgbm",
+      "tabpfn-v2"
+    ],
+    "threads": 2,
+    "role": "confirmatory",
+    "prereg_sha256": "eea8f0ee8b217458a82b073bac5261f43ab8056e1b4eb32a170e5aece061543a",
+    "source_snapshot_sha256": "c37e39ab8168ed2fda38e9a6e952a15114bda4faa595356c7aeeb5f633bf5678",
+    "code_sha256": {
+      "src/cric_ed/conditional.py": "4001f9c53d91300b4cdbb3262d82851fa254e29ff8ef0fb37d60aab2cc1c219f",
+      "src/cric_ed/baselines.py": "a7e79639d4756bd3e5b4c978121eeb92cc363bd01d5d0f1c725b061a7b03ff8b",
+      "src/cric_ed/benchmark.py": "9428429b53291ffdfd4c0c53dc62ed48691a9af184e21d8b97654f5104f8f866",
+      "src/cric_ed/v2_contract.py": "576219f7c25300426efb010c610131d089a7c53fd6abc1fe665b216cc2a44202",
+      "src/cric_ed/run_record.py": "18df9f5d3ec70747468e56b7ff7c55e151073fc3b6fe1acd30266ded00784209",
+      "experiments/tfm/run_v2.py": "b24c62ca4174d8d9afc2a47b2a79f5e87996d1e3b4ee952a1106a5d947da94cf",
+      "experiments/tfm/analyze_v2.py": "1f57ceee29a3109c44f3f37d2579e5f84519a8d63e3389cf1941d76b2456365b"
+    },
+    "git": {
+      "commit": "0aff63e292da7a071368f594015089d5d746fa05",
+      "dirty_files": 88
+    },
+    "python": "3.12.6"
+  },
+  "started_at": "2026-10-30T19:39:20.523528+00:00",
+  "finished_at": "2026-10-30T19:49:19.680313+00:00"
+}

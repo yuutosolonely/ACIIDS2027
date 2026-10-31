@@ -1,5 +1,7 @@
 # Idea 3 — Thiết kế nghiên cứu cho ACIIDS 2027
 
+> **Thiết kế hiện hành, 2026-10-30:** bổ sung decision brief và checkpoint Claude `0aff63e` xác nhận Path A. Thực thi amendment `prereg/PREREGISTRATION_V2_1.md`: five-fold row primary; observed-key LEO secondary trên hospital/flights/beers; final encoder transductive dirty-only; nested pass-1 trong outer training pool; q=0.15; phân tích mô tả theo source table và row-bootstrap, không verdict xuyên dataset. Random có cùng số hàng loại và chi phí nested được báo riêng, thêm accounted matched-compute sum. TFM numeric score là predictive tail, không density; DDCcore/LGBM/TFM raw không được gắn nhãn tái lập reference DDC/CDC/uTabPFN. Bỏ automatic pivot và các ablation chưa có trong v2.1 khỏi yêu cầu xác nhận hiện hành. Nội dung đề xuất gốc dưới đây giữ làm lịch sử; amendment v2.1 thay các lựa chọn xung đột. Freeze còn chờ development validation, không có confirmatory results.
+
 Cập nhật: 2026-10-29.
 > **Đối soát 2026-10-30:** tác giả đã chọn NO-GO cho hạn ACIIDS này (`docs/DECISION_BRIEF_20261030.md`). Nội dung dưới đây giữ vai trò thiết kế đề xuất gốc; fallback không tự cấp quyền pivot. Candidate v2 ở `prereg/PREREGISTRATION_V2.md` chưa được xác nhận quyền hạn/đóng băng; các thay đổi phương pháp phải được chấp thuận và đồng bộ ở đây trước khi dùng làm protocol hiện hành. Trạng thái và task tiếp theo: `docs/STATE.md`, `ROADMAP.md`.
 

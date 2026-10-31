@@ -1,0 +1,6 @@
+{
+  "note": "The original postprocessor recorded here (pid 3536, status 'running', stage wait_for_complete_grid) is not alive. It died with the original grid process tree at about 2026-10-30T05:06Z (12:06 ICT). Its status.json is retained unchanged as evidence.",
+  "superseded_by": "experiments/archive/v2_1_postprocess_resume/ (tools/finish_v2_1_after_resume.py)",
+  "resume_record": "experiments/archive/v2_1_runs/resume_20261030T095022Z.json",
+  "written_by": "Claude coordinator, 2026-10-30 16:55 ICT"
+}

@@ -1,73 +1,27 @@
-% INTERNAL DRAFT -- NOT FOR SUBMISSION (status: NO-GO / NOT READY, see docs/STATE.md).
-% Corrected on 2026-10-30 after audit. Every number traces to
-% experiments/archive/run_pilot_001 (as executed) or
-% experiments/archive/run_pilot_003_evalfix (paired streams, tie-correct AUPRC,
-% 1,000 entity-cluster bootstrap resamples); see docs/CLAIM_EVIDENCE.md.
 \documentclass[runningheads]{llncs}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{booktabs}
-\usepackage{microtype}
+\usepackage{amsmath,amssymb,booktabs,microtype}
 \usepackage{hyperref}
-
 \begin{document}
-\title{Influence-Based Context Trimming for Unsupervised Cell Error Detection: A Negative Pilot on a Synthetic Fixture\\(Internal Draft -- Not for Submission)}
-\titlerunning{Context Trimming for Cell Error Detection: Negative Pilot}
-\author{Anonymous Authors}
-\authorrunning{Anonymous et al.}
-\institute{Anonymous Institution}
+\title{Context Purification for Cell-Level Error Detection with Tabular Foundation Models}
+\titlerunning{Context Purification for Cell Error Detection}
+\author{Ngo Dang Trong Hieu\orcidID{0009-0007-1773-3680}}
+\authorrunning{Ngo Dang Trong Hieu}
+\institute{Ton Duc Thang University\\
+\email{ngodangtronghieu.dl2021@gmail.com}}
 \maketitle
-
 \begin{abstract}
-We report a pilot of an influence-based context-trimming scheme for unsupervised cell-level error detection. The scorer evaluated is a kernel-weighted local conditional estimator (a weighted $z$-score for numeric columns and a weighted, Laplace-smoothed conditional frequency for categorical columns) under leave-entity-out cross-fitting; \emph{no tabular foundation model was run}. The pilot uses a 100-row synthetic software fixture with 4 injected error cells and a single seed; it is not a benchmark. A column-wise median-absolute-deviation baseline attained cell-level AUPRC 1.000; the conditional scorer attained 0.365 without trimming and 0.357 with influence trimming, whose paired difference to matched-random removal was $-0.008$ (95\% CI $[-0.081, 0.048]$). An earlier analysis reported 0.698 and a trimming gain; both were artifacts of tie ordering and unpaired random streams. The preregistered stop rule could not be evaluated as written, but its proxy outcome is negative. We document the defects and what a confirmatory study would require.
-\keywords{Cell error detection \and Self-contamination \and Negative result \and Preregistration.}
+\input{sections/abstract}
+\keywords{Cell error detection \and Tabular foundation models \and Context purification \and Contaminated context.}
 \end{abstract}
-
-\section{Status and Scope}
-This document replaces an earlier draft whose claims were not supported by its artifacts. It is an internal record, not a submission. The earlier draft (i) described a frozen tabular foundation model~\cite{hollmann2025tabpfn} although the implementation contains none; (ii) attributed results to the RAHA benchmark~\cite{mahdavi2019raha} although only a synthetic fixture was scored; (iii) reported a $+0.0167$ AUPRC advantage of influence trimming over matched-random removal that arose from unpaired random streams; and (iv) credited a rare-valid guardrail with a false-alarm reduction that the untrimmed arm also shows.
-
-\section{Scorer Actually Evaluated}
-For a dirty table with entity groups $\mathcal{E}(i)$, cell $(i,j)$ is scored from a context $\mathcal{C}$ of at most 30 rows drawn from the other folds of a 5-fold leave-entity-out partition, so no row of $\mathcal{E}(i)$ enters the context. Row distances $d(i,m)$ exclude the target column $j$ and the key column, use raw (unscaled) numeric differences and a Hamming penalty for categories, and give weights $w_m=\exp(-d(i,m)/2)$. Numeric cells receive $\min(|x_{ij}-\hat\mu|/\hat\sigma, 25)$ with weighted mean and standard deviation; categorical cells receive $-\log\frac{\sum_{m:x_{mj}=x_{ij}} w_m + 1}{\sum_m w_m + |V|}$. ``Influence'' trimming removes the 15\% of context rows with the largest $d(i,m)$; the preregistered influence score (a likelihood gradient norm or leave-one-out variance) was not implemented. Rows whose target value is in a supplied rare-valid list are exempt; in the pilot that list (\texttt{category\_c = RareDelta}, 4\% of rows, above the preregistered $\le 1\%$ criterion) was provided by the fixture author, i.e.\ it is oracle information.
-
-\section{Pilot Protocol and Deviations}
-Fixture: 100 rows $\times$ 5 columns, 20 entities, 400 eligible cells, 4 error cells (1\%), one seed (42). The preregistration (\texttt{prereg/PREREGISTRATION.md}) names DDC, column-wise Isolation Forest, CDC~\cite{jager2024cdc} and an unsupervised TabPFN as baselines; none was run. The only baseline is a column-wise MAD score computed on all rows. Its stop rule compares raw TabPFN or CDC with CRIC-ED on a pilot benchmark; because neither exists here, the rule cannot be evaluated as written, and we report the untrimmed scorer as a proxy.
-
-\begin{table}[t]
-\centering
-\caption{Pilot on the synthetic fixture (software-level evidence; 4 positives, 1 seed). Run 001: original execution and evaluator (ties broken by input order; matched-random arm on a different random stream). Run 003: same scorer with separated random streams (arms 2--4 share every base context), tie-invariant AUPRC (equal to scikit-learn's average precision), coverage penalty, 1{,}000 entity-cluster bootstrap resamples (990 with at least one positive).}
-\label{tab:pilot}
-\small\setlength{\tabcolsep}{4pt}
-\begin{tabular}{lcccc}
-\toprule
-Arm & \multicolumn{2}{c}{AUPRC} & 95\% CI & Rare-valid \\
- & run 001 & run 003 & run 003 & in top 5\% \\
-\midrule
-MAD (column-wise) & 1.000 & 1.000 & [1.000, 1.000] & 4/4 \\
-Conditional scorer, no trimming & 0.698 & 0.365 & [0.292, 1.000] & 3/4 \\
-\quad + matched-random removal & 0.674 & 0.365 & [0.294, 1.000] & 3/4 \\
-\quad + influence trim (oracle list) & 0.691 & 0.357 & [0.278, 1.000] & 3/4 \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\section{Findings}
-{\sloppy
-\begin{itemize}
-\item MAD outperformed every conditional-scorer arm. Paired difference (untrimmed $-$ MAD): $-0.635$, 95\% CI $[-0.708, 0.000]$. The injected errors are three large numeric deviations and one out-of-domain category, which favour marginal statistics.
-\item Influence trimming was below the untrimmed scorer (paired $-0.008$, $[-0.042, 0.000]$) and below matched-random removal (paired $-0.008$, $[-0.081, 0.048]$). With 4 positives these intervals are wide and the trimming comparison is inconclusive; no trimming benefit is supported.
-\item The earlier 0.698 arose because six cells, two of them errors, share the clipped score 25; the original evaluator ordered tied cells by input order. With ties grouped, AUPRC is 0.365.
-\item All conditional-scorer arms place 3 of the 4 rare-valid cells inside the 5\% audit budget, versus 4 of 4 for MAD. The difference is one cell and is not attributable to trimming or to the guardrail.
-\end{itemize}
-\par}
-
-\section{What a Confirmatory Study Would Need}
-An approved research path (a pinned, licence-checked foundation-model checkpoint, or a newly preregistered fallback without one), real benchmark tables with provenance, the preregistered baselines, at least five seeds, paired context logging, a detector-inferred rare-valid criterion and the preregistered influence score. Adjacent problems that must not be conflated with cell-level detection include row-level in-context anomaly detection~\cite{tactic2026,zen2026focus}, in-context data attribution for labelling errors~\cite{ticda2026}, LLM-based detection~\cite{zeroed2025}, and robust cellwise statistics~\cite{rousseeuw2018ddc,raymaekers2024cellmcd}.
-
-\subsubsection*{AI Disclosure.}
-AI tools assisted coding, auditing and drafting under human oversight; authors must verify all content before any use outside the project.
-
+\input{sections/introduction}
+\input{sections/related_work}
+\input{sections/method}
+\input{sections/protocol}
+\input{sections/results}
+\input{sections/limitations}
+\input{sections/conclusion}
 \bibliographystyle{splncs04}
 \bibliography{references}
 \end{document}

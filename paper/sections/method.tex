@@ -1,0 +1,129 @@
+\section{Conditional Scoring and Context Purification}
+\subsection{Task and information boundary}
+Let $\widetilde X$ be an observed table with $n$ rows and $d$ eligible columns.
+The detector outputs $S\in\mathbb R^{n\times d}$, with larger values indicating
+greater suspicion. Evaluation compares observed strings with aligned clean strings;
+this defines benchmark disagreement, rather than a universal semantic definition
+of an error. Clean values and the error matrix are unavailable to deployment arms.
+Only a separately labelled oracle receives clean contexts.
+
+For seed $s$, partition rows into $K=5$ outer folds $Q_f$. Sample a sorted base
+context $B_f$ of at most $C=512$ rows from $\{1,\ldots,n\}\setminus Q_f$.
+Share these bases across target columns, removal arms and models. To score column
+$j$, drop $j$ from the features and predict its observed values from the remaining
+eligible columns. Excluded identifier columns are not conditioning features.
+The query fold never enters a fitted deployment context. Other rows of the same
+entity may be used in the primary row-level analysis.
+
+Typing and feature encoding are fitted on the complete observed table for the
+final pass. Numerical features use parsed numbers with unparseable entries as
+missing; other features use observed frequency-rank codes and an unknown code.
+This is label-free transductive preprocessing: outer queries can affect encoding,
+although they do not enter the model's fitted context. We distinguish this
+assumption from a fully inductive fit on context rows only.
+
+\subsection{Mixed-type suspicion scores}
+A column is numerical if at least $80\%$ of its nonempty observed strings parse
+as finite numbers. Otherwise it is categorical, unless its observed unique-value
+ratio exceeds $0.5$, in which case the target is unsupported. Unsupported cells
+receive score zero and remain in every whole-universe evaluation denominator.
+They may still supply encoded conditioning features.
+
+For a parseable numerical query $y$ and context of size $b$, let $b_p$ be the
+number of parseable context targets. With predictive CDF $F$, the score is
+\begin{equation}
+ S(y)=-\log\frac{b_p+0.5}{b+1}
+       -\log\max\{2\min(F(y),1-F(y)),10^{-12}\}.
+\end{equation}
+The second term is a two-sided tail score, not a probability density. With fewer
+than ten parseable context targets or no numerical range, a smoothed exact-match
+frequency replaces that term. Unparseable query tokens use a smoothed
+nonparseability probability followed by their smoothed frequency among
+unparseable context targets. These rules retain empty strings and formatting
+variants rather than repairing them before detection.
+
+For a categorical target with at most ten context classes, the model predicts
+class probabilities. With more classes, retain the nine most frequent and pool
+the others into an OTHER class. Divide OTHER mass by smoothed within-pool
+frequencies, allowing probability for an unseen query token. If the context
+contains a single class, use the degenerate class distribution. A final
+additive smoothing term assigns mass to values absent from the context:
+\begin{equation}
+ S(y)=-\log\left[\frac{b\widehat p(y\mid x_{-j})+1/(v+1)}{b+1}\right],
+\end{equation}
+where $v$ is the number of distinct observed context target values and
+$\widehat p$ includes OTHER redistribution when applicable. Previously unseen
+tokens share an unknown bucket; this is not a probability model over every
+possible unseen string. These numerical
+and categorical scores share an orientation but have no proven common
+calibration. We therefore retain type-specific analyses alongside pooled AP.
+
+\paragraph{Relation to residual and conformal scores.}
+DDC standardizes residuals from robust linear relations among numerical
+variables~\cite{rousseeuw2018ddc}; our scores instead come from the predictive
+distribution of a pretrained or task-fitted model, without a linearity assumption.
+CDC calibrates prediction sets on clean data~\cite{jager2024cdc}. Our deployment arms
+have no clean calibration split and the context may contain errors, so $S$ is used
+only as an uncalibrated ranking evaluated by precision--recall metrics. Removal is
+based on first-pass suspicion scores, not on a gradient-based influence estimate.
+
+\subsection{Outer-isolated selection}
+The purification parameter is fixed at $q=0.15$. For each outer fold, score
+every row of its training pool by an inner raw cross-fit. Inner typing,
+encoding, contexts and fits all use that pool exclusively. Let $U^{(f)}_{ij}$
+be the inner out-of-fold score for target $j$. For each base $B_f$, remove
+the $r_f=\operatorname{round}(q|B_f|)$ rows with largest $U^{(f)}_{ij}$,
+breaking ties by increasing row index. Fit the final conditional model on
+the remaining dirty context and score $Q_f$. Selection is column specific:
+the rows removed for one target need not be removed for another.
+
+\begin{figure}[t]
+\centering
+\fbox{\begin{minipage}{0.91\linewidth}\small
+\textbf{Outer-isolated purification for seed $s$}\par
+1. Construct row folds $Q_f$ and shared bases $B_f$.\par
+2. For each outer fold $f$, form $P_f=\{1,\ldots,n\}\setminus Q_f$.\par
+3. Inner-cross-fit raw scores $U^{(f)}$ using only $\widetilde X[P_f]$.\par
+4. For each target $j$, rank $B_f$ by $U^{(f)}_{ij}$ and remove $r_f$ rows.\par
+5. Fit on the retained dirty context, omitting feature $j$; score $Q_f$.\par
+6. Retain unsupported cells and failure masks in the full output universe.
+\end{minipage}}
+\caption{Selection has no dependency on the outer query through the first pass.
+Final encoding remains explicitly transductive. This is one trimming step,
+not an iterative procedure or a gradient-based influence estimate.}
+\label{fig:algorithm}
+\end{figure}
+
+Reusing a raw score matrix computed on the entire table would break this
+isolation: training examples used to score a prospective context row could
+include the eventual outer query. The nested construction prevents that
+dependency. It does not prove that the highest scores identify corrupted
+contexts, nor that removing them preserves rare correct values.
+
+\subsection{Controls, diagnostics and compute}
+\emph{Raw} retains $B_f$. \emph{Random} removes $r_f$ rows without replacement
+using a separate deterministic stream for each seed, fold and target.
+\emph{Oracle} keeps the same base IDs but substitutes clean target and feature
+values in the context; query values remain observed and the encoder remains
+dirty fitted. Its gap is diagnostic and need not be positive.
+\emph{Leaky}, on real-error conditions only, unions the query fold with the base;
+its intentional violation of exclusion is reported separately.
+
+The secondary \emph{raw-LEO} arm constructs folds of observed entity keys,
+using provider number, flight and brewery identifier on their declared tables.
+No observed query key enters a fitted context. Corrupted keys can split a true
+entity and shared or empty keys can merge entities. Bases differ from row-level
+bases, and the final encoder is still transductive; this arm is a boundary
+sensitivity analysis rather than proof of independence.
+
+Purification requires up to $K^2d$ additional column tasks for nested scoring,
+besides up to $Kd$ final tasks. The corresponding number for a single raw or
+random arm is at most $Kd$; degenerate or unsupported targets can bypass a model
+fit, while LightGBM residual calibration can require additional fits.
+These are task-count bounds, not measured neural forward-call counts.
+We measure nested preparation and inclusive purification time separately.
+The accounted matched-compute random cost is ordinary random time plus the
+same nested preparation time, using unchanged random scores. It must not be
+described as a separately timed end-to-end arm. No task-specific TabPFN weight
+update is performed; its context fitting and preprocessing remain chargeable
+work. LightGBM, in contrast, fits task-specific trees for each context.

@@ -20,6 +20,14 @@ ACIIDS's public submission page does not set out a separate AI-use rule. Springe
 
 Springer Nature generally does not accept generative-AI-created images, subject to limited policy exceptions. For figures, use the publisher's current rules and verify any claimed exception. This figure-specific rule does not prohibit AI assistance for other research and writing tasks.
 
+## Recheck 2026-10-31 (official pages fetched: submit.html, dates.html, home)
+
+- Deadline still 31 October 2026 (extended), 23:59 AoE per dates page; notification and camera-ready "Jan 2027", subject to change.
+- 12–15 pages including figures, tables and references; extra-page charges up to 25 pages (amount not stated).
+- Springer LNCS/LNAI style, PDF for initial review; link points to Springer series 558 author page (requires sign-in when fetched; not read).
+- No statement on double-blind/anonymization or on AI use. Similarity checking and desk-rejection for (self-)plagiarism; simultaneous submission prohibited; author list cannot change structurally after review begins.
+- Springer Nature book-publishing policy page (2026-10-31): AI cannot be author or bear accountability; authors should disclose AI use; language polishing is low-risk but disclosure still encouraged; no placement specified. LNCS-specific disclosure instructions: UNVERIFIED (page behind sign-in).
+
 ## Unresolved
 
 - Initial-review anonymization and author limits are not specified on the public submission page reviewed. Check EasyChair's current instructions.

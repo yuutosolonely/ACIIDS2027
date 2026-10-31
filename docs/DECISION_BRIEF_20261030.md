@@ -54,3 +54,12 @@ Nguồn: câu trả lời trực tiếp của tác giả cho 4 câu hỏi của 
 4. **Control khớp compute:** có. Nested pass-1 chung trong pool huấn luyện ngoài, dùng cho purify và cho một random control khớp compute; báo cáo chi phí từng phần.
 
 Các quyết định này được đưa vào `prereg/PREREGISTRATION_V2_1.md` (bản sửa đổi; v1 và v2 giữ nguyên).
+
+## Chỉ thị mới của tác giả — Hoàn thiện bài để tác giả nộp ACIIDS 2027 (2026-10-30 ~11:45 ICT)
+
+- **Nguồn & thời điểm:** Chỉ thị trực tiếp từ tác giả do coordinator Claude chuyển tiếp vào khoảng 11:45 ICT ngày 2026-10-30.
+- **Nội dung chỉ thị:** Hoàn thiện bài báo càng nhanh càng tốt để TÁC GIẢ tự nộp vào ACIIDS 2027 (hạn chót: 31/10/2026 23:59 AoE = 01/11/2026 18:59 ICT; định dạng PDF LNCS/LNAI, 12–15 trang gồm tài liệu tham khảo; nộp qua EasyChair).
+- **Ý nghĩa kế hoạch:** Chỉ thị này thay thế quyết định NO-GO trước đó về mặt mục tiêu kế hoạch; chuyển mục tiêu sang hoàn thiện đầy đủ bài báo khoa học có kiểm chứng thực nghiệm chặt chẽ để tác giả kịp nộp.
+- **Quy tắc bất biến:** Tác giả là người duy nhất nộp bài, tải bài lên hệ thống hay công bố. Các agent (Codex, Claude, Antigravity) tuyệt đối không tự ý nộp bài, upload file ra ngoài, push branch hay liên hệ với bất kỳ ai.
+- **Phân công điều phối:** Claude giữ vai trò coordinator (review, không trực tiếp sửa file); Antigravity là worker duy nhất triển khai hoàn thiện code/bài báo trên worktree `agy/finish`.
+

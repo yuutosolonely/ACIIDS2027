@@ -1,8 +1,12 @@
 # Kế hoạch điều phối CRIC-ED — ACIIDS 2027
 
+**Checkpoint10:00ICT:** T1/T2/T3 hoàn tất trong phạm vi đã ghi; T4 freeze `c37e39ab…` lúc02:58:59UTC; T5 fullgrid60 chạy từ02:59:15UTC,4process×2threads. Không sửa các file đã frozen trong lúc chạy. T6 chờgrid đầy đủ và audit; T7 đã có10trang phương pháp/protocol, cònresults và diễn giải từT6; T8 cònkiểm chứng/render/review. Bằng chứngdev lưu cả archive; khôngđưa vào confirmatory.
+
+**Lộ trình hiện hành sau tiếp quản checkpoint `0aff63e` (2026-10-30):** tác giả đã duyệt Path A và bốn quyết định v2.1 trong decision brief; chỉ Codex đang chạy và sở hữu tích hợp. T1 đã tích hợp WIP/test PASS (scientific68; minimal37/3skip; setupPASS; mirrorMATCH). T2 candidate v2.1 đã tích hợp, rà trước freeze. T3 đang chạy movies_1 seed0 ba điều kiện, hai model. Tiếp đến T4 freeze → T5 grid60 → T6 descriptive analysis → T7 manuscript/PDF12–15 trang → T8 kiểm chứng. Các task chờ A/B và strict-v3 bên dưới là lịch sử, không còn điều khiển kế hoạch. Không thay protocol vì mốc 8 giờ; yêu cầu thực nghiệm đầy đủ vẫn áp dụng. NO-GO deadline/submission vẫn giữ.
+
 Cập nhật: 2026-10-30, sau tiếp nhận `docs/handoffs/HANDOFF_20261030_CLAUDE_TO_CODEX.md`.
 Quyết định đang hiệu lực: **NO-GO cho hạn ACIIDS này**, theo `docs/DECISION_BRIEF_20261030.md`.
-Hướng nghiên cứu tiếp theo chưa được xác nhận nhất quán trong hồ sơ. Không tự chuyển hướng theo kết quả pilot.
+**Goal nghiên cứu/paper đã active theo chỉ thị mới:** tiếp tục Idea 3 bằng CPU/weights sẵn có, không pivot hoặc hồi tố authorization. `docs/PAPER_COMPLETION_PLAN.md` là checklist hoàn tất. Các task chờ bên dưới giữ như lịch sử; chỉ thị mới và `docs/AUTHORIZATION.md` điều chỉnh công việc tiếp nối.
 
 ## Căn cứ và quyền hạn
 
@@ -43,6 +47,8 @@ Snapshot/kết quả: `docs/handoffs/CPU_REMEDIATION_20261030.json`; handoff: `d
 
 ## Các bước tiếp theo và điều kiện hoàn tất
 
+Task active `RESEARCH-20261030-STRICT-PROTOCOL`: TFM capability CPU đã PASS ở run mới; tiếp theo hoàn thiện closest-method evidence, triển khai group cross-fitting và train-only preprocessing, kiểm invariants, ghi/freeze protocol v3 + input/split/source trước benchmark. Sau đó chạy đủ thiết kế, analysis và viết/render/review paper. Không kết thúc goal ở setup hoặc draft scaffold. Rank ACIIDS ICORE2026 B đã kiểm; không chuẩn bị submission cho deadline NO-GO.
+
 Task tiếp nối `COORD-20261030-PREFLIGHT-RELIABILITY`: Codex own `run_record.py`, runtime checks trong `v2_contract.py`, runner/analysis journal integration, tests và `tools/check_inference_resolution.py`; ghi một amendment đề xuất, không áp dụng phương pháp mới vào prereg. Bản pin môi trường gốc được archive trước thay đổi setup.
 
 - [x] Test failure/interruption journaling, required-artifact finalization và refusal khi runtime chưa khớp.
@@ -59,3 +65,14 @@ Task tiếp nối `COORD-20261030-PREFLIGHT-RELIABILITY`: Codex own `run_record.
 6. **Manuscript/venue — chưa mở.** Giữ internal draft kết quả âm; chọn venue và xác minh CFP/policy khi tác giả quyết định. Không có task chuẩn bị gói nộp cho hạn đã NO-GO.
 
 P3 cleanup tên cũ/absolute paths và vendoring template Springer chưa thuộc task hiện tại. R2/R3, installer và builder không được chạy hoặc sửa.
+
+## Current execution plan — 2026-10-30 17:00 ICT (Claude, sole coordinator/executor)
+
+1. [running] Resumed frozen v2.1 grid: 46 remaining units (14/60 done before the 12:06 ICT interruption); ETA about 23:00–24:00 ICT. `docs/EXPERIMENT_LOG.md` §7.
+2. [queued, automatic] `tools/finish_v2_1_after_resume.py`: artifact audit, frozen split audit, analysis, analysis reproduction + byte comparison, paper tables/figures, empirical draft, PDF, Markdown, text-overlap screen.
+3. [next] Acceptance review: every number vs analysis outputs; claim ledger; citation support; disclose interruption/resume and two timing periods in results/cost text; interpret real results without overclaiming; 12–15 pages incl. references; render and inspect every page; anonymized variant if the author needs double-blind.
+4. [author] Decide anonymity (UNVERIFIED), track/session, final read-through and whether to submit by 01/11/2026 18:59 ICT. Agents never submit.
+
+## Status update — 2026-10-31 (Claude, consistency review)
+
+Items 1–3 of the 17:00 ICT plan are done: grid 60/60, audits, analysis, same-script replay, tables, manuscript (15 pages) — see `docs/EXPERIMENT_LOG.md` §9. Acceptance review found and fixed: overstated "independent" wording; gate table inflated (G4 now PENDING, G5 draft complete pending author verification); fit-failure scope (>50% of TabPFN cells in one injected unit) under-reported — post hoc sensitivity added as exploratory; DDCcore ≡ RobustZ on real errors; timing periods undisclosed. Open, author-owned: (a) resolve NO-GO vs submit directive; (b) read and approve full manuscript; (c) session/track; (d) Disclosure of Interests content; (e) anonymity (not stated by official pages; check EasyChair). No independent review exists. Agents never submit.

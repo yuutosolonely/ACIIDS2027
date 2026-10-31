@@ -1,5 +1,77 @@
 # Citation audit — 2026-10-30
 
+### Further closest-work search during frozen execution (04:30 UTC)
+
+Four additional primary records were inspected; these extend literature interpretation,
+not the frozen detector or experimental design:
+
+- `papastergios2025wild`: two authors/title/workshop verified on the primary QDB2025 PDF,
+  https://www.vldb.org/2025/Workshops/VLDB-Workshops-2025/QDB/QDB25_1.pdf.
+  §§2–4 inspected: embeddings, corruption scenarios and clean-context intervention.
+  Broad claims that dirty-context TFM behavior or cleaner context benefits are first
+  studied here are disallowed. No headline performance number borrowed.
+- `bertiequille2026prior`: Laure Berti-Equille, arXiv2604.25154v1, 28April2026;
+  https://arxiv.org/html/2604.25154v1, §§3–4 inspected. Learned cleaning-policy
+  sequencing for TFM data preparation differs from fixed per-target removal and
+  cell-ranking evaluation. No claim to reproduce its RL policy or theoretical assertions.
+- `ipas2026lucos`: four authors/title verified in arXiv2605.27254v1, 26May2026;
+  https://arxiv.org/html/2605.27254v1, §3.1 and Fig1 inspected. Unsupervised representation
+  and medoid selection followed by oracle annotation for supervised TFM contexts.
+  Label-free selection itself is not a novel claim of CRIC-ED.
+- `zaccaria2025cellgmm`: four authors/title verified in arXiv2409.07881v3, 13May2025;
+  https://arxiv.org/html/2409.07881v3, §§1–2 including penalized detection/imputation.
+  Numerical mixture populations, not heterogeneous categorical text. Cite inspected
+  preprint version here, without asserting unverified final journal metadata.
+
+Public search strings: `"TabPFN" "cell" "error detection" context`;
+`"tabular foundation" "data cleaning" contamination`;
+`"cellwise" "trimming" "conditional" outlier detection`;
+`"TabPFN" "context selection" anomaly detection`. Search hits are leads, not proof of
+support. Cell-TRICC and other uninspected hits are not cited as verified methods.
+
+## V2.1 manuscript support check (Codex continuation)
+
+Source scope is `paper/sections/{introduction,related_work,method,protocol,limitations}.tex`.
+This supersedes unsupported comparisons in the older closest-work matrix, not its history.
+
+- **TabPFN:** full primary article read at https://pmc.ncbi.nlm.nih.gov/articles/PMC11711098/,
+  especially “Principled in-context learning”, regression distribution description and
+  Methods “Foundation model abilities / Density estimation”. Supports pretrained
+  classification/regression, no per-dataset weight update for ICL, and existing
+  autoregressive feature-conditional density estimation. Does not establish our dirty-context
+  performance. Nature direct/DOI access redirected to inaccessible login; PMC full text succeeded.
+- **CDC:** https://proceedings.mlr.press/v238/jager24a/jager24a.pdf, §§3.1–3.3 and 4.1/4.3,
+  inspected. Supports column prediction, conformal calibration and the evaluated clean-training,
+  corrupted-inference setting. Older claims “LOO calibration” and “fails without clean split”
+  are not supported as universal statements and must not appear in manuscript.
+- **DDC:** https://arxiv.org/pdf/1601.07251 (v4), §4 eight-step algorithm and §8 software,
+  inspected. Supports numerical cellwise detection via robust prediction/residuals, including
+  deshrinkage; no support for labelling DDCcore as the full reference algorithm or asserting
+  a universal leave-cell-out protocol. Publisher full text had failed; primary author preprint read.
+- **TACTIC:** https://arxiv.org/html/2603.14171v1, §§2–3 and 4.2–4.3, inspected.
+  Supports anomaly-specific pretraining, row-level scoring and explicit contaminated-context
+  experiments. Broad context-contamination novelty is disallowed. No cross-task score comparison.
+- **ZeroED:** https://arxiv.org/html/2504.05345v1, abstract and §§III-A–III-E inspected.
+  Supports LLM-derived features/labels and detector training. Cite preprint only here;
+  no verified venue, per-prompt latency or universal numerical-column weakness asserted.
+- **Raha:** primary author-deposited accepted-manuscript record
+  https://dspace.mit.edu/entities/publication/f19685bd-d937-4287-b6dc-0563809e1987,
+  identity and system summary checked. PDF download returned 429; alternate author PDF
+  locations failed. Manuscript uses only system identity; benchmark bytes/provenance are
+  verified separately by local manifest, not inferred from the paper abstract.
+- **Isolation Forest:** https://cs.nju.edu.cn/zhouzh/zhouzh.files/publication/icdm08b.pdf,
+  title/authors and §§2–4 inspected; primary university metadata verifies venue/pages/year/DOI.
+  Supports original isolation algorithm identity, not the claim that our column-wise
+  implementation reproduces the original multivariate evaluation.
+- **LightGBM:** official NeurIPS record and linked PDF
+  https://proceedings.neurips.cc/paper_files/paper/2017/hash/6449f44a102fde848669bdd9eb6b76fa-Abstract.html,
+  title/eight authors/year/volume and model identity checked. Our hyperparameters are
+  protocol choices, not source-reported recommendations.
+
+Newly added BibTeX keys `liu2008isolation` and `ke2017lightgbm` were checked against
+these primary records. Existing unused entries are not evidence of support merely
+because their metadata is verified. No private manuscript was sent in web queries.
+
 Identity = title/authors/venue/pages match a primary record. Support = the cited source's
 own text (abstract or body actually read) supports the sentence in `paper/main.tex`.
 Support marked UNVERIFIED was not checked against the full paper in this session.

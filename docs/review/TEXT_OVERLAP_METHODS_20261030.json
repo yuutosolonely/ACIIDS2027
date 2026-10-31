@@ -1,0 +1,59 @@
+{
+  "scope": "Exact phrase screening on current prose and seven cached primary texts; bibliography excluded",
+  "limitations": "Does not detect semantic paraphrase or overlap with unsearched sources; not a plagiarism score or proof of originality",
+  "phrase_words": 12,
+  "sources": [
+    {
+      "file": "ddc.pdf",
+      "url": "https://arxiv.org/pdf/1601.07251v4",
+      "status": "cached",
+      "sha256": "bb2ff344df2fae69fc1910959f073c0d6ab33a39e558b6993dae063365dd87e1"
+    },
+    {
+      "file": "cdc.pdf",
+      "url": "https://proceedings.mlr.press/v238/jager24a/jager24a.pdf",
+      "status": "cached",
+      "sha256": "da6d27dbc2eecf286d16fbaa8062d924b8ef7470d791bac59396adde6c9c37ad"
+    },
+    {
+      "file": "tactic.pdf",
+      "url": "https://arxiv.org/pdf/2603.14171v1",
+      "status": "cached",
+      "sha256": "be38176ac827324a784500576d4c302245c09c72368c9375def0d62f30a30041"
+    },
+    {
+      "file": "zeroed.pdf",
+      "url": "https://arxiv.org/pdf/2504.05345v1",
+      "status": "cached",
+      "sha256": "2c3b5cb402016c9105c16f01349f56a6857bb7d13de57e41af5377d7d7050367"
+    },
+    {
+      "file": "tabpfn.html",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11711098/",
+      "status": "cached",
+      "sha256": "1f034167de3fdbd43b61bd93f806964c2c45addffc529fb41bba6e8d340c9d3d"
+    },
+    {
+      "file": "lightgbm.pdf",
+      "url": "https://proceedings.neurips.cc/paper_files/paper/2017/file/6449f44a102fde848669bdd9eb6b76fa-Paper.pdf",
+      "status": "cached",
+      "sha256": "32ddfe0c7a8e1acb87c97cff904a16e0a556a8d79ebfecf772159843e736affc"
+    },
+    {
+      "file": "iforest.pdf",
+      "url": "https://cs.nju.edu.cn/zhouzh/zhouzh.files/publication/icdm08b.pdf",
+      "status": "cached",
+      "sha256": "188a224c40786174ae6c9037d4a64e2ead1bf5bd1eb6da6334b42d3271021862"
+    }
+  ],
+  "matches": [],
+  "manuscript_text_sha256": {
+    "paper/sections/introduction.tex": "8c17cd58471094997af973c1636c5177328bf5ada7c06d353885e99b4376f36b",
+    "paper/sections/limitations.tex": "bf446be9229d5caa2601259f886cdc2e64945c3933cb6c36e88096496235ee13",
+    "paper/sections/method.tex": "6f33d78c40b1f8d3c0c72fdbc80c107ad79abd7ddbdf6054c61b9c7a1af5c6ac",
+    "paper/sections/protocol.tex": "073e50e0f677d781a8421cb7b78d014176e0cb21b321a4fa432b3ad091fed35a",
+    "paper/sections/related_work.tex": "401878b583f2f6e8f8b4e0d07019f9eb0cb0d3f07a941618dcf1e4e4f92570f8",
+    "paper/main.tex:abstract": "601da179086c2062f5d631334f74ca43af98225d675d1b3d7a7de3eb5e952906"
+  },
+  "script_sha256": "72c0a3f3d98a0b1bb8b1a0543ba3088b77a1539ab8fc76daf0894283b024c1dc"
+}

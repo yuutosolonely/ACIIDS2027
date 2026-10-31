@@ -1,0 +1,189 @@
+{
+  "status": "PASS_EXACT",
+  "scope": "One frozen unit rerun; not independent implementation or all-grid replication",
+  "arrays": {
+    "errors": {
+      "exact_equal": true,
+      "max_abs_difference": null,
+      "allclose_1e_8": true
+    },
+    "clean_values": {
+      "exact_equal": true,
+      "max_abs_difference": null,
+      "allclose_1e_8": true
+    },
+    "baseline__VF": {
+      "exact_equal": true,
+      "max_abs_difference": 0.0,
+      "allclose_1e_8": true
+    },
+    "baseline__PF": {
+      "exact_equal": true,
+      "max_abs_difference": 0.0,
+      "allclose_1e_8": true
+    },
+    "baseline__RobustZ": {
+      "exact_equal": true,
+      "max_abs_difference": 0.0,
+      "allclose_1e_8": true
+    },
+    "baseline__ColumnIF": {
+      "exact_equal": true,
+      "max_abs_difference": 0.0,
+      "allclose_1e_8": true
+    },
+    "baseline__DDCcore": {
+      "exact_equal": true,
+      "max_abs_difference": 0.0,
+      "allclose_1e_8": true
+    },
+    "lgbm__raw__nan_cells": {
+      "exact_equal": true,
+      "max_abs_difference": null,
+      "allclose_1e_8": true
+    },
+    "lgbm__raw": {
+      "exact_equal": true,
+      "max_abs_difference": 0.0,
+      "allclose_1e_8": true
+    },
+    "lgbm__random__nan_cells": {
+      "exact_equal": true,
+      "max_abs_difference": null,
+      "allclose_1e_8": true
+    },
+    "lgbm__random": {
+      "exact_equal": true,
+      "max_abs_difference": 0.0,
+      "allclose_1e_8": true
+    },
+    "lgbm__purify__nan_cells": {
+      "exact_equal": true,
+      "max_abs_difference": null,
+      "allclose_1e_8": true
+    },
+    "lgbm__purify": {
+      "exact_equal": true,
+      "max_abs_difference": 0.0,
+      "allclose_1e_8": true
+    },
+    "lgbm__oracle__nan_cells": {
+      "exact_equal": true,
+      "max_abs_difference": null,
+      "allclose_1e_8": true
+    },
+    "lgbm__oracle": {
+      "exact_equal": true,
+      "max_abs_difference": 0.0,
+      "allclose_1e_8": true
+    },
+    "lgbm__leaky__nan_cells": {
+      "exact_equal": true,
+      "max_abs_difference": null,
+      "allclose_1e_8": true
+    },
+    "lgbm__leaky": {
+      "exact_equal": true,
+      "max_abs_difference": 0.0,
+      "allclose_1e_8": true
+    },
+    "lgbm__raw_leo__nan_cells": {
+      "exact_equal": true,
+      "max_abs_difference": null,
+      "allclose_1e_8": true
+    },
+    "lgbm__raw_leo": {
+      "exact_equal": true,
+      "max_abs_difference": 0.0,
+      "allclose_1e_8": true
+    },
+    "tabpfn-v2__raw__nan_cells": {
+      "exact_equal": true,
+      "max_abs_difference": null,
+      "allclose_1e_8": true
+    },
+    "tabpfn-v2__raw": {
+      "exact_equal": true,
+      "max_abs_difference": 0.0,
+      "allclose_1e_8": true
+    },
+    "tabpfn-v2__random__nan_cells": {
+      "exact_equal": true,
+      "max_abs_difference": null,
+      "allclose_1e_8": true
+    },
+    "tabpfn-v2__random": {
+      "exact_equal": true,
+      "max_abs_difference": 0.0,
+      "allclose_1e_8": true
+    },
+    "tabpfn-v2__purify__nan_cells": {
+      "exact_equal": true,
+      "max_abs_difference": null,
+      "allclose_1e_8": true
+    },
+    "tabpfn-v2__purify": {
+      "exact_equal": true,
+      "max_abs_difference": 0.0,
+      "allclose_1e_8": true
+    },
+    "tabpfn-v2__oracle__nan_cells": {
+      "exact_equal": true,
+      "max_abs_difference": null,
+      "allclose_1e_8": true
+    },
+    "tabpfn-v2__oracle": {
+      "exact_equal": true,
+      "max_abs_difference": 0.0,
+      "allclose_1e_8": true
+    },
+    "tabpfn-v2__leaky__nan_cells": {
+      "exact_equal": true,
+      "max_abs_difference": null,
+      "allclose_1e_8": true
+    },
+    "tabpfn-v2__leaky": {
+      "exact_equal": true,
+      "max_abs_difference": 0.0,
+      "allclose_1e_8": true
+    },
+    "tabpfn-v2__raw_leo__nan_cells": {
+      "exact_equal": true,
+      "max_abs_difference": null,
+      "allclose_1e_8": true
+    },
+    "tabpfn-v2__raw_leo": {
+      "exact_equal": true,
+      "max_abs_difference": 0.0,
+      "allclose_1e_8": true
+    }
+  },
+  "contexts_exact_equal": true,
+  "artifacts_sha256": {
+    "original": {
+      "scores.npz": "7a99bffb8c68b8e873b19f4b53b5b20c4786f135a089fa84d420b58fce9f1f1f",
+      "contexts.jsonl": "696f636356ded2600a639dd8c76030661343ef393aff446e5f870b76681d1114",
+      "meta.json": "144cac144dfaeeecbc6d1748744dae5b9dd273083b326302fd0633417853f92f",
+      "attempt.json": "323e7f928584783419534d4787d8c0c46f677a865e69da7eadd83e6194cd7028"
+    },
+    "replica": {
+      "scores.npz": "7a99bffb8c68b8e873b19f4b53b5b20c4786f135a089fa84d420b58fce9f1f1f",
+      "contexts.jsonl": "696f636356ded2600a639dd8c76030661343ef393aff446e5f870b76681d1114",
+      "meta.json": "2c86d872d445ec735cdb83eaee0635abe6006d87a60dec7c706af52244e2ea3a",
+      "attempt.json": "dfa5278516c50db5b371a235545d6bb977fe452667e8a0e83319efc27cad4372"
+    }
+  },
+  "source_snapshot_sha256": "c37e39ab8168ed2fda38e9a6e952a15114bda4faa595356c7aeeb5f633bf5678",
+  "params": {
+    "folds": 5,
+    "context_cap": 512,
+    "q": 0.15,
+    "tabpfn_n_estimators": 1,
+    "rate": 0.1,
+    "threads": 2,
+    "lgbm_n_jobs": 1,
+    "entity_key_leo": "flight"
+  },
+  "script_sha256": "4499cfa5c17ebf6964770d1d6926d70f69c506f1c91c468850aab28dbd191988",
+  "timings_excluded_from_equality": true
+}

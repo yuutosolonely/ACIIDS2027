@@ -1,0 +1,12 @@
+{
+  "status": "completed",
+  "stage": "finalize",
+  "request": {
+    "run_id": "g0_capability_20261030",
+    "data_role": "synthetic capability check",
+    "source_revision": "0aff63e292da7a071368f594015089d5d746fa05",
+    "script_sha256": "d1119458ded6d2e37bb009a4716410ab34fcff1c755bfc4c54ca54887133ea93"
+  },
+  "started_at": "2026-10-30T02:04:00.861504+00:00",
+  "finished_at": "2026-10-30T02:04:10.845468+00:00"
+}

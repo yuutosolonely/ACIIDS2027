@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering\small
+\setlength{\tabcolsep}{3.5pt}
+\caption{Secondary real-data AP differences and descriptive row-bootstrap intervals. LEO uses observed keys and differs from the primary row boundary; rayyan has no declared key.}
+\label{tab:secondary}
+\begin{tabular}{lrrr}
+\toprule
+Table & TFM raw $-$ LGBM & Oracle $-$ raw & TFM LEO $-$ raw \\
+\midrule
+hospital & 0.251 [0.220, 0.277] & 0.131 [0.104, 0.159] & -0.515 [-0.538, -0.493] \\
+flights & 0.097 [0.088, 0.108] & 0.484 [0.458, 0.507] & -0.173 [-0.190, -0.156] \\
+beers & -0.022 [-0.026, -0.018] & 0.743 [0.733, 0.754] & -0.019 [-0.022, -0.018] \\
+rayyan & -0.073 [-0.087, -0.060] & 0.217 [0.200, 0.236] & -- \\
+\bottomrule
+\end{tabular}
+\end{table}

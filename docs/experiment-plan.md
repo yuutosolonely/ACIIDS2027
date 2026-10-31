@@ -1,5 +1,7 @@
 # Kế hoạch Thực nghiệm CRIC-ED — ACIIDS 2027
 
+> **Kế hoạch thực thi hiện hành, 2026-10-30:** theo thiết kế đã đồng bộ trong `docs/IDEA.md` và accepted decisions của tác giả, thực hiện T1–T8 của `docs/handoffs/TASKS_CODEX_V2_1_20261030.md`. V2.1 candidate là đặc tả prospective; v1/v2 giữ nguyên lịch sử. Dev: movies_1, seed0, ba điều kiện; confirmatory sau freeze: hospital/flights/beers/rayyan × real/inj-random/inj-systematic × seeds0–4, cả LGBM và pinned TabPFN-2. Row primary, observed-key LEO secondary, row-bootstrap mô tả; final preprocessing transductive công khai. Không tự áp dụng group-primary/inductive v3, không Wilcoxon/Holm, không đổi protocol theo kết quả. Các phần kế hoạch gốc bên dưới không thay amendment hiện hành.
+
 Cập nhật: 2026-10-29.
 Trạng thái: **Protocol Design; Chưa đóng băng (Unfrozen); Chưa chạy confirmatory runs.**
 

@@ -1,0 +1,116 @@
+\section{Experimental Protocol}
+\subsection{Data, roles and corruption conditions}
+We use a pinned snapshot of the Raha benchmark repository, upstream commit
+\texttt{7be1334b8c7bbdac3f47ef514fb3e1e8c5fc181c}, with per-file hashes.
+All CSV values are read as strings, retaining empty strings. An eligible cell is
+an entry outside a uniquely valued column named \texttt{id}, \texttt{index} or
+\texttt{tuple\_id}, with eligibility established on the source observed table.
+The error label is an exact string disagreement with the aligned reference.
+Unsupported targets remain eligible; successful-output-only evaluation would
+otherwise reward methods for avoiding difficult columns.
+
+\texttt{movies\_1} is development data and does not enter confirmatory summaries.
+The confirmatory collection comprises \texttt{hospital}, \texttt{flights},
+\texttt{beers} and \texttt{rayyan}. Each table is capped at 1,000 rows before
+injection: tables below the cap retain every row; larger tables use a single
+seed-0 sample without replacement, sorted in original row order. Identical
+source rows and column order are used across conditions, models and seeds.
+The study targets these capped tables, not their uncapped distributions.
+
+Each table has three conditions. \emph{Real} retains the observed values.
+\emph{Random injection} starts from the clean reference and attempts corruption
+at individually sampled eligible positions. \emph{Systematic injection} also
+starts from the reference but repeats a shared wrong value across sampled
+occurrences of the same column value. Both target a $10\%$ corruption rate.
+Attempted error types are sampled uniformly from character edits, replacement
+by another column value, empty-string replacement, format changes and numeric
+rescaling. Rejected or unchanged proposals imply that realized type proportions
+are not uniform. A fixed attempt guard can produce a shortfall; realized counts
+are reported rather than forced by an outcome-dependent rerun. These are
+string-level mechanism probes, not claims to reproduce every natural error process.
+
+Run seeds are $0,1,2,3,4$. The injection and context algorithms both use the
+run seed; their randomness is coupled rather than independently crossed.
+The primary contrast averages the five paired AP differences separately for
+each real table. Corruption conditions remain separate repeated measurements
+within a source table.
+
+\subsection{Models and comparators}
+TabPFN uses package version 9.2.0 and explicit second-generation classifier
+and regressor checkpoint paths. The pinned upstream revisions are recorded
+with checkpoint and license hashes in the reproducibility manifest. We use
+one estimator, CPU inference and the run seed for model randomness. Package
+and weight licenses are evaluated separately; later package defaults or
+checkpoint generations are not substituted.
+
+The conditional LightGBM model uses 100 trees, learning rate $0.1$, 15 leaves,
+minimum child size five and one training thread. Classification predicts the
+context target classes. Regression uses a Gaussian tail about its predicted
+mean, with scale estimated from within-context cross-validated residuals.
+Thus the conditional-model comparison includes different distributional
+approximations, not just a backbone replacement with equivalent calibration.
+
+Value frequency (VF) scores smoothed leave-one-out token frequency in each
+column. Pattern frequency (PF) applies this rule to character-class signatures.
+RobustZ scores numerical deviations using median and MAD with the declared
+fallback; nonnumerical columns receive zero. ColumnIF fits 100 Isolation Forest
+trees separately to each column, using numbers or frequency encodings.
+DDCcore combines robust numerical standardization, selected pairwise
+relationships and residual scores. It omits parts of reference DDC and is
+reported under its own name. All methods share the full eligible denominator,
+while their support sets may differ.
+
+\subsection{Endpoints and uncertainty}
+Average precision (AP) is the primary metric, with tied scores grouped as in
+\texttt{average\_precision\_score}; it is not trapezoidal PR integration.
+For real table $t$, the primary estimand is
+\begin{equation}
+ \Delta_t=\frac{1}{5}\sum_{s=0}^4
+  \bigl[\operatorname{AP}_{t,s}(\mathrm{TFM,purify})-
+        \operatorname{AP}_{t,s}(\mathrm{TFM,random})\bigr].
+\end{equation}
+AP is calculated per seed before taking differences and means. We also report
+R-precision, precision at $1\%$ and $5\%$ audit budgets, numerical/categorical
+AP, supported-column summaries, finite-output coverage and failure counts.
+Exact top-$k$ ties use stable row-major order. R-precision uses the reference error
+count as an evaluation-only budget, not an error count known at deployment.
+Type-specific summaries follow the declared numerical/categorical target groups;
+unsupported text remains visible in the whole-universe and support reports.
+
+Rare-valid cells are reference-correct entries whose clean marginal value
+frequency is at most $1\%$, restricted to columns with clean unique-value ratio
+at most $0.5$. Their alarm rate is the fraction included in the R-precision
+budget; zero denominators are unavailable, not zero. This reference-based
+mask is used only after detection and never protects rows during purification.
+The sensitivity analysis excluding real columns with error rate above $50\%$
+is explicitly label-dependent and exploratory, not a replacement endpoint.
+
+For each paired contrast, draw 1,000 row-bootstrap samples with seed 2027.
+Use the same resampled row IDs for both arms and every run seed, retaining
+all cells in each selected row. Recalculate the five paired AP differences
+and their mean. Discard the whole bootstrap draw if any constituent seed
+has no positive errors, and report the valid-draw count. Percentiles give
+the descriptive $95\%$ interval. These intervals condition on fitted predictions
+and declared seeds. They exclude retraining and new-table uncertainty, and
+can understate uncertainty when rows share entities. Cross-fitting and the
+LEO diagnostic do not make row resampling independent.
+
+Secondary contrasts compare raw TabPFN with raw LightGBM, oracle with raw,
+purification with raw, raw-LEO with row-level raw, and LightGBM purification
+with its random control. Equal-weight macro means summarize named source
+tables separately for each condition. There is no pooled-cell cross-table
+endpoint, Wilcoxon/Holm decision or binary superiority verdict. Four sources
+do not become twelve independent datasets by repeating three conditions.
+
+\subsection{Prospective specification and execution integrity}
+The amended v2.1 specification preserves earlier protocols and discloses that
+descriptive dirty/clean profiles of all five tables were inspected before the
+amendment; only development data were used for detector debugging. Source code,
+input manifests, splits and environment record were frozen before confirmatory
+scoring, and every run records source identity, configuration, seed, checkpoint
+hashes and source row IDs. Interrupted and failed attempts are retained; missing
+seeds, unresolved partial runs, inconsistent universes or stale source hashes block
+the analysis. Nonfinite scores and caught fit errors keep masks and exception
+metadata; affected cells receive the maximum finite arm score plus one and stay in
+the denominator. The local environment inherits system site packages and is not
+isolated; version checks cover declared packages, not every transitive dependency.

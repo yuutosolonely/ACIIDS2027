@@ -227,8 +227,10 @@ ENTITY_KEYS = {"hospital": "provider_number", "flights": "flight", "beers": "bre
 
 
 def entity_groups(t: Table) -> np.ndarray | None:
-    key = ENTITY_KEYS.get(t.name)
+    key = ENTITY_KEYS.get(getattr(t, "name", None))
     if key is None:
         return None
+    if key not in t.dirty:
+        raise ValueError("Declared entity key missing from observed table: " + key)
     codes, _ = pd.factorize(t.dirty[key].values)
     return codes

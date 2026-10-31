@@ -1,0 +1,56 @@
+{
+  "head": "0aff63e292da7a071368f594015089d5d746fa05",
+  "integration": "reviewed WIP file blobs; no commit, branch reset or external worktree modification",
+  "files": [
+    {
+      "source_commit": "a7560c1",
+      "destination": "src/cric_ed/conditional.py",
+      "sha256": "c0f78835ede95438deaec3880ed05653992dba87154ae7ca8c4ba83390fb5ee0"
+    },
+    {
+      "source_commit": "a7560c1",
+      "destination": "src/cric_ed/benchmark.py",
+      "sha256": "9428429b53291ffdfd4c0c53dc62ed48691a9af184e21d8b97654f5104f8f866"
+    },
+    {
+      "source_commit": "a7560c1",
+      "destination": "src/cric_ed/v2_contract.py",
+      "sha256": "576219f7c25300426efb010c610131d089a7c53fd6abc1fe665b216cc2a44202"
+    },
+    {
+      "source_commit": "a7560c1",
+      "destination": "experiments/tfm/run_v2.py",
+      "sha256": "415059ebe20f3b481fc1a0df18608c6394df00c041d3b4862b7712c3ecf7e1f8"
+    },
+    {
+      "source_commit": "a7560c1",
+      "destination": "experiments/tfm/analyze_v2.py",
+      "sha256": "d833111bc69159611a6b1e69bc5a61bacb641521c05508ec770162d8abdb7434"
+    },
+    {
+      "source_commit": "a7560c1",
+      "destination": "tests/test_v2_contract.py",
+      "sha256": "8c94b908fef40f2b577744ec6ca6e079728a13caa7ec1514c8f6294cf92f03b3"
+    },
+    {
+      "source_commit": "a7560c1",
+      "destination": "tests/test_v2_cpu_boundaries.py",
+      "sha256": "cb3a8f2ab3ea6c84fdec9e35a1dfc3669e597a46aaafc6f902f50b3ff5660195"
+    },
+    {
+      "source_commit": "a7560c1",
+      "destination": "tests/test_v2_reporting.py",
+      "sha256": "a8fe7e882b8a546dcd8e1b6a59be7348043b7ee1a8da52812e1a9e01e39fadf0"
+    },
+    {
+      "source_commit": "32d4bc2",
+      "destination": "prereg/PREREGISTRATION_V2_1.md",
+      "sha256": "9942fb55fb4875ef9a5334abe908043f33a51f184685e7423c46be71ec292d33"
+    },
+    {
+      "source_commit": "d2fe584",
+      "destination": "docs/literature/PRIMARY_METADATA_20261030.json",
+      "sha256": "f3d6a6104fdc933293dc875dc4badf2d513a26edd5eb20a0b0d5705d411fe89e"
+    }
+  ]
+}

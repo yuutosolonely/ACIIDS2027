@@ -1,5 +1,16 @@
 # Closest-Work Comparison Matrix & Novelty Analysis
 
+> **Superseded comparisons, 2026-10-30:** this historical matrix contains unsupported
+> universal claims and must not be copied into the current paper. The checked v2.1
+> support record is `CITATION_AUDIT_20261030.md` and current prose is
+> `paper/sections/related_work.tex`. CDC uses clean training/calibration in its evaluated
+> setting; its universal failure without clean splits and “LOO calibration” are not
+> established here. DDC's reference algorithm is not reproduced by DDCcore. TACTIC
+> already studies contaminated contexts; broad contamination novelty is false.
+> ZeroED's venue/latency and the remaining uninspected method claims below are not
+> usable evidence. CRIC-ED v2.1 uses nested suspicion trimming, not influence estimation
+> or a rare-valid protection guarantee. Raw TabPFN is not the reference uTabPFN extension.
+
 **Worker:** W1-LIT (Literature & Novelty Specialist)  
 **Worktree:** `C:/Users/ngoda/orca/workspaces/ACIIDS2027/literature`  
 **Date:** 2026-10-29  

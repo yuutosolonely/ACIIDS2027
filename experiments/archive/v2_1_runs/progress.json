@@ -1,0 +1,103 @@
+{
+  "updated_utc": "2026-10-30T05:05:40.444977+00:00",
+  "runs": [
+    {
+      "run_id": "flights__real__s0",
+      "exit_code": 0,
+      "elapsed_seconds": 719.7518953000108,
+      "finished_utc": "2026-10-30T03:11:15.064163+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "rayyan__real__s0",
+      "exit_code": 0,
+      "elapsed_seconds": 819.396607799994,
+      "finished_utc": "2026-10-30T03:12:54.710403+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "beers__real__s0",
+      "exit_code": 0,
+      "elapsed_seconds": 1349.1610688000073,
+      "finished_utc": "2026-10-30T03:21:44.474173+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "flights__real__s1",
+      "exit_code": 0,
+      "elapsed_seconds": 714.7552563000063,
+      "finished_utc": "2026-10-30T03:24:49.561075+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "rayyan__real__s1",
+      "exit_code": 0,
+      "elapsed_seconds": 852.4224141000013,
+      "finished_utc": "2026-10-30T03:39:02.070874+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "beers__real__s1",
+      "exit_code": 0,
+      "elapsed_seconds": 1363.198793100004,
+      "finished_utc": "2026-10-30T03:44:27.783647+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "flights__real__s2",
+      "exit_code": 0,
+      "elapsed_seconds": 736.1337195000087,
+      "finished_utc": "2026-10-30T03:56:43.995961+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "hospital__real__s0",
+      "exit_code": 0,
+      "elapsed_seconds": 4497.292014199993,
+      "finished_utc": "2026-10-30T04:14:12.604030+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "beers__real__s2",
+      "exit_code": 0,
+      "elapsed_seconds": 1397.3850313000003,
+      "finished_utc": "2026-10-30T04:20:01.467472+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "hospital__real__s1",
+      "exit_code": 0,
+      "elapsed_seconds": 4555.671226699997,
+      "finished_utc": "2026-10-30T04:27:10.810706+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "rayyan__real__s2",
+      "exit_code": 0,
+      "elapsed_seconds": 884.9163266000105,
+      "finished_utc": "2026-10-30T04:28:57.627011+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "flights__real__s3",
+      "exit_code": 0,
+      "elapsed_seconds": 1204.7514413000026,
+      "finished_utc": "2026-10-30T04:47:15.668322+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "beers__real__s3",
+      "exit_code": 0,
+      "elapsed_seconds": 1987.9190708999959,
+      "finished_utc": "2026-10-30T05:02:05.631515+00:00",
+      "fit_failure_events": 0
+    },
+    {
+      "run_id": "rayyan__real__s3",
+      "exit_code": 0,
+      "elapsed_seconds": 1104.5520751000004,
+      "finished_utc": "2026-10-30T05:05:40.314532+00:00",
+      "fit_failure_events": 0
+    }
+  ]
+}

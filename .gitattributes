@@ -1,0 +1,10 @@
+# Keep hashed source/configuration text byte-stable in future worktree checkouts.
+* text=auto eol=lf
+# Historical evidence/data and binary artifacts retain their exact recorded bytes.
+experiments/archive/** -text
+*.csv -text
+*.npz -text
+*.ckpt -text
+*.pdf -text
+*.png -text
+*.jpg -text

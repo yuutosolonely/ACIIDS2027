@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "scope": "Saved artifact consistency and information-boundary audit; not independent model replication",
+  "script_sha256": "cbed07d7d97c06bb250fc29ebaf0a9e3d6031d9c5503deadfda8266b11a77fd3",
+  "runs": [
+    {
+      "table": "movies_1",
+      "condition": "inj-random",
+      "seed": 0,
+      "contexts_verified": 1440,
+      "fit_failure_events": 0,
+      "final_nonfinite_cells": {
+        "lgbm__raw__nan_cells": 0,
+        "lgbm__random__nan_cells": 0,
+        "lgbm__purify__nan_cells": 0,
+        "lgbm__oracle__nan_cells": 0,
+        "tabpfn-v2__raw__nan_cells": 0,
+        "tabpfn-v2__random__nan_cells": 0,
+        "tabpfn-v2__purify__nan_cells": 0,
+        "tabpfn-v2__oracle__nan_cells": 0
+      },
+      "errors": 1600,
+      "cells": 16000,
+      "scores_sha256": "f703a3495b2c0bd4953f2fe5150b5a70cc66954dca026062d16652e55908c575"
+    },
+    {
+      "table": "movies_1",
+      "condition": "inj-systematic",
+      "seed": 0,
+      "contexts_verified": 1440,
+      "fit_failure_events": 0,
+      "final_nonfinite_cells": {
+        "lgbm__raw__nan_cells": 0,
+        "lgbm__random__nan_cells": 0,
+        "lgbm__purify__nan_cells": 0,
+        "lgbm__oracle__nan_cells": 0,
+        "tabpfn-v2__raw__nan_cells": 0,
+        "tabpfn-v2__random__nan_cells": 0,
+        "tabpfn-v2__purify__nan_cells": 0,
+        "tabpfn-v2__oracle__nan_cells": 0
+      },
+      "errors": 1600,
+      "cells": 16000,
+      "scores_sha256": "631e7a73c15bbba9c4b6215514e9a5edba7eba22c8bd01c724044d7e77d4d67f"
+    },
+    {
+      "table": "movies_1",
+      "condition": "real",
+      "seed": 0,
+      "contexts_verified": 1600,
+      "fit_failure_events": 0,
+      "final_nonfinite_cells": {
+        "lgbm__raw__nan_cells": 0,
+        "lgbm__random__nan_cells": 0,
+        "lgbm__purify__nan_cells": 0,
+        "lgbm__oracle__nan_cells": 0,
+        "lgbm__leaky__nan_cells": 0,
+        "tabpfn-v2__raw__nan_cells": 0,
+        "tabpfn-v2__random__nan_cells": 0,
+        "tabpfn-v2__purify__nan_cells": 0,
+        "tabpfn-v2__oracle__nan_cells": 0,
+        "tabpfn-v2__leaky__nan_cells": 0
+      },
+      "errors": 1064,
+      "cells": 16000,
+      "scores_sha256": "b554b76ca57972be7ff736009e1337c7f8a162a7850be8fe220a7754ae88219d"
+    }
+  ]
+}

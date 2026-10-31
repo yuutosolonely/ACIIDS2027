@@ -1,0 +1,86 @@
+{
+  "scope": "Exact phrase screening on current prose and 11 cached primary texts; bibliography excluded",
+  "limitations": "Does not detect semantic paraphrase or overlap with unsearched sources; not a plagiarism score or proof of originality",
+  "phrase_words": 12,
+  "sources": [
+    {
+      "file": "qualitab.pdf",
+      "url": "https://www.vldb.org/2025/Workshops/VLDB-Workshops-2025/QDB/QDB25_1.pdf",
+      "status": "cached",
+      "sha256": "e275a6f6e752152731d923e9b5e48d1442d2c6817ad327485ec39e5ace050ec6"
+    },
+    {
+      "file": "l2c2.pdf",
+      "url": "https://arxiv.org/pdf/2604.25154v1",
+      "status": "cached",
+      "sha256": "3e7328b5652b21cd4539ab256de006ebc4cc28562e8730a8915b206f35b0bff3"
+    },
+    {
+      "file": "lucos.pdf",
+      "url": "https://arxiv.org/pdf/2605.27254v1",
+      "status": "cached",
+      "sha256": "45a3791860eddc2902ca411252ff1c35013f64d1a032f833627f72578997edc8"
+    },
+    {
+      "file": "cellgmm.pdf",
+      "url": "https://arxiv.org/pdf/2409.07881v3",
+      "status": "cached",
+      "sha256": "40d6f4738d23542aebc7e5021e438b47522549294817d58146e8889436960ec4"
+    },
+    {
+      "file": "ddc.pdf",
+      "url": "https://arxiv.org/pdf/1601.07251v4",
+      "status": "cached",
+      "sha256": "bb2ff344df2fae69fc1910959f073c0d6ab33a39e558b6993dae063365dd87e1"
+    },
+    {
+      "file": "cdc.pdf",
+      "url": "https://proceedings.mlr.press/v238/jager24a/jager24a.pdf",
+      "status": "cached",
+      "sha256": "da6d27dbc2eecf286d16fbaa8062d924b8ef7470d791bac59396adde6c9c37ad"
+    },
+    {
+      "file": "tactic.pdf",
+      "url": "https://arxiv.org/pdf/2603.14171v1",
+      "status": "cached",
+      "sha256": "be38176ac827324a784500576d4c302245c09c72368c9375def0d62f30a30041"
+    },
+    {
+      "file": "zeroed.pdf",
+      "url": "https://arxiv.org/pdf/2504.05345v1",
+      "status": "cached",
+      "sha256": "2c3b5cb402016c9105c16f01349f56a6857bb7d13de57e41af5377d7d7050367"
+    },
+    {
+      "file": "tabpfn.html",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11711098/",
+      "status": "cached",
+      "sha256": "1f034167de3fdbd43b61bd93f806964c2c45addffc529fb41bba6e8d340c9d3d"
+    },
+    {
+      "file": "lightgbm.pdf",
+      "url": "https://proceedings.neurips.cc/paper_files/paper/2017/file/6449f44a102fde848669bdd9eb6b76fa-Paper.pdf",
+      "status": "cached",
+      "sha256": "32ddfe0c7a8e1acb87c97cff904a16e0a556a8d79ebfecf772159843e736affc"
+    },
+    {
+      "file": "iforest.pdf",
+      "url": "https://cs.nju.edu.cn/zhouzh/zhouzh.files/publication/icdm08b.pdf",
+      "status": "cached",
+      "sha256": "188a224c40786174ae6c9037d4a64e2ead1bf5bd1eb6da6334b42d3271021862"
+    }
+  ],
+  "matches": [],
+  "manuscript_text_sha256": {
+    "paper/sections/abstract.tex": "7629c4c3c9865f3a43a63607aa7e9be64cc3619c1ee6b43aed8ea0e977ce5516",
+    "paper/sections/conclusion.tex": "a3b6b6250d2b12cd1d9050b9ebfec2f75befa22e8a4d9fd95285f40562004863",
+    "paper/sections/introduction.tex": "8c17cd58471094997af973c1636c5177328bf5ada7c06d353885e99b4376f36b",
+    "paper/sections/limitations.tex": "213407d613417db5d605732f1ab1d6aaee490e8044dc84875bf966ea6bb1cbf8",
+    "paper/sections/method.tex": "e691803c83c7f53d2dc1f918a8d0fb421a6bb986e6ca47c3f06d442e43fa9b96",
+    "paper/sections/protocol.tex": "6eaaf6d2800d5db023bf8c75931394559b905b107c6f19564012618f753cccbe",
+    "paper/sections/related_work.tex": "5c221a65d2b0a183573f63d24226e95ccc68d3f0c3de8e44c2cfa63118e8f58a",
+    "paper/sections/results.tex": "449ef63ef4b799dd740ca025fed4b4aaec52dca0873ae025a89442311f5c2c52",
+    "paper/main.tex:abstract": "058e2f0d51182f0a95646233e60eaddbdf01275eb6b9ca399e36189df7766559"
+  },
+  "script_sha256": "c690786d3eb4b9004ff77849c8506de7561a241fe684fe380a7ca492291c4c87"
+}

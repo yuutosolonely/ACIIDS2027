@@ -1,96 +1,68 @@
-# Candidate v2 pipeline — local remediation, not an approved research protocol
+# CRIC-ED v2.1: authorized CPU study
 
-The author has recorded NO-GO for the ACIIDS deadline. The statement of Path A approval
-in `prereg/PREREGISTRATION_V2.md` is not corroborated by the authorization/decision brief.
-The code corrections described here are proposals for a future protocol amendment.
-No real model, development benchmark or confirmatory run was executed to validate them.
-Preregistration v1/v2 and existing result files remain unchanged.
+Authority: the appended Path A and amendment decisions in
+`docs/DECISION_BRIEF_20261030.md`, and Claude checkpoint `0aff63e`.
+Codex owns integration and execution. NO-GO for the original ACIIDS deadline remains;
+no submission, paid compute or new model download is authorized.
 
-## Corrections implemented for CPU validation
+## Protocol
 
-`conditional.score_table` rejects externally supplied pass-1 matrices. For each outer
-fold, the candidate purification arm computes an inner cross-fit on the remaining rows,
-including typing and encoding for that inner work. Only those scores rank rows in the
-shared outer base context. Thus the outer query fold cannot influence purification via
-the inner model or its preprocessing. Final-pass encoding is still the candidate's
-global transductive encoding; this does not resolve its compatibility with the original
-group/information-boundary requirements.
+`prereg/PREREGISTRATION_V2_1.md` is the prospective amended specification. V1 and v2
+remain historical records. Primary: row-level five-fold cross-fitting. Secondary:
+observed-key leave-entity-out raw scoring for hospital/provider_number, flights/flight,
+beers/brewery_id, real condition only. Final observed-table typing and encoding are
+explicitly transductive; fitted contexts exclude query folds. Nested purification
+preprocessing and inner fits cannot see the outer query fold. V3 and strict_scorer
+are inactive diagnostic alternatives, not this pipeline.
 
-The proposal increases purification compute. Its full arm time includes preprocessing,
-context construction and the inner fits; comparisons must disclose this extra work.
-Matched random removes the same number of rows from the same outer base. Whether this
-also needs a matched-compute control remains a design question before freeze.
+Models: pinned TabPFN-v2 classifier/regressor, tabpfn==9.2.0, CPU, one estimator;
+LightGBM conditional comparison. Numeric scores use predictive two-sided tails plus
+parseability, not densities. Baselines: VF, PF, RobustZ, ColumnIF, simplified DDCcore.
+Neither LGBM nor DDCcore nor TFM raw is a reproduction of CDC/DDC/uTabPFN.
 
-`contexts.jsonl` records final and pass-1 stages, outer fold, seed, column, query/base/
-active/removed row IDs and preprocessing row IDs. Failure records retain stage/fold/model
-identity. Row IDs for the fixed dataset subsample are retained in run metadata.
-Context IDs are subsample row positions, mapped to source rows by metadata `row_ids`.
-Clean data may be passed only to the labelled oracle arm.
+Primary contrast: TabPFN purify minus matched-count random on each real source table.
+Report five-seed mean paired differences and 1,000 paired row-bootstrap intervals,
+with row-dependence caveats. Injection probes remain separate. Macro means are
+descriptive; no Wilcoxon/Holm or binary cross-dataset superiority verdict.
 
-## Freeze and analysis validation (candidate contract)
+Purify includes outer-isolated nested pass-1 compute, reported as pass1_nested.
+Purify_final subtracts this component. Random_matched_total adds it to ordinary
+random cost while retaining identical random scores: an accounted cost, not an
+independently measured end-to-end accuracy arm. No double-counting these entries.
 
-Neither runner nor analysis creates a protocol lock automatically. Confirmatory runs
-require both `prereg/PREREGISTRATION_V2.sha256` and
-`prereg/PREREGISTRATION_V2.freeze.json`. The latter must have `schema_version: 1` and
-`files_sha256`, mapping repository-relative paths to SHA-256 values. Required paths are
-defined by `cric_ed.v2_contract.REQUIRED_FREEZE_FILES`: protocol, scorer, baselines,
-loader, contract module, runner, analysis, environment record and pinned input manifests.
-All listed files must still match; paths cannot escape the repository. The protocol
-digest must agree between both locks. No actual lock is supplied by this remediation.
-
-The canonical sorted hash map defines `source_snapshot_sha256`; runs record it and the
-protocol/code/checkpoint identities. Runner verifies data/checkpoint/license file bytes
-against the pinned manifests, refuses reuse of existing/partial run directories, and
-checks the source freeze again before finalizing a confirmatory run. Hash verification
-does not establish authorization, license compatibility or actual environment versions.
-
-Analysis requires the full declared table-condition-seed grid and both models, rejects
-partial/duplicate/wrong-source runs, and validates all declared method arrays, error masks,
-failure masks, eligible denominators and row alignment across seeds. Invalid input creates
-no result directory. Existing analysis output is not overwritten. Bootstrap replicates
-are discarded as a whole if any seed has no positive error; a replicate never silently
-changes the seed mean. The candidate decision rule still uses the v2 units and threshold;
-their cross-condition dependence and multiplicity interpretation need methodological review.
-
-Before any real freeze: reconcile scope/rights, amend and approve the protocol, decide
-group and preprocessing boundaries, validate actual environment/checkpoint capabilities,
-freeze exact split/subsample manifests and failure handling, and resolve the statistical
-unit and matched-compute questions. This implementation does not complete those gates.
-
-## Tests without checkpoints or network
-
-The minimal environment runs the contract tests; the scientific module is skipped if
-NumPy/pandas/SciPy are absent. The existing `.venv-tfm` environment can run the whole suite:
+## Execution and validation
 
 ```powershell
 .venv-tfm/Scripts/python.exe -m pytest -q -p no:cacheprovider
+.venv-tfm/Scripts/python.exe experiments/tfm/run_v2.py --table movies_1 --condition real --seeds 0 --threads 3 --out experiments/runs/v2_dev
+.venv-tfm/Scripts/python.exe experiments/tfm/analyze_v2.py --runs experiments/runs/v2_dev --out experiments/validation/v2_1_dev_analysis --development
 ```
 
-All new tests use temporary synthetic arrays/tables and a deterministic fake predictor.
-They do not load weights or access RAHA data. Test PASS is software validation only.
+Development analysis requires movies_1 only, all three conditions with the same seeds.
+Confirmatory execution requires both PREREGISTRATION_V2_1.sha256 and .freeze.json,
+covering every REQUIRED_FREEZE_FILES entry. Freeze verification uses exact bytes.
+The root .gitattributes uses LF for text and preserves immutable archive/data/binary
+bytes; do not mass-normalize archived artifacts or run from stale CRLF worktrees.
 
-## Reliability continuation — candidate setup, not a research run
+After development validation and recorded freeze, execute the full 4-table x
+3-condition x 5-seed grid with both models. The analysis rejects missing/duplicate
+runs, unresolved partials, absent arms, denominator misalignment and stale identities.
+No result directory is overwritten. Source modifications after freeze require an
+amendment and new freeze, not replacement of completed results.
 
-`run_record.run_attempt` journals each fresh attempt before runtime/input verification.
-It retains stage, source/request identity, error type/message and partial artifacts on
-exceptions or interrupts, then re-raises the failure. Only a successful block with all
-required output files finalizes the directory. Abrupt termination may leave a running
-journal in `.partial`; analysis rejects that incomplete attempt too. Completed metadata
-and the attempt journal must agree before analysis accepts an output directory.
+Every fresh attempt starts as .partial with an attempt.json stage/time/request/source
+journal. Exceptions and interrupts retain the journal and partials. Completion
+requires scores.npz, contexts.jsonl and meta.json; abrupt termination may leave a
+running journal, which is still incomplete. Inner and final context IDs are subsample
+positions mapped to original rows by metadata.row_ids. Clean truth is evaluation-only
+except the explicitly labelled oracle input. Failure masks retain the full denominator.
 
-`verify_environment` checks exact installed distribution metadata against the declared
-pins before dataset loading, including all core scientific packages and `torch`. The
-original pin record omitted torch; it is archived unchanged at
-`experiments/archive/tfm_env_freeze_before_core_pin_20261030.txt`. The candidate pin record
-now adds the installed version and its declared-pin check passes.
+Runtime and input hashes are checked before data loading. The scientific environment
+inherits system site packages and is NOT isolated; see the environment provenance
+record. Exact distribution versions do not fully identify wheels or all transitive
+packages. The original torch-omitting pin record is preserved in experiments/archive.
+Capability verification at experiments/validation/g0_capability_20261030 uses synthetic
+data and recorded zero network attempts; it is not benchmark performance evidence.
 
-The existing `.venv-tfm` enables system site packages; it must not be called isolated.
-See `experiments/validation/tfm_environment_provenance_20261030.json` for installation
-origins and limitations. No packages or weights were installed/downloaded. Matching
-distribution versions is not a complete dependency/build/license freeze.
-
-The proposed statistical and information-boundary amendment is
-`docs/proposals/V2_AMENDMENT_20261030.md`. It recommends table-level, descriptive reporting
-for the present collection; the existing v2 hypothesis rule was not changed. The exact
-sign-pattern enumeration in `experiments/validation/inference_resolution_20261030.json`
-is a mathematical design diagnostic under stated assumptions, not a benchmark result.
+All numerical claims must link to runs, config/source hashes and artifacts through
+`docs/CLAIM_EVIDENCE.md`. Tests using fake predictors establish software behavior only.

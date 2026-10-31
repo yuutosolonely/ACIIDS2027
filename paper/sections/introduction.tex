@@ -1,0 +1,41 @@
+\section{Introduction}
+Data errors can affect only a few attributes of a record. A suspicious product measurement
+does not imply that its name and producer are wrong, and a rare bibliographic entry need
+not contain an error. This makes cell localization a different objective from ranking
+entire rows as anomalies. Robust cellwise methods already exploit relationships among
+variables~\cite{rousseeuw2018ddc}; a foundation model does not make that problem new.
+The question addressed here is whether the context used by a conditional predictor can
+be improved without access to clean examples or error labels.
+
+A pretrained tabular model offers a practical route to conditional scoring. Treat each
+column in turn as a prediction target, use the remaining columns as features, and score
+the observed target value under the resulting prediction. TabPFN supports classification
+and regression through in-context prediction~\cite{hollmann2025tabpfn}. In a dirty table,
+however, the reference examples are themselves imperfect. Repeated corrupt values may
+become predictable, while infrequent correct values can receive large suspicion scores.
+Removing the highest-scoring context cells' rows could therefore either improve the
+reference distribution or erase legitimate variation. Neither outcome follows from
+the model's supervised prediction capability.
+
+We study this intervention under a controlled cell-detection protocol. For each target
+column and outer query fold, a nested first pass scores only the outer training pool.
+The purification arm removes context rows with the largest target-cell scores. A random
+arm removes exactly the same number of rows from the same base context. Both retain
+the same queries and evaluation denominator. The random arm's accuracy is unchanged
+by first-pass computation; we report that computation separately and also account for
+a random control charged the same preparation cost. This comparison distinguishes
+targeted selection from simply reducing context size, without presenting extra inference
+as a free intervention.
+
+The empirical scope is deliberately specific: four capped benchmark tables, their
+real errors, two controlled corruption conditions and five seeds. Real-error
+purification is primary; injections and an observed-key leave-entity-out analysis
+are probes. Effects are reported per source table; repeated conditions and seeds
+are not treated as additional independent datasets.
+
+The study contributes an outer-fold-isolated implementation of a simple context
+intervention, a matched-count and explicitly costed comparison against random removal,
+and an artifact-backed assessment spanning accuracy, rare-valid alarms, support,
+failures and boundary sensitivity. It does not introduce a new pretrained model,
+an influence estimator, or a conformal guarantee. The breadth of any empirical
+conclusion is limited to the measured implementations and named tables.
