@@ -1,11 +1,10 @@
 \section{Conclusion}
 We evaluated a simple context-purification intervention for conditional cell-error
-scoring under an explicitly transductive row-level protocol. On the four named
-real-error tables, the paired AP difference to random removal was
-$-0.161$ on hospital, $-0.049$ on flights, $+0.026$ on beers and $-0.030$ on rayyan, although a
-clean-context oracle showed room for improvement on every table. The declared rule
-therefore did not exploit that headroom in general. Nested isolation, complete
-denominators, failure masks and explicit preparation cost were needed to interpret
-these results; they do not provide a robustness theorem or a cross-dataset
-superiority claim. Broader conclusions require more datasets, other context
-strategies, direct cell-level competitors and dependence-aware validation.
+scoring under an explicitly transductive row-level protocol. On real errors, removing
+the most suspicious context rows was worse than removing the same number of random
+rows on three of the four tables, although a clean-context oracle showed room for
+improvement on every table; the declared rule did not exploit that headroom in general.
+Nested isolation, complete denominators, failure masks and explicit preparation cost
+were needed to interpret these results, which provide neither a robustness theorem nor
+a cross-dataset superiority claim. Broader conclusions require more datasets, other
+context strategies, direct cell-level competitors and dependence-aware validation.

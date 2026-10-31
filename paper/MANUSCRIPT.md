@@ -40,17 +40,17 @@ not make that problem new. The question addressed here is whether the
 context used by a conditional predictor can be improved without access
 to clean examples or error labels.
 
-A pretrained tabular model offers a practical route to conditional
-scoring. Treat each column in turn as a prediction target, use the
-remaining columns as features, and score the observed target value under
-the resulting prediction. TabPFN supports classification and regression
-through in-context prediction (Hollmann et al. 2025). In a dirty table,
-however, the reference examples are themselves imperfect. Repeated
-corrupt values may become predictable, while infrequent correct values
-can receive large suspicion scores. Removing the highest-scoring context
-cells’ rows could therefore either improve the reference distribution or
-erase legitimate variation. Neither outcome follows from the model’s
-supervised prediction capability.
+A pretrained tabular foundation model (TFM) offers a practical route to
+conditional scoring. Treat each column in turn as a prediction target,
+use the remaining columns as features, and score the observed target
+value under the resulting prediction. TabPFN supports classification and
+regression through in-context prediction (Hollmann et al. 2025). In a
+dirty table, however, the reference examples are themselves imperfect.
+Repeated corrupt values may become predictable, while infrequent correct
+values can receive large suspicion scores. Removing the highest-scoring
+context cells’ rows could therefore either improve the reference
+distribution or erase legitimate variation. Neither outcome follows from
+the model’s supervised prediction capability.
 
 We study this intervention under a controlled cell-detection protocol.
 For each target column and outer query fold, a nested first pass scores
@@ -73,8 +73,7 @@ context intervention, a matched-count and explicitly costed comparison
 against random removal, and an artifact-backed assessment spanning
 accuracy, rare-valid alarms, support, failures and boundary sensitivity.
 It does not introduce a new pretrained model, an influence estimator, or
-a conformal guarantee. The breadth of any empirical conclusion is
-limited to the measured implementations and named tables.
+a conformal guarantee.
 
 # Related Work and Scope
 
@@ -135,9 +134,10 @@ but can fail badly, for example by distorting class composition, and
 that context expansion gives no consistent gain (Ning et al. 2026). It
 concerns supervised prediction from labelled contexts, not detecting
 errors in a dirty context, so it is related evidence rather than a
-direct comparator. Together these works rule out broad novelty claims
-about TFM data cleaning, label-free context selection or context
-selection in general.
+direct comparator. Together these works narrow what can be claimed as
+new: TFM-oriented data cleaning and label-free context selection already
+have precedents, so our contribution is limited to the cell-level,
+dirty-context setting studied here.
 
 #### Systems for heterogeneous error detection.
 
@@ -728,16 +728,15 @@ with PriorLabs-TabPFN.
 
 We evaluated a simple context-purification intervention for conditional
 cell-error scoring under an explicitly transductive row-level protocol.
-On the four named real-error tables, the paired AP difference to random
-removal was $`-0.161`$ on hospital, $`-0.049`$ on flights, $`+0.026`$ on
-beers and $`-0.030`$ on rayyan, although a clean-context oracle showed
-room for improvement on every table. The declared rule therefore did not
-exploit that headroom in general. Nested isolation, complete
-denominators, failure masks and explicit preparation cost were needed to
-interpret these results; they do not provide a robustness theorem or a
-cross-dataset superiority claim. Broader conclusions require more
-datasets, other context strategies, direct cell-level competitors and
-dependence-aware validation.
+On real errors, removing the most suspicious context rows was worse than
+removing the same number of random rows on three of the four tables,
+although a clean-context oracle showed room for improvement on every
+table; the declared rule did not exploit that headroom in general.
+Nested isolation, complete denominators, failure masks and explicit
+preparation cost were needed to interpret these results, which provide
+neither a robustness theorem nor a cross-dataset superiority claim.
+Broader conclusions require more datasets, other context strategies,
+direct cell-level competitors and dependence-aware validation.
 
 <div class="credits">
 
@@ -746,9 +745,9 @@ dependence-aware validation.
 AI coding and writing assistants (OpenAI Codex and Anthropic Claude)
 were used for literature search, implementation, test and audit scripts,
 experiment orchestration, analysis checks, and drafting and editing of
-this text. The author is responsible for the design decisions, has to
-verify every source, number and statement, and remains accountable for
-the paper; no AI system is an author.
+this text. The author takes responsibility for the design decisions and
+for all sources, numbers and statements in the paper; no AI system is an
+author.
 
 ### 
 

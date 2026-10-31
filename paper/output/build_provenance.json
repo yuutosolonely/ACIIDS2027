@@ -1,6 +1,6 @@
 {
   "pages": 15,
-  "pdf_sha256": "da5cba33410336876a11eccb6ca42092aa6a34d5d764b7e55683614633d05c74",
+  "pdf_sha256": "5d8c31e7b372427c1a82e00998e451cd566247300e6932a4a40dcd33cfec1016",
   "template": {
     "url": "https://cms-resources.apps.public.k8s.springernature.io/springer-cms/rest/v1/content/27851904/data/LaTeX2e%20Proceedings%20Template%20ZIP",
     "retrieved_utc": "2026-10-30T02:31:00.907142+00:00",
@@ -25,13 +25,13 @@
     "generated/rare.tex": "3373940e14d0f4ee6305fc753a9dcfc62182d43c140eec116927088ae12dba8f",
     "generated/secondary.tex": "a349d0c1f19f3ebe3103b711d36bc00392f9f14297cb869ec92d7bbb08af70f7",
     "sections/abstract.tex": "4d79122025975602c85dbc849f3950b1acd7d07e5fd5b06ffa80103202ed232a",
-    "sections/conclusion.tex": "7eab5401a21fb623018e381fc78be407bd770f41ec490e8154d2122b691528cd",
-    "sections/credits.tex": "6a92918db3fab2b8027f7916284b7043a25e69a2c00c3701cdf5a3dbfe8d4baa",
-    "sections/introduction.tex": "eccf9a6eae74687ee1880f1215adb86be8c55b4fd7a3da8bd7fad2601b18eaac",
+    "sections/conclusion.tex": "7ebaa2450e9d01fa428e3653b6e0d95b83aa9587acfe4e5b7d50c2329050c668",
+    "sections/credits.tex": "171e9bca95c596a74f690493ced9df9fd36a351e6d1fc85f93891c6d3c668c09",
+    "sections/introduction.tex": "ef92bd1bcc1be7c564da8b1bb0319a31cedaf6a74fed6025dda76459f52235de",
     "sections/limitations.tex": "f80919eab6d66b6f6d4a68ccf4bed9aaac9bba224dd4197cfab9776995772d35",
     "sections/method.tex": "6be250f5172a227711769ccce131d8b3496d23242ff321ec2367340a53ff83ff",
     "sections/protocol.tex": "5fb185b43704f27722c320b315e419ede6015078cb8005c2d69421d822cc2094",
-    "sections/related_work.tex": "15902f7cb8a87f476b8de12d1e3a0ba5a399c40d43da17859c713621ab4b6a50",
+    "sections/related_work.tex": "ae09225a852f90fe0fe05a4840f1c8c5c3f2ae96be916084f5713724e95cd538",
     "sections/results.tex": "aab17831d7d687c4b63dfa673bad71009600236b356c680f93bdf9d15388ade3"
   },
   "compiler": "tectonic --only-cached --keep-logs --keep-intermediates main.tex"

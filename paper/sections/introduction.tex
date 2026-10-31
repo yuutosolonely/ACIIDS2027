@@ -7,7 +7,7 @@ variables~\cite{rousseeuw2018ddc}; a foundation model does not make that problem
 The question addressed here is whether the context used by a conditional predictor can
 be improved without access to clean examples or error labels.
 
-A pretrained tabular model offers a practical route to conditional scoring. Treat each
+A pretrained tabular foundation model (TFM) offers a practical route to conditional scoring. Treat each
 column in turn as a prediction target, use the remaining columns as features, and score
 the observed target value under the resulting prediction. TabPFN supports classification
 and regression through in-context prediction~\cite{hollmann2025tabpfn}. In a dirty table,
@@ -34,5 +34,4 @@ The study contributes an outer-fold-isolated implementation of a simple context
 intervention, a matched-count and explicitly costed comparison against random removal,
 and an artifact-backed assessment spanning accuracy, rare-valid alarms, support,
 failures and boundary sensitivity. It does not introduce a new pretrained model,
-an influence estimator, or a conformal guarantee. The breadth of any empirical
-conclusion is limited to the measured implementations and named tables.
+an influence estimator, or a conformal guarantee.

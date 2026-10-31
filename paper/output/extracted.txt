@@ -33,20 +33,20 @@ already exploit relationships among variables [16]; a foundation model does not
 make that problem new. The question addressed here is whether the context used
 by a conditional predictor can be improved without access to clean examples or
 error labels.
-A pretrained tabular model oﬀers a practical route to conditional scoring.
-Treat each column in turn as a prediction target, use the remaining columns
-as features, and score the observed target value under the resulting prediction.
-TabPFN supports classiﬁcation and regression through in-context prediction [5].
+A pretrained tabular foundation model (TFM) oﬀers a practical route to con-
+ditional scoring. Treat each column in turn as a prediction target, use the remain-
+ing columns as features, and score the observed target value under the resulting
+prediction. TabPFN supports classiﬁcation and regression through in-context
 
 
 2
 Ngo Dang Trong Hieu
-In a dirty table, however, the reference examples are themselves imperfect. Re-
-peated corrupt values may become predictable, while infrequent correct values
-can receive large suspicion scores. Removing the highest-scoring context cells’
-rows could therefore either improve the reference distribution or erase legitimate
-variation. Neither outcome follows from the model’s supervised prediction capa-
-bility.
+prediction [5]. In a dirty table, however, the reference examples are themselves
+imperfect. Repeated corrupt values may become predictable, while infrequent
+correct values can receive large suspicion scores. Removing the highest-scoring
+context cells’ rows could therefore either improve the reference distribution or
+erase legitimate variation. Neither outcome follows from the model’s supervised
+prediction capability.
 We study this intervention under a controlled cell-detection protocol. For
 each target column and outer query fold, a nested ﬁrst pass scores only the
 outer training pool. The puriﬁcation arm removes context rows with the largest
@@ -63,9 +63,7 @@ The study contributes an outer-fold-isolated implementation of a simple con-
 text intervention, a matched-count and explicitly costed comparison against ran-
 dom removal, and an artifact-backed assessment spanning accuracy, rare-valid
 alarms, support, failures and boundary sensitivity. It does not introduce a new
-pretrained model, an inﬂuence estimator, or a conformal guarantee. The breadth
-of any empirical conclusion is limited to the measured implementations and
-named tables.
+pretrained model, an inﬂuence estimator, or a conformal guarantee.
 2
 Related Work and Scope
 Cellwise detection and imputation. DDC uses robust relationships between nu-
@@ -84,13 +82,13 @@ data and subsequently encounters corrupted inputs. Our deployment arms re-
 ceive one dirty table and no clean calibration split. The LightGBM conditional
 comparator is inspired by column prediction but does not reproduce CDC, and
 our scores have no conformal coverage interpretation.
+Foundation models and contaminated contexts. TabPFN provides pretrained
+conditional prediction for small tabular problems [5]. We use pinned second-
+generation weights through an explicit adapter, rather than whichever model
 
 
 Context Puriﬁcation for Cell Error Detection
 3
-Foundation models and contaminated contexts. TabPFN provides pretrained
-conditional prediction for small tabular problems [5]. We use pinned second-
-generation weights through an explicit adapter, rather than whichever model
 a current package would select by default. Unsupervised extensions of TabPFN
 also use conditional prediction; we do not claim this reduction as novel or call our
 raw arm a reproduction of the extensions. TACTIC explicitly studies contami-
@@ -114,8 +112,9 @@ attention-guided row retrieval helps on some large tables but can fail badly, fo
 example by distorting class composition, and that context expansion gives no
 consistent gain [13]. It concerns supervised prediction from labelled contexts, not
 detecting errors in a dirty context, so it is related evidence rather than a direct
-comparator. Together these works rule out broad novelty claims about TFM
-data cleaning, label-free context selection or context selection in general.
+comparator. Together these works narrow what can be claimed as new: TFM-
+oriented data cleaning and label-free context selection already have precedents,
+so our contribution is limited to the cell-level, dirty-context setting studied here.
 Systems for heterogeneous error detection. Raha is a conﬁguration-free error-
 detection system and supplies the benchmark repository used here [10]. Auto-
 Test learns semantic-domain constraints from a large table corpus oﬄine and
@@ -130,13 +129,13 @@ its complete detection workﬂow. ZeroED combines LLM-derived representations
 and labels with detector training [12]. That information and compute regime
 diﬀers from our label-free local deployment arms. Neither system’s published
 headline score is an interchangeable baseline result for our capped-table protocol.
+Measured comparators. We run frequency and pattern scores, a robust numerical
+score, column-wise Isolation Forest [9], DDCcore and conditional LightGBM [8].
+They test whether marginal rarity, simple numerical deviation or the choice of
 
 
 4
 Ngo Dang Trong Hieu
-Measured comparators. We run frequency and pattern scores, a robust numerical
-score, column-wise Isolation Forest [9], DDCcore and conditional LightGBM [8].
-They test whether marginal rarity, simple numerical deviation or the choice of
 conditional model explains an eﬀect; they cannot rank the declared rule against
 every context-selection strategy.
 3
@@ -179,13 +178,13 @@ b + 1
 The second term is a two-sided tail score, not a probability density. With fewer
 than ten parseable context targets or no numerical range, a smoothed exact-
 match frequency replaces that term. Unparseable query tokens use a smoothed
+nonparseability probability followed by their smoothed frequency among un-
+parseable context targets. These rules retain empty strings and formatting vari-
+ants rather than repairing them before detection.
 
 
 Context Puriﬁcation for Cell Error Detection
 5
-nonparseability probability followed by their smoothed frequency among un-
-parseable context targets. These rules retain empty strings and formatting vari-
-ants rather than repairing them before detection.
 For a categorical target with at most ten context classes, the model predicts
 class probabilities. With more classes, retain the nine most frequent and pool
 the others into an OTHER class. Divide OTHER mass by smoothed within-
@@ -233,6 +232,7 @@ removing them preserves rare correct values.
 Controls, diagnostics and compute
 Raw retains Bf. Random removes rf rows without replacement using a separate
 deterministic stream for each seed, fold and target. Oracle keeps the same base
+IDs but substitutes clean target and feature values in the context; query values
 
 
 6
@@ -250,7 +250,6 @@ and remove rf rows.
 Fig. 1. Selection has no dependency on the outer query through the ﬁrst pass. Final
 encoding remains explicitly transductive. This is one trimming step, not an iterative
 procedure or a gradient-based inﬂuence estimate.
-IDs but substitutes clean target and feature values in the context; query values
 remain observed and the encoder remains dirty ﬁtted. Its gap is diagnostic and
 need not be positive. Leaky, on real-error conditions only, unions the query fold
 with the base; its intentional violation of exclusion is reported separately.
@@ -747,20 +746,20 @@ with PriorLabs-TabPFN.
 7
 Conclusion
 We evaluated a simple context-puriﬁcation intervention for conditional cell-error
-scoring under an explicitly transductive row-level protocol. On the four named
-real-error tables, the paired AP diﬀerence to random removal was −0.161 on
-hospital, −0.049 on ﬂights, +0.026 on beers and −0.030 on rayyan, although
-a clean-context oracle showed room for improvement on every table. The de-
-clared rule therefore did not exploit that headroom in general. Nested isolation,
-complete denominators, failure masks and explicit preparation cost were needed
-to interpret these results; they do not provide a robustness theorem or a cross-
-dataset superiority claim. Broader conclusions require more datasets, other con-
-text strategies, direct cell-level competitors and dependence-aware validation.
+scoring under an explicitly transductive row-level protocol. On real errors, re-
+moving the most suspicious context rows was worse than removing the same
+number of random rows on three of the four tables, although a clean-context
+oracle showed room for improvement on every table; the declared rule did not
+exploit that headroom in general. Nested isolation, complete denominators, fail-
+ure masks and explicit preparation cost were needed to interpret these results,
+which provide neither a robustness theorem nor a cross-dataset superiority claim.
+Broader conclusions require more datasets, other context strategies, direct cell-
+level competitors and dependence-aware validation.
 Use of AI tools. AI coding and writing assistants (OpenAI Codex and Anthropic
-Claude) were used for literature search, implementation, test and audit scripts, experi-
-ment orchestration, analysis checks, and drafting and editing of this text. The author is
-responsible for the design decisions, has to verify every source, number and statement,
-and remains accountable for the paper; no AI system is an author.
+Claude) were used for literature search, implementation, test and audit scripts, exper-
+iment orchestration, analysis checks, and drafting and editing of this text. The author
+takes responsibility for the design decisions and for all sources, numbers and statements
+in the paper; no AI system is an author.
 Disclosure of Interests. The author has no competing interests to declare that are
 relevant to the content of this article.
 References
